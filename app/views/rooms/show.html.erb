@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @room.post.title %>
+</p>
+
+<div class="status"></div>
+
+<button id="toggle-local">-</button>
+<div class="videoContainer">
+  <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
+  <div id="localVolume" class="volume_bar"></div>
+</div>
+<div id="remote"></div>
+
+</br >
+
+<div class="buttons">
+    <button id="end-conversation">End Conversation</button>
+    <div class="new-buttons">
+      <%= link_to "New Conversation About the Same Topic", @room.post, id: 'new-conversation', class: 'btn' %>
+      </br >
+      <%= link_to "List of Topics", root_path, id: 'new-topic', class: 'btn' %>
+    </div>
+</div>
+
+</br >
+</br >
+
+<div class="rating">
+  <strong>Rate Other User:</strong>
+  <%= form_for(@rating, remote: true) do |f| %>
+      <%= f.hidden_field :room_id, value: @room.id %>
+
+      <% select_options = options_for_select([["*", 1], ["**", 2], ["***", 3], ["****", 4], ["*****", 5]], ["***", 3]) %>
+      <%= f.select :value, select_options %>
+
+      <%= f.check_box :nsfw %>
+      <%= f.label :nsfw, "Report for Nudity" %>
+
+      <div class="actions">
+        <%= f.submit "Submit Rating" %>
+      </div>
+  <% end %>
+</div>
+
+<script>
+    $(document).ready(function(){
+        var roomShow = new RoomShow({ room: '<%= @room.token %>', participationId: '<%= @participation_id %>', nick: '<%= current_user.name %>' });
+    });
+</script>

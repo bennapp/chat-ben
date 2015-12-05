@@ -1,0 +1,16 @@
+<% if current_user && current_user.banned? %>
+    <% message = 'You have been banned for violating the rules' %>
+    <% redirect_url = 'http://www.omegle.com/' %>
+<% else %>
+    <% message = 'You are not banned' %>
+    <% redirect_url = request.original_url.sub('/banned', '') %>
+<% end %>
+
+<h1><%= message %></h1>
+<script>
+    $(document).ready(function(){
+        setTimeout(function(){
+            window.location.replace('<%= redirect_url %>');
+        }, 4000);
+    });
+</script>
