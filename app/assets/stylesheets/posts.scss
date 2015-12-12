@@ -1,0 +1,58 @@
+$page-margin: 5%;
+$container-margin: 20px;
+$field-margin: 8px;
+$sub-text-grey: #8899a6;
+
+h1 {
+	small {
+		color: $sub-text-grey;
+	}
+}
+
+.page-title {
+	margin-left: $page-margin;
+}
+
+.page-container {
+	display: flex;
+	margin-left: $page-margin;
+	min-width: 800px;
+
+	.link-panel {
+		flex-grow: 7;
+
+		.count-container {
+			display: inline-block;
+
+			.badge {
+				background-color: $sub-text-grey;
+			}
+		}
+
+		.link-title-container {
+			margin-left: $field-margin;
+			display: inline-block;
+		}
+
+		.edit-delete {
+			display: inline-block;
+			float: right;
+
+			.posted-by {
+				color: $sub-text-grey;
+			    font-size: 12px;
+			}
+		}
+	}
+
+	.right-panel {
+		flex-grow: 1;
+		max-width: 380px;
+		margin-left: $page-margin;
+		margin-right: $page-margin;
+
+		.new-post-container {
+			margin-bottom: $container-margin;
+		}
+	}
+}

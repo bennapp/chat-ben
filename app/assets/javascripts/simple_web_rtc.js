@@ -243,6 +243,8 @@
             this.webrtc.on('channelMessage', function (peer, label, data) {
                 if (data.type == 'volume') {
                     self.emit('remoteVolumeChange', peer, data.volume);
+                } else if (data.type == 'chatMessage') {
+                    self.emit('chatMessage', peer, data.volume);
                 }
             });
 

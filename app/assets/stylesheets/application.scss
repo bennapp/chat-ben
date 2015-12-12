@@ -1,0 +1,26 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "rooms";
+@import "posts";
+
+.login-container {
+	.login-input {
+		font-size: small;
+	}
+
+	.login-field {
+		display: inline-block;
+		margin-right: $field-margin;
+		margin-bottom: $field-margin;
+	}
+
+	.btn {
+		display: inline-block;
+		margin-right: $field-margin;
+		margin-bottom: $field-margin;
+	}
+}
+
+.login-page {
+	margin-left: $container-margin;
+}

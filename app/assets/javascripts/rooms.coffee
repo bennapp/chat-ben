@@ -17,12 +17,19 @@ class @RoomShow
       autoAdjustMic: false
       nick: options.nick
 
+    @setupWebRTC()
+
+  setupWebRTC: ->
     @webrtc.on 'readyToCall', =>
       @webrtc.joinRoom @room if @room
 
     @webrtc.on 'channelMessage', (peer, label, data) =>
       if data.type == 'volume'
         @showVolume document.getElementById('volume_' + peer.id), data.volume
+      if data.type == 'chatMessage'
+        @recieveMessage(data['chatMessage'])
+        
+        console.log(data, label)
 
     @webrtc.on 'videoAdded', (video, peer) =>
       @otherPeer = peer
@@ -42,6 +49,10 @@ class @RoomShow
 
         d.appendChild vol
         remote.appendChild d
+      
+      @createChatDataChannel()
+      @_bindChat()
+
       $('#end-conversation').show()
       @_setStatus('chatting')
 
@@ -50,6 +61,10 @@ class @RoomShow
 
     @webrtc.on 'volumeChange', (volume, treshold) =>
       @showVolume document.getElementById('localVolume'), volume
+
+  createChatDataChannel: ->
+    pc = @webrtc.webrtc.peers[0].pc
+    @webrtc.channel = pc.createDataChannel("ChatData");
 
   removeVideo: (video, peer) =>
     remote = document.getElementById('remote')
@@ -68,6 +83,22 @@ class @RoomShow
       el.style.height = '100%'
     else
       el.style.height = '' + Math.floor((volume + 100) * 100 / 25 - 220) + '%'
+
+  recieveMessage: (message) ->
+    $('.messages-continer').append("<div class=\"from\">#{message}</div>")
+
+  sendMessage: (message) ->
+    @webrtc.channel.send(JSON.stringify({type: 'chatMessage', chatMessage: message}))
+    $('.messages-continer').append("<div class=\"to\">#{message}</div>")
+
+  _bindChat: ->
+    $sendMessage = $('#send-message')
+    $sendMessage.prop('disabled', false)
+    $sendMessage.keypress (e) =>
+      if e.which == 13 && $sendMessage.val() != '' && e.shiftKey == false
+        @sendMessage($sendMessage.val())
+        $sendMessage.val('')
+        return false;
 
   _bindDom: ->
     window.onbeforeunload = ->
