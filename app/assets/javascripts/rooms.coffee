@@ -28,7 +28,7 @@ class @RoomShow
         @showVolume document.getElementById('volume_' + peer.id), data.volume
       if data.type == 'chatMessage'
         @recieveMessage(data['chatMessage'])
-        
+
         console.log(data, label)
 
     @webrtc.on 'videoAdded', (video, peer) =>
@@ -49,7 +49,7 @@ class @RoomShow
 
         d.appendChild vol
         remote.appendChild d
-      
+
       @createChatDataChannel()
       @_bindChat()
 
@@ -119,6 +119,7 @@ class @RoomShow
       @webrtc.connection.disconnect()
 
     $('#toggle-local').on 'click', @_toggleLocal
+    $('#toggle-chat').on 'click', @_toggleChat
 
   _setStatus: (status) ->
     status = switch status
@@ -133,11 +134,23 @@ class @RoomShow
     $('.status').text(status)
 
   _toggleLocal: ->
-    $toggleLocal = $('#toggle-local')
-    if $toggleLocal.text() == '-'
-      $('#localVideo').hide()
-      $toggleLocal.text('+')
+    $toggleLocal = $('#toggle-local span')
+    if $toggleLocal.hasClass('glyphicon-indent-right')
+      $toggleLocal.removeClass('glyphicon-indent-right')
+      $toggleLocal.addClass('glyphicon-indent-left')
+      $('.left-panel').hide()
     else
-      $('#localVideo').show()
-      $toggleLocal.text('-')
+      $toggleLocal.removeClass('glyphicon-indent-left')
+      $toggleLocal.addClass('glyphicon-indent-right')
+      $('.left-panel').show()
 
+  _toggleChat: ->
+    $toggleChat = $('#toggle-chat span')
+    if $toggleChat.hasClass('glyphicon-indent-left')
+      $toggleChat.removeClass('glyphicon-indent-left')
+      $toggleChat.addClass('glyphicon-indent-right')
+      $('.chat-panel').hide()
+    else
+      $toggleChat.removeClass('glyphicon-indent-right')
+      $toggleChat.addClass('glyphicon-indent-left')
+      $('.chat-panel').show()

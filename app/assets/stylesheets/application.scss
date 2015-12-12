@@ -2,6 +2,11 @@
 @import "bootstrap";
 @import "rooms";
 @import "posts";
+$page-header-margin: 20px 0 20px 0;
+
+.page-header {
+	margin: $page-header-margin;
+}
 
 .login-container {
 	.login-input {

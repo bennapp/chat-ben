@@ -20,10 +20,8 @@
   }
 }
 
-.container {
+.room-page {
   display: flex;
-  align-items: stretch;
-  justify-content: center;
 
   .left-panel {
     flex-grow: 1;
@@ -42,10 +40,17 @@
   }
 
   .remote-panel {
-    flex-grow: 3;
+    flex-grow: 4;
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+
+    .remote-container {
+      display: flex;
+      align-items: flex-start;
+      // justify-content: space-between;
+    }
   }
 
   .chat-panel {
@@ -66,10 +71,6 @@
       .from {
         display: inline-block;;
       }
-    }
-
-    .send-container {
-      flex-grow: 1;
     }
   }
 }
