@@ -51,24 +51,24 @@
         <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
           <div class="login-field">
             <%= f.label :login, 'Name or Email' %></br>
-            <%= f.text_field :login, class: 'login-input' %>
+            <%= f.text_field :login, class: 'login-input', tabindex: 1 %>
           </div>
 
           <div class="login-field">
             <%= f.label :password %></br>
-            <%= f.password_field :password, autocomplete: "off", class: 'login-input' %>
+            <%= f.password_field :password, autocomplete: "off", class: 'login-input', tabindex: 2 %>
           </div>
 
           <% if Devise.mappings[:user] %>
               <div class="login-field">
-                <%= f.check_box :remember_me %>
+                <%= f.check_box :remember_me, tabindex: 3 %>
                 <%= f.label :remember_me %>
               </div>
           <% end %>
 
           <div class="actions">
-            <%= f.submit "Log in", class: 'btn btn-info' %>
-            <%= link_to "Sign up", new_registration_path(:user), class: 'btn btn-success' %>
+            <%= f.submit "Log in", class: 'btn btn-info', tabindex: 4 %>
+            <%= link_to "Sign up", new_registration_path(:user), class: 'btn btn-success', tabindex: 5 %></br>
             <%= link_to "Forgot your password?", new_password_path(:user) %>
           </div>
         <% end %>
