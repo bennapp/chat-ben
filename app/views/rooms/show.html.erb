@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1 class="page-title">Convo <small><%= @room.post.title %></small></h1>
+  <h1 class="page-title">Convo <small class="lead"><%= @room.post.title %></small></h1>
 </div>
 
 <div class="room-page">
@@ -12,7 +12,7 @@
     </div>
 
     <div class="buttons">
-      <button id="end-conversation">End Conversation</button>
+      <button id="end-conversation" class="btn btn-danger">End Conversation</button>
       <div class="new-buttons">
         <%= link_to "New Conversation About the Same Topic", @room.post, id: 'new-conversation', class: 'btn' %>
         </br >
@@ -20,23 +20,22 @@
       </div>
     </div>
 
-    </br >
-    </br >
-
     <div class="rating">
-      <strong>Rate Other User:</strong>
+      <h4 id="rate-other-user">Rate your conversation</h4>
       <%= form_for(@rating, remote: true) do |f| %>
         <%= f.hidden_field :room_id, value: @room.id %>
 
-        <% select_options = options_for_select([["*", 1], ["**", 2], ["***", 3], ["****", 4], ["*****", 5]], ["***", 3]) %>
-        <%= f.select :value, select_options %>
-
-        <%= f.check_box :nsfw %>
-        <%= f.label :nsfw, "Report for Nudity" %>
-
-        <div class="actions">
-          <%= f.submit "Submit Rating" %>
+        <div>
+          <%= f.check_box :nsfw %>
+          <%= f.label :nsfw, "Report for nudity" %>
         </div>
+
+        <div class="rating-select-container">
+          <% select_options = options_for_select([["★", 1], ["★★", 2], ["★★★", 3], ["★★★★", 4], ["★★★★★", 5]], ["★★★", 3]) %>
+          <%= f.select :value, select_options %>
+        </div>
+
+        <%= f.submit "Submit Rating", class: 'submit-rating btn btn-primary' %>
       <% end %>
     </div>
   </div>
@@ -49,6 +48,7 @@
 
       <div id="remote"></div>
 
+
       <button id="toggle-chat" type="button" class="btn btn-default" aria-label="Left Align">
         <span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span>
       </button>
@@ -60,7 +60,7 @@
   </div>
 
   <div class="chat-panel">
-    <div class="messages-continer">
+    <div class="messages-container">
       <div class="from">From them:</div>
       <div class="to">From you:</div>
     </div>

@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1 class="page-title">Convo <small>video chats with purpose</small></h1>
+  <h1 class="page-title">Convo <small class="lead">video chats with purpose</small></h1>
 </div>
 
 <div class="page-container">
@@ -7,19 +7,18 @@
     <ul class="list-group">
       <% @posts.each do |post| %>
         <li class="list-group-item">
-          <div class="count-container">
-            <span class="badge"><%= (post.rooms.count / 2) + 1 %></span>
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-          </div>
-          <div class="link-title-container">
-            <%= link_to post.title, post %>
+          <div class="badge-and-title">
+            <div class="count-container">
+              <span class="badge"><%= (post.rooms.count / 2) + 1 %></span>
+            </div>
+            <div class="link-title-container">
+              <%= link_to post.title, post %>
+            </div>
           </div>
           <div class="edit-delete">
             <% if current_user == post.user %>
               <%= link_to 'Edit', edit_post_path(post) %>
-              <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
             <% else %>
               <span class='posted-by' ><%= post.user.name %>, <%= time_ago_in_words(post.created_at) %> ago</span>
             <% end %>
@@ -45,7 +44,7 @@
       </div>
     </div>
 
-    <div class="panel login-container">
+    <div class="login-container">
       <% if current_user %>
           <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'btn btn-info') %>
       <% else %>

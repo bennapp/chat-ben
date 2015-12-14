@@ -1,8 +1,18 @@
+$page-header-margin: 20px 0 20px 0;
+$field-margin: 8px;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "rooms";
 @import "posts";
-$page-header-margin: 20px 0 20px 0;
+
+html, body {
+	height: 100%;
+}
+
+.alert {
+	padding: 8px 15px 8px 15px;
+}
 
 .page-header {
 	margin: $page-header-margin;

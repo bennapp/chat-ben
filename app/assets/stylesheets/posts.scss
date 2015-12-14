@@ -1,6 +1,5 @@
 $page-margin: 5%;
 $container-margin: 20px;
-$field-margin: 8px;
 $sub-text-grey: #8899a6;
 
 h1 {
@@ -15,11 +14,21 @@ h1 {
 
 .page-container {
 	display: flex;
+
 	margin-left: $page-margin;
 	min-width: 800px;
 
 	.link-panel {
 		flex-grow: 7;
+
+		.list-group-item {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.badge-and-title {
+			display: flex;
+		}
 
 		.count-container {
 			display: inline-block;
@@ -32,11 +41,11 @@ h1 {
 		.link-title-container {
 			margin-left: $field-margin;
 			display: inline-block;
+			max-width: 640px;
 		}
 
 		.edit-delete {
-			display: inline-block;
-			float: right;
+			margin-left: 20px;
 
 			.posted-by {
 				color: $sub-text-grey;

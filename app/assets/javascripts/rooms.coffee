@@ -43,12 +43,10 @@ class @RoomShow
         vol.id = 'volume_' + peer.id
         vol.className = 'volume_bar'
 
-        video.onclick = ->
-          video.style.width = video.videoWidth + 'px'
-          video.style.height = video.videoHeight + 'px'
-
         d.appendChild vol
         remote.appendChild d
+
+      video.style.width = '800px';
 
       @createChatDataChannel()
       @_bindChat()
@@ -74,6 +72,10 @@ class @RoomShow
     $('.rating').show()
     $('#end-conversation').hide()
     @_setStatus('ending')
+    $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
+    $('.videoContainer').remove()
+    $('.remote-panel').remove()
+
 
   showVolume: (el, volume) ->
     return unless el
@@ -131,7 +133,9 @@ class @RoomShow
         "Your conversation with #{@otherPeer.nick} has ended"
       else
         ""
-    $('.status').text(status)
+
+    $('.status').text('')
+    $('.status').append(document.createTextNode(status))
 
   _toggleLocal: ->
     $toggleLocal = $('#toggle-local span')

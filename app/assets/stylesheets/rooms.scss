@@ -18,18 +18,26 @@
   .new-buttons {
     display: none;
   }
+
+  margin-bottom: 20px;
 }
 
 .room-page {
   display: flex;
+  align-items: stretch;
 
   .left-panel {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
 
     .videoContainer {
       position: relative;
       width: 200px;
       height: 150px;
+      margin-bottom: 20px;
     }
 
     .videoContainer video {
@@ -37,19 +45,56 @@
       width: 100%;
       height: 100%;
     }
+
+    .rating {
+      h4 {
+        margin-bottom: 2px;
+      }
+
+      .submit-rating {
+        margin-top: -4px;
+      }
+
+      label {
+        font-weight: normal;
+      }
+
+      .rating-select-container {
+        margin-top: -4px;
+        margin-bottom: 12px;
+
+        select {
+          background: white;
+          color: black;
+          padding: 5px;
+          font-size: 16px;
+          line-height: 1;
+          height: 34px;
+          -webkit-appearance: none;
+        }
+      }
+    }
   }
 
   .remote-panel {
     flex-grow: 4;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
     .remote-container {
       display: flex;
       align-items: flex-start;
-      // justify-content: space-between;
+      justify-content: space-between;
+      flex-grow: 8;
+
+      video {
+        max-width: 100%    !important;
+        height: auto   !important;
+      }
+    }
+
+    .send-container {
+      flex-grow: 2;
     }
   }
 
@@ -58,8 +103,9 @@
     display: flex;
     flex-direction: column;
     min-width: 200px;
+    max-width: 400px;
 
-    .messages-continer {
+    .messages-container {
       flex-grow: 8;
       flex-direction: column;
       display: flex;
