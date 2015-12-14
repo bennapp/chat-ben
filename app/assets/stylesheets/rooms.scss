@@ -1,3 +1,4 @@
+$panel-margin: 0 12px 0 12px;
 .volume_bar {
   position: absolute;
   width: 5px;
@@ -5,6 +6,10 @@
   right: 0px;
   bottom: 0px;
   background-color: #12acef;
+}
+
+video {
+  border-radius: 4px;
 }
 
 .rating {
@@ -27,6 +32,7 @@
   align-items: stretch;
 
   .left-panel {
+    margin: $panel-margin;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -62,6 +68,13 @@
       .rating-select-container {
         margin-top: -4px;
         margin-bottom: 12px;
+        position: relative;
+
+        .caret {
+          position: absolute;
+          top: 15px;
+          left: 95px;
+        }
 
         select {
           background: white;
@@ -70,6 +83,7 @@
           font-size: 16px;
           line-height: 1;
           height: 34px;
+          width: 115px;
           -webkit-appearance: none;
         }
       }
@@ -83,13 +97,31 @@
 
     .remote-container {
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
+      align-items: stretch;
+      justify-content: center;
       flex-grow: 8;
 
+      .glyphicon {
+        font-size: 22px;
+        margin: 0 6px 0 6px;
+      }
+
+      .toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover{
+          cursor: pointer;
+        }
+      }
+
+      button {
+        border-color: white;
+      }
+
       video {
-        max-width: 100%    !important;
-        height: auto   !important;
+        max-width: 100% !important;
+        height: auto !important;
       }
     }
 
@@ -99,7 +131,8 @@
   }
 
   .chat-panel {
-    flex-grow: 1;
+    margin: $panel-margin;
+    flex-grow: 4;
     display: flex;
     flex-direction: column;
     min-width: 200px;
@@ -110,12 +143,21 @@
       flex-direction: column;
       display: flex;
 
-      .to {
-        display: inline-block;;
-        align-self: flex-end;
+      .well {
+        margin-bottom: 6px;
       }
+
+      .to {
+        margin-left: 18px;
+        display: inline-block;
+        align-self: flex-end;
+        background-color: #dff0d8;
+      }
+
       .from {
-        display: inline-block;;
+        margin-right: 18px;
+        flex-shrink: 4;
+        display: inline-block;
       }
     }
   }

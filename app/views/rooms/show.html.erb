@@ -31,6 +31,7 @@
         </div>
 
         <div class="rating-select-container">
+          <span class="caret"></span>
           <% select_options = options_for_select([["★", 1], ["★★", 2], ["★★★", 3], ["★★★★", 4], ["★★★★★", 5]], ["★★★", 3]) %>
           <%= f.select :value, select_options %>
         </div>
@@ -42,27 +43,30 @@
 
   <div class="remote-panel">
     <div class="remote-container">
-      <button id="toggle-local" type="button" class="btn btn-default" aria-label="Left Align">
+      <div id="toggle-local" class="toggle" aria-label="Left Align">
         <span class="glyphicon glyphicon-indent-right" aria-hidden="true"></span>
-      </button>
+      </div>
 
-      <div id="remote"></div>
+      <div id="remote">
+        <div class="send-container">
+          <textarea class='form-control' id="send-message" placeholder="Type a message, press enter to send"></textarea>
+        </div>
+      </div>
 
-
-      <button id="toggle-chat" type="button" class="btn btn-default" aria-label="Left Align">
+      <div id="toggle-chat" class="toggle" aria-label="Left Align">
         <span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span>
-      </button>
-    </div>
-
-    <div class="send-container">
-      <textarea id="send-message" placeholder="Type a message, press enter to send"></textarea>
+      </div>
     </div>
   </div>
 
-  <div class="chat-panel">
-    <div class="messages-container">
-      <div class="from">From them:</div>
-      <div class="to">From you:</div>
+  <div class="chat-panel panel panel-default">
+    <div class="panel-heading">Chat Messages</div>
+      <div class="panel-body">
+        <div class="messages-container">
+          <div class="from well well-sm bg-info">Hey how is it going</div>
+          <div class="to well well-sm">It is going well thank you!</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

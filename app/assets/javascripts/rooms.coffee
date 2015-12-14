@@ -29,8 +29,6 @@ class @RoomShow
       if data.type == 'chatMessage'
         @recieveMessage(data['chatMessage'])
 
-        console.log(data, label)
-
     @webrtc.on 'videoAdded', (video, peer) =>
       @otherPeer = peer
       remote = document.getElementById('remote')
@@ -44,7 +42,7 @@ class @RoomShow
         vol.className = 'volume_bar'
 
         d.appendChild vol
-        remote.appendChild d
+        remote.insertBefore d, remote.firstChild
 
       video.style.width = '800px';
 
@@ -87,11 +85,12 @@ class @RoomShow
       el.style.height = '' + Math.floor((volume + 100) * 100 / 25 - 220) + '%'
 
   recieveMessage: (message) ->
-    $('.messages-continer').append("<div class=\"from\">#{message}</div>")
+    $('.messages-container').append("<div class=\"from well well-sm bg-info\">#{message}</div>")
 
   sendMessage: (message) ->
+    console.log('hi')
     @webrtc.channel.send(JSON.stringify({type: 'chatMessage', chatMessage: message}))
-    $('.messages-continer').append("<div class=\"to\">#{message}</div>")
+    $('.messages-container').append("<div class=\"to well well-sm\">#{message}</div>")
 
   _bindChat: ->
     $sendMessage = $('#send-message')
