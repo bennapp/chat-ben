@@ -18,6 +18,7 @@ class @RoomShow
       nick: options.nick
 
     @setupWebRTC()
+    $('.toggle').hide()
 
   setupWebRTC: ->
     @webrtc.on 'readyToCall', =>
@@ -49,6 +50,8 @@ class @RoomShow
       @createChatDataChannel()
       @_bindChat()
 
+      $('#send-message').show()
+      $('.toggle').show()
       $('#end-conversation').show()
       @_setStatus('chatting')
 
