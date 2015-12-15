@@ -125,8 +125,9 @@ video {
       }
     }
 
-    .send-container {
-      flex-grow: 2;
+    .send-container textarea{
+      height: 10vh;
+      margin-top: 12px;
     }
   }
 
@@ -137,7 +138,7 @@ video {
     flex-direction: column;
     min-width: 360px;
     max-width: 360px;
-    height: 80vh;
+    height: 75vh;
 
     .messages-container {
       flex-grow: 8;

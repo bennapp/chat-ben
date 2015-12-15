@@ -141,22 +141,22 @@ class @RoomShow
 
   _toggleLocal: ->
     $toggleLocal = $('#toggle-local span')
-    if $toggleLocal.hasClass('glyphicon-indent-right')
-      $toggleLocal.removeClass('glyphicon-indent-right')
-      $toggleLocal.addClass('glyphicon-indent-left')
+    if $toggleLocal.hasClass('glyphicon-menu-left')
+      $toggleLocal.removeClass('glyphicon-menu-left')
+      $toggleLocal.addClass('glyphicon-menu-right')
       $('.left-panel').hide()
     else
-      $toggleLocal.removeClass('glyphicon-indent-left')
-      $toggleLocal.addClass('glyphicon-indent-right')
+      $toggleLocal.removeClass('glyphicon-menu-right')
+      $toggleLocal.addClass('glyphicon-menu-left')
       $('.left-panel').show()
 
   _toggleChat: ->
     $toggleChat = $('#toggle-chat span')
-    if $toggleChat.hasClass('glyphicon-indent-left')
-      $toggleChat.removeClass('glyphicon-indent-left')
-      $toggleChat.addClass('glyphicon-indent-right')
+    if $toggleChat.hasClass('glyphicon-menu-right')
+      $toggleChat.removeClass('glyphicon-menu-right')
+      $toggleChat.addClass('glyphicon-menu-left')
       $('.chat-panel').hide()
     else
-      $toggleChat.removeClass('glyphicon-indent-right')
-      $toggleChat.addClass('glyphicon-indent-left')
+      $toggleChat.removeClass('glyphicon-menu-left')
+      $toggleChat.addClass('glyphicon-menu-right')
       $('.chat-panel').show()
