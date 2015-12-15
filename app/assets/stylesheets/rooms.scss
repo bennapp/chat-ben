@@ -37,7 +37,6 @@ video {
     display: flex;
     flex-direction: column;
     align-items: center;
-    // justify-content: center;
 
     .videoContainer {
       position: relative;
@@ -110,6 +109,7 @@ video {
         display: flex;
         align-items: center;
         justify-content: center;
+
         &:hover{
           cursor: pointer;
         }
@@ -131,17 +131,17 @@ video {
   }
 
   .chat-panel {
-    margin: $panel-margin;
+    margin: 0 32px 0 12px;
     flex-grow: 4;
     display: flex;
     flex-direction: column;
-    min-width: 200px;
-    max-width: 400px;
+    min-width: 360px;
+    max-width: 360px;
+    height: 80vh;
 
     .messages-container {
       flex-grow: 8;
-      flex-direction: column;
-      display: flex;
+      overflow-y: scroll;
 
       .well {
         margin-bottom: 6px;
@@ -150,13 +150,16 @@ video {
       .to {
         margin-left: 18px;
         display: inline-block;
-        align-self: flex-end;
-        background-color: #dff0d8;
+        float: right;
+        clear: both;
+        background-color: #5bc0de;
+        color: white;
       }
 
       .from {
         margin-right: 18px;
-        flex-shrink: 4;
+        float: left;
+        clear: both;
         display: inline-block;
       }
     }
