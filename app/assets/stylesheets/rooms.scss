@@ -93,11 +93,13 @@ video {
     flex-grow: 4;
     display: flex;
     flex-direction: column;
+    border-right: 1px solid #eeeeee;
+    border-left: 1px solid #eeeeee;
 
     .remote-container {
       display: flex;
       align-items: stretch;
-      justify-content: center;
+      justify-content: space-between;
       flex-grow: 8;
 
       .glyphicon {
@@ -124,11 +126,6 @@ video {
         height: auto !important;
       }
     }
-
-    .send-container textarea{
-      height: 10vh;
-      margin-top: 12px;
-    }
   }
 
   .chat-panel {
@@ -140,28 +137,33 @@ video {
     max-width: 360px;
     height: 75vh;
 
+    .send-container textarea{
+      height: 10vh;
+      margin-top: 12px;
+    }
+
     .messages-container {
       flex-grow: 8;
       overflow-y: scroll;
 
       .well {
         margin-bottom: 6px;
+        display: inline-block;
+        clear: both;
+        word-break: break-all;
       }
 
       .to {
-        margin-left: 18px;
-        display: inline-block;
+        margin-left: 40px;
         float: right;
-        clear: both;
         background-color: #5bc0de;
         color: white;
       }
 
       .from {
-        margin-right: 18px;
+        margin-right: 40px;
+        margin-left: 18px;
         float: left;
-        clear: both;
-        display: inline-block;
       }
     }
   }
