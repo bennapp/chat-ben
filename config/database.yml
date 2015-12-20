@@ -19,5 +19,5 @@ production:
   encoding: utf8
   database: chat_ben_production
   pool: 5
-  username:
-  password:
+  username: dev
+  password: <%= begin IO.read("/deploy/db_pass") rescue "" end %>
