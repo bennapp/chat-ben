@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise', '~> 3.5'
 gem 'paranoia', '~> 2.0'
+gem 'unicorn', '~> 5.0'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
