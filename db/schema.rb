@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151205211138) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "participations", force: :cascade do |t|
     t.integer  "room_id",    null: false
     t.integer  "user_id",    null: false
@@ -21,9 +24,9 @@ ActiveRecord::Schema.define(version: 20151205211138) do
     t.datetime "deleted_at"
   end
 
-  add_index "participations", ["deleted_at"], name: "index_participations_on_deleted_at"
-  add_index "participations", ["room_id"], name: "index_participations_on_room_id"
-  add_index "participations", ["user_id"], name: "index_participations_on_user_id"
+  add_index "participations", ["deleted_at"], name: "index_participations_on_deleted_at", using: :btree
+  add_index "participations", ["room_id"], name: "index_participations_on_room_id", using: :btree
+  add_index "participations", ["user_id"], name: "index_participations_on_user_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -33,8 +36,8 @@ ActiveRecord::Schema.define(version: 20151205211138) do
     t.datetime "deleted_at"
   end
 
-  add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at"
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
+  add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
     t.integer  "rater_id"
@@ -46,10 +49,10 @@ ActiveRecord::Schema.define(version: 20151205211138) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "ratings", ["ratee_id"], name: "index_ratings_on_ratee_id"
-  add_index "ratings", ["rater_id"], name: "index_ratings_on_rater_id"
-  add_index "ratings", ["room_id", "rater_id", "ratee_id"], name: "index_ratings_on_room_id_and_rater_id_and_ratee_id", unique: true
-  add_index "ratings", ["room_id"], name: "index_ratings_on_room_id"
+  add_index "ratings", ["ratee_id"], name: "index_ratings_on_ratee_id", using: :btree
+  add_index "ratings", ["rater_id"], name: "index_ratings_on_rater_id", using: :btree
+  add_index "ratings", ["room_id", "rater_id", "ratee_id"], name: "index_ratings_on_room_id_and_rater_id_and_ratee_id", unique: true, using: :btree
+  add_index "ratings", ["room_id"], name: "index_ratings_on_room_id", using: :btree
 
   create_table "rooms", force: :cascade do |t|
     t.integer  "post_id"
@@ -59,8 +62,8 @@ ActiveRecord::Schema.define(version: 20151205211138) do
     t.datetime "deleted_at"
   end
 
-  add_index "rooms", ["deleted_at"], name: "index_rooms_on_deleted_at"
-  add_index "rooms", ["post_id"], name: "index_rooms_on_post_id"
+  add_index "rooms", ["deleted_at"], name: "index_rooms_on_deleted_at", using: :btree
+  add_index "rooms", ["post_id"], name: "index_rooms_on_post_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -79,8 +82,8 @@ ActiveRecord::Schema.define(version: 20151205211138) do
     t.boolean  "banned",                 default: false, null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["name"], name: "index_users_on_name", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
