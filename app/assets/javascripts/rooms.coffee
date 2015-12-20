@@ -53,6 +53,7 @@ class @RoomShow
       $('#send-message').show()
       $('.toggle').show()
       $('#end-conversation').show()
+      $('.no-user-container').hide()
       @_setStatus('chatting')
 
     @webrtc.on 'videoRemoved', (video, peer) =>
@@ -75,7 +76,7 @@ class @RoomShow
     @_setStatus('ending')
     $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
     $('.videoContainer').remove()
-    $('.remote-container').hide()
+    $('.remote-panel').hide()
 
 
   showVolume: (el, volume) ->
@@ -91,7 +92,6 @@ class @RoomShow
     $('.messages-container').append("<div class=\"from well well-sm bg-info\">#{message}</div>")
 
   sendMessage: (message) ->
-    console.log('hi')
     @webrtc.channel.send(JSON.stringify({type: 'chatMessage', chatMessage: message}))
     $('.messages-container').append("<div class=\"to well well-sm\">#{message}</div>")
 
