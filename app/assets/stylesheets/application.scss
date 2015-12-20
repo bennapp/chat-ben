@@ -1,5 +1,7 @@
 $page-header-margin: 20px 0 20px 0;
 $field-margin: 8px;
+$page-margin: 5%;
+$sub-text-grey: #8899a6;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -38,4 +40,23 @@ html, body {
 
 .login-page {
 	margin-left: $container-margin;
+}
+
+.page-header{
+	h1 {
+		small {
+			color: $sub-text-grey;
+		}
+	}
+
+	.page-title {
+		margin-left: $page-margin;
+	}
+
+	.logout-link {
+		float: right;
+		margin-right: 44px;
+		margin-top: -33px;
+		font-size: 16px;
+	}
 }

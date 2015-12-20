@@ -38,6 +38,14 @@ video {
     flex-direction: column;
     align-items: center;
 
+    .rating-description {
+      width: 390px;
+
+      p {
+        margin-bottom: 4px;
+      }
+    }
+
     .videoContainer {
       position: relative;
       width: 200px;
@@ -95,6 +103,15 @@ video {
     flex-direction: column;
     border-right: 1px solid #eeeeee;
     border-left: 1px solid #eeeeee;
+    align-items: center;
+
+
+    .no-user-container {
+      margin: $panel-margin;
+    }
+    .no-user .glyphicon {
+      font-size: 38vw;
+    }
 
     .remote-container {
       display: flex;
@@ -102,7 +119,7 @@ video {
       justify-content: space-between;
       flex-grow: 8;
 
-      .glyphicon {
+      .toggle .glyphicon {
         font-size: 22px;
         margin: 0 6px 0 6px;
       }

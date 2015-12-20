@@ -1,16 +1,4 @@
-$page-margin: 5%;
 $container-margin: 20px;
-$sub-text-grey: #8899a6;
-
-h1 {
-	small {
-		color: $sub-text-grey;
-	}
-}
-
-.page-title {
-	margin-left: $page-margin;
-}
 
 .page-container {
 	display: flex;
@@ -59,6 +47,10 @@ h1 {
 		max-width: 380px;
 		margin-left: $page-margin;
 		margin-right: $page-margin;
+
+		.new-post {
+			display: block;
+		}
 
 		.new-post-container {
 			margin-bottom: $container-margin;

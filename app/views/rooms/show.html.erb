@@ -1,5 +1,6 @@
 <div class="page-header">
   <h1 class="page-title">Convo <small class="lead"><%= @room.post.title %></small></h1>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
 </div>
 
 <div class="room-page">
@@ -21,7 +22,11 @@
     </div>
 
     <div class="rating">
-      <h4 id="rate-other-user">Rate your conversation</h4>
+      <h4 id="rate-other-user">How would you rate your conversation</h4>
+      <div class="rating-description">
+        <p>Rating your conversations will increase your chances of being matched with someone you will enjoy talking with!</p>
+      </div>
+
       <%= form_for(@rating, remote: true) do |f| %>
         <%= f.hidden_field :room_id, value: @room.id %>
 
@@ -42,6 +47,12 @@
   </div>
 
   <div class="remote-panel">
+    <div class="no-user-container">
+      <div class="well no-user" aria-label="Left Align">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      </div>
+    </div>
+
     <div class="remote-container">
       <div id="toggle-local" class="toggle" aria-label="Left Align">
         <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>

@@ -75,7 +75,7 @@ class @RoomShow
     @_setStatus('ending')
     $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
     $('.videoContainer').remove()
-    $('.remote-panel').remove()
+    $('.remote-container').hide()
 
 
   showVolume: (el, volume) ->

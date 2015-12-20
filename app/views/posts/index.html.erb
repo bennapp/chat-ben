@@ -1,5 +1,6 @@
 <div class="page-header">
   <h1 class="page-title">Convo <small class="lead">video chats with purpose</small></h1>
+  <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
 </div>
 
 <div class="page-container">
@@ -9,7 +10,8 @@
         <li class="list-group-item">
           <div class="badge-and-title">
             <div class="count-container">
-              <span class="badge"><%= (post.rooms.count / 2) + 1 %></span>
+              <% num_chatting = (post.rooms.count / 2) + 1 %>
+              <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= num_chatting %> people chatting right now!"><%= num_chatting %></span>
             </div>
             <div class="link-title-container">
               <%= link_to post.title, post %>
@@ -30,27 +32,27 @@
 
   <div class="right-panel">
     <div class="new-post-container">
-      <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+      <%= link_to 'New Post', new_post_path, class: 'btn btn-primary new-post' %>
     </div>
 
     <div class="panel panel-default about-container">
       <div class="panel-heading">
-        about convo
+        About Convo
       </div>
       <div class="panel-body">
         <p>
-          It's almost like something out of a fairytale book. You can't make a mistake. Anything that happens you can learn to use - and make something beautiful out of it. If you overwork it you become a cloud killer. There's nothing worse than a cloud killer. We wash our brush with odorless thinner. So often we avoid running water, and running water is a lot of fun.
+          Convo is place to have a one on one video conversation about a topic. After each conversation, you are encouraged to rate how the conversation went with the other person. Ratings improve the chance of you being matched with someone you will enjoy talking with!
+          Convo is not a place to be nude or do anything to make the other person feel uncomfortable.
         </p>
       </div>
     </div>
 
     <div class="login-container">
       <% if current_user %>
-          <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'btn btn-info') %>
       <% else %>
         <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
           <div class="login-field">
-            <%= f.label :login, 'Name or Email' %></br>
+            <%= f.label :login, 'Username or Email' %></br>
             <%= f.text_field :login, class: 'login-input', tabindex: 1 %>
           </div>
 
@@ -77,3 +79,8 @@
   </div>
 </div>
 
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
