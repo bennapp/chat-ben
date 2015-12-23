@@ -48,12 +48,14 @@ $container-margin: 20px;
 		margin-left: $page-margin;
 		margin-right: $page-margin;
 
-		.new-post {
-			display: block;
-		}
-
-		.new-post-container {
-			margin-bottom: $container-margin;
+		.btn-container {
+			input {
+				width: 100%;
+			}
+			.btn {
+				margin-bottom: 12px;
+				display: block;
+			}
 		}
 	}
 }

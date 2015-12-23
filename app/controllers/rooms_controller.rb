@@ -3,6 +3,7 @@ class RoomsController < ApplicationController
 
   def show
     participation = Participation.create(user: current_user, room: @room)
+    @subtitle = @room.post.title
     @participation_id = participation.id
     @rating = Rating.new
   end

@@ -33,16 +33,14 @@ html, body {
 
 	.btn {
 		display: inline-block;
-		margin-right: $field-margin;
-		margin-bottom: $field-margin;
 	}
 }
 
-.sign-up-btn {
+.auth-btn {
 	margin-top: 8px;
 }
 
-.login-signup-page {
+.auth-form {
 	margin-left: $container-margin;
 }
 
