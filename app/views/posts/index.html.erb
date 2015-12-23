@@ -6,7 +6,7 @@
           <div class="badge-and-title">
             <div class="count-container">
               <% num_chatting = (post.rooms.count / 2) + 1 %>
-              <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= num_chatting %> people chatting right now!"><%= num_chatting %></span>
+              <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= num_chatting %> chatting right now!"><%= num_chatting %></span>
             </div>
             <div class="link-title-container">
               <%= link_to post.title, post %>
