@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :participations
   has_many :posts
 
-  validates :name, :presence => true, :uniqueness => { :case_sensitive => false }
+  validates :name, :presence => true, :uniqueness => { :case_sensitive => true }
   validates_format_of :name, with: /\A[a-zA-Z0-9_\.]*\z/
   validate :validate_name
 
