@@ -7,7 +7,7 @@ $container-margin: 20px;
 	min-width: 800px;
 
 	.link-panel {
-		flex-grow: 7;
+		flex-grow: 10;
 
 		.list-group-item {
 			display: flex;
@@ -44,14 +44,20 @@ $container-margin: 20px;
 
 	.right-panel {
 		flex-grow: 1;
-		max-width: 380px;
+		flex-basis: 22%;
 		margin-left: $page-margin;
 		margin-right: $page-margin;
+		min-width: 312px;
+
+		.about{
+			min-width: 380px;
+		}
 
 		.btn-container {
 			input {
 				width: 100%;
 			}
+
 			.btn {
 				margin-bottom: 12px;
 				display: block;

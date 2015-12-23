@@ -105,7 +105,6 @@ video {
     border-left: 1px solid #eeeeee;
     align-items: center;
 
-
     .no-user-container {
       margin: $panel-margin;
     }
@@ -119,9 +118,17 @@ video {
       justify-content: space-between;
       flex-grow: 8;
 
+      #remote {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
       .toggle .glyphicon {
         font-size: 22px;
         margin: 0 6px 0 6px;
+        color: #eeeeee;
       }
 
       .toggle {
@@ -152,7 +159,7 @@ video {
     flex-direction: column;
     min-width: 360px;
     max-width: 360px;
-    height: 75vh;
+    height: 79vh;
 
     .send-container textarea{
       height: 10vh;

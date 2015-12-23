@@ -1,4 +1,4 @@
-<div class="page-container">
+<div class="page-container page">
   <div class="link-panel">
     <ul class="list-group">
       <% @posts.each do |post| %>
@@ -49,14 +49,17 @@
       <% if current_user %>
       <% else %>
         <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
-          <div class="login-field">
-            <%= f.label :login, 'Username or Email' %></br>
-            <%= f.text_field :login, class: 'login-input', tabindex: 1 %>
-          </div>
 
-          <div class="login-field">
-            <%= f.label :password %></br>
-            <%= f.password_field :password, autocomplete: "off", class: 'login-input', tabindex: 2 %>
+          <div class="login-fields">
+            <div class="login-field">
+              <%= f.label :login, 'Username or Email' %></br>
+              <%= f.text_field :login, class: 'login-input', tabindex: 1 %>
+            </div>
+
+            <div class="login-field">
+              <%= f.label :password %></br>
+              <%= f.password_field :password, autocomplete: "off", class: 'login-input', tabindex: 2 %>
+            </div>
           </div>
 
           <div class="actions">

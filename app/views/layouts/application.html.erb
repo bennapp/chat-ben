@@ -8,14 +8,19 @@
 </head>
 <body>
 
-  <div class="page-header">
-    <h1 class="page-title">Chat Ben <small class="lead"><%= @subtitle || 'video chats with purpose' %></small></h1>
-    <% if current_user %>
-	  <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
-    <% end %>
-  </div>
+<div class="page-header">
+  <h1 class="page-title">Chat Ben <small class="lead"><%= @subtitle || 'video chats with purpose' %></small></h1>
+  <% if current_user %>
+    <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
+  <% end %>
+</div>
 
 <%= yield %>
 
+<div class="navbar navbar-default navbar-fixed-bottom">
+  <div class="footer-content">
+    <p class="copyright text-muted">© 2016 Chat Ben, Inc.</p>
+  </div>
+</div>
 </body>
 </html>
