@@ -105,8 +105,8 @@ class @RoomShow
         return false;
 
   _bindDom: ->
-    window.onbeforeunload = ->
-      $.ajax(url: "/participations/#{options.participationId}", type: 'DELETE')
+    window.onbeforeunload = =>
+      $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
       return undefined
 
     $ratingForm = $("#new_rating")

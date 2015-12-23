@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show]
 
   def show
-    participation = Participation.create(user: current_user, room: @room)
+    participation = Participation.find_or_create_by(user: current_user, room: @room)
     @subtitle = @room.post.title
     @participation_id = participation.id
     @rating = Rating.new
