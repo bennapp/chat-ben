@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :feedbacks, only: [:create, :new], path: 'feeback'
   resources :posts
   resources :participations, only: :destroy
   resources :rooms, only: :show, path: 'convo', param: :token

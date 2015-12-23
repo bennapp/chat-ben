@@ -19,6 +19,10 @@
 
 <div class="navbar navbar-default navbar-fixed-bottom">
   <div class="footer-content">
+    <% if current_user && !@is_feeback_new %>
+      <%= link_to('Leave Ben Feedback', new_feedback_path) %>
+    <% end %>
+
     <p class="copyright text-muted">© 2016 Chat Ben, Inc.</p>
   </div>
 </div>

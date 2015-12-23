@@ -43,12 +43,19 @@ body {
 	}
 }
 
-.auth-btn {
-	margin-top: 8px;
-}
 
-.auth-form {
+
+.form-container {
 	margin-left: $container-margin;
+
+	.btn {
+		margin-top: 8px;
+	}
+
+	textarea {
+		width: 300px;
+		height: 100px;
+	}
 }
 
 .page {
@@ -81,9 +88,9 @@ body {
 	border-top: 1px solid #eeeeee;
 	margin-left: 5%;
 	margin-right: 5%;
+	padding-top: 14px;
 
 	.copyright {
-		padding-top: 14px;
 		float: right;
 	}
 }
