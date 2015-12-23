@@ -1,9 +1,9 @@
-<div class='login-page'>
+<div class='login-signup-page'>
   <h2>Log in</h2>
 
   <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
     <div class="login-field">
-      <%= f.label :login, 'Name or Email' %></br>
+      <%= f.label :login, 'Username or Email' %></br>
       <%= f.text_field :login, class: 'login-input' %>
     </div>
 
