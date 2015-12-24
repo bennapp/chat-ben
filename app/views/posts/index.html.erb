@@ -5,7 +5,7 @@
         <li class="list-group-item">
           <div class="badge-and-title">
             <div class="count-container">
-              <% num_chatting = (post.rooms.count / 2) + 1 %>
+              <% num_chatting = Participation.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', post.id).count %>
               <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= num_chatting %> chatting right now!"><%= num_chatting %></span>
             </div>
             <div class="link-title-container">
@@ -14,10 +14,11 @@
           </div>
           <div class="edit-delete">
             <% if current_user == post.user %>
+              <span class='posted-by' > created <%= time_ago_in_words(post.created_at) %> ago</span>
               <%= link_to 'Edit', edit_post_path(post) %>
               <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
             <% else %>
-              <span class='posted-by' ><%= post.user.name %>, <%= time_ago_in_words(post.created_at) %> ago</span>
+              <span class='posted-by' ><%= post.user.name %>, created <%= time_ago_in_words(post.created_at) %> ago</span>
             <% end %>
           </div>
         </li>
@@ -42,7 +43,7 @@
           &nbsp Chat Ben is a place to have a one on one video conversation about a specific topic with someone you might like!
           </br>
           </br>
-          &nbsp You are encouraged to rate each conversation. Rating your conversations will improve your chances of you being matched with someone you will enjoy talking with next time!
+          &nbsp You are encouraged to rate each conversation. Rating your conversations will improve your chances of you being matched with someone you will enjoy talking with!
         </br>
         </br>
           &nbsp Chat Ben is not a place to be nude or do anything that makes the person you are chatting with feel uncomfortable.
