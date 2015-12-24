@@ -8,7 +8,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    unless room = @post.rooms.joins(:participations).group('rooms.id').having('COUNT(participations.id) < 2').first
+    room = @post.rooms.joins(:participations).group('rooms.id').having('COUNT(participations.id) < 2').first
+    waiting_user_ids = room.participations.pluck(:user_id)
+    if !room.present? || rated_waiting_users_poorly?(waiting_user_ids)
       room = @post.rooms.create
     end
 
@@ -70,5 +72,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title)
+  end
+
+  def rated_waiting_users_poorly?(user_ids)
+    Rating.where(rater: current_user).where('ratee_id in (?)', user_ids).where('value <= 2').any? || Rating.where(ratee: current_user).where('rater_id in (?)', user_ids).where('value <= 2').any?
   end
 end

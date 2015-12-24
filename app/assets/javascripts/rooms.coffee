@@ -77,6 +77,7 @@ class @RoomShow
     $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
     $('.videoContainer').remove()
     $('.remote-panel').hide()
+    $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
     @webrtc.channel.close()
 
 
