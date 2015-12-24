@@ -9,8 +9,7 @@ class PostsController < ApplicationController
 
   def show
     room = @post.rooms.joins(:participations).group('rooms.id').having('COUNT(participations.id) < 2').first
-    waiting_user_ids = room.participations.pluck(:user_id)
-    if !room.present? || rated_waiting_users_poorly?(waiting_user_ids)
+    if !room.present? || rated_waiting_users_poorly?(room.participations.pluck(:user_id))
       room = @post.rooms.create
     end
 

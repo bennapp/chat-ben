@@ -328,7 +328,7 @@
             var self = this;
             this.roomName = name;
             this.connection.emit('join', name, function (err, roomDescription) {
-                console.log('join CB', err, roomDescription);
+
                 if (err) {
                     self.emit('error', err);
                 } else {
@@ -4381,7 +4381,7 @@
 
     },{"webrtc-adapter-test":29}],28:[function(require,module,exports){
         /*
-         WildEmitter.js is a slim little event emitter by @henrikjoreteg largely based 
+         WildEmitter.js is a slim little event emitter by @henrikjoreteg largely based
          on @visionmedia's Emitter from UI Kit.
 
          Why? I wanted it standalone.
@@ -4396,7 +4396,7 @@
 
          });
 
-         Please note that callbacks triggered by wildcard registered events also get 
+         Please note that callbacks triggered by wildcard registered events also get
          the event name as the first argument.
          */
         module.exports = WildEmitter;
