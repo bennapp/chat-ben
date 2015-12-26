@@ -27,13 +27,33 @@
   </div>
 
   <div class="right-panel">
+    <div class="login-container">
+      <% if current_user %>
+      <% else %>
+        <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
+
+          <div class="login-fields">
+            <div class="login-field">
+              <%= f.text_field :login, class: 'login-input', tabindex: 1, placeholder: 'Username/Email' %>
+            </div>
+
+            <div class="login-field">
+              <%= f.password_field :password, autocomplete: "off", class: 'login-input', tabindex: 2, placeholder: 'Password' %>
+            </div>
+
+            <div class="btn-container">
+              <%= f.submit "Log in", class: 'btn btn-info', tabindex: 3 %>
+            </div>
+          </div>
+        <% end %>
+      <% end  %>
+    </div>
     <div class="btn-container">
       <% unless current_user %>
-        <%= link_to "Sign up", new_registration_path(:user), class: 'btn btn-success' %>
+        <%= link_to "Sign up", new_registration_path(:user), class: 'btn btn-success', tabindex: 4 %>
       <% end %>
-      <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+      <%= link_to 'New Post', new_post_path, class: 'btn btn-primary', tabindex: 5 %>
     </div>
-
     <div class="panel panel-default about-container">
       <div class="panel-heading">
         About Chat Ben
@@ -49,32 +69,6 @@
           &nbsp Chat Ben is not a place to be nude or do anything that makes the person you are chatting with feel uncomfortable.
         </p>
       </div>
-    </div>
-
-    <div class="login-container">
-      <% if current_user %>
-      <% else %>
-        <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
-
-          <div class="login-fields">
-            <div class="login-field">
-              <%= f.label :login, 'Username or Email' %></br>
-              <%= f.text_field :login, class: 'login-input', tabindex: 1 %>
-            </div>
-
-            <div class="login-field">
-              <%= f.label :password %></br>
-              <%= f.password_field :password, autocomplete: "off", class: 'login-input', tabindex: 2 %>
-            </div>
-          </div>
-
-          <div class="actions">
-            <div class="btn-container">
-              <%= f.submit "Log in", class: 'btn btn-info', tabindex: 3 %>
-            </div>
-          </div>
-        <% end %>
-      <% end  %>
     </div>
   </div>
 </div>

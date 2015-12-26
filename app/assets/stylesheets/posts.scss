@@ -47,19 +47,11 @@ $container-margin: 20px;
 		flex-basis: 22%;
 		margin-left: $page-margin;
 		margin-right: $page-margin;
-		min-width: 312px;
-
-		.about{
-			min-width: 380px;
-		}
+		min-width: 344px;
 
 		.btn-container {
-			input {
-				width: 100%;
-			}
-
 			.btn {
-				margin-bottom: 12px;
+				margin-bottom: 8px;
 				display: block;
 			}
 		}

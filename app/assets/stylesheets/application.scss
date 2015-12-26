@@ -1,4 +1,4 @@
-$field-margin: 8px;
+$field-margin: 12px;
 $page-margin: 5%;
 $sub-text-grey: #8899a6;
 
@@ -25,7 +25,7 @@ body {
 
 .login-container {
 	.login-input {
-		font-size: small;
+		font-size: 15px;
 	}
 
 	.login-fields {
@@ -33,8 +33,15 @@ body {
 		align-items: center;
 
 		.login-field {
-			margin-right: $field-margin;
-			margin-bottom: $field-margin;
+			margin-right: 12px;
+			margin-bottom: 8px;
+
+			input {
+				height: 34px;
+
+				border-radius: 4px;
+				width: 128px;
+			}
 		}
 	}
 
@@ -42,8 +49,6 @@ body {
 		display: inline-block;
 	}
 }
-
-
 
 .form-container {
 	margin-left: $container-margin;
