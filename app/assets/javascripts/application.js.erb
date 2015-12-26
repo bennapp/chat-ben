@@ -17,3 +17,5 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+const SIGNAL_SERVER = '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>'

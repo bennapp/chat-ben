@@ -109,7 +109,8 @@ class @RoomShow
   _bindDom: ->
     window.onbeforeunload = =>
       $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
-      @webrtc.channel.close()
+      if @webrtc.channel
+        @webrtc.channel.close()
       return undefined
 
     $ratingForm = $("#new_rating")
