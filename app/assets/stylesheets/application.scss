@@ -23,33 +23,6 @@ body {
 	margin: 0;
 }
 
-.login-container {
-	.login-input {
-		font-size: 15px;
-	}
-
-	.login-fields {
-		display: flex;
-		align-items: center;
-
-		.login-field {
-			margin-right: 12px;
-			margin-bottom: 8px;
-
-			input {
-				height: 34px;
-
-				border-radius: 4px;
-				width: 128px;
-			}
-		}
-	}
-
-	.btn {
-		display: inline-block;
-	}
-}
-
 .form-container {
 	margin-left: $container-margin;
 

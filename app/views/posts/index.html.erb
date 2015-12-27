@@ -1,5 +1,8 @@
 <div class="page-container page">
   <div class="link-panel">
+    <div class="btn-container">
+      <%= link_to 'New Post', new_post_path, class: 'btn btn-primary', tabindex: 5 %>
+    </div>
     <ul class="list-group">
       <% @posts.each do |post| %>
         <li class="list-group-item">
@@ -52,7 +55,6 @@
       <% unless current_user %>
         <%= link_to "Sign up", new_registration_path(:user), class: 'btn btn-success', tabindex: 4 %>
       <% end %>
-      <%= link_to 'New Post', new_post_path, class: 'btn btn-primary', tabindex: 5 %>
     </div>
     <div class="panel panel-default about-container">
       <div class="panel-heading">
