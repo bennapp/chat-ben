@@ -1,0 +1,23 @@
+.error-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 70%;
+
+	.error-icon-container {
+		margin-top: 2%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		.glyphicon-alert {
+			color: #d9534f;
+		}
+
+		.glyphicon {
+		  font-size: 28vw;
+		}
+	}
+}
+
