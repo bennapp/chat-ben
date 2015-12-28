@@ -17,6 +17,8 @@ $container-margin: 20px;
 		margin-left: 8px;
 	}
 
+
+
 	.link-panel {
 		flex-grow: 10;
 
@@ -41,6 +43,13 @@ $container-margin: 20px;
 			margin-left: $field-margin;
 			display: inline-block;
 			max-width: 640px;
+		}
+
+		.preview {
+			margin-left: 12px;
+			max-width: 600px;
+			overflow: auto;
+			text-overflow: ellipsis;
 		}
 
 		.edit-delete {
