@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   before_action :set_current_users_post, only: [:edit, :update, :destroy]
 
   def index
+    @post = Post.new
     @posts = Post.joins(:rooms).group('posts.id').order('COUNT(rooms.id) DESC').all
   end
 
@@ -70,7 +71,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title)
+    params.require(:post).permit(:title, :link)
   end
 
   def rated_waiting_users_poorly?(user_ids)

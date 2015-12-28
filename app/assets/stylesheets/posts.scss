@@ -13,6 +13,10 @@ $container-margin: 20px;
 		}
 	}
 
+	.clear-button {
+		margin-left: 8px;
+	}
+
 	.link-panel {
 		flex-grow: 10;
 
@@ -33,7 +37,7 @@ $container-margin: 20px;
 			}
 		}
 
-		.link-title-container {
+		.post-title-container {
 			margin-left: $field-margin;
 			display: inline-block;
 			max-width: 640px;
@@ -58,24 +62,34 @@ $container-margin: 20px;
 	}
 }
 
-.login-container {
-	.login-input {
+.login-container, .new-post-container {
+	.input {
 		font-size: 15px;
 	}
 
-	.login-fields {
+	.fields {
 		display: flex;
 		align-items: center;
 
-		.login-field {
+		.field {
 			margin-right: 12px;
 			margin-bottom: 8px;
 
 			input {
 				height: 34px;
-
 				border-radius: 4px;
+			}
+		}
+
+		.login-field {
+			input {
 				width: 128px;
+			}
+		}
+
+		.new-post-field {
+			input {
+				width: 200px;
 			}
 		}
 	}

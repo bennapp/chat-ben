@@ -1,8 +1,30 @@
 <div class="page-container page">
   <div class="link-panel">
     <div class="btn-container">
-      <%= link_to 'New Post', new_post_path, class: 'btn btn-primary', tabindex: 5 %>
+      <%= link_to 'New Post', 'javascript:;', class: 'btn btn-primary new-post-button', tabindex: 5 %>
     </div>
+
+    <div class="new-post-container" style="display: none;">
+      <%= form_for(@post) do |f| %>
+        <div class="fields">
+          <div class="field new-post-field">
+            <%= f.text_field :title, placeholder: 'Title'%>
+          </div>
+          <div class="field new-post-field">
+            <%= f.text_field :link, placeholder: 'Link'%>
+          </div>
+          <div class="btn-container">
+            <%= f.submit class: 'btn btn-primary'%>
+          </div>
+          <div class="btn-container clear-button">
+            <button type="button" class="btn btn-default" aria-label="Left Align">
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
     <ul class="list-group">
       <% @posts.each do |post| %>
         <li class="list-group-item">
@@ -11,9 +33,15 @@
               <% num_chatting = Participation.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', post.id).count %>
               <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= num_chatting %> chatting right now!"><%= num_chatting %></span>
             </div>
-            <div class="link-title-container">
+            <div class="post-title-container">
               <%= link_to post.title, post %>
             </div>
+
+            <% if post.link %>
+              <div class="post-title-container">
+                <%= link_to post.link, "http://#{post.link}" %>
+              </div>
+            <% end %>
           </div>
           <div class="edit-delete">
             <% if current_user == post.user %>
@@ -35,12 +63,12 @@
       <% else %>
         <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
 
-          <div class="login-fields">
-            <div class="login-field">
+          <div class="fields">
+            <div class="field login-field">
               <%= f.text_field :login, class: 'login-input', tabindex: 1, placeholder: 'Username/Email' %>
             </div>
 
-            <div class="login-field">
+            <div class="field login-field">
               <%= f.password_field :password, autocomplete: "off", class: 'login-input', tabindex: 2, placeholder: 'Password' %>
             </div>
 
@@ -79,4 +107,14 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
+$('.new-post-button').on('click', function(){
+  $('.new-post-container').toggle(true);
+  $('.new-post-button').toggle(false);
+});
+
+$('.clear-button').on('click', function(){
+  $('.new-post-container').toggle(false);
+  $('.new-post-button').toggle(true);
+});
+
 </script>
