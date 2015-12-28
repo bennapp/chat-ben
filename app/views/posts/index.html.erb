@@ -1,23 +1,23 @@
 <div class="page-container page">
   <div class="link-panel">
     <div class="btn-container">
-      <%= link_to 'New Post', 'javascript:;', class: 'btn btn-primary new-post-button', tabindex: 5 %>
+      <%= link_to 'New Post', 'javascript:;', class: 'btn btn-primary new-post-button' %>
     </div>
 
     <div class="new-post-container" style="display: none;">
       <%= form_for(@post) do |f| %>
         <div class="fields">
           <div class="field new-post-field">
-            <%= f.text_field :title, placeholder: 'Title'%>
+            <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
           </div>
           <div class="field new-post-field">
-            <%= f.text_field :link, placeholder: 'Link'%>
+            <%= f.text_field :link, placeholder: 'Link', tabindex: 2 %>
           </div>
           <div class="btn-container">
-            <%= f.submit class: 'btn btn-primary'%>
+            <%= f.submit class: 'btn btn-primary', tabindex: 3 %>
           </div>
           <div class="btn-container clear-button">
-            <button type="button" class="btn btn-default" aria-label="Left Align">
+            <button type="button" class="btn btn-default" aria-label="Left Align", tabindex='4'>
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
           </div>

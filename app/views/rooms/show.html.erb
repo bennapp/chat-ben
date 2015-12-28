@@ -39,6 +39,14 @@
         <%= f.submit "Submit Rating", class: 'submit-rating btn btn-primary' %>
       <% end %>
     </div>
+
+    <div class="embedded-content-container">
+      <% if @room.post.format_link %>
+        <%= raw(@room.post.format_link) %>
+      <% elsif @room.post.link %>
+        <%= link_to @room.post.link, "http://#{@room.post.link}", target: '_blank', class: 'preview' %>
+      <% end %>
+    </div>
   </div>
 
   <div class="remote-panel">
