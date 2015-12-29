@@ -42,7 +42,7 @@
 
     <div class="embedded-content-container">
       <% if @room.post.format_link %>
-        <%= raw(@room.post.format_link) %>
+
       <% elsif @room.post.link %>
         <%= link_to @room.post.link, "http://#{@room.post.link}", target: '_blank', class: 'preview' %>
       <% end %>
@@ -50,15 +50,15 @@
   </div>
 
   <div class="remote-panel">
-    <div class="no-user-container">
-      <div class="well no-user" aria-label="Left Align">
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-      </div>
-    </div>
-
     <div class="remote-container">
       <div id="toggle-local" class="toggle" aria-label="Left Align">
         <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+      </div>
+
+      <div class="no-user-container">
+        <div class="well no-user" aria-label="Left Align">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        </div>
       </div>
 
       <div id="remote"></div>
@@ -83,5 +83,6 @@
 <script>
   $(document).ready(function(){
     var roomShow = new RoomShow({ room: '<%= @room.token %>', participationId: '<%= @participation_id %>', nick: '<%= current_user.name %>' });
+    $('.embedded-content-container').append('<%= @room.post.format_link ? raw(@room.post.format_link_for_youtube) : '' %>');
   });
 </script>

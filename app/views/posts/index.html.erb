@@ -40,7 +40,7 @@
             <% if post.format_link %>
               <a href="#" data-featherlight="<%= post.format_link %>" class="preview"><%= post.link %></a>
             <% elsif post.link %>
-              <%= link_to post.link, "http://#{post.link}", target: '_blank', class: 'preview' %>
+              <%= link_to post.link, "#{post.link}", target: '_blank', class: 'preview' %>
             <% end %>
           </div>
           <div class="edit-delete">

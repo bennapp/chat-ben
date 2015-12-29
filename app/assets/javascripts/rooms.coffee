@@ -18,7 +18,6 @@ class @RoomShow
       nick: options.nick
 
     @setupWebRTC()
-    $('.toggle').hide()
 
   setupWebRTC: ->
     @webrtc.on 'readyToCall', =>
