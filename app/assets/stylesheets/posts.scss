@@ -29,6 +29,17 @@ $container-margin: 20px;
 			display: flex;
 		}
 
+		.preview-container {
+			&:hover {
+				cursor: pointer;
+			}
+
+			span {
+				padding: 0 2px 0 2px;
+				font-size: 22px;
+			}
+		}
+
 		.count-container {
 			display: inline-block;
 

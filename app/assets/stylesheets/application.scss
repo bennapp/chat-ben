@@ -40,6 +40,9 @@ body {
 
 .page {
 	margin-top: 20px;
+	> div {
+		height: 79vh;
+	}
 }
 
 .page-header{

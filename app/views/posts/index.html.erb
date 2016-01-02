@@ -11,7 +11,7 @@
             <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
           </div>
           <div class="field new-post-field">
-            <%= f.text_field :link, placeholder: 'Link', tabindex: 2 %>
+            <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
           </div>
           <div class="btn-container">
             <%= f.submit class: 'btn btn-primary', tabindex: 3 %>
@@ -33,16 +33,33 @@
               <% num_chatting = Participation.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', post.id).count %>
               <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= num_chatting %> chatting right now!"><%= num_chatting %></span>
             </div>
+
+            <% if post.format_link %>
+              <div class="preview-container" aria-label="Left Align">
+                <span class="preview format glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+              </div>
+              <script>
+                $('.preview.format').featherlight('<%= raw(post.format_link) %>', {
+                    openTrigger: 'click',
+                    afterContent: function() {
+                      twttr.widgets.load();
+
+                      var script = document.createElement('script');
+                      script.src = "//s.imgur.com/min/embed.js";
+                      document.head.appendChild(script);
+                    }
+                });
+              </script>
+            <% end %>
+
             <div class="post-title-container">
               <%= link_to post.title, post %>
             </div>
-
-            <% if post.format_link %>
-              <a href="#" data-featherlight="<%= post.format_link %>" class="preview"><%= post.link %></a>
-            <% elsif post.link %>
+            <% if post.link && !post.format_link %>
               <%= link_to post.link, "#{post.link}", target: '_blank', class: 'preview' %>
             <% end %>
           </div>
+
           <div class="edit-delete">
             <% if current_user == post.user %>
               <span class='posted-by' > created <%= time_ago_in_words(post.created_at) %> ago</span>
@@ -116,5 +133,4 @@ $('.clear-button').on('click', function(){
   $('.new-post-container').toggle(false);
   $('.new-post-button').toggle(true);
 });
-
 </script>
