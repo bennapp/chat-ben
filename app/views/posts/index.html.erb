@@ -61,7 +61,7 @@
               <%= link_to post.title, post %>
             </div>
             <% if post.link && !post.format_link %>
-              <%= link_to post.link, "#{post.link}", target: '_blank', class: 'preview' %>
+              <%= link_to post.full_url, "#{post.full_url}", target: '_blank', class: 'preview' %>
             <% end %>
           </div>
 
