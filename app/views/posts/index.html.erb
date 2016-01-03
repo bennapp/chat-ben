@@ -17,7 +17,7 @@
             <%= f.submit class: 'btn btn-primary', tabindex: 3 %>
           </div>
           <div class="btn-container clear-button">
-            <button type="button" class="btn btn-default" aria-label="Left Align", tabindex='4'>
+            <button type="button" class="btn btn-default" aria-label="Left Align", tabindex="4">
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
           </div>
@@ -41,6 +41,11 @@
               <script>
                 $('.preview.format').featherlight('<%= raw(post.format_link) %>', {
                     openTrigger: 'click',
+                    closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
+                    otherClose: '.escape-icon',
+                    afterOpen: function() {
+                      $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
+                    },
                     afterContent: function() {
                       twttr.widgets.load();
 

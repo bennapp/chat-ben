@@ -67,6 +67,29 @@ body {
 	}
 }
 
+.featherlight .featherlight-content{
+	padding-top: 28px;
+	border-radius: 4px;
+}
+
+.escape-container {
+	background: rgba(230, 230, 230, 0.6);
+	border-radius: 4px;
+	span {
+		font-size: 11px;
+	}
+}
+
+.escape-icon {
+	background: rgba(230, 230, 230, 0.6);
+	padding: 0px 3px 0px 3px;
+	font-weight: 700;
+	font-size: 16px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
 .footer-content {
 	border-top: 1px solid #eeeeee;
 	margin-left: 5%;
