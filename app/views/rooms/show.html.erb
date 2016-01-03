@@ -7,6 +7,38 @@
       </div>
     </div>
 
+    <div class="embeded-content-container">
+      <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
+        <% if @room.post.link && !@room.post.format_link %>
+          <%= link_to @room.post.link, "http://#{@room.post.link}", target: '_blank', class: 'preview' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="remote-panel">
+    <div class="alert-container">
+      <div class="alert alert-info status" role="alert"></div>
+    </div>
+
+    <div class="remote-container">
+      <div id="toggle-local" class="toggle" aria-label="Left Align">
+        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+      </div>
+
+      <div class="no-user-container">
+        <div class="well no-user" aria-label="Left Align">
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div id="remote"></div>
+
+      <div id="toggle-chat" class="toggle" aria-label="Left Align">
+        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+      </div>
+    </div>
+
     <div class="buttons">
       <button id="end-conversation" class="btn btn-danger">End Conversation</button>
       <div class="new-buttons">
@@ -39,35 +71,6 @@
         <%= f.submit "Submit Rating", class: 'submit-rating btn btn-primary' %>
       <% end %>
     </div>
-
-    <div class="embedded-content-container">
-      <% if @room.post.format_link %>
-
-      <% elsif @room.post.link %>
-        <%= link_to @room.post.link, "http://#{@room.post.link}", target: '_blank', class: 'preview' %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="remote-panel">
-    <div class="alert alert-info status" role="alert"></div>
-    <div class="remote-container">
-      <div id="toggle-local" class="toggle" aria-label="Left Align">
-        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-      </div>
-
-      <div class="no-user-container">
-        <div class="well no-user" aria-label="Left Align">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-        </div>
-      </div>
-
-      <div id="remote"></div>
-
-      <div id="toggle-chat" class="toggle" aria-label="Left Align">
-        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-      </div>
-    </div>
   </div>
 
   <div class="chat-panel">
@@ -85,6 +88,6 @@
 <script>
   $(document).ready(function(){
     var roomShow = new RoomShow({ room: '<%= @room.token %>', participationId: '<%= @participation_id %>', nick: '<%= current_user.name %>' });
-    $('.embedded-content-container').append('<%= @room.post.format_link ? raw(@room.post.format_link_for_youtube) : '' %>');
+    $('.embeded-content-wrapper').append('<%= @room.post.format_link ? raw(@room.post.format_link_for_youtube) : '' %>');
   });
 </script>

@@ -75,10 +75,9 @@ class @RoomShow
     @_setStatus('ending')
     $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
     $('.videoContainer').remove()
-    $('.remote-panel').hide()
+    $('.remote-container').hide()
     $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
     @webrtc.channel.close()
-
 
   showVolume: (el, volume) ->
     return unless el

@@ -24,7 +24,53 @@ video {
     display: none;
   }
 
+  margin-top: 14px;
   margin-bottom: 20px;
+}
+
+.rating-description {
+  width: 390px;
+
+  p {
+    margin-bottom: 4px;
+  }
+}
+
+.rating {
+  h4 {
+    margin-bottom: 2px;
+  }
+
+  .submit-rating {
+    margin-top: -4px;
+  }
+
+  label {
+    font-weight: normal;
+  }
+
+  .rating-select-container {
+    margin-top: -4px;
+    margin-bottom: 12px;
+    position: relative;
+
+    .caret {
+      position: absolute;
+      top: 15px;
+      left: 95px;
+    }
+
+    select {
+      background: white;
+      color: black;
+      padding: 5px;
+      font-size: 16px;
+      line-height: 1;
+      height: 34px;
+      width: 115px;
+      -webkit-appearance: none;
+    }
+  }
 }
 
 .room-page {
@@ -37,14 +83,6 @@ video {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    .rating-description {
-      width: 390px;
-
-      p {
-        margin-bottom: 4px;
-      }
-    }
 
     .local-video-container {
       width: 200px;
@@ -63,44 +101,28 @@ video {
       }
     }
 
-    .embedded-content-container {
-      margin-top: -15px;
+    .embeded-content-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 60vh;
     }
 
-    .rating {
-      h4 {
-        margin-bottom: 2px;
-      }
+    .embeded-content-wrapper.imgur {
+      padding: 0;
+      height: 60vh;
 
-      .submit-rating {
-        margin-top: -4px;
-      }
+      iframe {
+        margin-top: -50px !important;
+        width: 1280px;
+        height: 786px;
+        border: 0;
 
-      label {
-        font-weight: normal;
-      }
-
-      .rating-select-container {
-        margin-top: -4px;
-        margin-bottom: 12px;
-        position: relative;
-
-        .caret {
-          position: absolute;
-          top: 15px;
-          left: 95px;
-        }
-
-        select {
-          background: white;
-          color: black;
-          padding: 5px;
-          font-size: 16px;
-          line-height: 1;
-          height: 34px;
-          width: 115px;
-          -webkit-appearance: none;
-        }
+        -ms-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        -o-transform: scale(0.8);
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
       }
     }
   }
@@ -113,9 +135,14 @@ video {
     border-left: 1px solid #eeeeee;
     align-items: center;
 
+    .alert {
+      margin-bottom: 14px;
+    }
+
     .no-user-container {
       margin: $panel-margin;
     }
+
     .no-user .glyphicon {
       font-size: 38vw;
     }
