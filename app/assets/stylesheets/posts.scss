@@ -30,6 +30,19 @@ $container-margin: 20px;
 		}
 
 		.preview-container {
+			.preview {
+				margin-left: 12px;
+				max-width: 600px;
+				overflow: auto;
+				text-overflow: ellipsis;
+				color: black !important;
+			}
+
+			.fa-lg {
+				line-height: 1.12em;
+				font-size: 25px;
+			}
+
 			&:hover {
 				cursor: pointer;
 			}
@@ -42,6 +55,7 @@ $container-margin: 20px;
 
 		.count-container {
 			display: inline-block;
+			line-height: 1.9em;
 
 			.badge {
 				background-color: $sub-text-grey;
@@ -52,17 +66,12 @@ $container-margin: 20px;
 			margin-left: $field-margin;
 			display: inline-block;
 			max-width: 640px;
-		}
-
-		.preview {
-			margin-left: 12px;
-			max-width: 600px;
-			overflow: auto;
-			text-overflow: ellipsis;
+			line-height: 1.9em;
 		}
 
 		.edit-delete {
 			margin-left: 20px;
+			line-height: 1.9em;
 
 			.posted-by {
 				color: $sub-text-grey;
@@ -74,7 +83,7 @@ $container-margin: 20px;
 	.right-panel {
 		flex-grow: 1;
 		flex-basis: 22%;
-		margin-left: $page-margin;
+		margin-left: 28px;
 		margin-right: $page-margin;
 		min-width: 344px;
 	}
@@ -114,6 +123,14 @@ $container-margin: 20px;
 
 	.btn {
 		display: inline-block;
+	}
+
+	.new-post-textarea textarea{
+		width: 412px;
+		height: 88px;
+		border-radius: 4px;
+		border-color: #ccc;
+		margin-bottom: 8px;
 	}
 }
 

@@ -13,14 +13,18 @@
           <div class="field new-post-field">
             <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
           </div>
+
           <div class="btn-container">
-            <%= f.submit class: 'btn btn-primary', tabindex: 3 %>
+            <%= f.submit class: 'btn btn-primary', tabindex: 4 %>
           </div>
           <div class="btn-container clear-button">
             <button type="button" class="btn btn-default" aria-label="Left Align", tabindex="4">
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
           </div>
+        </div>
+        <div class="new-post-textarea">
+          <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
         </div>
       <% end %>
     </div>
@@ -36,11 +40,10 @@
 
             <% if post.format_link %>
               <div class="preview-container" aria-label="Left Align">
-                <span class="preview format glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                <span class="preview format <%= post.format_icon %>" aria-hidden="true"></span>
               </div>
               <script>
                 $('.preview.format').featherlight('<%= raw(post.format_link) %>', {
-                    openTrigger: 'click',
                     closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
                     otherClose: '.escape-icon',
                     afterOpen: function() {
@@ -57,21 +60,41 @@
               </script>
             <% end %>
 
+            <% if post.link.present? && !post.format_link %>
+              <div class="preview-container" aria-label="Left Align">
+                <%= link_to post.full_url, target: '_blank' do %>
+                  <span class="preview glyphicon glyphicon-globe"></span>
+                <% end %>
+              </div>
+            <% end %>
+
+            <% if post.text_content %>
+              <div class="preview-container" aria-label="Left Align">
+                <span class="preview text-content-icon fa fa-file-text-o fa-lg" aria-hidden="true"></span>
+              </div>
+              <script>
+                $('.text-content-icon').featherlight('<div class=\"well\"><%= html_escape j(simple_format post.text_content) %></div>', {
+                    closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
+                    otherClose: '.escape-icon',
+                    afterOpen: function() {
+                      $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
+                    }
+                });
+              </script>
+            <% end %>
+
             <div class="post-title-container">
               <%= link_to post.title, post %>
             </div>
-            <% if post.link && !post.format_link %>
-              <%= link_to post.full_url, "#{post.full_url}", target: '_blank', class: 'preview' %>
-            <% end %>
           </div>
 
           <div class="edit-delete">
             <% if current_user == post.user %>
-              <span class='posted-by' > created <%= time_ago_in_words(post.created_at) %> ago</span>
-              <%= link_to 'Edit', edit_post_path(post) %>
+              <span class='posted-by' > <%= time_ago_in_words(post.created_at) %> ago</span>
+              <% link_to 'Edit', edit_post_path(post) %>
               <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
             <% else %>
-              <span class='posted-by' ><%= post.user.name %>, created <%= time_ago_in_words(post.created_at) %> ago</span>
+              <span class='posted-by' ><%= post.user.name %>, <%= time_ago_in_words(post.created_at) %> ago</span>
             <% end %>
           </div>
         </li>

@@ -71,7 +71,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :link)
+    params.require(:post).permit(:title, :link, :text_content)
   end
 
   def rated_waiting_users_poorly?(user_ids)
