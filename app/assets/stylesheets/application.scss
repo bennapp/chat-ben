@@ -59,6 +59,12 @@ body {
 
 	.page-title {
 		margin-left: $page-margin;
+		font-family: 'Raleway', sans-serif;
+		font-weight: 700;
+
+		small {
+			font-weight: 300;
+		}
 	}
 
 	.logout-link {

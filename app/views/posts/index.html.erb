@@ -1,7 +1,9 @@
 <div class="page-container page">
   <div class="link-panel">
     <div class="btn-container">
-      <%= link_to 'New Post', 'javascript:;', class: 'btn btn-primary new-post-button' %>
+      <%= link_to 'javascript:;', class: 'btn btn-primary new-post-button' do %>
+        <span class="new-post-key">N</span>ew Post
+      <% end %>
     </div>
 
     <div class="new-post-container" style="display: none;">
@@ -131,7 +133,7 @@
     </div>
     <div class="panel panel-default about-container">
       <div class="panel-heading">
-        About Chat Ben
+        About
       </div>
       <div class="panel-body">
         <p>
@@ -152,13 +154,30 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
-$('.new-post-button').on('click', function(){
-  $('.new-post-container').toggle(true);
-  $('.new-post-button').toggle(false);
-});
+$(document).ready(function() {
+  $('.new-post-button').on('click', function(){
+    $('.new-post-container').toggle(true);
+    $('.new-post-button').toggle(false);
+  });
+  $('.clear-button').on('click', function(){
+    $('.new-post-container').toggle(false);
+    $('.new-post-button').toggle(true);
+  });
 
-$('.clear-button').on('click', function(){
-  $('.new-post-container').toggle(false);
-  $('.new-post-button').toggle(true);
+  $(document).keyup(function(e){
+    if(e.keyCode === 78){ // n
+      if($('.new-post-button').is(":visible")){
+        $('.new-post-container').toggle(true);
+        $('.new-post-button').toggle(false);
+      }
+    }
+
+    if(e.keyCode === 27){ // esc
+      if($('.clear-button').is(":visible")){
+        $('.new-post-container').toggle(false);
+        $('.new-post-button').toggle(true);
+      }
+    }
+  });
 });
 </script>

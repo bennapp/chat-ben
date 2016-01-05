@@ -11,6 +11,19 @@ $container-margin: 20px;
 			margin-bottom: 8px;
 			display: block;
 		}
+
+		.new-post-button {
+			@include gradient-horizontal(#337ab7, #5bc0de, 0%, 100%);
+			border: none;
+			&:hover {
+				background-color: #286090;
+				background-image: none;
+			}
+		}
+
+		.new-post-key {
+			text-decoration: underline;
+		}
 	}
 
 	.clear-button {
@@ -136,4 +149,11 @@ $container-margin: 20px;
 
 .new-edit-post {
 	margin-left: 20px;
+}
+
+.panel-heading {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  padding: 5px 14px 5px;
+  font-size: 16px;
 }
