@@ -9,7 +9,7 @@
     <div class="new-post-container" style="display: none;">
       <%= form_for(@post) do |f| %>
         <div class="fields">
-          <div class="field new-post-field">
+          <div class="field new-post-field new-post-title">
             <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
           </div>
           <div class="field new-post-field">
@@ -155,27 +155,35 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 $(document).ready(function() {
-  $('.new-post-button').on('click', function(){
+  var showNewPost = function(){
     $('.new-post-container').toggle(true);
     $('.new-post-button').toggle(false);
-  });
-  $('.clear-button').on('click', function(){
+    $('.new-post-title input').focus();
+  };
+
+  var hideNewPost = function(){
     $('.new-post-container').toggle(false);
     $('.new-post-button').toggle(true);
+  };
+
+  $('.new-post-button').on('click', function(){
+    showNewPost();
+  });
+
+  $('.clear-button').on('click', function(){
+
   });
 
   $(document).keyup(function(e){
     if(e.keyCode === 78){ // n
       if($('.new-post-button').is(":visible")){
-        $('.new-post-container').toggle(true);
-        $('.new-post-button').toggle(false);
+        showNewPost();
       }
     }
 
     if(e.keyCode === 27){ // esc
       if($('.clear-button').is(":visible")){
-        $('.new-post-container').toggle(false);
-        $('.new-post-button').toggle(true);
+        hideNewPost();
       }
     }
   });

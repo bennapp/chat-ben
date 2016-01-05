@@ -59,7 +59,7 @@ class Post < ActiveRecord::Base
         return unless youtube_token
         youtube_token = youtube_token.split('v=')[1]
         self.format_type = 'youtube'
-        "<iframe id=\"ytplayer\" type=\"text/html\" width=\"640\" height=\"390\" src=\"http://www.youtube.com/embed/#{youtube_token}?autoplay=1&origin=https://www.chatben.co\" frameborder=\"0\"/>"
+        "<iframe id=\"ytplayer\" type=\"text/html\" width=\"640\" height=\"390\" src=\"//www.youtube.com/embed/#{youtube_token}?autoplay=1&origin=https://www.chatben.co\" frameborder=\"0\"/>"
       when /vimeo.com/
         vimeo_token = URI(link).path
         return unless vimeo_token
