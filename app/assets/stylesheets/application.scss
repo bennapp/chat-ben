@@ -27,6 +27,20 @@ body {
 	margin: 0;
 }
 
+.flash {
+	&.alert-danger {
+		@include gradient-horizontal(#f2dede, #FFFFFF, 0%, 100%);
+		border: none;
+	}
+
+	&.alert-info {
+		@include gradient-horizontal(#d9edf7, #FFFFFF, 0%, 100%);
+		border: none;
+	}
+
+	margin: 16px $page-margin 0;
+}
+
 .form-container {
 	margin-left: $container-margin;
 

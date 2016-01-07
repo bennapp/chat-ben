@@ -70,7 +70,7 @@
               </div>
             <% end %>
 
-            <% if post.text_content %>
+            <% if post.text_content.present? %>
               <div class="preview-container" aria-label="Left Align">
                 <span class="preview text-content-icon fa fa-file-text-o fa-lg" aria-hidden="true"></span>
               </div>
@@ -112,15 +112,15 @@
 
           <div class="fields">
             <div class="field login-field">
-              <%= f.text_field :login, class: 'login-input', tabindex: 1, placeholder: 'Username/Email' %>
+              <%= f.text_field :login, class: 'login-input', tabindex: 5, placeholder: 'Username/Email' %>
             </div>
 
             <div class="field login-field">
-              <%= f.password_field :password, autocomplete: "off", class: 'login-input', tabindex: 2, placeholder: 'Password' %>
+              <%= f.password_field :password, autocomplete: "off", class: 'login-input', tabindex: 6, placeholder: 'Password' %>
             </div>
 
             <div class="btn-container">
-              <%= f.submit "Log in", class: 'btn btn-info', tabindex: 3 %>
+              <%= f.submit "Log in", class: 'btn btn-info', tabindex: 7 %>
             </div>
           </div>
         <% end %>
@@ -128,7 +128,7 @@
     </div>
     <div class="btn-container">
       <% unless current_user %>
-        <%= link_to "Sign up", new_registration_path(:user), class: 'btn btn-success', tabindex: 4 %>
+        <%= link_to "Sign up", new_registration_path(:user), class: 'btn btn-success', tabindex: 8 %>
       <% end %>
     </div>
     <div class="panel panel-default about-container">
@@ -171,12 +171,12 @@ $(document).ready(function() {
   });
 
   $('.clear-button').on('click', function(){
-
+    hideNewPost();
   });
 
   $(document).keyup(function(e){
     if(e.keyCode === 78){ // n
-      if($('.new-post-button').is(":visible")){
+      if($('.new-post-button').is(":visible") && !$('input').is(':focus')){
         showNewPost();
       }
     }
@@ -187,5 +187,7 @@ $(document).ready(function() {
       }
     }
   });
+
+  $('.flash.notice').delay(3500).fadeTo(1400, 0.0);
 });
 </script>

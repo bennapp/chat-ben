@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <% if @room.post.text_content %>
+    <% if @room.post.text_content.present? %>
       <div class="well">
         <%= html_escape(simple_format @room.post.text_content) %>
       </div>
@@ -108,5 +108,7 @@
   $(document).ready(function(){
     var roomShow = new RoomShow({ room: '<%= @room.token %>', participationId: '<%= @participation_id %>', nick: '<%= current_user.name %>' });
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? raw(@room.post.format_link_for_youtube) : '' %>');
+
+    $('.flash.notice').delay(3500).fadeOut(1400);
   });
 </script>

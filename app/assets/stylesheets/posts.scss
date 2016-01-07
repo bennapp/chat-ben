@@ -45,10 +45,13 @@ $container-margin: 20px;
 		.preview-container {
 			.preview {
 				margin-left: 12px;
+				color: black !important;
+			}
+
+			.post-title-container {
 				max-width: 600px;
 				overflow: auto;
 				text-overflow: ellipsis;
-				color: black !important;
 			}
 
 			.fa-lg {
