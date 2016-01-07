@@ -7,32 +7,40 @@
       </div>
     </div>
 
-    <% if @room.post.text_content.present? %>
-      <div class="well">
-        <%= html_escape(simple_format @room.post.text_content) %>
-      </div>
-
-      <div class="btn btn-info read-more" aria-label="Left Align">
-        <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
-      </div>
-      <script>
-        $('.read-more').featherlight('<div class=\"well\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
-            closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
-            otherClose: '.escape-icon',
-            afterOpen: function() {
-              $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
-            }
-        });
-      </script>
+    <% if @room.post.link.present? && @room.post.format_link.blank? %>
+      <%= link_to @room.post.link, "http://#{@room.post.link}", target: '_blank', class: 'preview' %>
     <% end %>
 
-    <div class="embeded-content-container">
-      <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
-        <% if @room.post.link && !@room.post.format_link %>
-          <%= link_to @room.post.link, "http://#{@room.post.link}", target: '_blank', class: 'preview' %>
-        <% end %>
+    <% if @room.post.text_content.present? %>
+      <% if @room.post.format_link.blank? %>
+        <div class="well">
+          <%= html_escape(simple_format @room.post.text_content) %>
+        </div>
+      <% end %>
+
+      <% if @room.post.text_content.length > 500 %>
+        <div class="btn btn-info read-more" aria-label="Left Align">
+          <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
+        </div>
+
+        <script>
+          $('.read-more').featherlight('<div class=\"well\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
+              closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
+              otherClose: '.escape-icon',
+              afterOpen: function() {
+                $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
+              }
+          });
+        </script>
+      <% end %>
+    <% end %>
+
+    <% if @room.post.format_link.present? %>
+      <div class="embeded-content-container">
+        <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
 
   <div class="remote-panel">

@@ -2,8 +2,8 @@ $container-margin: 20px;
 
 .page-container {
 	display: flex;
+	flex-wrap: wrap-reverse;
 
-	margin-left: $page-margin;
 	min-width: 800px;
 
 	.btn-container {
@@ -32,6 +32,9 @@ $container-margin: 20px;
 
 	.link-panel {
 		flex-grow: 10;
+		height: auto;
+		margin-left: 2.5%;
+		margin-right: 2.5%;
 
 		.list-group-item {
 			display: flex;
@@ -99,9 +102,10 @@ $container-margin: 20px;
 	.right-panel {
 		flex-grow: 1;
 		flex-basis: 22%;
-		margin-left: 28px;
-		margin-right: $page-margin;
 		min-width: 344px;
+		height: auto;
+		margin-left: 2.5%;
+		margin-right: 2.5%;
 	}
 }
 

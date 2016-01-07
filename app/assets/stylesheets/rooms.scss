@@ -100,22 +100,27 @@ video {
 
     .well {
       margin-top: 20px;
-      width: 90%;
       padding-bottom: 40px;
-      max-height: 390px;
       margin-bottom: 12px;
-      overflow-y:scroll;
+      overflow-y: scroll;
     }
 
     .read-more {
-      padding-bottom: 12px;
+      margin-top: 12px;
+      max-height: 30px;
+      span {
+        padding-bottom: 12px;
+      }
     }
 
     .embeded-content-container {
       display: flex;
       flex-direction: column;
       justify-content: center;
+      margin-top: 12px;
       height: 60vh;
+      overflow-y: scroll;
+      border-radius: 4px;
     }
 
     .embeded-content-wrapper.imgur {
