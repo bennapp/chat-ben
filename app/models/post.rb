@@ -10,11 +10,15 @@ class Post < ActiveRecord::Base
   validates_presence_of :user
 
   def full_url
-    u = URI.parse(link)
-    if !u.scheme
-      'https://' + link
-    else
-      link
+    begin
+      u = URI.parse(link)
+      if !u.scheme
+        'https://' + link
+      else
+        link
+      end
+    rescue
+      ''
     end
   end
 
