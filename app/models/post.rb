@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   before_save :format_link_into_lightbox_html
 
   validates_presence_of :user
+  validates_presence_of :title
 
   def full_url
     begin
