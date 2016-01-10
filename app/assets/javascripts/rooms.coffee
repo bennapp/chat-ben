@@ -89,11 +89,13 @@ class @RoomShow
       el.style.height = '' + Math.floor((volume + 100) * 100 / 25 - 220) + '%'
 
   recieveMessage: (message) ->
-    $('.messages-container').append("<div class=\"from well well-sm bg-info\">#{message}</div>")
+    $('.messages-container').append("<div class=\"from well well-sm bg-info\"></div>")
+    $('.from:last').text(message)
 
   sendMessage: (message) ->
     @webrtc.channel.send(JSON.stringify({type: 'chatMessage', chatMessage: message}))
-    $('.messages-container').append("<div class=\"to well well-sm\">#{message}</div>")
+    $('.messages-container').append("<div class=\"to well well-sm\"></div>")
+    $('.to:last').text(message)
 
   _bindChat: ->
     $sendMessage = $('#send-message')
