@@ -3,7 +3,6 @@ class Rating < ActiveRecord::Base
   belongs_to :ratee, class_name: 'User', foreign_key: 'ratee_id'
   belongs_to :room
 
-  validates :room, presence: true
   validates :rater, presence: true
   validates :ratee, presence: true
   validate :rater_and_ratee_participated_in_room

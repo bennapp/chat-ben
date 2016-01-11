@@ -77,7 +77,8 @@ class @RoomShow
     $('.videoContainer').remove()
     $('.remote-container').hide()
     $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
-    @webrtc.channel.close()
+    @webrtc.leaveRoom()
+    @webrtc.stopLocalVideo()
 
   showVolume: (el, volume) ->
     return unless el
@@ -108,10 +109,16 @@ class @RoomShow
 
   _bindDom: ->
     window.onbeforeunload = =>
+      if @status == 'chatting'
+        return 'Make sure to end your conversation before leaving!'
+      else
+        return undefined
+
+    window.onunload = =>
+      window.onbeforeunload = undefined
       $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
-      if @webrtc.channel
-        @webrtc.channel.close()
-      return undefined
+      @webrtc.leaveRoom()
+      @webrtc.stopLocalVideo()
 
     $ratingForm = $("#new_rating")
     $ratingForm.on "ajax:success", (e, data, status, xhr) ->
@@ -130,6 +137,7 @@ class @RoomShow
     $('#toggle-chat').on 'click', @_toggleChat
 
   _setStatus: (status) ->
+    @status = status
     status = switch status
       when 'waiting'
         'Waiting for someone to chat with'
