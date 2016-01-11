@@ -27,15 +27,17 @@
 
     <%= yield %>
 
-    <div class="navbar navbar-default navbar-fixed-bottom">
-      <div class="footer-content">
-        <% if current_user && !@is_feeback_new %>
-          <%= link_to('Leave Ben Feedback', new_feedback_path) %>
-        <% end %>
+    <% unless @hide_footer %>
+      <div class="navbar navbar-default navbar-fixed-bottom">
+        <div class="footer-content">
+          <% if current_user && !@is_feeback_new %>
+            <%= link_to('Leave Ben Feedback', new_feedback_path) %>
+          <% end %>
 
-        <p class="copyright text-muted">2016 Chat Ben</p>
+          <p class="copyright text-muted">2016 Chat Ben</p>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <script>
       window.twttr = (function(d, s, id) {

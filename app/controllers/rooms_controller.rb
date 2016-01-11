@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show]
 
   def show
+    @hide_footer = true
     redirect_to root_url and return unless @room
     participation = Participation.find_or_create_by(user: current_user, room: @room)
     @subtitle = @room.post.title
