@@ -46,6 +46,9 @@ class @RoomShow
 
       video.style.width = '800px';
 
+      $('.messages-container').append("<div class=\"from well well-sm bg-info\"></div>")
+      $('.from:last').text("Hey! What's going on!?")
+
       @createChatDataChannel()
       @_bindChat()
 

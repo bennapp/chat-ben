@@ -6,6 +6,7 @@ $panel-margin: 0 12px 0 12px;
   right: 0px;
   bottom: 0px;
   background-color: #12acef;
+  border-radius: 4px;
 }
 
 video {
@@ -190,6 +191,14 @@ video {
 
       button {
         border-color: white;
+      }
+
+      .videoContainer {
+        position: relative;
+
+        .volume_bar {
+          bottom: 5px;
+        }
       }
 
       video {
