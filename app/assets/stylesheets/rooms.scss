@@ -219,12 +219,18 @@ video {
     .messages-container {
       flex-grow: 8;
       overflow-y: scroll;
+      border-top: 1px solid #eeeeee;
+      border-bottom: 1px solid #eeeeee;
 
       .well {
         margin-bottom: 6px;
         display: inline-block;
         clear: both;
         word-break: break-word;
+
+        &:first-child {
+          margin-top: 12px;
+        }
       }
 
       .to {

@@ -92,11 +92,13 @@ class @RoomShow
   recieveMessage: (message) ->
     $('.messages-container').append("<div class=\"from well well-sm bg-info\"></div>")
     $('.from:last').text(message)
+    $('.messages-container').scrollTop($('.messages-container')[0].scrollHeight);
 
   sendMessage: (message) ->
     @webrtc.channel.send(JSON.stringify({type: 'chatMessage', chatMessage: message}))
     $('.messages-container').append("<div class=\"to well well-sm\"></div>")
     $('.to:last').text(message)
+    $('.messages-container').scrollTop($('.messages-container')[0].scrollHeight);
 
   _bindChat: ->
     $sendMessage = $('#send-message')
