@@ -67,7 +67,12 @@
     </div>
 
     <div class="buttons">
-      <button id="end-conversation" class="btn btn-danger">End Conversation</button>
+      <div class="control-buttons">
+        <button id="mute-microphone-button" class="btn dtn-defualt"><span class="fa fa-microphone-slash"></span></button>
+        <button id="mute-volume-button" class="btn dtn-defualt"><span class="fa fa-volume-off"></span></button>
+        <button id="end-conversation" class="btn btn-danger">End Conversation</button>
+      </div>
+
       <div class="new-buttons">
         <%= link_to "New Conversation About the Same Topic", @room.post, id: 'new-conversation', class: 'btn' %>
         </br >

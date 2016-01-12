@@ -54,7 +54,7 @@ class @RoomShow
 
       $('#send-message').show()
       $('.toggle').show()
-      $('#end-conversation').show()
+      $('.control-buttons').show()
       $('.no-user-container').hide()
       @_setStatus('chatting')
 
@@ -74,7 +74,7 @@ class @RoomShow
     if remote and el
       remote.removeChild el
     $('.rating').show()
-    $('#end-conversation').hide()
+    $('.control-buttons').hide()
     @_setStatus('ending')
     $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
     $('.videoContainer').remove()
@@ -141,6 +141,8 @@ class @RoomShow
     $('#toggle-local').on 'click', @_toggleLocal
     $('#toggle-chat').on 'click', @_toggleChat
 
+    @_controlButtons()
+
   _setStatus: (status) ->
     @status = status
     status = switch status
@@ -177,3 +179,29 @@ class @RoomShow
       $toggleChat.removeClass('glyphicon-menu-left')
       $toggleChat.addClass('glyphicon-menu-right')
       $('.chat-panel').show()
+
+  _controlButtons: ->
+    $('#mute-microphone-button').on 'click', @_toggleMic
+    $('#mute-volume-button').on 'click', @_toggleVolume
+
+  _toggleMic: =>
+    $mic = $('#mute-microphone-button')
+    if $mic.hasClass('btn-danger')
+      @webrtc.unmute()
+      @_toggleDanger($mic)
+    else
+      @webrtc.mute()
+      @_toggleDanger($mic)
+
+  _toggleVolume: =>
+    $vol = $('#mute-volume-button')
+    if $vol.hasClass('btn-danger')
+      @webrtc.setVolumeForAll(1)
+      @_toggleDanger($vol)
+    else
+      @webrtc.setVolumeForAll(0)
+      @_toggleDanger($vol)
+
+  _toggleDanger: ($el) ->
+    $el.toggleClass('btn-danger')
+    $el.toggleClass('btn-default')
