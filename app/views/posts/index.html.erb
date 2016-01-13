@@ -39,13 +39,19 @@
     </div>
 
     <ul class="list-group">
-      <% @posts.each do |post| %>
+      <% @posts.sort_by{ |post| post.sticky? ? -2**16 : -post.rooms.with_deleted.count }.each do |post| %>
         <li class="list-group-item">
           <div class="badge-and-title">
-            <div class="count-container">
-              <% num_chatting = Participation.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', post.id).count %>
-              <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= num_chatting %> chatting right now!"><%= num_chatting %></span>
-            </div>
+
+          <div class="count-container">
+            <% if post.sticky? %>
+              <span class="fa fa-thumb-tack fa-lg" aria-hidden="true"></span>
+            <% else %>
+              <% num_chatted = Participation.with_deleted.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', post.id).count %>
+              <% num_chatted += 1 if num_chatted == 1 %>
+              <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= num_chatted %> chatted about this post!"><%= num_chatted %></span>
+            <% end %>
+          </div>
 
             <% if post.format_link %>
               <div class="preview-container" aria-label="Left Align">

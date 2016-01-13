@@ -28,7 +28,7 @@ class Room < ActiveRecord::Base
 
   def destroy_empty_post
     if post.rooms.count == 1
-      post.destroy
+      post.destroy unless post.sticky?
     end
   end
 end
