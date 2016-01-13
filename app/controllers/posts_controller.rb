@@ -65,7 +65,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.with_deleted.find(params[:id])
   end
 
   def post_params
