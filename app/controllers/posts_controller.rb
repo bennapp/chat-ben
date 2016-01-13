@@ -26,6 +26,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    binding.pry
     @post.user = current_user
 
     respond_to do |format|
@@ -69,7 +70,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :link, :text_content)
+    params.require(:post).permit(:title, :link, :text_content, :sticky)
   end
 
   def rated_waiting_users_poorly?(user_ids)
