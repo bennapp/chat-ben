@@ -16,7 +16,7 @@
             <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
           </div>
 
-          <% if current_user.name == 'ben' %>
+          <% if current_user && current_user.name == 'ben' %>
             <div class="field new-post-field">
               <%= f.label :sticky %>
               <%= f.check_box :sticky %>
