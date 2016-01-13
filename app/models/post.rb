@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   acts_as_paranoid
 
   belongs_to :user
-  has_many :rooms
+  has_many :rooms, :dependent => :delete_all
 
   before_save :format_link_into_lightbox_html
 

@@ -2,7 +2,7 @@ class Room < ActiveRecord::Base
   acts_as_paranoid
 
   belongs_to :post
-  has_many :participations
+  has_many :participations, :dependent => :delete_all
 
   validates_presence_of :token
   validates_uniqueness_of :token
