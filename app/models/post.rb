@@ -10,8 +10,6 @@ class Post < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :title
 
-  before_destroy :keep_sticky_posts
-
   def num_chatted
     @num_chatted ||= Participation.with_deleted.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', id).count
   end
@@ -76,9 +74,5 @@ class Post < ActiveRecord::Base
       end
 
     self.format_link = self.format_link.html_safe if self.format_link
-  end
-
-  def keep_sticky_posts
-    return false if sticky?
   end
 end

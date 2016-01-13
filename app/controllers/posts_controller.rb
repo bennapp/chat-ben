@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.joins(:rooms).group('posts.id').order('COUNT(rooms.id) DESC').all
+    @posts = Post.all
   end
 
   def show

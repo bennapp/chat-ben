@@ -51,7 +51,7 @@
             <% end %>
           </div>
 
-            <% if post.format_link %>
+            <% if post.format_type.present? %>
               <div class="preview-container" aria-label="Left Align">
                 <span class="preview format <%= post.format_icon %>" aria-hidden="true"></span>
               </div>
