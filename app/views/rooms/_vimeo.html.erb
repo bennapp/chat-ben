@@ -1,1 +1,4 @@
-<iframe src="//player.vimeo.com/video<%= value %>?portrait=0&color=333" width="640" height="390" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<% width = defined?(@room) ? '320' : '640' %>
+<% height = defined?(@room) ? '195' : '390' %>
+
+<iframe src="//player.vimeo.com/video<%= value %>?portrait=0&color=333" width="<%= width %>" height="<%= height %>" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
