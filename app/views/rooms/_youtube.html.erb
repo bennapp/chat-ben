@@ -1,0 +1,5 @@
+<% width = defined?(@room) ? '320' : '640' %>
+<% height = defined?(@room) ? '195' : '390' %>
+<% autoplay = defined?(@room) ? '' : 'autoplay=1' %>
+
+<iframe id="ytplayer" type="text/html" width="<%= width %>" height="<%= height %>" src="//www.youtube.com/embed/<%= value %>?<%= autoplay %>&origin=https://www.chatben.co" frameborder="0"/>

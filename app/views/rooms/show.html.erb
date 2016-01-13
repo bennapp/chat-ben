@@ -8,7 +8,7 @@
     </div>
 
     <% if @room.post.link.present? && @room.post.format_link.blank? %>
-      <%= link_to @room.post.link, "http://#{@room.post.link}", target: '_blank', class: 'preview' %>
+      <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
     <% end %>
 
     <% if @room.post.text_content.present? %>
@@ -118,8 +118,7 @@
 <script>
   $(document).ready(function(){
     var roomShow = new RoomShow({ room: '<%= @room.token %>', participationId: '<%= @participation_id %>', nick: '<%= current_user.name %>' });
-    $('.embeded-content-wrapper').append('<%= @room.post.format_link ? raw(@room.post.format_link_for_youtube) : '' %>');
-
+    $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
     $('.flash.notice').delay(3500).fadeOut(1400);
   });
 </script>

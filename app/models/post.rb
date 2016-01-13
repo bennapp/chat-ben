@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :title
 
+  before_destroy :keep_sticky_posts
+
   def num_chatted
     @num_chatted ||= Participation.with_deleted.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', id).count
   end
@@ -42,44 +44,41 @@ class Post < ActiveRecord::Base
     end
   end
 
-  def format_link_for_youtube
-    format_link.slice!('autoplay=1&')
-    format_link.sub(/640/, '320').sub(/390/, '195')
-  end
-
   def format_link_into_lightbox_html
     return unless self.link.present?
     link = ERB::Util.html_escape(self.link)
 
-    self.format_link = case link
+    case link
       when /twitter.com/
-        #<blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/NewYearSamePersonBecause?src=hash">#NewYearSamePersonBecause</a> last year was only the day before yesterday, sorry to break it to you...</p>&mdash; TLBKlaus (@TLBKlaus) <a href="https://twitter.com/TLBKlaus/status/683317326654091264">January 2, 2016</a></blockquote>
-        #<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         self.format_type = 'twitter'
-        "<blockquote class=\"twitter-tweet\" lang=\"en\"><a href=\"#{link}\"></a></blockquote>"
+        self.format_link = link
       when /imgur.com/
-        #<blockquote class="imgur-embed-pub" lang="en" data-id="a/18eUC"><a href="//imgur.com/a/18eUC">Nom Award Winning Chicken Wings Recipes</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-        self.format_type = 'imgur'
         imgur_token = link.scan(/\w{5,}/).last
         return unless imgur_token
-        "<blockquote class=\"imgur-embed-pub\" lang=\"en\" data-id=\"#{imgur_token}\"><a href=\"//imgur.com/#{imgur_token}\"></a></blockquote>"
+
+        self.format_type = 'imgur'
+        self.format_link = imgur_token
       when %r{youtube.com/watch?}
         youtube_token = link.scan(/v=\w{5,}/).last
-        return unless youtube_token
         youtube_token = youtube_token.split('v=')[1]
+        return unless youtube_token
+
         self.format_type = 'youtube'
-        "<iframe id=\"ytplayer\" type=\"text/html\" width=\"640\" height=\"390\" src=\"//www.youtube.com/embed/#{youtube_token}?autoplay=1&origin=https://www.chatben.co\" frameborder=\"0\"/>"
+        self.format_link = youtube_token
       when /vimeo.com/
         vimeo_token = URI(link).path
-        return unless vimeo_token
         vimeo_token.slice!('/channels')
         vimeo_token.slice!('/staffpicks')
+        return unless vimeo_token
+
         self.format_type = 'vimeo'
-        "<iframe src=\"//player.vimeo.com/video#{vimeo_token}?portrait=0&color=333\" width=\"640\" height=\"390\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>"
-      else
-         nil
+        self.format_link = vimeo_token
       end
 
     self.format_link = self.format_link.html_safe if self.format_link
+  end
+
+  def keep_sticky_posts
+    return false if sticky?
   end
 end

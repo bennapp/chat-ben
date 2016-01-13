@@ -56,7 +56,7 @@
                 <span class="preview format <%= post.format_icon %>" aria-hidden="true"></span>
               </div>
               <script>
-                $('.preview.format').featherlight('<%= raw(post.format_link) %>', {
+                $('.preview.format').featherlight('<%= j(render partial: "rooms/#{post.format_type}", locals: { value: post.format_link }) %>', {
                     closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
                     otherClose: '.escape-icon',
                     afterOpen: function() {
