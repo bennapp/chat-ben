@@ -10,6 +10,10 @@ class Post < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :title
 
+  def num_chatted
+    @num_chatted ||= Participation.with_deleted.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', id).count
+  end
+
   def full_url
     begin
       u = URI.parse(link)
