@@ -118,6 +118,12 @@ $container-margin: 20px;
 		margin-left: 2.5%;
 		margin-right: 2.5%;
 	}
+
+	.about-container {
+		p {
+			text-indent: 8px;
+		}
+	}
 }
 
 .login-container, .new-post-container {
