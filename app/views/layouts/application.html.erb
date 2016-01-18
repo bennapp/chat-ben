@@ -5,11 +5,11 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <%= favicon_link_tag('chatben.ico') %>
     <link href='https://fonts.googleapis.com/css?family=Raleway:700,300' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
   </head>
   <body>
-
     <div class="page-header">
 
       <h1 class="page-title"><%= link_to 'Chat Ben ', "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || 'video chats with purpose' %></small></h1>
