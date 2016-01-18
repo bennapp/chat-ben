@@ -12,9 +12,9 @@
   <body>
     <div class="page-header">
       <% if params[:logo] %>
-        <div class="page-title"><%= link_to image_tag('chatbenlogo'), "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || ' video chats with purpose' %></small></div>
+        <div class="page-title"><%= link_to image_tag('chatbenlogo.png'), "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || ' video chats with purpose' %></small></div>
       <% elsif params[:purple] %>
-        <div class="page-title"><%= link_to image_tag('chatbenlogopurple'), "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || ' video chats with purpose' %></small></div>
+        <div class="page-title"><%= link_to image_tag('chatbenlogopurple.png'), "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || ' video chats with purpose' %></small></div>
       <% else %>
         <h1 class="page-title"><%= link_to 'Chat Ben ', "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || 'video chats with purpose' %></small></h1>
       <% end %>
