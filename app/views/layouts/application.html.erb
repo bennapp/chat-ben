@@ -11,8 +11,13 @@
   </head>
   <body>
     <div class="page-header">
-
-      <h1 class="page-title"><%= link_to 'Chat Ben ', "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || 'video chats with purpose' %></small></h1>
+      <% if params[:logo] %>
+        <div class="page-title"><%= link_to image_tag('chatbenlogo'), "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || ' video chats with purpose' %></small></div>
+      <% elsif params[:purple] %>
+        <div class="page-title"><%= link_to image_tag('chatbenlogopurple'), "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || ' video chats with purpose' %></small></div>
+      <% else %>
+        <h1 class="page-title"><%= link_to 'Chat Ben ', "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || 'video chats with purpose' %></small></h1>
+      <% end %>
       <% if current_user %>
         <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
       <% end %>
