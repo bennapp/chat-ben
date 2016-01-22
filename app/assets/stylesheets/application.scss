@@ -31,6 +31,7 @@ body {
 
 .page-header {
 	margin: 0;
+	max-height: 88px;
 }
 
 .flash {
@@ -67,6 +68,10 @@ body {
 	}
 }
 
+.page.page-container {
+	margin-top: 34px;
+}
+
 .page-header{
 	h1 {
 		margin-top: 0px;
@@ -98,7 +103,7 @@ body {
 	.logout-link {
 		float: right;
 		margin-right: 44px;
-		margin-top: -33px;
+		margin-top: -66px;
 		font-size: 16px;
 	}
 }
