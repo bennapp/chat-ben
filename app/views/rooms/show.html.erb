@@ -119,6 +119,7 @@
   $(document).ready(function(){
     var roomShow = new RoomShow({ room: '<%= @room.token %>', participationId: '<%= @participation_id %>', nick: '<%= current_user.name %>' });
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
+    twttr.widgets.load();
     $('.flash.notice').delay(3500).fadeOut(1400);
   });
 </script>
