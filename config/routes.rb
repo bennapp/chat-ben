@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :feedbacks, only: [:create, :new], path: 'feeback'
   resources :posts
   resources :participations, only: :destroy
-  resources :rooms, only: :show, path: 'chat', param: :token
+  resources :rooms, only: [:show, :update], path: 'chat', param: :token
   resources :ratings, only: :create
   devise_for :users#, controllers: { sessions: "users/sessions" }
   root 'posts#index'

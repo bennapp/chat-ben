@@ -10,8 +10,6 @@ class Room < ActiveRecord::Base
   before_validation :base_36_encode  # Needs specs
   before_update :base_36_encode # Needs specs
 
-  before_destroy :destroy_empty_post
-
   def base_36_encode
     return if token.present?
     self.token = loop do
@@ -25,10 +23,4 @@ class Room < ActiveRecord::Base
   end
 
   private
-
-  def destroy_empty_post
-    if post.rooms.count == 1
-      post.destroy unless post.sticky?
-    end
-  end
 end
