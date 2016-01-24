@@ -13,16 +13,27 @@ video {
   border-radius: 4px;
 }
 
-.rating, #send-message {
-  display: none;
+.display-none {
+  display: none !important;
 }
 
 .buttons {
-  .control-buttons {
-    display: none;
-  }
   .new-buttons {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+
+    .btn {
+      margin-bottom: 8px;
+    }
+
+    #new-conversation {
+      max-width: 250px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 

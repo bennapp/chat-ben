@@ -49,7 +49,7 @@
     </div>
 
     <div class="remote-container">
-      <div id="toggle-local" class="toggle" aria-label="Left Align">
+      <div id="toggle-local" class="toggle display-none" aria-label="Left Align">
         <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
       </div>
 
@@ -61,26 +61,25 @@
 
       <div id="remote"></div>
 
-      <div id="toggle-chat" class="toggle" aria-label="Left Align">
+      <div id="toggle-chat" class="toggle display-none" aria-label="Left Align">
         <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
       </div>
     </div>
 
     <div class="buttons">
-      <div class="control-buttons">
+      <div class="control-buttons display-none">
         <button id="mute-microphone-button" class="btn dtn-defualt"><span class="fa fa-microphone-slash"></span></button>
         <button id="mute-volume-button" class="btn dtn-defualt"><span class="fa fa-volume-off"></span></button>
         <button id="end-conversation" class="btn btn-danger">End Conversation</button>
       </div>
 
-      <div class="new-buttons">
-        <%= link_to "New Conversation About the Same Topic", @room.post, id: 'new-conversation', class: 'btn' %>
-        </br >
-        <%= link_to "List of Topics", root_url, id: 'new-topic', class: 'btn' %>
+      <div class="new-buttons display-none">
+        <%= link_to "Back to the Front Page", root_url, id: 'new-topic', class: 'btn btn-info' %>
+        <%= link_to "New Chat - #{@subtitle}", @room.post, id: 'new-conversation', class: 'btn btn-success' %>
       </div>
     </div>
 
-    <div class="rating">
+    <div class="rating display-none">
       <h4 id="rate-other-user">How would you rate your conversation</h4>
       <div class="rating-description">
         <p>Rating your conversations will increase your chances of being matched with someone you will enjoy talking with!</p>
@@ -109,7 +108,7 @@
     <div class="messages-container">
     </div>
     <div class="send-container">
-      <textarea class='form-control' id="send-message" placeholder="Type a message, press enter to send"></textarea>
+      <textarea class='form-control display-none' id="send-message" placeholder="Type a message, press enter to send"></textarea>
     </div>
   </div>
 </div>

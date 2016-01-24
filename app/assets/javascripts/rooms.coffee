@@ -52,10 +52,10 @@ class @RoomShow
       @createChatDataChannel()
       @_bindChat()
 
-      $('#send-message').show()
-      $('.toggle').show()
-      $('.control-buttons').show()
-      $('.no-user-container').hide()
+      $('#send-message').removeClass('display-none')
+      $('.toggle').removeClass('display-none')
+      $('.control-buttons').removeClass('display-none')
+      $('.no-user-container').addClass('display-none')
       @_setStatus('chatting')
 
     @webrtc.on 'videoRemoved', (video, peer) =>
@@ -73,12 +73,13 @@ class @RoomShow
     el = document.getElementById('container_' + @webrtc.getDomId(peer))
     if remote and el
       remote.removeChild el
-    $('.rating').show()
-    $('.control-buttons').hide()
+    $('.rating').removeClass('display-none')
+    $('.control-buttons').addClass('display-none')
     @_setStatus('ending')
     $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
     $('.videoContainer').remove()
-    $('.remote-container').hide()
+    $('.remote-container').addClass('display-none')
+    $('#send-message').addClass('display-none')
     $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
     @webrtc.leaveRoom()
     @webrtc.stopLocalVideo()
@@ -127,14 +128,14 @@ class @RoomShow
 
     $ratingForm = $("#new_rating")
     $ratingForm.on "ajax:success", (e, data, status, xhr) ->
-      $('.rating').hide()
-      $('.new-buttons').show()
+      $('.rating').addClass('display-none')
+      $('.new-buttons').removeClass('display-none')
     $ratingForm.on "ajax:error", (e, xhr, status, error) ->
-      $('.rating').hide()
-      $('.new-buttons').show()
+      $('.rating').addClass('display-none')
+      $('.new-buttons').removeClass('display-none')
 
     $('#end-conversation').on 'click', =>
-      $('#end-conversation').hide()
+      $('#end-conversation').addClass('display-none')
       @webrtc.leaveRoom()
       @webrtc.connection.disconnect()
 
@@ -174,11 +175,11 @@ class @RoomShow
     if $toggleChat.hasClass('glyphicon-menu-right')
       $toggleChat.removeClass('glyphicon-menu-right')
       $toggleChat.addClass('glyphicon-menu-left')
-      $('.chat-panel').hide()
+      $('.chat-panel').addClass('display-none')
     else
       $toggleChat.removeClass('glyphicon-menu-left')
       $toggleChat.addClass('glyphicon-menu-right')
-      $('.chat-panel').show()
+      $('.chat-panel').removeClass('display-none')
 
   _controlButtons: ->
     $('#mute-microphone-button').on 'click', @_toggleMic
