@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    room = @post.rooms.where(updated_at: 36.seconds.ago..DateTime.now).joins(:participations).group('rooms.id').having('COUNT(participations.id) < 2').first
+    room = @post.rooms.active.joins(:participations).group('rooms.id').having('COUNT(participations.id) < 2').first
     if !room.present? || rated_waiting_users_poorly?(room.participations.pluck(:user_id))
       room = @post.rooms.create
     end
