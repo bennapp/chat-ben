@@ -10,7 +10,7 @@ class Room < ActiveRecord::Base
   before_validation :base_36_encode  # Needs specs
   before_update :base_36_encode # Needs specs
 
-  scope :active, lambda { where(updated_at: (DateTime.now - 35.seconds)..DateTime.now) }
+  scope :active, lambda { where(updated_at: (Time.zone.now - 35.seconds)..Time.zone.now) }
 
   def base_36_encode
     return if token.present?
