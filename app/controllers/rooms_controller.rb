@@ -1,5 +1,10 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: [:show]
+  before_action :set_room, only: [:show, :update]
+
+  def update
+    @room.touch
+    render nothing: true
+  end
 
   def show
     @hide_footer = true

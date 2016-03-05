@@ -210,10 +210,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass (~> 3.3.6)
+  bootstrap-sass (~> 3.3)
   coffee-rails (~> 4.1.0)
   devise (~> 3.5)
-  font-awesome-sass (~> 4.5.0)
+  font-awesome-sass (~> 4.5)
   jbuilder (~> 2.0)
   jquery-rails
   mailcatcher (~> 0.6.2)

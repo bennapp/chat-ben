@@ -10,7 +10,7 @@ class Room < ActiveRecord::Base
   before_validation :base_36_encode  # Needs specs
   before_update :base_36_encode # Needs specs
 
-  # before_destroy :destroy_empty_post
+  scope :active, lambda { where(updated_at: (Time.zone.now - 35.seconds)..Time.zone.now) }
 
   def base_36_encode
     return if token.present?
@@ -23,12 +23,4 @@ class Room < ActiveRecord::Base
   def to_param
     token
   end
-
-  private
-
-  # def destroy_empty_post
-    # if post.rooms.count == 1
-      # post.destroy unless post.sticky?
-    # end
-  # end
 end

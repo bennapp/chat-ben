@@ -27,8 +27,8 @@ gem 'devise', '~> 3.5'
 gem 'paranoia', '~> 2.0'
 gem 'thin', '~> 1.5'
 
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'font-awesome-sass', '~> 4.5.0'
+gem 'bootstrap-sass', '~> 3.3'
+gem 'font-awesome-sass', '~> 4.5'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
