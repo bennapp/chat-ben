@@ -24,8 +24,8 @@ server {
 }
 
 upstream app {
-    server unix:/var/www/app/tmp/sockets/thin.0.sock max_fails=1 fail_timeout=15s;
-    server unix:/var/www/app/tmp/sockets/thin.1.sock max_fails=1 fail_timeout=15s;
+    server unix: /home/dev/workspace/convo/tmp/sockets/thin.0.sock max_fails=1 fail_timeout=15s;
+    server unix: /home/dev/workspace/convo/tmp/sockets/thin.1.sock max_fails=1 fail_timeout=15s;
 }
 
 server {
