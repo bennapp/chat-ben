@@ -23,6 +23,4 @@ class Room < ActiveRecord::Base
   def to_param
     token
   end
-
-  private
 end
