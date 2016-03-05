@@ -1,0 +1,3 @@
+socket: tmp/sockets/thin.sock
+servers: 2
+onebyone: true
