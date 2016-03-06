@@ -20,3 +20,4 @@
 //= require_tree .
 
 const SIGNAL_SERVER = '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>'
+const WEB_SOCKET_SERVER = '<%= Rails.env.development? ? "localhost:3000/websocket" : "wss://chatben.co:3000/websocket" %>'

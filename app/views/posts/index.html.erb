@@ -169,7 +169,7 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 $(document).ready(function() {
-  var dispatcher = new WebSocketRails('localhost:3000/websocket');
+  var dispatcher = new WebSocketRails(WEB_SOCKET_SERVER);
 
   dispatcher.bind('event_name', function(data) {
     console.log(data.count); // would output 'this is a message'
