@@ -85,7 +85,4 @@ Rails.application.configure do
   config.to_prepare { Devise::SessionsController.force_ssl }
   config.to_prepare { Devise::RegistrationsController.force_ssl }
   config.to_prepare { Devise::PasswordsController.force_ssl }
-
-  # https://github.com/jamesotron/faye-rails/issues/41
-  config.threadsafe!
 end
