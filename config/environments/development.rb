@@ -41,6 +41,10 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  ## !! Unexpected error while processing request: deadlock; recursive locking
+  # https://github.com/jamesotron/faye-rails/issues/41
+  config.middleware.delete Rack::Lock
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end

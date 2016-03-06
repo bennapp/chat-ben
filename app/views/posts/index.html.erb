@@ -169,6 +169,14 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 $(document).ready(function() {
+  var dispatcher = new WebSocketRails('localhost:3000/websocket');
+
+  dispatcher.bind('event_name', function(data) {
+    console.log(data.count); // would output 'this is a message'
+  });
+
+  window.dispatcher = dispatcher;
+
   var showNewPost = function(){
     $('.new-post-container').toggle(true);
     $('.new-post-button').toggle(false);

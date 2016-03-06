@@ -25,7 +25,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise', '~> 3.5'
 gem 'paranoia', '~> 2.0'
+
 gem 'thin', '~> 1.5'
+gem 'faye-websocket', '0.10.0'
 gem 'websocket-rails', '~> 0.7'
 
 gem 'bootstrap-sass', '~> 3.3'
