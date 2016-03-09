@@ -55,7 +55,7 @@ server {
   keepalive_timeout 10;
 
   location /websocket {
-    proxy_pass http://localhost:3001/websocket;
+    proxy_pass http://app/websocket;
     proxy_http_version 1.1;
     proxy_set_header  X-Real-IP  $remote_addr;
     add_header Access-Control-Allow-Origin *;
