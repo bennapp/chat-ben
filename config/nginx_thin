@@ -54,18 +54,6 @@ server {
   client_max_body_size 4G;
   keepalive_timeout 10;
 
-  location /websocket {
-    proxy_pass http://app/websocket;
-    proxy_http_version 1.1;
-    proxy_set_header  X-Real-IP  $remote_addr;
-    add_header Access-Control-Allow-Origin *;
-    proxy_set_header Upgrade websocket;
-    proxy_set_header Connection upgrade;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-  }
-
   ssl on;
   ssl_certificate /ssl/www.chatben.co.crt;
   ssl_certificate_key /ssl/www.chatben.co.key;
