@@ -1,5 +1,5 @@
 class Participation < ActiveRecord::Base
-  acts_as_paranoid
+  # acts_as_paranoid
 
   belongs_to :room
   belongs_to :user

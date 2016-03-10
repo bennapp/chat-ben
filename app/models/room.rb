@@ -1,5 +1,5 @@
 class Room < ActiveRecord::Base
-  acts_as_paranoid
+  # acts_as_paranoid
 
   belongs_to :post
   has_many :participations

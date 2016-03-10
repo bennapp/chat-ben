@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   include ERB::Util
-  acts_as_paranoid
+  # acts_as_paranoid
 
   belongs_to :user
   has_many :rooms
@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :title
 
   def num_chatted
-    @num_chatted ||= Participation.with_deleted.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', id).count
+    @num_chatted ||= Participation.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', id).count
   end
 
   def full_url

@@ -13,11 +13,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require featherlight
-//= require websocket_rails/main
 //= require_tree .
 
 const SIGNAL_SERVER = '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>'
-const WEB_SOCKET_SERVER = '<%= Rails.env.development? ? "localhost:3000/websocket" : "chatben.co:3000/websocket" %>'
