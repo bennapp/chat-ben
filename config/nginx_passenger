@@ -1,3 +1,6 @@
+passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
+passenger_ruby /usr/bin/ruby;
+
 server {
   listen 443 ssl;
   server_name          chatben.co;
@@ -23,10 +26,6 @@ server {
   return 301 https://www.chatben.co$request_uri;
 }
 
-upstream app {
-  server 127.0.0.1:3000;
-}
-
 server {
   listen 443 ssl;
   server_name www.chatben.co;
@@ -34,15 +33,6 @@ server {
   passenger_enabled on;
 
   root /home/dev/workspace/convo/public;
-  try_files $uri/index.html $uri @app;
-
-  location @app {
-    proxy_pass http://app;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_set_header X-FORWARDED-PROTO $scheme;
-    proxy_redirect off;
-  }
 
   location /cable {
     passenger_app_group_name chat_ben_websocket;
@@ -63,3 +53,4 @@ server {
   ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
   ssl_prefer_server_ciphers on;
 }
+

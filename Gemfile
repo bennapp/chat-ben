@@ -17,7 +17,7 @@ gem 'jquery-rails'
 
 gem 'devise', :github => 'plataformatec/devise', :branch => 'master'
 gem 'paranoia'
-gem 'passenger'
+gem 'thin'
 
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'

@@ -24,7 +24,8 @@ server {
 }
 
 upstream app {
-  server 127.0.0.1:3000;
+  server unix:/home/dev/workspace/convo/tmp/sockets/thin.0.sock max_fails=1 fail_timeout=15s;
+  server unix:/home/dev/workspace/convo/tmp/sockets/thin.1.sock max_fails=1 fail_timeout=15s;
 }
 
 server {
@@ -47,18 +48,6 @@ server {
     proxy_set_header Host $http_host;
     proxy_set_header X-FORWARDED-PROTO $scheme;
     proxy_redirect off;
-  }
-
-  location /websocket {
-    proxy_pass http://app/websocket;
-    proxy_http_version 1.1;
-    proxy_set_header  X-Real-IP  $remote_addr;
-    add_header Access-Control-Allow-Origin *;
-    try_files /system/maintenance.html $uri $uri/index.html $uri.html @websocket;
-    proxy_set_header Upgrade websocket;
-    proxy_set_header Connection Upgrade;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
   }
 
   error_page 500 502 503 504 /500.html;
