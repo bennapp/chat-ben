@@ -22,7 +22,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.serve_static_files = true
+  public_file_server.enabled = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = :uglifier
@@ -87,4 +87,5 @@ Rails.application.configure do
   config.to_prepare { Devise::PasswordsController.force_ssl }
 
   config.action_cable.allowed_request_origins = ['https://www.chatben.co', 'https://45.55.192.195']
+  config.action_cable.disable_request_forgery_protection = true
 end
