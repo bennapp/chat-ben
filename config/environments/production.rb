@@ -85,4 +85,6 @@ Rails.application.configure do
   config.to_prepare { Devise::SessionsController.force_ssl }
   config.to_prepare { Devise::RegistrationsController.force_ssl }
   config.to_prepare { Devise::PasswordsController.force_ssl }
+
+  config.action_cable.allowed_request_origins = ['https://www.chatben.co', 'https://45.55.192.195']
 end

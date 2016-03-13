@@ -1,17 +1,15 @@
 class AppearanceChannel < ApplicationCable::Channel
   def subscribed
-    current_user.appear
+    puts 'subscribed'
   end
 
   def unsubscribed
-    current_user.disappear
+    puts 'unsubscribed'
   end
 
   def appear(data)
+    puts 'appear'
+    puts data
     current_user.appear on: data['appearing_on']
-  end
-
-  def away
-    current_user.away
   end
 end
