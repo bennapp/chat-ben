@@ -44,7 +44,8 @@ server {
 }
 
 upstream app {
-  server unix:/home/dev/workspace/convo/shared/sockets/puma.sock fail_timeout=0;
+  server unix:/home/dev/workspace/convo/tmp/sockets/thin.0.sock max_fails=1 fail_timeout=15s;
+  server unix:/home/dev/workspace/convo/tmp/sockets/thin.1.sock max_fails=1 fail_timeout=15s;
 }
 
 server {
@@ -55,6 +56,13 @@ server {
   try_files $uri/index.html $uri @app;
 
   location @app {
+    # http://jordanhollinger.com/2011/12/19/deploying-with-thin/
+    # Define what a "failure" is, so it can try the next server
+    proxy_next_upstream error timeout http_502 http_503;
+
+    # If the upstream server doesn't respond within n seconds, timeout
+    proxy_read_timeout 60s;
+
     proxy_pass http://app;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $http_host;
