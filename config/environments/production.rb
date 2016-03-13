@@ -42,7 +42,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = false
+  # config.force_ssl = false
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -82,9 +82,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  # config.to_prepare { Devise::SessionsController.force_ssl }
-  # config.to_prepare { Devise::RegistrationsController.force_ssl }
-  # config.to_prepare { Devise::PasswordsController.force_ssl }
+  config.to_prepare { Devise::SessionsController.force_ssl }
+  config.to_prepare { Devise::RegistrationsController.force_ssl }
+  config.to_prepare { Devise::PasswordsController.force_ssl }
 
   config.action_cable.allowed_request_origins = ['https://www.chatben.co', 'https://45.55.192.195']
   config.action_cable.url = "wss://www.chatben.co:28081/websocket"
