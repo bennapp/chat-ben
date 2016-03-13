@@ -24,7 +24,7 @@ server {
 }
 
 upstream web_socket {
-  server localhost:28080;
+  server localhost:28081;
 }
 
 upstream app {
@@ -34,8 +34,6 @@ upstream app {
 
 server {
   listen 443 ssl;
-  listen               *:28080;
-  listen               [::]:28080;
   server_name www.chatben.co;
 
   root /home/dev/workspace/convo/public;
