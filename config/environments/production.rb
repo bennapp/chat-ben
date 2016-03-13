@@ -87,5 +87,4 @@ Rails.application.configure do
   config.to_prepare { Devise::PasswordsController.force_ssl }
 
   config.action_cable.allowed_request_origins = ['https://www.chatben.co', 'https://45.55.192.195']
-  config.action_cable.disable_request_forgery_protection = true
 end
