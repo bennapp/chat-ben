@@ -215,20 +215,20 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass
-  coffee-rails
+  bootstrap-sass (~> 3.3)
+  coffee-rails (~> 4.1)
   devise!
-  font-awesome-sass
-  jquery-rails
+  font-awesome-sass (~> 4.5)
+  jquery-rails (~> 4.1)
   mailcatcher
-  paranoia
-  pg
+  paranoia (~> 1.2)
+  pg (~> 0.18)
   pry
-  puma
+  puma (~> 3.1)
   rails (= 5.0.0.beta3)
-  redis
+  redis (~> 3.2)
   rspec-rails
-  sass-rails
+  sass-rails (~> 5.0)
   spring
   uglifier (>= 1.3.0)
   web-console

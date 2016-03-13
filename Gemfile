@@ -4,25 +4,25 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.0.beta3'
 # Use pg as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 0.18'
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails'
+gem 'coffee-rails', '~> 4.1'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.1'
 
 gem 'devise', :github => 'plataformatec/devise', :branch => 'master'
-gem 'paranoia'
+gem 'paranoia', '~> 1.2'
 
-gem 'redis'
-gem 'puma'
+gem 'redis', '~> 3.2'
+gem 'puma', '~> 3.1'
 
-gem 'bootstrap-sass'
-gem 'font-awesome-sass'
+gem 'bootstrap-sass', '~> 3.3'
+gem 'font-awesome-sass', '~> 4.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
