@@ -3,7 +3,7 @@
 #= require_tree .
 
 @App = {}
-App.cable = ActionCable.createConsumer('/cable')
+App.cable = ActionCable.createConsumer()
 
 App.cable.subscriptions.create "AppearanceChannel",
   # Called when the subscription is ready for use on the server

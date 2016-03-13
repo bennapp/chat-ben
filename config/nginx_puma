@@ -23,6 +23,26 @@ server {
   return 301 https://www.chatben.co$request_uri;
 }
 
+upstream web_socket {
+  server localhost:28080;
+}
+
+server {
+  server_name          www.chatben.co;
+  listen               *:28080;
+  listen               [::]:28080;
+
+  ssl_certificate      /ssl/www.chatben.co.crt;
+  ssl_certificate_key  /ssl/www.chatben.co.key;
+
+  location @web_socket {
+    proxy_pass http://web_socket/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+  }
+}
+
 upstream app {
   server unix:/home/dev/workspace/convo/shared/sockets/puma.sock fail_timeout=0;
 }
@@ -40,36 +60,6 @@ server {
     proxy_set_header Host $http_host;
     proxy_set_header X-FORWARDED-PROTO $scheme;
     proxy_redirect off;
-  }
-
-  location /cable/ {
-    # proxy_pass http://app/;/
-    # proxy_http_version 1.1;
-    # proxy_set_header Upgrade $http_upgrade;
-    # proxy_set_header Connection "Upgrade";
-
-    proxy_pass http://app/;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-    proxy_read_timeout 86400;
-
-    # switch off logging
-    # access_log off;
-
-    # redirect all HTTP traffic to localhost:8080
-    # proxy_set_header X-Real-IP $remote_addr;
-    # proxy_set_header Host $host;
-    # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-
-    # WebSocket support (nginx 1.4)
-    # proxy_http_version 1.1;
-    # proxy_set_header Upgrade $http_upgrade;
-    # proxy_set_header Connection "Upgrade";
-
-    # Path rewriting
-    # rewrite /cable/(.*) /$1 break;
-    # proxy_redirect off;
   }
 
   error_page 500 502 503 504 /500.html;

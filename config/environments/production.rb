@@ -87,4 +87,5 @@ Rails.application.configure do
   config.to_prepare { Devise::PasswordsController.force_ssl }
 
   config.action_cable.allowed_request_origins = ['https://www.chatben.co', 'https://45.55.192.195']
+  config.action_cable.url = "wss://www.chatben.co:28080"
 end
