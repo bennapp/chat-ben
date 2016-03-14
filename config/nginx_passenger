@@ -23,11 +23,6 @@ server {
   return 301 https://www.chatben.co$request_uri;
 }
 
-upstream app {
-  server unix:/home/dev/workspace/convo/tmp/sockets/thin.0.sock max_fails=1 fail_timeout=15s;
-  server unix:/home/dev/workspace/convo/tmp/sockets/thin.1.sock max_fails=1 fail_timeout=15s;
-}
-
 server {
   listen 443 ssl;
   server_name www.chatben.co;
@@ -35,22 +30,15 @@ server {
   root /home/dev/workspace/convo/public;
   try_files $uri/index.html $uri @app;
 
-  location @app {
-    proxy_next_upstream error timeout http_502 http_503;
-    proxy_read_timeout 60s;
+  passenger_enabled on;
+  rails_env production;
 
-    proxy_pass http://app;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
-    proxy_set_header X-FORWARDED-PROTO $scheme;
-    proxy_redirect off;
-  }
+  passenger_root /usr/lib/ruby/vendor_ruby/phusion_passenger/locations.ini;
+  passenger_ruby /home/dev/.rbenv/versions/2.2.3/bin/ruby
 
-  location /websocket/ {
-    proxy_pass http://127.0.0.1:28080/;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "Upgrade";
+  location /cable {
+    passenger_app_group_name chatben_websocket;
+    passenger_force_max_concurrent_requests_per_process 0;
   }
 
   error_page 500 502 503 504 /500.html;
