@@ -1,25 +1,23 @@
-# Change to match your CPU core count
-workers 1
+    workers 1
+    threads 1, 10
 
-# Min and Max threads per worker
-threads 1, 10
+    app_dir = File.expand_path("../..", __FILE__)
+    shared_dir = "#{app_dir}/shared"
 
-app_dir = File.expand_path("../..", __FILE__)
-shared_dir = "#{app_dir}/shared"
+    rails_env = ENV['RAILS_ENV'] || "production"
+    environment rails_env
 
-# Default to production
-rails_env = ENV['RAILS_ENV'] || "production"
-environment rails_env
+    stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
+
+    pidfile "#{shared_dir}/pids/puma.pid"
+    state_path "#{shared_dir}/pids/puma.state"
 
 # Set up socket location
 # bind "unix://#{shared_dir}/sockets/puma.sock"
 
 # Logging
-stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
 
 # Set master PID and state locations
-pidfile "#{shared_dir}/pids/puma.pid"
-state_path "#{shared_dir}/pids/puma.state"
 
 # activate_control_app
 

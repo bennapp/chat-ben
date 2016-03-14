@@ -23,10 +23,6 @@ server {
   return 301 https://www.chatben.co$request_uri;
 }
 
-upstream web_socket {
-  server localhost:28081;
-}
-
 upstream app {
   server unix:/home/dev/workspace/convo/tmp/sockets/thin.0.sock max_fails=1 fail_timeout=15s;
   server unix:/home/dev/workspace/convo/tmp/sockets/thin.1.sock max_fails=1 fail_timeout=15s;
@@ -40,11 +36,7 @@ server {
   try_files $uri/index.html $uri @app;
 
   location @app {
-    # http://jordanhollinger.com/2011/12/19/deploying-with-thin/
-    # Define what a "failure" is, so it can try the next server
     proxy_next_upstream error timeout http_502 http_503;
-
-    # If the upstream server doesn't respond within n seconds, timeout
     proxy_read_timeout 60s;
 
     proxy_pass http://app;
@@ -55,7 +47,7 @@ server {
   }
 
   location /websocket/ {
-    proxy_pass http://web_socket/;
+    proxy_pass http://localhost:28080/;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "Upgrade";
