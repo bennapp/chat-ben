@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   include ERB::Util
   # acts_as_paranoid
+  default_scope { where(deleted_at: nil) }
 
   belongs_to :user
   has_many :rooms

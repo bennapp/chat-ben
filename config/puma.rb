@@ -1,16 +1,21 @@
-    workers 1
-    threads 1, 10
+workers 1
+threads 1, 10
 
-    app_dir = File.expand_path("../..", __FILE__)
-    shared_dir = "#{app_dir}/shared"
+app_dir = File.expand_path("../..", __FILE__)
+shared_dir = "#{app_dir}/shared"
 
-    rails_env = ENV['RAILS_ENV'] || "production"
-    environment rails_env
+rails_env = ENV['RAILS_ENV'] || "development"
+environment rails_env
 
-    stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
+# stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
 
-    pidfile "#{shared_dir}/pids/puma.pid"
-    state_path "#{shared_dir}/pids/puma.state"
+stdout_redirect '/Users/bennappier/workspace/convo/log/stdout', '/Users/bennappier/workspace/convo/log/stderr'
+stdout_redirect '/Users/bennappier/workspace/convo/log/stdout', '/Users/bennappier/workspace/convo/log/stderr', true
+
+port 3000
+
+pidfile "#{shared_dir}/pids/puma.pid"
+state_path "#{shared_dir}/pids/puma.state"
 
 # Set up socket location
 # bind "unix://#{shared_dir}/sockets/puma.sock"
