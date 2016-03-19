@@ -13,7 +13,7 @@ class Rating < ActiveRecord::Base
   private
 
   def rater_and_ratee_participated_in_room
-    if rater && ratee && room && (!rater.participations.with_deleted.where(room: room).any? || !ratee.participations.with_deleted.where(room: room).any?)
+    if rater && ratee && room && (!rater.participations.where(room: room).any? || !ratee.participations.where(room: room).any?)
       errors.add(:base, 'Non valid rating')
     end
   end

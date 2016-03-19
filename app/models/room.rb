@@ -1,6 +1,6 @@
 class Room < ActiveRecord::Base
   # acts_as_paranoid
-  default_scope { where(deleted_at: nil) }
+  scope :without_deleted, -> { where(deleted_at: nil) }
   scope :with_deleted, -> { where.not(deleted_at: nil) }
   # end acts_as_paranoid
 
@@ -12,8 +12,6 @@ class Room < ActiveRecord::Base
 
   before_validation :base_36_encode  # Needs specs
   before_update :base_36_encode # Needs specs
-
-  scope :active, lambda { where(updated_at: (Time.zone.now - 35.seconds)..Time.zone.now) }
 
   def base_36_encode
     return if token.present?

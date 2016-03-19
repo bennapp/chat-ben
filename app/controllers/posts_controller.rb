@@ -5,11 +5,11 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.all
+    @posts = Post.without_deleted
   end
 
   def show
-    room = @post.rooms.active.joins(:participations).group('rooms.id').having('COUNT(participations.id) < 2').first
+    room = @post.rooms.joins(:participations).group('rooms.id').having('COUNT(participations.id) < 2').first
     if !room.present? || rated_waiting_users_poorly?(room.participations.pluck(:user_id))
       room = @post.rooms.create
     end
@@ -65,7 +65,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.with_deleted.find(params[:id])
+    @post = Post.find(params[:id])
   end
 
   def post_params

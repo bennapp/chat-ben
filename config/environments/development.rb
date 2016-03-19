@@ -50,4 +50,8 @@ Rails.application.configure do
 
   config.action_cable.allowed_request_origins = ['http://localhost:3000']
   config.action_cable.disable_request_forgery_protection = true
+
+  config.logger = Logger.new(STDOUT)
+  config.logger.level = Logger.const_get('INFO')
+  config.log_level = :debug
 end

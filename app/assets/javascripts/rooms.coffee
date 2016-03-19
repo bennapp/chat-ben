@@ -114,19 +114,11 @@ class @RoomShow
         return false;
 
   _bindDom: ->
-    @_startPolling()
-
     window.onbeforeunload = =>
       if @status == 'chatting'
         return 'Make sure to end your conversation before leaving!'
       else
         return undefined
-
-    window.onunload = =>
-      window.onbeforeunload = undefined
-      $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
-      @webrtc.leaveRoom()
-      @webrtc.stopLocalVideo()
 
     $ratingForm = $("#new_rating")
     $ratingForm.on "ajax:success", (e, data, status, xhr) ->
@@ -208,16 +200,3 @@ class @RoomShow
   _toggleDanger: ($el) ->
     $el.toggleClass('btn-danger')
     $el.toggleClass('btn-default')
-
-  _startPolling: ->
-    _this = @
-    poll = ->
-      setTimeout((->
-        if _this.status == 'waiting'
-          $.ajax(
-            url: "/chat/#{_this.room}"
-            type: 'PUT'
-            complete: poll)
-        ), 30000)
-
-    poll()

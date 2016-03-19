@@ -16,6 +16,6 @@ class RoomsController < ApplicationController
   end
 
   def set_room
-    @room = Room.with_deleted.where('token = ?', params['token']).first
+    @room = Room.where('token = ?', params['token']).first
   end
 end
