@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.without_deleted
+    @posts = Post.without_deleted.includes(:rooms)
   end
 
   def show

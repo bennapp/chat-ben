@@ -14,7 +14,11 @@ class Post < ActiveRecord::Base
   validates_presence_of :title
 
   def num_chatted
-    @num_chatted ||= Participation.joins(:room).joins('join posts on rooms.post_id = posts.id').where('posts.id = ?', id).count
+    @num_chatted ||= Participation.joins(:room).joins('inner join posts on rooms.post_id = posts.id').where('posts.id = ?', id).count
+  end
+
+  def num_waiting
+    rooms.where(full: false).count
   end
 
   def full_url

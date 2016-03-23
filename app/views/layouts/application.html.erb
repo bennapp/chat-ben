@@ -27,16 +27,16 @@
 
       return t;
     }(document, "script", "twitter-wjs"));
+
+    $(document).ready(function() {
+      var cable = new Cable();
+    });
   </script>
   <body>
     <div class="page-header">
-      <% if params[:nologo] %>
-        <h1 class="page-title"><%= link_to 'Chat Ben', "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || 'video chats with purpose' %></small></h1>
-      <% elsif params[:purple] %>
-        <div class="page-title"><%= link_to image_tag('chatbenlogopurple.png'), "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || 'video chats with purpose' %></small></div>
-      <% else %>
-        <div class="page-title"><%= link_to image_tag('chatbenlogo.png'), "javascript: window.location = '#{root_url}';" %><small class="lead"><%= @subtitle || 'Happy Chat Ben Night!' %></small></div>
-      <% end %>
+        <div class="page-title"><%= link_to image_tag('chatbenlogo.png'), "javascript: window.location = '#{root_url}';" %>
+          <small class="lead"><%= @subtitle || 'Video Chats with Purpose' %></small>
+        </div>
       <% if current_user %>
         <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
       <% end %>

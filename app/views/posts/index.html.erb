@@ -39,17 +39,16 @@
     </div>
 
     <ul class="list-group">
-      <% @posts.sort_by{ |post| post.sticky? ? -2**16 : -post.num_chatted }.each do |post| %>
-        <li class="list-group-item">
+      <% @posts.sort_by { |post| post.sticky? ? -2**16 : -post.num_chatted }.each do |post| %>
+        <li class="list-group-item" id="<%= post.id %>">
           <div class="badge-and-title">
-
-          <div class="count-container">
-            <% if post.sticky? %>
-              <span class="fa fa-thumb-tack fa-lg" aria-hidden="true"></span>
-            <% else %>
-              <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= post.num_chatted %> chatted about this post!"><%= post.num_chatted %></span>
-            <% end %>
-          </div>
+            <div class="count-container">
+              <% if post.sticky? %>
+                <span class="fa fa-thumb-tack fa-lg" aria-hidden="true"></span>
+              <% else %>
+                <span class="badge" data-toggle="tooltip" data-placement="top" title="<%= post.num_waiting %> waiting to chat right now!"><%= post.num_waiting %></span>
+              <% end %>
+            </div>
 
             <% if post.format_type.present? %>
               <div class="preview-container" aria-label="Left Align">
@@ -148,13 +147,13 @@
       </div>
       <div class="panel-body">
         <p>
-          Chat Ben is a space to have a one-on-one video conversations about specific topics with people you'll like!
+          Chat Ben is a space to have one-on-one video conversations about specific topics with people you'll like!
         </p>
         <p>
-          After each chat, you are encouraged to rate your conversation. Rating conversations will improve your chances of matching with someone you'll like!
+          After each chat, you are encouraged to rate your conversation. Rating conversations will improve your chances of matching with awesome people!
         </p>
         <p>
-          Chat Ben is not a place to be nude or do anything that makes anybody uncomfortable.
+          Chat Ben is not about being nude or doing anything that makes people feel uncomfortable.
         </p>
         <p>
           <em>Chat Ben on!</em>
@@ -169,6 +168,8 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
 $(document).ready(function() {
+  var postChannel = new PostChannel();
+
   var showNewPost = function(){
     $('.new-post-container').toggle(true);
     $('.new-post-button').toggle(false);

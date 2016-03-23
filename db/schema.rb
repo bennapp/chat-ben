@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113044610) do
+ActiveRecord::Schema.define(version: 20160323033018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,9 +71,10 @@ ActiveRecord::Schema.define(version: 20160113044610) do
   create_table "rooms", force: :cascade do |t|
     t.integer  "post_id"
     t.string   "token"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.datetime "deleted_at"
+    t.boolean  "full",       default: false, null: false
   end
 
   add_index "rooms", ["deleted_at"], name: "index_rooms_on_deleted_at", using: :btree
