@@ -48,11 +48,11 @@ $container-margin: 20px;
 
 		.preview-container {
 			.preview {
+				margin-left: 8px;
 				color: black !important;
 			}
 
 			.post-title-container {
-				margin-left: 8px;
 				max-width: 600px;
 				overflow: auto;
 				text-overflow: ellipsis;
@@ -85,7 +85,6 @@ $container-margin: 20px;
 
 			.badge {
 				background-color: $sub-text-grey;
-				margin-right: 8px;
 			}
 
 			.fa-thumb-tack {
@@ -95,6 +94,7 @@ $container-margin: 20px;
 		}
 
 		.post-title-container {
+			margin-left: 8px;
 			display: inline-block;
 			max-width: 640px;
 			line-height: 1.9em;
