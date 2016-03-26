@@ -80,7 +80,6 @@ class @RoomShow
     $('.videoContainer').remove()
     $('.remote-container').addClass('display-none')
     $('#send-message').addClass('display-none')
-    $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
     @webrtc.leaveRoom()
     @webrtc.stopLocalVideo()
 
@@ -115,7 +114,10 @@ class @RoomShow
 
   _bindDom: ->
     window.onbeforeunload = =>
-      if @status == 'chatting'
+      if @status == 'waiting'
+        $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
+        return undefined
+      else if @status == 'chatting'
         return 'Make sure to end your conversation before leaving!'
       else
         return undefined

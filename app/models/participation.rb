@@ -7,15 +7,11 @@ class Participation < ActiveRecord::Base
   belongs_to :room
   belongs_to :user
 
-  after_commit :update_room_full
-  after_commit :notify_posts_for_num_waiting
+  after_commit :update_room_and_num_waiting
 
-  def notify_posts_for_num_waiting
-    ActionCable.server.broadcast "posts_notfications_channel", action: 'num_waiting', post_id: room.post_id, num_waiting: room.post.num_waiting
-  end
-
-  def update_room_full
+  def update_room_and_num_waiting
     room.update_attribute(:full, room.participations.count >= 2)
+    ActionCable.server.broadcast "posts_notfications_channel", action: 'num_waiting', post_id: room.post_id, num_waiting: room.post.num_waiting
   end
 
   validates :room, presence: true
