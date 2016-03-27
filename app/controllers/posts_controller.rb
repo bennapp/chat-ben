@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    room = @post.rooms.where('rooms.full is false').first
+    room = @post.rooms.where('rooms.full is false').where('rooms.waiting is true').first
     if !room.present? || rated_waiting_users_poorly?(room.participations.pluck(:user_id))
       room = @post.rooms.create
     end

@@ -25,7 +25,7 @@ class @PostChannel
               $badge.tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)
               $badge.text(numWaiting)
             else
-              $('li#' + postId).prepend("<span class=\"badge\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"#{numWaiting} waiting to chat right now!\">#{numWaiting}</span>")
+              $('li#' + postId + ' .count-container').prepend("<span class=\"badge\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"\" data-original-title=\"#{numWaiting} waiting to chat right now!\">#{numWaiting}</span>")
 
         else if action == 'new'
           #

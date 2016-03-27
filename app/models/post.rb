@@ -18,7 +18,7 @@ class Post < ActiveRecord::Base
   end
 
   def num_waiting
-    @num_waiting ||= rooms.where(full: false).count
+    @num_waiting ||= rooms.where(waiting: true).count
   end
 
   def full_url

@@ -170,41 +170,6 @@ $(function () {
 });
 $(document).ready(function() {
   var postChannel = new PostChannel();
-
-  var showNewPost = function(){
-    $('.new-post-container').toggle(true);
-    $('.new-post-button').toggle(false);
-    $('.new-post-title input').focus();
-  };
-
-  var hideNewPost = function(){
-    $('.new-post-container').toggle(false);
-    $('.new-post-button').toggle(true);
-  };
-
-  $('.new-post-button').on('click', function(){
-    showNewPost();
-  });
-
-  $('.clear-button').on('click', function(){
-    hideNewPost();
-  });
-
-  $(document).keyup(function(e){
-    if(e.keyCode === 78){ // n
-      if($('.new-post-button').is(":visible") && !$('input').is(':focus')){
-        showNewPost();
-      }
-    }
-
-    if(e.keyCode === 27){ // esc
-      if($('.clear-button').is(":visible")){
-        hideNewPost();
-      }
-    }
-  });
-
-  $('.flash.notice').delay(3500).fadeOut(1400);
-  // $('.flash.notice').delay(3500).fadeTo(1400, 0.0);
+  var posts = new Posts();
 });
 </script>

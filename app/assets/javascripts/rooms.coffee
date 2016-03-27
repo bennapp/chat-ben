@@ -1,4 +1,5 @@
 #= require simple_web_rtc
+#= require ./channels/room-channel
 
 class @RoomShow
   constructor: (options) ->
@@ -114,10 +115,11 @@ class @RoomShow
 
   _bindDom: ->
     window.onbeforeunload = =>
-      if @status == 'waiting'
-        $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
-        return undefined
-      else if @status == 'chatting'
+      # if @status == 'waiting'
+      #   $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
+      #   return undefined
+      # else
+      if @status == 'chatting'
         return 'Make sure to end your conversation before leaving!'
       else
         return undefined

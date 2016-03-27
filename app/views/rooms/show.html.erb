@@ -117,6 +117,7 @@
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
   $(document).ready(function(){
+    var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>'});
     var roomShow = new RoomShow({ room: '<%= @room.token %>', participationId: '<%= @participation_id %>', nick: '<%= current_user.name %>' });
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
 
