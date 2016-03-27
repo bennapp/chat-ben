@@ -115,10 +115,10 @@ class @RoomShow
 
   _bindDom: ->
     window.onbeforeunload = =>
-      # if @status == 'waiting'
-      #   $.ajax(url: "/participations/#{@participation}", type: 'DELETE')
-      #   return undefined
-      # else
+      if @status == 'waiting'
+        $.ajax(url: "/chat/#{@room}", type: 'PUT') # When you leave your own room and navigate back to front page, you should see num chating change becauce of you.
+        return undefined
+      else
       if @status == 'chatting'
         return 'Make sure to end your conversation before leaving!'
       else

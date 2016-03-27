@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :update]
 
   def update
-    @room.touch
+    @room.update_attribute(:waiting, false) # all you can update is that you are no long waiting when you leave
     render nothing: true
   end
 

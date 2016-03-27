@@ -13,12 +13,23 @@ class Post < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :title
 
+  after_create :broadcast_create
+  after_destroy :broadcast_destroy
+
+  def broadcast_create
+    ActionCable.server.broadcast("post_channel", { id: id, title: title, action: 'create', user: user.name })
+  end
+
+  def broadcast_destroy
+    ActionCable.server.broadcast("post_channel", { id: id, action: 'destroy' })
+  end
+
   def num_chatted
     @num_chatted ||= Participation.joins(:room).joins('inner join posts on rooms.post_id = posts.id').where('posts.id = ?', id).count
   end
 
   def num_waiting
-    @num_waiting ||= rooms.where(waiting: true).count
+    @num_waiting = rooms.where(waiting: true).where(full: false).count
   end
 
   def full_url

@@ -1,6 +1,6 @@
 class PostChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "posts_notfications_channel"
+    stream_from "post_channel"
   end
 
   def unsubscribed
