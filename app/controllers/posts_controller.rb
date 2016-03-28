@@ -51,9 +51,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if @post.destroy
-      render nothing: true
-    end
+    @post.destroy
+    render nothing: true
   end
 
   private
