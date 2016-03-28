@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_ben?
+    name == 'ben'
+  end
+
   attr_accessor :login
 
   def login=(login)

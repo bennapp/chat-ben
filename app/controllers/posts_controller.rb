@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.new
-    @posts = Post.without_deleted.includes(:rooms)
+    @posts = Post.without_deleted.from_three_weeks_ago.includes(:rooms)
   end
 
   def show
@@ -27,6 +27,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
+    @post.sticky = false unless current_user.is_ben?
 
     respond_to do |format|
       if @post.save

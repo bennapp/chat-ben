@@ -5,6 +5,8 @@ class Post < ActiveRecord::Base
   scope :with_deleted, -> { where.not(deleted_at: nil) }
   # end acts_as_paranoid
 
+  scope :from_three_weeks_ago, -> { where('posts.created_at > ?', 2.weeks.ago.utc) }
+
   belongs_to :user
   has_many :rooms
 
