@@ -1,4 +1,4 @@
-p# Change to match your CPU core count
+# Change to match your CPU core count
 workers 1
 
 # Min and Max threads per worker

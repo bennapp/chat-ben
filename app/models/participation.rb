@@ -14,7 +14,7 @@ class Participation < ActiveRecord::Base
   end
 
   def update_room_full
-    room.update_attribute(:full, room.participations.without_deleted.count >= 2)
+    room.update_attribute(:full, room.participations.count >= 2)
   end
 
   validates :room, presence: true
