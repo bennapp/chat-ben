@@ -6,6 +6,10 @@ class RatingsController < ApplicationController
   def create
     @rating = Rating.new(rating_params)
     @rating.rater = current_user
+    room = Room.where(id: @rating.room_id).first
+    p room
+    parts = room.participations
+    p parts
     @rating.ratee_id = Room.where(id: @rating.room_id).first.participations.where('user_id != ?', current_user.id).pluck(:user_id).last
 
     @rating.save!
