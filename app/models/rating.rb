@@ -4,7 +4,7 @@ class Rating < ActiveRecord::Base
   belongs_to :room
 
   validates :rater, presence: true
-  validates :ratee, presence: true
+  # validates :ratee, presence: true # let you rate the room
   validate :rater_and_ratee_participated_in_room
   validates_uniqueness_of :room_id, scope: [:rater_id, :ratee_id]
 
