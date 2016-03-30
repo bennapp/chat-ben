@@ -6,7 +6,7 @@ class RatingsController < ApplicationController
   def create
     @rating = Rating.new(rating_params)
     @rating.rater = current_user
-    @rating.ratee_id = (Room.find(@rating.room_id).participations.pluck(:user_id) - [current_user.id]).first
+    @rating.ratee_id = Room.where(id: @rating.room_id).first.participations.where('user_id != ?', current_user.id).pluck(:user_id).last
 
     @rating.save!
     render nothing: true
