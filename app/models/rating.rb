@@ -6,7 +6,7 @@ class Rating < ActiveRecord::Base
   validates :rater, presence: true
   # validates :ratee, presence: true # let you rate the room
   validate :rater_and_ratee_participated_in_room
-  # validates_uniqueness_of :room_id, scope: [:rater_id, :ratee_id]
+  validates_uniqueness_of :room_id, scope: [:rater_id, :ratee_id]
 
   after_save :ban_ratee_after_two_nsfw
 
