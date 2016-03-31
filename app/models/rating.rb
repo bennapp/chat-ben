@@ -8,7 +8,7 @@ class Rating < ActiveRecord::Base
   validate :rater_and_ratee_participated_in_room
   validates_uniqueness_of :room_id, scope: [:rater_id, :ratee_id]
 
-  after_save :ban_ratee_after_two_nsfw
+  # after_save :ban_ratee_after_two_nsfw
 
   private
 
