@@ -27,8 +27,6 @@ class @RoomShow
     @webrtc.on 'channelMessage', (peer, label, data) =>
       if data.type == 'volume'
         @showVolume document.getElementById('volume_' + peer.id), data.volume
-      if data.type == 'chatMessage'
-        @recieveMessage(data['chatMessage'])
 
     @webrtc.on 'videoAdded', (video, peer) =>
       @otherPeer = peer
@@ -48,14 +46,7 @@ class @RoomShow
       video.style.width = '800px';
 
       document.getElementById('notification-sound').play();
-      $('.messages-container').append("<div class=\"from well well-sm bg-info\"></div>")
-      $('.from:last').text("Hey! What's going on!?")
 
-      @createChatDataChannel()
-      @_bindChat()
-
-      $('#send-message').removeClass('display-none')
-      $('.toggle').removeClass('display-none')
       $('.control-buttons').removeClass('display-none')
       $('.no-user-container').addClass('display-none')
       @_setStatus('chatting')
@@ -65,10 +56,6 @@ class @RoomShow
 
     @webrtc.on 'volumeChange', (volume, treshold) =>
       @showVolume document.getElementById('localVolume'), volume
-
-  createChatDataChannel: ->
-    pc = @webrtc.webrtc.peers[0].pc
-    @webrtc.channel = pc.createDataChannel("ChatData");
 
   removeVideo: (video, peer) =>
     remote = document.getElementById('remote')
@@ -94,26 +81,6 @@ class @RoomShow
     else
       el.style.height = '' + Math.floor((volume + 100) * 100 / 25 - 220) + '%'
 
-  recieveMessage: (message) ->
-    $('.messages-container').append("<div class=\"from well well-sm bg-info\"></div>")
-    $('.from:last').text(message)
-    $('.messages-container').scrollTop($('.messages-container')[0].scrollHeight);
-
-  sendMessage: (message) ->
-    @webrtc.channel.send(JSON.stringify({type: 'chatMessage', chatMessage: message}))
-    $('.messages-container').append("<div class=\"to well well-sm\"></div>")
-    $('.to:last').text(message)
-    $('.messages-container').scrollTop($('.messages-container')[0].scrollHeight);
-
-  _bindChat: ->
-    $sendMessage = $('#send-message')
-    $sendMessage.prop('disabled', false)
-    $sendMessage.keypress (e) =>
-      if e.which == 13 && $sendMessage.val() != '' && e.shiftKey == false
-        @sendMessage($sendMessage.val())
-        $sendMessage.val('')
-        return false;
-
   _bindDom: ->
     window.onbeforeunload = =>
       if @status == 'waiting'
@@ -138,9 +105,6 @@ class @RoomShow
       @webrtc.leaveRoom()
       @webrtc.connection.disconnect()
 
-    $('#toggle-local').on 'click', @_toggleLocal
-    $('#toggle-chat').on 'click', @_toggleChat
-
     @_controlButtons()
 
   _setStatus: (status) ->
@@ -157,28 +121,6 @@ class @RoomShow
 
     $('.status').text('')
     $('.status').append(document.createTextNode(status))
-
-  _toggleLocal: ->
-    $toggleLocal = $('#toggle-local span')
-    if $toggleLocal.hasClass('glyphicon-menu-left')
-      $toggleLocal.removeClass('glyphicon-menu-left')
-      $toggleLocal.addClass('glyphicon-menu-right')
-      $('.left-panel').hide()
-    else
-      $toggleLocal.removeClass('glyphicon-menu-right')
-      $toggleLocal.addClass('glyphicon-menu-left')
-      $('.left-panel').show()
-
-  _toggleChat: ->
-    $toggleChat = $('#toggle-chat span')
-    if $toggleChat.hasClass('glyphicon-menu-right')
-      $toggleChat.removeClass('glyphicon-menu-right')
-      $toggleChat.addClass('glyphicon-menu-left')
-      $('.chat-panel').addClass('display-none')
-    else
-      $toggleChat.removeClass('glyphicon-menu-left')
-      $toggleChat.addClass('glyphicon-menu-right')
-      $('.chat-panel').removeClass('display-none')
 
   _controlButtons: ->
     $('#mute-microphone-button').on 'click', @_toggleMic

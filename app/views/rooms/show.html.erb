@@ -1,4 +1,4 @@
-<%= audio_tag('notification.wav', id: 'notification-soundp') %>
+<%= audio_tag('notification.wav', id: 'notification-sound') %>
 <div class="room-page page">
   <div class="left-panel">
     <div class="local-video-container">
@@ -50,10 +50,6 @@
     </div>
 
     <div class="remote-container">
-      <div id="toggle-local" class="toggle display-none" aria-label="Left Align">
-        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-      </div>
-
       <div class="no-user-container">
         <div class="well no-user" aria-label="Left Align">
           <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -61,10 +57,6 @@
       </div>
 
       <div id="remote"></div>
-
-      <div id="toggle-chat" class="toggle display-none" aria-label="Left Align">
-        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-      </div>
     </div>
 
     <div class="buttons">
@@ -102,14 +94,6 @@
 
         <%= f.submit "Submit Rating", class: 'submit-rating btn btn-primary' %>
       <% end %>
-    </div>
-  </div>
-
-  <div class="chat-panel">
-    <div class="messages-container">
-    </div>
-    <div class="send-container">
-      <textarea class='form-control display-none' id="send-message" placeholder="Type a message, press enter to send"></textarea>
     </div>
   </div>
 </div>
