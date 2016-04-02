@@ -47,6 +47,7 @@ class @RoomShow
 
       video.style.width = '800px';
 
+      document.getElementById('notification-sound').play();
       $('.messages-container').append("<div class=\"from well well-sm bg-info\"></div>")
       $('.from:last').text("Hey! What's going on!?")
 

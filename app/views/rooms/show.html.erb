@@ -1,3 +1,4 @@
+<%= audio_tag('notification.wav', id: 'notification-sound') %>
 <div class="room-page page">
   <div class="left-panel">
     <div class="local-video-container">
@@ -95,7 +96,7 @@
 
         <div class="rating-select-container">
           <span class="caret"></span>
-          <% select_options = options_for_select([["", nil], ["★", 1], ["★★", 2], ["★★★", 3], ["★★★★", 4], ["★★★★★", 5]], ["", nil]) %>
+          <% select_options = options_for_select([["Select Rating", nil], ["★", 1], ["★★", 2], ["★★★", 3], ["★★★★", 4], ["★★★★★", 5]], ["", nil]) %>
           <%= f.select :value, select_options %>
         </div>
 
