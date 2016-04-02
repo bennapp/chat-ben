@@ -20,6 +20,8 @@ gem 'puma', '~> 3.1'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'font-awesome-sass', '~> 4.5'
 
+gem 'autoprefixer-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
