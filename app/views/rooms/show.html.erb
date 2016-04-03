@@ -1,13 +1,6 @@
 <%= audio_tag('notification.wav', id: 'notification-sound') %>
 <div class="room-page page">
   <div class="left-panel">
-    <div class="local-video-container">
-      <div class="videoContainer">
-        <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
-        <div id="localVolume" class="volume_bar"></div>
-      </div>
-    </div>
-
     <% if @room.post.link.present? && @room.post.format_link.blank? %>
       <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
     <% end %>
@@ -50,13 +43,22 @@
     </div>
 
     <div class="remote-container">
-      <div class="no-user-container">
-        <div class="well no-user" aria-label="Left Align">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      <div class="no-user-local">
+        <div id="remote">
+          <div class="no-user-container">
+            <div class="well no-user" aria-label="Left Align">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="local-video-container">
+          <div class="videoContainer">
+            <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
+            <div id="localVolume" class="volume_bar"></div>
+          </div>
         </div>
       </div>
-
-      <div id="remote"></div>
     </div>
 
     <div class="buttons">

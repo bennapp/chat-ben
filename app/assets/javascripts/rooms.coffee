@@ -44,8 +44,9 @@ class @RoomShow
         remote.insertBefore d, remote.firstChild
 
       video.style.width = '800px';
+      # $(".local-video-container").appendTo('#remote')
 
-      document.getElementById('notification-sound').play();
+      document.getElementById('notification-sound').play()
 
       $('.control-buttons').removeClass('display-none')
       $('.no-user-container').addClass('display-none')

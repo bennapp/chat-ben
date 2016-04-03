@@ -89,24 +89,10 @@ video {
 
   .left-panel {
     margin: $panel-margin;
-    flex-grow: 1;
+    flex-grow: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    .local-video-container {
-      .videoContainer {
-        position: relative;
-        width: 200px;
-        height: 150px;
-
-        video {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-        }
-      }
-    }
 
     a.preview {
       max-width: 300px;
@@ -155,19 +141,43 @@ video {
   }
 
   .remote-panel {
-    flex-grow: 4;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     border-right: 1px solid #eeeeee;
     border-left: 1px solid #eeeeee;
     align-items: center;
+    max-width: 540px;
+
+    .no-user-local{
+      position: relative;
+      height: 100%;
+    }
+
+    .local-video-container {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+
+      .videoContainer {
+        position: relative;
+        width: 200px;
+        height: 150px;
+
+        video {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    .no-user.well {
+      margin-bottom: 0px;
+    }
 
     .alert {
       margin-bottom: 14px;
-    }
-
-    .no-user-container {
-      margin: $panel-margin;
     }
 
     .no-user .glyphicon {
@@ -177,8 +187,7 @@ video {
     .remote-container {
       display: flex;
       align-items: stretch;
-      justify-content: space-between;
-      flex-grow: 8;
+      margin-bottom: 20px;
 
       #remote {
         display: flex;
@@ -187,28 +196,14 @@ video {
         justify-content: center;
       }
 
-      .toggle .glyphicon {
-        font-size: 22px;
-        margin: 0 6px 0 6px;
-        color: #eeeeee;
-      }
-
-      .toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &:hover{
-          cursor: pointer;
-        }
-      }
-
       button {
         border-color: white;
       }
 
       .videoContainer {
         position: relative;
+        margin-right: 8px;
+        margin-left: 8px;
 
         .volume_bar {
           bottom: 5px;
@@ -216,54 +211,9 @@ video {
       }
 
       video {
+        margin-bottom: -5px; // This is because the local vid will be off idk why
         max-width: 100% !important;
         height: auto !important;
-      }
-    }
-  }
-
-  .chat-panel {
-    margin: 0 32px 0 12px;
-    flex-grow: 4;
-    display: flex;
-    flex-direction: column;
-    min-width: 288px;
-    max-width: 360px;
-    height: 79vh;
-
-    .send-container textarea{
-      height: 10vh;
-      margin-top: 12px;
-    }
-
-    .messages-container {
-      flex-grow: 8;
-      overflow-y: scroll;
-      border-top: 1px solid #eeeeee;
-      border-bottom: 1px solid #eeeeee;
-
-      .well {
-        margin-bottom: 6px;
-        display: inline-block;
-        clear: both;
-        word-break: break-word;
-
-        &:first-child {
-          margin-top: 12px;
-        }
-      }
-
-      .to {
-        margin-left: 40px;
-        float: right;
-        background-color: #5bc0de;
-        color: white;
-      }
-
-      .from {
-        margin-right: 40px;
-        margin-left: 18px;
-        float: left;
       }
     }
   }
