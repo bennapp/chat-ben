@@ -43,13 +43,12 @@ class @RoomShow
         d.appendChild vol
         remote.insertBefore d, remote.firstChild
 
-      video.style.width = '800px';
-      # $(".local-video-container").appendTo('#remote')
-
       document.getElementById('notification-sound').play()
 
       $('.control-buttons').removeClass('display-none')
       $('.no-user-container').addClass('display-none')
+      $('#next-post').removeClass('display-none')
+
       @_setStatus('chatting')
 
     @webrtc.on 'videoRemoved', (video, peer) =>

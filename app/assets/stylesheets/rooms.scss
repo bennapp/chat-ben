@@ -89,10 +89,10 @@ video {
 
   .left-panel {
     margin: $panel-margin;
-    flex-grow: 10;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 50%;
 
     .post-header {
       white-space: nowrap;
@@ -143,13 +143,12 @@ video {
   }
 
   .remote-panel {
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     border-right: 1px solid #eeeeee;
     border-left: 1px solid #eeeeee;
     align-items: center;
-    max-width: 540px;
+    width: 50%;
 
     .no-user-local{
       position: relative;
