@@ -103,10 +103,11 @@
 
           <div class="edit-delete">
             <% if current_user == post.user %>
-              <span class='posted-by' > <%= time_ago_in_words(post.created_at) %> ago</span>
+              <span class='posted-by' ><%= post.likes.count %></span><i class="fa fa-thumbs-up fa-lg"></i>
+              |
               <%= link_to 'Delete', post, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
             <% else %>
-              <span class='posted-by' ><%= post.user.name %>, <%= time_ago_in_words(post.created_at) %> ago</span>
+              <span class='posted-by' ><%= post.user.name %>, <%= post.likes.count %></span><i class="fa fa-thumbs-up fa-lg"></i>
             <% end %>
           </div>
         </li>

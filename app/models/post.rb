@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   has_many :rooms
+  has_many :likes
 
   before_save :format_link_into_lightbox_html
 
