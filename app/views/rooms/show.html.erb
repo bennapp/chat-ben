@@ -104,8 +104,7 @@
         </div>
 
         <div class="rating-select-container">
-          <span class="caret"></span>
-          <% select_options = options_for_select([["Select Rating", nil], ["★", 1], ["★★", 2], ["★★★", 3], ["★★★★", 4], ["★★★★★", 5]], ["", nil]) %>
+          <% select_options = options_for_select([["Select Rating", nil], ["★", 1], ["★★", 2], ["★★★", 3], ["★★★★", 4], ["★★★★★", 5]], ["Select Rating", nil]) %>
           <%= f.select :value, select_options %>
         </div>
 
