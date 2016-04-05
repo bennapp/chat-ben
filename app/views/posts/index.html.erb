@@ -39,7 +39,7 @@
     </div>
 
     <ul class="list-group">
-      <% @posts.sort_by { |post| post.sticky? ? -2**16 : -post.num_chatted }.each do |post| %>
+      <% @posts.each do |post| %>
         <li class="list-group-item" id="<%= post.id %>">
           <div class="badge-and-title">
             <div class="count-container">

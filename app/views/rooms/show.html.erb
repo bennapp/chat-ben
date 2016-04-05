@@ -42,15 +42,20 @@
         <% end %>
       </div>
 
-      <div class="buttons">
-        <div class="control-buttons">
-          <button id="previous-post" class="btn btn-primary display-none">Previous</button>
-          <% if Like.where(user_id: current_user.id, post_id: @room.post.id).exists? %>
-            <button id="like" class="btn btn-primary"><span class="fa fa-thumbs-o-up fa-lg"></span></buttons>
-          <% else %>
-            <button id="like" class="btn btn-default"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
-          <% end %>
-          <button id="next-post" class="btn btn-primary display-none">Next Post</button>
+      <div class='buttons-info-container'>
+        <div class='posted-by'><%= @room.post.user.name %></div>
+        <div class='like-count'><%= @room.post.likes.count %></div>
+
+        <div class="buttons">
+          <div class="control-buttons">
+            <button id="previous-post" class="btn btn-primary display-none">Previous</button>
+            <% if Like.where(user_id: current_user.id, post_id: @room.post.id).exists? %>
+              <button id="like" class="btn btn-primary"><span class="fa fa-thumbs-o-up fa-lg"></span></buttons>
+            <% else %>
+              <button id="like" class="btn btn-default"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
+            <% end %>
+            <button id="next-post" class="btn btn-primary">Next Post</button>
+          </div>
         </div>
       </div>
     </div>

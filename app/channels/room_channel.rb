@@ -20,14 +20,17 @@ class RoomChannel < ApplicationCable::Channel
     room = Room.find_by_token(params[:room])
     # Remove this rooms post from the list of next
     posts = Post.without_deleted.from_three_weeks_ago
+    posts = posts.sort_by { |post| post.sticky? ? -2**16 : -post.likes.count }
     current_post_id = data['post_id'].to_i
     current_post_index = posts.find_index { |post| post.id == current_post_id }
     next_post = posts[current_post_index + 1]
     next_post = posts[0] if next_post.nil?
 
     like_exists = Like.where(user_id: current_user.id, post_id: next_post.id).exists?
+    like_count = Like.where(post_id: next_post.id).count
+    posted_by = next_post.user.name
 
-    ActionCable.server.broadcast "room_#{params[:room]}", action: 'next_post', id: next_post.id, title: next_post.title, link: next_post.link, format_link: next_post.format_link, format_type: next_post.format_type, text_content: next_post.text_content, like: like_exists
+    ActionCable.server.broadcast "room_#{params[:room]}", action: 'next_post', id: next_post.id, title: next_post.title, link: next_post.link, format_link: next_post.format_link, format_type: next_post.format_type, text_content: next_post.text_content, like: like_exists, posted_by: posted_by, like_count: like_count
   end
 
   def like(data)

@@ -35,6 +35,9 @@ class @RoomChannel
             $like.addClass('btn-default')
             $like.removeClass('btn-primary')
 
+          $('.like-count').text(data.like_count)
+          $('.posted-by').text(data.posted_by)
+
           $container = $('.content-container')
           $container.empty()
           $container.append("<h3 class=\"post-header\" id=\"#{data.id}\">#{data.title}</h3>")
