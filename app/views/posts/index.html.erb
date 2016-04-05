@@ -107,7 +107,7 @@
               |
               <%= link_to 'Delete', post, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
             <% else %>
-              <span class='posted-by' ><%= post.user.name %>, <%= post.likes.count %></span><i class="fa fa-thumbs-up fa-lg"></i>
+              <span class='posted-by' ><%= post.user.name %>, <span class='like-count' data-post-id="<%= post.id %>"><%= post.likes.count %></span></span><i class="fa fa-thumbs-up fa-lg"></i>
             <% end %>
           </div>
         </li>

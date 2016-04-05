@@ -7,16 +7,6 @@ class @RoomChannel
         console.log('connected')
         $('#next-post').click =>
           @perform("next_post", post_id: $('.post-header')[0].id)
-        $('#like').click =>
-          $like = $('#like')
-          if $like.hasClass('btn-default')
-            $like.removeClass('btn-default')
-            $like.addClass('btn-primary')
-            @perform("like", post_id: $('.post-header')[0].id)
-          else
-            @perform("unlike", post_id: $('.post-header')[0].id)
-            $like.addClass('btn-default')
-            $like.removeClass('btn-primary')
 
       disconnected: ->
         console.log('disconnected')
@@ -36,6 +26,8 @@ class @RoomChannel
             $like.removeClass('btn-primary')
 
           $('.like-count').text(data.like_count)
+          $('.like-count').attr("data-post-id", data.id)
+
           $('.posted-by').text(data.posted_by)
 
           $container = $('.content-container')

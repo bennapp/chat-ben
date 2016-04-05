@@ -32,15 +32,4 @@ class RoomChannel < ApplicationCable::Channel
 
     ActionCable.server.broadcast "room_#{params[:room]}", action: 'next_post', id: next_post.id, title: next_post.title, link: next_post.link, format_link: next_post.format_link, format_type: next_post.format_type, text_content: next_post.text_content, like: like_exists, posted_by: posted_by, like_count: like_count
   end
-
-  def like(data)
-    current_post_id = data['post_id'].to_i
-    Like.find_or_create_by(user: current_user, post_id: current_post_id)
-  end
-
-  def unlike(data)
-    current_post_id = data['post_id'].to_i
-    like = Like.where(user: current_user, post_id: current_post_id).first
-    like.destroy if like.present?
-  end
 end

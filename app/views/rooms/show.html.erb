@@ -44,7 +44,7 @@
 
       <div class='buttons-info-container'>
         <div class='posted-by'><%= @room.post.user.name %></div>
-        <div class='like-count'><%= @room.post.likes.count %></div>
+        <div class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></div>
 
         <div class="buttons">
           <div class="control-buttons">
