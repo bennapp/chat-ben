@@ -85,12 +85,12 @@
 
       <div class="new-buttons display-none">
         <%= link_to "Back to the Front Page", root_url, id: 'new-topic', class: 'btn btn-info' %>
-        <%= link_to "New Chat - #{@subtitle}", @room.post, id: 'new-conversation', class: 'btn btn-success' %>
+        <%= link_to "New Chat - #{@room.post.title}", @room.post, id: 'new-conversation', class: 'btn btn-success' %>
       </div>
     </div>
 
     <div class="rating display-none">
-      <h4 id="rate-other-user">How would you rate your conversation</h4>
+      <h4 id="rate-other-user">How would you rate your conversation?</h4>
       <div class="rating-description">
         <p>Rating your conversations will increase your chances of being matched with someone you will enjoy talking with!</p>
       </div>
