@@ -7,6 +7,16 @@ class @RoomChannel
         console.log('connected')
         $('#next-post').click =>
           @perform("next_post", post_id: $('.post-header')[0].id)
+        $('#like').click =>
+          $like = $('#like')
+          if $like.hasClass('btn-default')
+            $like.removeClass('btn-default')
+            $like.addClass('btn-primary')
+            @perform("like", post_id: $('.post-header')[0].id)
+          else
+            @perform("unlike", post_id: $('.post-header')[0].id)
+            $like.addClass('btn-default')
+            $like.removeClass('btn-primary')
 
       disconnected: ->
         console.log('disconnected')
@@ -15,9 +25,16 @@ class @RoomChannel
         console.log('rejected')
 
       received: (data) ->
-        console.log(data)
         action = data.action
         if action == 'next_post'
+          $like = $('#like')
+          if data.like
+            $like.removeClass('btn-default')
+            $like.addClass('btn-primary')
+          else
+            $like.addClass('btn-default')
+            $like.removeClass('btn-primary')
+
           $container = $('.content-container')
           $container.empty()
           $container.append("<h3 class=\"post-header\" id=\"#{data.id}\">#{data.title}</h3>")
