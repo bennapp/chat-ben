@@ -102,7 +102,7 @@ video {
     }
 
     .well {
-      margin-top: 20px;
+      margin-top: 10px;
       padding-bottom: 40px;
       margin-bottom: 12px;
       overflow-y: scroll;
@@ -114,6 +114,10 @@ video {
       span {
         padding-bottom: 12px;
       }
+    }
+
+    .posted-by-container {
+      color: #555;
     }
 
     .post-content-container {
@@ -138,6 +142,10 @@ video {
       iframe {
         border: 0;
       }
+    }
+
+    .buttons-info-container {
+      margin-top: 12px;
     }
 
     #next-post {

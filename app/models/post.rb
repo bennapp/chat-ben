@@ -17,6 +17,11 @@ class Post < ActiveRecord::Base
   validates_presence_of :title
 
   after_create :broadcast_create
+  after_create :create_like
+
+  def create_like
+    Like.create(user_id: user_id, post_id: self.id)
+  end
 
   def destroy
     updated = update_attribute(:deleted_at, current_time_from_proper_timezone)

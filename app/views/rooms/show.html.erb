@@ -4,6 +4,7 @@
     <div class="post-content-container">
       <div class="content-container">
         <h3 class="post-header" id="<%= @room.post.id %>"><%= @room.post.title %></h3>
+        <div class='posted-by-container'>submitted by <span class='posted-by'><%= @room.post.user.name %></span></div>
         <% if @room.post.link.present? && @room.post.format_link.blank? %>
           <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
         <% end %>
@@ -43,8 +44,7 @@
       </div>
 
       <div class='buttons-info-container'>
-        <div class='posted-by'><%= @room.post.user.name %></div>
-        <div class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></div>
+        <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
 
         <div class="buttons">
           <div class="control-buttons">
