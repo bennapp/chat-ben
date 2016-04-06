@@ -6,7 +6,15 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.without_deleted.from_three_weeks_ago.includes(:rooms).includes(:likes)
-    @posts = @posts.sort_by { |post| post.sticky? ? -2**16 : -post.likes.count }
+    @posts = @posts.sort_by { |post|
+      if post.num_waiting > 0
+        -2**16
+      elsif post.sticky?
+        -2**8
+      else
+        -post.likes.count
+      end
+    }
   end
 
   def show

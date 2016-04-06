@@ -18,11 +18,12 @@ class @PostChannel
 
           waitingToChatMessage = ' waiting to chat right now!'
           $dot = $('li#' + postId + ' .waiting-dot')
+          $('li#' + postId).prependTo("ul");
 
           if numWaiting == 0
             $dot.remove()
           else
-            if $dot.length != 0
+            if $dot.length != 0 #
               $dot.tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)
               $dot.text(numWaiting)
             else
