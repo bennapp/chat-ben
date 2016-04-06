@@ -17,17 +17,17 @@ class @PostChannel
           numWaiting = data.num_waiting
 
           waitingToChatMessage = ' waiting to chat right now!'
-          $badge = $('li#' + postId + ' .badge')
+          $dot = $('li#' + postId + ' .waiting-dot')
 
           if numWaiting == 0
-            $badge.remove()
+            $dot.remove()
           else
-            if $badge.length != 0
-              $badge.tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)
-              $badge.text(numWaiting)
+            if $dot.length != 0
+              $dot.tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)
+              $dot.text(numWaiting)
             else
-              $('li#' + postId + ' .count-container').prepend("<span class=\"badge\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"#{numWaiting} waiting to chat right now!\">#{numWaiting}</span>")
-              $('li#' + postId + ' .badge').tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)
+              $('li#' + postId + ' .count-container').prepend("<span class=\"waiting-dot\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"#{numWaiting} waiting to chat right now!\"></span>")
+              $('li#' + postId + ' .waiting-dot').tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)
 
         else if action == 'create'
           id = data.id
