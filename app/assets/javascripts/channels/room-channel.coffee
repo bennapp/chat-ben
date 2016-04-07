@@ -4,9 +4,12 @@ class @RoomChannel
 
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
-        console.log('connected')
+        console.log('You are in a room. What are you doing looking at the console log?!')
+        window.nextPost = (postId, options={}) =>
+          @perform("next_post", post_id: postId, first_post: options.firstPost)
+
         $('#next-post').click =>
-          @perform("next_post", post_id: $('.post-header')[0].id)
+          window.nextPost($('.post-header')[0].id)
 
       disconnected: ->
         console.log('disconnected')
@@ -17,6 +20,8 @@ class @RoomChannel
       received: (data) ->
         action = data.action
         if action == 'next_post'
+          # If somone refreshes the page they can next someone elses content
+          # return if window.RoomShow.status == 'ending'
           $like = $('#like')
           if data.like
             $like.removeClass('btn-default')

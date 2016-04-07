@@ -2,7 +2,7 @@ class @LikeChannel
   constructor: (options) ->
     App.cable.subscriptions.create "LikeChannel",
       connected: ->
-        console.log('connected to some likes!')
+        console.log('connected to some likes! Websockets are happening?!')
         $('#like').click =>
           $like = $('#like')
           if $like.hasClass('btn-default')

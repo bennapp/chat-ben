@@ -6,6 +6,7 @@ class @RoomShow
     @_setStatus('waiting')
     @room = options.room
     @participation = options.participationId
+    @postId = options.postId
 
     @_bindDom()
 
@@ -44,6 +45,8 @@ class @RoomShow
         remote.insertBefore d, remote.firstChild
 
       document.getElementById('notification-sound').play()
+
+      window.nextPost(@postId, firstPost: true)
 
       $('.control-buttons').removeClass('display-none')
       $('.no-user-container').addClass('display-none')
