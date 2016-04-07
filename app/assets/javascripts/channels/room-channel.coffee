@@ -33,11 +33,11 @@ class @RoomChannel
           $('.like-count').text(data.like_count)
           $('.like-count').attr("data-post-id", data.id)
 
-          $('.posted-by').text(data.posted_by)
-
           $container = $('.content-container')
           $container.empty()
           $container.append("<h3 class=\"post-header\" id=\"#{data.id}\">#{data.title}</h3>")
+          $container.append("<div class='posted-by-container'>submitted by <span class='posted-by'></span></div>")
+          $('.posted-by').text(data.posted_by)
 
           if data.text_content
             $container.append("<div class=\"well\"></div>")

@@ -34,7 +34,7 @@ class @RoomShow
       remote = document.getElementById('remote')
       if remote
         d = document.createElement('div')
-        d.className = 'videoContainer'
+        d.className = 'videoContainer remote'
         d.id = 'container_' + @webrtc.getDomId(peer)
         d.appendChild video
         vol = document.createElement('div')
