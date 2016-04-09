@@ -16,7 +16,7 @@
             <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
           </div>
 
-          <% if current_user && current_user.is_ben? %>
+          <% if current_user && current_user.is_admin? %>
             <div class="field new-post-field">
               <%= f.label :sticky %>
               <%= f.check_box :sticky %>
@@ -108,6 +108,10 @@
               <%= link_to 'Delete', post, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
             <% else %>
               <span class='posted-by' >submitted by <%= post.user.name %>, <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= post.id %>"><%= post.likes.count %></span></span>
+              <% if current_user && current_user.is_admin? %>
+              |
+                <%= link_to 'Delete', post, method: :delete, remote: true, data: { confirm: 'Ian or Ben you are deleting someone elses post. Are you sure?' } %>
+              <% end %>
             <% end %>
           </div>
         </li>

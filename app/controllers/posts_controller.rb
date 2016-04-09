@@ -36,7 +36,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-    @post.sticky = false unless current_user.is_ben?
+    @post.sticky = false unless current_user.is_admin?
 
     respond_to do |format|
       if @post.save
@@ -68,7 +68,11 @@ class PostsController < ApplicationController
   private
 
   def set_current_users_post
-    @post = current_user.posts.find(params[:id])
+    if current_user.is_admin?
+      @post = Post.find(params[:id])
+    else
+      @post = current_user.posts.find(params[:id])
+    end
   end
 
   def set_post

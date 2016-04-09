@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def is_ben?
-    name == 'ben'
+  def is_admin?
+    name == 'ben' || name == 'napes'
   end
 
   attr_accessor :login
