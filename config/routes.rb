@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get "/500" => "errors#internal_server_error"
 
   resources :feedbacks, only: [:create, :new], path: 'feeback'
+
+  get '/new_chat', to: 'posts#new_chat'
   resources :posts
+
   resources :participations, only: :destroy
   resources :rooms, only: [:show, :update], path: 'chat', param: :token
   resources :ratings, only: :create

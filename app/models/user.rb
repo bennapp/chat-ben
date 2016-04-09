@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login]
   has_many :participations
   has_many :posts
+  has_many :ratings, class_name: 'Rating', foreign_key: 'rater_id'
+  has_many :rateeds, class_name: 'Rating', foreign_key: 'ratee_id'
 
   validates :name, :presence => true, :uniqueness => { :case_sensitive => true }
   validates_format_of :name, with: /\A[a-zA-Z0-9_\.]*\z/
