@@ -23,9 +23,8 @@ class @PostChannel
           if numWaiting == 0
             $dot.remove()
           else
-            if $dot.length != 0 #
+            if $dot.length != 0
               $dot.tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)
-              $dot.text(numWaiting)
             else
               $('li#' + postId + ' .count-container').prepend("<span class=\"waiting-dot\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"#{numWaiting} waiting to chat right now!\"></span>")
               $('li#' + postId + ' .waiting-dot').tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)

@@ -122,7 +122,7 @@
 
   <div class="right-panel">
     <div class="total-users-container">
-      <span id="total-users"><%= Stat.find_or_create_by(title: 'total_users').value.to_i %></span> Users Chatting Now!
+      <span id="total-users"><%= User.where(active: true).count %></span> Users Chatting Now!
     </div>
     <div class="login-container">
       <% if current_user %>

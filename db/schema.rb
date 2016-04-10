@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160410004008) do
+ActiveRecord::Schema.define(version: 20160410012311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,13 +91,6 @@ ActiveRecord::Schema.define(version: 20160410004008) do
   add_index "rooms", ["deleted_at"], name: "index_rooms_on_deleted_at", using: :btree
   add_index "rooms", ["post_id"], name: "index_rooms_on_post_id", using: :btree
 
-  create_table "stats", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -113,6 +106,7 @@ ActiveRecord::Schema.define(version: 20160410004008) do
     t.datetime "updated_at",                             null: false
     t.string   "name"
     t.boolean  "banned",                 default: false, null: false
+    t.boolean  "active"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

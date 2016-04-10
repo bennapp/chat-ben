@@ -2,21 +2,13 @@ class LikeChannel < ApplicationCable::Channel
   def subscribed
     stream_from "like_channel"
 
-    total_users = Stat.find_or_create_by(title: 'total_users')
-    total_users.value = total_users.value.to_i + 1
-    total_users.save
-
-    ActionCable.server.broadcast "like_channel", action: 'total_users', value: total_users.value
+    current_user.update_attribute(:active, true) if current_user.present?
+    ActionCable.server.broadcast "like_channel", action: 'total_users', value: User.where(active: true).count
   end
 
   def unsubscribed
-    puts 'unsubscribed'
-
-    total_users = Stat.find_or_create_by(title: 'total_users')
-    total_users.value = total_users.value.to_i - 1
-    total_users.save
-
-    ActionCable.server.broadcast "like_channel", action: 'total_users', value: total_users.value
+    current_user.update_attribute(:active, false) if current_user.present?
+    ActionCable.server.broadcast "like_channel", action: 'total_users', value: User.where(active: true).count
   end
 
   def like(data)
