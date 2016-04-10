@@ -54,7 +54,7 @@ class @RoomChannel
               $('.read-more').featherlight('<div class=\"well\"></div>', options);
 
           if data.format_link
-            $container.append("<div class=\"embeded-content-container embed-responsive embed-responsive-16by9\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
+            $container.append("<div class=\"embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
             $wrapper = $('.embeded-content-wrapper')
             if data.format_type == 'imgur'
               $wrapper.append("<blockquote class=\"imgur-embed-pub\" lang=\"en\" data-id=#{data.format_link}><a href=\"//imgur.com/#{data.format_link}\"></a></blockquote>")
