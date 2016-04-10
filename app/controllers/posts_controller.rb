@@ -33,6 +33,7 @@ class PostsController < ApplicationController
     }.first
 
     room = post.rooms.create if room.blank?
+    room.update_attribute(:fresh, true)
 
     redirect_to room_path(room)
   end
@@ -41,7 +42,7 @@ class PostsController < ApplicationController
     rooms = @post.rooms.where('rooms.full is false').where('rooms.waiting is true')
     room = rooms.select do |room|
       waiting_user_id = room.participations.first.try(:user_id)
-      waiting_user_id.present? && !bad_rating?(waiting_user_id)
+      waiting_user_id.present? && !bad_rating?(waiting_user_id) && !(room.fresh? && just_chat?(waiting_user_id))
     end
 
     room = @post.rooms.create if room.blank?
