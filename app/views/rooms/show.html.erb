@@ -38,7 +38,7 @@
           </div>
         <% end %>
 
-        <% if !@room.post.format_link.present? && !@room.post.text_content.present? %>
+        <% if !@room.post.link.present? && !@room.post.text_content.present? %>
           <div class="well">This post has no link or description</div>
         <% end %>
       </div>

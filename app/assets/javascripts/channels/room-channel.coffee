@@ -39,6 +39,11 @@ class @RoomChannel
           $container.append("<div class='posted-by-container'>submitted by <span class='posted-by'></span></div>")
           $('.posted-by').text(data.posted_by)
 
+          if data.link && data.full_url && !data.format_link
+            $container.append("<a target=\"_blank\" class=\"preview\" href=\"\"></a>")
+            $('.preview').text(data.full_url)
+            $('.preview').attr('href', data.full_url)
+
           if data.text_content
             $container.append("<div class=\"well\"></div>")
             $('.content-container .well').text(data.text_content)
@@ -67,5 +72,5 @@ class @RoomChannel
             else if data.format_type == 'youtube'
               $wrapper.append("<iframe id=\"ytplayer\" type=\"text/html\" width=\"640\" height=\"390\" src=\"//www.youtube.com/embed/#{data.format_link}?autoplay=1&origin=https://www.chatben.co\" frameborder=\"0\"/>")
 
-          if !data.format_link && !data.text_content
-            $container.append("<div class=\"well\">This post has no link or description</div>")
+          if !data.link && !data.text_content
+            $container.append("<div class=\"well\">This post has no embeded link or description</div>")
