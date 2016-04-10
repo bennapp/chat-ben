@@ -23,5 +23,7 @@ class @LikeChannel
       received: (data) ->
         if data.action == 'like_count'
           $('.like-count[data-post-id="' + data.post_id + '"]').text(data.like_count)
+        else if data.action == 'total_users'
+          $('#total-users').text(data.value)
 
 

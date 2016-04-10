@@ -164,6 +164,14 @@ $container-margin: 20px;
 		margin-right: 2.5%;
 	}
 
+	.total-users-container {
+		font-size: 24px;
+		font-weight: bold;
+		font-family: 'Raleway', sans-serif;
+		color: darken(#5bc0de, 9.5%); //info
+
+	}
+
 	.about-container {
 		p {
 			text-indent: 8px;
