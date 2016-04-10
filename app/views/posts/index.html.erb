@@ -104,11 +104,11 @@
 
           <div class="edit-delete">
             <% if current_user == post.user %>
-              <span class='posted-by' >submitted by you! <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= post.id %>"><%= post.likes.count %></span> </span>
+              <span class='posted-by' >submitted by you! <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= post.id %>"><%= post.like_count %></span> </span>
               |
               <%= link_to 'Delete', post, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
             <% else %>
-              <span class='posted-by' >submitted by <%= post.user.name %>, <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= post.id %>"><%= post.likes.count %></span></span>
+              <span class='posted-by' >submitted by <%= post.user.name %>, <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= post.id %>"><%= post.like_count %></span></span>
               <% if current_user && current_user.is_admin? %>
               |
                 <%= link_to 'Delete', post, method: :delete, remote: true, data: { confirm: 'Ian or Ben you are deleting someone elses post. Are you sure?' } %>

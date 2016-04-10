@@ -11,6 +11,10 @@ class @RoomChannel
         $('#next-post').click =>
           window.nextPost($('.post-header')[0].id)
 
+        # $('#previous-post').click =>
+          # console.log window.prevPostId
+          # window.nextPost(window.prevPostId, first_post: true)
+
       disconnected: ->
         console.log('disconnected')
 
@@ -23,12 +27,20 @@ class @RoomChannel
           # If somone refreshes the page they can next someone elses content
           # return if window.RoomShow.status == 'ending'
           $like = $('#like')
+          $dislike = $('#dislike')
           if data.like
             $like.removeClass('btn-default')
             $like.addClass('btn-primary')
           else
             $like.addClass('btn-default')
             $like.removeClass('btn-primary')
+
+          if data.dislike
+            $dislike.removeClass('btn-default')
+            $dislike.addClass('btn-danger')
+          else
+            $dislike.addClass('btn-default')
+            $dislike.removeClass('btn-danger')
 
           $('.like-count').text(data.like_count)
           $('.like-count').attr("data-post-id", data.id)

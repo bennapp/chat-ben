@@ -48,12 +48,22 @@
 
         <div class="buttons">
           <div class="control-buttons">
-            <button id="previous-post" class="btn btn-primary display-none">Previous</button>
-            <% if Like.where(user_id: current_user.id, post_id: @room.post.id).exists? %>
-              <button id="like" class="btn btn-primary"><span class="fa fa-thumbs-o-up fa-lg"></span></buttons>
-            <% else %>
-              <button id="like" class="btn btn-default"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
-            <% end %>
+            <button id="previous-post" class="btn btn-primary">Previous</button>
+
+            <div class="likes">
+              <% if Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
+                <button id="like" class="btn btn-primary"><span class="fa fa-thumbs-o-up fa-lg"></span></buttons>
+              <% else %>
+                <button id="like" class="btn btn-default"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
+              <% end %>
+
+              <% if Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: true).exists? %>
+                <button id="dislike" class="btn btn-danger"><span class="fa fa-thumbs-o-down fa-lg"></span></buttons>
+              <% else %>
+                <button id="dislike" class="btn btn-default"><span class="fa fa-thumbs-o-down fa-lg"></span></buttons>
+              <% end %>
+            </div>
+
             <button id="next-post" class="btn btn-primary">Next Post</button>
           </div>
         </div>

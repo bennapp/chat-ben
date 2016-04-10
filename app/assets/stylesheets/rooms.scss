@@ -147,10 +147,11 @@ video {
 
     .buttons-info-container {
       margin-top: 12px;
-    }
 
-    #next-post {
-      float: right;
+      .control-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
 

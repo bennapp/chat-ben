@@ -25,6 +25,14 @@ class Post < ActiveRecord::Base
     Like.create(user_id: user_id, post_id: self.id)
   end
 
+  def like_count
+    likes.pluck(:dislike).sum { |dislike| dislike ? -1 : 1 }
+  end
+
+  def sort_order
+    [-num_waiting, (sticky? ? -1 : 1), -like_count]
+  end
+
   def destroy
     updated = update_attribute(:deleted_at, current_time_from_proper_timezone)
     ActionCable.server.broadcast("post_channel", { id: id, action: 'destroy' }) if updated
