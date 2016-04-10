@@ -1,6 +1,7 @@
 class @RoomChannel
   constructor: (options) ->
     roomToken = options.roomToken
+    window.postHistory = [options.postId]
 
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
@@ -11,9 +12,12 @@ class @RoomChannel
         $('#next-post').click =>
           window.nextPost($('.post-header')[0].id)
 
-        # $('#previous-post').click =>
-          # console.log window.prevPostId
-          # window.nextPost(window.prevPostId, first_post: true)
+        $('#previous-post').click =>
+          if postHistory.length == 1
+            window.nextPost(window.postHistory[0], firstPost: true)
+          else
+            window.postHistory.pop()
+            window.nextPost(window.postHistory[window.postHistory.length - 1], firstPost: true)
 
       disconnected: ->
         console.log('disconnected')
@@ -24,6 +28,8 @@ class @RoomChannel
       received: (data) ->
         action = data.action
         if action == 'next_post'
+          postHistory.push data.id unless data.first_post
+
           # If somone refreshes the page they can next someone elses content
           # return if window.RoomShow.status == 'ending'
           $like = $('#like')
