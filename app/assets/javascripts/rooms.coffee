@@ -72,6 +72,7 @@ class @RoomShow
     $('.videoContainer').remove()
     $('.remote-container').addClass('display-none')
     $('#send-message').addClass('display-none')
+    $('.remote-panel').css('justify-content', 'flex-start')
     @webrtc.leaveRoom()
     @webrtc.stopLocalVideo()
 

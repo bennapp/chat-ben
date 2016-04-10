@@ -32,7 +32,7 @@
         <% end %>
 
         <% if @room.post.format_link.present? %>
-          <div class="embeded-content-container">
+          <div class="embeded-content-container embed-responsive embed-responsive-16by9">
             <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
             </div>
           </div>
@@ -78,7 +78,7 @@
 
         <div class="local-video-container">
           <div class="videoContainer">
-            <video id="localVideo" style="height: 150px;" oncontextmenu="return false;"></video>
+            <video id="localVideo" oncontextmenu="return false;"></video>
             <div id="localVolume" class="volume_bar"></div>
           </div>
         </div>
