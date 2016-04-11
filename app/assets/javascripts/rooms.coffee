@@ -109,6 +109,12 @@ class @RoomShow
       @webrtc.leaveRoom()
       @webrtc.connection.disconnect()
 
+    $('#next-post').on 'click', =>
+      $('#next-post').tooltip('disable')
+
+    $('button').on 'click', ->
+      $(this).blur()
+
     @_controlButtons()
 
   _setStatus: (status) ->

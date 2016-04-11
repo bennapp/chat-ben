@@ -26,7 +26,7 @@ class @PostChannel
             if $dot.length != 0
               $dot.tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)
             else
-              $('li#' + postId + ' .count-container').prepend("<span class=\"waiting-dot\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"#{numWaiting} waiting to chat right now!\"></span>")
+              $('li#' + postId + ' .count-container').prepend("<span class=\"waiting-dot glow\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"#{numWaiting} waiting to chat right now!\"></span>")
               $('li#' + postId + ' .waiting-dot').tooltip().attr('data-original-title', numWaiting + waitingToChatMessage)
 
         else if action == 'create'

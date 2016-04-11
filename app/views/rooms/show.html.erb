@@ -48,7 +48,7 @@
 
         <div class="buttons">
           <div class="control-buttons">
-            <button id="previous-post" class="btn btn-primary">Previous</button>
+            <button id="previous-post" class="btn btn-primary">Previous Topic</button>
 
             <div class="likes">
               <% if Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
@@ -64,7 +64,7 @@
               <% end %>
             </div>
 
-            <button id="next-post" class="btn btn-primary">Next Post</button>
+            <button id="next-post" data-toggle="tooltip" data-placement="top" title="Press this button to chat about a new topic with the person you are chatting with!" class="btn btn-primary">Next Topic</button>
           </div>
         </div>
       </div>
@@ -142,5 +142,8 @@
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
 
     $('.flash.notice').delay(3500).fadeOut(1400);
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
   });
 </script>

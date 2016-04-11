@@ -4,7 +4,7 @@
       <%= link_to 'javascript:;', class: 'btn btn-primary new-post-button' do %>
         <span class="new-post-key">N</span>ew Post
       <% end %>
-      <%= link_to "Ready to Chat With Someone New!", new_chat_path, class: 'btn btn-success'%>
+      <%= link_to "Random Chat With Someone New!", new_chat_path, class: 'btn btn-success blink'%>
     </div>
 
     <div class="new-post-container" style="display: none;">
@@ -48,7 +48,7 @@
                 <span class="fa fa-thumb-tack fa-lg" aria-hidden="true"></span>
               <% end %>
               <% if post.num_waiting > 0 %>
-                <span class="waiting-dot" data-toggle="tooltip" data-placement="top" title="<%= post.num_waiting %> waiting to chat right now!"></span>
+                <span class="waiting-dot glow" data-toggle="tooltip" data-placement="top" title="<%= post.num_waiting %> waiting to chat right now!"></span>
               <% end %>
             </div>
 
