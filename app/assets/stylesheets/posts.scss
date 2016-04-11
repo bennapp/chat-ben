@@ -139,8 +139,12 @@ $container-margin: 20px;
 		.post-title-container {
 			margin-left: 8px;
 			display: inline-block;
-			max-width: 640px;
+			max-width: 500px;
 			line-height: 1.9em;
+
+			-webkit-box-orient: vertical;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
 		}
 
 		.edit-delete {
