@@ -100,13 +100,9 @@ $container-margin: 20px;
 			}
 
 			.post-title-container {
-				max-width: 500px;
+				max-width: 600px;
 				overflow: auto;
 				text-overflow: ellipsis;
-
-				-webkit-box-orient: vertical;
-				display: -webkit-box;
-				-webkit-line-clamp: 3;
 			}
 
 			.fa-lg {
