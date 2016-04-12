@@ -43,5 +43,11 @@ class @LikeChannel
           $('.like-count[data-post-id="' + data.post_id + '"]').text(data.like_count)
         else if data.action == 'total_users'
           $('#total-users').text(data.value)
+        else if data.action == 'like'
+          if data.like
+            document.getElementById('like-sound').play()
+          else
+            document.getElementById('dislike-sound').play()
+
 
 
