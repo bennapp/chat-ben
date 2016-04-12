@@ -20,8 +20,10 @@ class @Posts
   showNewPost: ->
     $('.new-post-container').toggle true
     $('.new-post-button').toggle false
+    $('.btn.blink').hide()
     $('.new-post-title input').focus()
 
   hideNewPost: ->
     $('.new-post-container').toggle false
     $('.new-post-button').toggle true
+    $('.btn.blink').show()
