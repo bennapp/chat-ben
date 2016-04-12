@@ -1,7 +1,10 @@
 class LikeChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "like_channel"
-    stream_from "like_channel_#{current_user.id}" if current_user.present?
+    if current_user.present?
+      stream_from "like_channel"
+    else
+      stream_from "like_channel_#{current_user.id}"
+    end
 
     current_user.update_attribute(:active, true) if current_user.present?
     ActionCable.server.broadcast "like_channel", action: 'total_users', value: User.where(active: true).count
