@@ -12,11 +12,13 @@ class @LikeChannel
             $like.addClass('btn-primary')
             $dislike.addClass('btn-default')
             $dislike.removeClass('btn-danger')
+            document.getElementById('like-sound').play()
             @perform("like", post_id: $('.post-header')[0].id)
           else
-            @perform("unlike", post_id: $('.post-header')[0].id)
             $like.addClass('btn-default')
             $like.removeClass('btn-primary')
+            document.getElementById('dislike-sound').play()
+            @perform("unlike", post_id: $('.post-header')[0].id)
 
         $('#dislike').click =>
           $like = $('#like')
@@ -26,10 +28,12 @@ class @LikeChannel
             $dislike.addClass('btn-danger')
             $like.addClass('btn-default')
             $like.removeClass('btn-primary')
+            document.getElementById('dislike-sound').play()
             @perform("dislike", post_id: $('.post-header')[0].id)
           else
             $dislike.addClass('btn-default')
             $dislike.removeClass('btn-danger')
+            document.getElementById('like-sound').play()
             @perform("undislike", post_id: $('.post-header')[0].id)
 
       disconnected: ->
