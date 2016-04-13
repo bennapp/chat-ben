@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160410204647) do
+ActiveRecord::Schema.define(version: 20160413041319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 20160410204647) do
     t.string   "format_type"
     t.text     "text_content"
     t.boolean  "sticky"
+    t.string   "comment"
+    t.integer  "editor_id"
   end
 
   add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree

@@ -68,6 +68,8 @@
           </div>
         </div>
       </div>
+      <div class="wall-container"><textarea id="board" placeholder="Leave a comment!"><%= @room.post.comment %></textarea></div>
+      <div class="edit-by-conatiner">last edited by: <span class="edited-by"><%= @room.post.last_editor.try(:name) %></span></div>
     </div>
   </div>
 

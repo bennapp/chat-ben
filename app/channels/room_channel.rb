@@ -41,6 +41,6 @@ class RoomChannel < ApplicationCable::Channel
     like_count = post.like_count
     posted_by = post.user.name
 
-    ActionCable.server.broadcast "room_#{params[:room]}", action: 'next_post', id: post.id, title: post.title, link: post.link, format_link: post.format_link, format_type: post.format_type, text_content: post.text_content, like: like_exists, dislike: dislike_exists, posted_by: posted_by, like_count: like_count, full_url: post.full_url, link: post.link, first_post: data['first_post']
+    ActionCable.server.broadcast "room_#{params[:room]}", action: 'next_post', id: post.id, title: post.title, link: post.link, format_link: post.format_link, format_type: post.format_type, text_content: post.text_content, like: like_exists, dislike: dislike_exists, posted_by: posted_by, like_count: like_count, full_url: post.full_url, link: post.link, first_post: data['first_post'], comment: post.comment, edited_by: post.last_editor.try(:name)
   end
 end

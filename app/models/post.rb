@@ -12,6 +12,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :rooms
   has_many :likes
+  belongs_to :last_editor, class_name: 'User', foreign_key: 'editor_id'
 
   before_save :format_link_into_lightbox_html
 

@@ -3,21 +3,49 @@ class @RoomChannel
     roomToken = options.roomToken
     window.postHistory = [options.postId]
 
+    boardKeyPress = (e) ->
+      if e.which == 13 && $('#board').val() != '' && e.shiftKey == false
+        window.commentChannel.perform("comment", comment: $('#board').val(), post_id: $('.post-header')[0].id)
+        $('#board').blur()
+        return false;
+
+    window.commentChannel = App.cable.subscriptions.create "CommentChannel",
+      connected: ->
+        $('#board').keypress boardKeyPress
+
+      disconnected: ->
+        console.log('disconnected')
+
+      rejected: ->
+        console.log('rejected')
+
+      received: (data) ->
+        if data.action == 'new_comment'
+          console.log data.post_id.toString()
+          console.log window.postHistory[window.postHistory.length - 1].toString()
+          if data.post_id.toString() == window.postHistory[window.postHistory.length - 1].toString()
+            $('#board').val(data.comment)
+            $('.edited-by').text(data.edited_by)
+
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
         console.log('You are in a room. What are you doing looking at the console log?!')
+
         window.nextPost = (postId, options={}) =>
           @perform("next_post", post_id: postId, first_post: options.firstPost)
 
-        $('#next-post').click =>
+        nextPostClick = ->
           window.nextPost($('.post-header')[0].id)
 
-        $('#previous-post').click =>
+        previousePostClick = ->
           if postHistory.length == 1
             window.nextPost(window.postHistory[0], firstPost: true)
           else
             window.postHistory.pop()
             window.nextPost(window.postHistory[window.postHistory.length - 1], firstPost: true)
+
+        $('#next-post').click nextPostClick
+        $('#previous-post').click previousePostClick
 
       disconnected: ->
         console.log('disconnected')
@@ -92,3 +120,6 @@ class @RoomChannel
 
           if !data.link && !data.text_content
             $container.append("<div class=\"well\">This post has no embeded link or description</div>")
+
+          $('#board').val(data.comment || '')
+          $('.edited-by').text(data.edited_by || '')
