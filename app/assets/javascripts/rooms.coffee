@@ -1,4 +1,3 @@
-#= require simple_web_rtc
 #= require ./channels/room-channel
 
 class @RoomShow
@@ -7,6 +6,7 @@ class @RoomShow
     @room = options.room
     @participation = options.participationId
     @postId = options.postId
+    @signalServer = options.signalServer
 
     @_bindDom()
 
@@ -18,6 +18,7 @@ class @RoomShow
       detectSpeakingEvents: true
       autoAdjustMic: false
       nick: options.nick
+      url: @signalServer
 
     @setupWebRTC()
 

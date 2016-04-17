@@ -29,8 +29,6 @@ class @RoomChannel
 
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
-        console.log('You are in a room. What are you doing looking at the console log?!')
-
         window.nextPost = (postId, options={}) =>
           @perform("next_post", post_id: postId, first_post: options.firstPost)
 
@@ -48,10 +46,8 @@ class @RoomChannel
         $('#previous-post').click previousePostClick
 
       disconnected: ->
-        console.log('disconnected')
 
       rejected: ->
-        console.log('rejected')
 
       received: (data) ->
         action = data.action

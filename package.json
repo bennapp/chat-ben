@@ -19,6 +19,8 @@
   "dependencies": {
     "browserify": "^13.0.0",
     "browserify-incremental": "^3.1.1",
-    "recordrtc": "^5.3.4"
+    "coffeeify": "^2.0.1",
+    "recordrtc": "^5.3.4",
+    "simplewebrtc": "^2.1.1"
   }
 }

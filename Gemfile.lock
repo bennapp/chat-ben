@@ -219,7 +219,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails (~> 6.3)
   bootstrap-sass (~> 3.3)
-  browserify-rails
+  browserify-rails (~> 3.0)
   coffee-rails (~> 4.1)
   devise!
   font-awesome-sass (~> 4.5)

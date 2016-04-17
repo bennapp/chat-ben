@@ -144,7 +144,14 @@
 <script>
   $(document).ready(function(){
     var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>'});
-    var roomShow = new RoomShow({ room: '<%= @room.token %>', participationId: '<%= @participation_id %>', nick: '<%= current_user.name %>', postId: '<%= @room.post.id %>' });
+    var roomShow = new RoomShow({
+      room: '<%= @room.token %>',
+      participationId: '<%= @participation_id %>',
+      nick: '<%= current_user.name %>',
+      postId: '<%= @room.post.id %>',
+      signalServer: '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>',
+    });
+
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
 
     $('.flash.notice').delay(3500).fadeOut(1400);
