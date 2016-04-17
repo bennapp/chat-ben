@@ -20,6 +20,8 @@ gem 'puma', '~> 3.1'
 gem 'bootstrap-sass', '~> 3.3'
 gem 'font-awesome-sass', '~> 4.5'
 
+gem 'browserify-rails', '~> 3.0'
+
 group :production do
   gem 'autoprefixer-rails', '~> 6.3'
 end
