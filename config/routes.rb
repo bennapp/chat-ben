@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "/500" => "errors#internal_server_error"
 
   resources :feedbacks, only: [:create, :new], path: 'feeback'
+  resources :reactions, only: [:create]
 
   get '/new_chat', to: 'posts#new_chat'
   resources :posts

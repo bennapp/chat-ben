@@ -22,6 +22,9 @@ gem 'font-awesome-sass', '~> 4.5'
 
 gem 'browserify-rails', '~> 3.0'
 
+gem 'paperclip', '~> 4.3'
+gem 'paperclip-av-transcoder', '~> 0.6'
+
 group :production do
   gem 'autoprefixer-rails', '~> 6.3'
 end

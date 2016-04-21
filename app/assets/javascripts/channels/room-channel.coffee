@@ -21,8 +21,6 @@ class @RoomChannel
 
       received: (data) ->
         if data.action == 'new_comment'
-          console.log data.post_id.toString()
-          console.log window.postHistory[window.postHistory.length - 1].toString()
           if data.post_id.toString() == window.postHistory[window.postHistory.length - 1].toString()
             $('#board').val(data.comment)
             $('.edited-by').text(data.edited_by)
@@ -114,8 +112,11 @@ class @RoomChannel
             else if data.format_type == 'youtube'
               $wrapper.append("<iframe id=\"ytplayer\" type=\"text/html\" width=\"640\" height=\"390\" src=\"//www.youtube.com/embed/#{data.format_link}?autoplay=1&origin=https://www.chatben.co\" frameborder=\"0\"/>")
 
-          if !data.link && !data.text_content
-            $container.append("<div class=\"well\">This post has no embeded link or description</div>")
-
           $('#board').val(data.comment || '')
           $('.edited-by').text(data.edited_by || '')
+
+          $('.reactions-container').empty()
+          if data.reaction_urls.length
+            for url in data.reaction_urls
+              $('.reactions-container').append("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{url}\" controls=true></video></div>")
+

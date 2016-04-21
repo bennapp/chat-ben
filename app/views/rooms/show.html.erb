@@ -37,19 +37,9 @@
             </div>
           </div>
         <% end %>
-
-        <% if !@room.post.link.present? && !@room.post.text_content.present? %>
-          <div class="well">This post has no link or description</div>
-        <% end %>
       </div>
 
       <div class='buttons-info-container'>
-        <h5>Dry Erase Board - Leave a message for everyone to see! Press Enter to save.</h5>
-        <div class="wall-container">
-          <textarea id="board" placeholder="Leave a message for everyone to see!"><%= @room.post.comment %></textarea>
-          <div class="edit-by-conatiner">last edited by: <span class="edited-by"><%= @room.post.last_editor.try(:name) %></span></div>
-        </div>
-
         <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
 
         <div class="buttons">
@@ -77,6 +67,29 @@
     </div>
   </div>
 
+  <div class="reaction-panel">
+    <h4>Reactions!</h4>
+
+    <div class="react-results-container display-none">
+      <button id="post-reaction" class="btn btn-success">Post Reaction</button>
+      <button id="toss-reaction" class="btn btn-danger">Toss Reaction</button>
+    </div>
+
+    <div class="reactions-and-react-button">
+      <div class="react-button-container">
+        <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Make a three second reaction!" >React!</button>
+      </div>
+
+      <div class="reactions-container">
+        <% @room.post.reactions.each do |reaction| %>
+          <div class="video-container">
+            <%= video_tag(reaction.video.url, controls: true, class: 'reaction-video') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
   <div class="remote-panel">
     <div class="alert-container">
       <div class="alert alert-info status" role="alert"></div>
@@ -94,7 +107,7 @@
 
         <div class="local-video-container">
           <div class="videoContainer">
-            <video id="localVideo" oncontextmenu="return false;"></video>
+            <video id="localVideo"></video>
             <div id="localVolume" class="volume_bar"></div>
           </div>
         </div>

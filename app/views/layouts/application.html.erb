@@ -44,7 +44,7 @@
   <body>
     <div class="page-header">
         <div class="page-title"><%= link_to image_tag('chatbenlogo.png'), "javascript: window.location = '#{root_url}';" %>
-          <small class="lead"><%= @subtitle || 'Chat Ben? More like Cat Ben amirite?!' %></small>
+          <small class="lead"><%= @subtitle || 'It\'s gonna be OWLright!!' %></small>
         </div>
       <% if current_user %>
         <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
