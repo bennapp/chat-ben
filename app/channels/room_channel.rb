@@ -76,4 +76,15 @@ class RoomChannel < ApplicationCable::Channel
 
     ActionCable.server.broadcast("room_#{params[:room]}", options)
   end
+
+  def add_reaction(data)
+    post = Post.find(data['post_id'])
+    reaction_url = post.reactions.first.video.url
+    options = {
+      action: 'add_reaction',
+      reaction_url: reaction_url
+    }
+
+    ActionCable.server.broadcast("room_#{params[:room]}", options)
+  end
 end
