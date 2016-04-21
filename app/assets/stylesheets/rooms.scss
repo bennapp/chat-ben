@@ -90,6 +90,7 @@ video {
     height: auto; //override remove the page div 79 vh thing?
 
     .post-header {
+      margin-top: 4px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -106,7 +107,7 @@ video {
       margin-top: 10px;
       margin-bottom: 12px;
       overflow-y: scroll;
-      padding: 10px 10px 4px 10px;
+      padding: 5px 10px 4px 10px;
     }
 
     .read-more {
@@ -125,6 +126,7 @@ video {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      height: 79vh;
       width: 100%;
     }
 
@@ -167,6 +169,10 @@ video {
 
   .reaction-panel {
     width: 33%;
+
+    h4 {
+      margin-top: 4px;
+    }
 
     .reactions-container {
       display: flex;
