@@ -102,18 +102,20 @@ class @RoomChannel
               $('.read-more').featherlight('<div class=\"well\"></div>', options);
 
           if data.format_link
-            $container.append("<div class=\"embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
+            $container.append("<div class=\"embed-responsive embed-responsive-4by3 embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
             $wrapper = $('.embeded-content-wrapper')
             if data.format_type == 'imgur'
               $wrapper.append("<blockquote class=\"imgur-embed-pub\" lang=\"en\" data-id=#{data.format_link}><a href=\"//imgur.com/#{data.format_link}\"></a></blockquote>")
               $wrapper.append("<script async src=\"//s.imgur.com/min/embed.js\" charset=\"utf-8\"></script>")
             else if data.format_type == 'twitter'
+              $('.embeded-content-container').removeClass('embed-responsive-4by3')
+              $('.embeded-content-container').removeClass('embed-responsive')
               $wrapper.append("<blockquote class=\"twitter-tweet\" lang=\"en\"><a href=#{data.format_link}></a></blockquote>")
               $wrapper.append("<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>")
             else if data.format_type == 'vimeo'
               $wrapper.append("<iframe src=\"//player.vimeo.com/video#{data.format_link}?portrait=0&color=333\" width=\"640\" height=\"390\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>")
             else if data.format_type == 'youtube'
-              $wrapper.append("<iframe id=\"ytplayer\" type=\"text/html\" width=\"640\" height=\"390\" src=\"//www.youtube.com/embed/#{data.format_link}?autoplay=1&origin=https://www.chatben.co\" frameborder=\"0\"/>")
+              $wrapper.append("<iframe id=\"ytplayer\" type=\"text/html\" src=\"//www.youtube.com/embed/#{data.format_link}?autoplay=1&origin=https://www.chatben.co\"/>")
 
           $('#board').val(data.comment || '')
           $('.edited-by').text(data.edited_by || '')
