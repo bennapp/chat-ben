@@ -19,6 +19,12 @@ class RoomChannel < ApplicationCable::Channel
   def next_post(data)
     room = Room.find_by_token(params[:room])
 
+    if data['post_history'].present?
+      post_history = data['post_history'].map(&:to_i)
+    else
+      post_history = []
+    end
+
     if data['first_post']
       post = Post.find(data['post_id'].to_i)
     else
@@ -27,8 +33,13 @@ class RoomChannel < ApplicationCable::Channel
       posts = posts.reject { |post| post.like_count <= -3 }
 
       current_post_id = data['post_id'].to_i
-      current_post_index = posts.find_index { |post| post.id == current_post_id }
-      post = posts[current_post_index + 1]
+
+      if rand(1) == 1
+        post = posts.select { |post| !post_history.include?(post.id) && post.id != current_post_id }.first
+      else
+        post = posts.select { |post| !post_history.include?(post.id) && post.id != current_post_id }.sample()
+      end
+
       post = posts[0] if post.nil?
     end
 

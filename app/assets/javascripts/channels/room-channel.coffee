@@ -2,6 +2,7 @@ class @RoomChannel
   constructor: (options) ->
     roomToken = options.roomToken
     window.postHistory = [options.postId]
+    window.fullHistory = [options.postId]
 
     boardKeyPress = (e) ->
       if e.which == 13 && $('#board').val() != '' && e.shiftKey == false
@@ -28,7 +29,8 @@ class @RoomChannel
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
         window.nextPost = (postId, options={}) =>
-          @perform("next_post", post_id: postId, first_post: options.firstPost)
+          console.log(fullHistory)
+          @perform("next_post", post_id: postId, first_post: options.firstPost, post_history: window.fullHistory)
 
         nextPostClick = ->
           window.nextPost($('.post-header')[0].id)
@@ -51,6 +53,7 @@ class @RoomChannel
         action = data.action
         if action == 'next_post'
           postHistory.push data.id unless data.first_post
+          fullHistory.push data.id unless data.first_post
 
           # If somone refreshes the page they can next someone elses content
           # return if window.RoomShow.status == 'ending'
