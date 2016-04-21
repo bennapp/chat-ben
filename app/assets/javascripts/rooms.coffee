@@ -54,8 +54,7 @@ class @RoomShow
         processData: false,
         contentType: false,
         success: (data) =>
-          videoURL = recordRTC.toURL()
-          $('.reactions-container').prepend("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{videoURL}\" controls=true></video></div>")
+          window.addReaction($('.post-header')[0].id)
 
     $('#toss-reaction').click ->
       $('.react-results-container').addClass('display-none')

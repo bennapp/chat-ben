@@ -29,8 +29,10 @@ class @RoomChannel
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
         window.nextPost = (postId, options={}) =>
-          console.log(fullHistory)
           @perform("next_post", post_id: postId, first_post: options.firstPost, post_history: window.fullHistory)
+
+        window.addReaction = (postId, options={}) =>
+          @perform("add_reaction", post_id: postId)
 
         nextPostClick = ->
           window.nextPost($('.post-header')[0].id)
@@ -51,7 +53,10 @@ class @RoomChannel
 
       received: (data) ->
         action = data.action
-        if action == 'next_post'
+        if action == 'add_reaction'
+          videoURL = data.reaction_url
+          $('.reactions-container').prepend("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{videoURL}\" controls=true></video></div>")
+        else if action == 'next_post'
           postHistory.push data.id unless data.first_post
           fullHistory.push data.id unless data.first_post
 

@@ -1,4 +1,5 @@
 class Reaction < ApplicationRecord
+  default_scope { order("created_at DESC") }
   has_attached_file :video
   validates_attachment :video, content_type: { content_type: ["video/webm"] }
   validates_attachment_size :video, :in => 0.megabytes..1.megabytes
