@@ -1,4 +1,3 @@
-#= require simple_web_rtc
 #= require ./channels/room-channel
 
 class @RoomShow
@@ -7,6 +6,7 @@ class @RoomShow
     @room = options.room
     @participation = options.participationId
     @postId = options.postId
+    @signalServer = options.signalServer
 
     @_bindDom()
 
@@ -18,11 +18,54 @@ class @RoomShow
       detectSpeakingEvents: true
       autoAdjustMic: false
       nick: options.nick
+      url: @signalServer
 
     @setupWebRTC()
 
+  setupRecordRTC: ->
+    options =
+      type: 'video'
+      frameInterval: 20
+
+    window.recordRTC = RecordRTC(@webrtc.webrtc.localStreams[0], options)
+
+    $('#react-button').click ->
+      $('.reactions-and-react-button').addClass('display-none')
+      $('.reaction-panel').append('<h1>You Are Reacting! Look at the camera!</h1>')
+
+      recordRTC.startRecording()
+
+      setTimeout(->
+        recordRTC.stopRecording (videoURL) ->
+          $('.reaction-panel h1').remove()
+          $('.react-results-container').removeClass('display-none')
+          $('.react-results-container').prepend("<video style=\"width:90%;\" autoplay=\"true\" src=\"#{videoURL}\"></video>")
+      , 3000)
+
+    $('#post-reaction').click =>
+      $('.react-results-container').addClass('display-none')
+      $('.reactions-and-react-button').removeClass('display-none')
+      fd = new FormData();
+      fd.append('post_id', $('.post-header')[0].id);
+      fd.append('video', recordRTC.getBlob());
+      $.post
+        url: "/reactions",
+        data: fd,
+        processData: false,
+        contentType: false,
+        success: (data) =>
+          videoURL = recordRTC.toURL()
+          $('.reactions-container').prepend("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{videoURL}\" controls=true></video></div>")
+
+    $('#toss-reaction').click ->
+      $('.react-results-container').addClass('display-none')
+      $('.reactions-and-react-button').removeClass('display-none')
+      $('.react-results-container video').remove()
+
   setupWebRTC: ->
     @webrtc.on 'readyToCall', =>
+      @setupRecordRTC()
+      $('#react-button').show()
       @webrtc.joinRoom @room if @room
 
     @webrtc.on 'channelMessage', (peer, label, data) =>

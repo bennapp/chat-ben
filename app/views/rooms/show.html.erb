@@ -32,14 +32,15 @@
         <% end %>
 
         <% if @room.post.format_link.present? %>
-          <div class="embeded-content-container">
+          <% if @room.post.format_type == 'twitter' %>
+            <div class="embeded-content-container">
+          <% else %>
+            <div class="embeded-content-container embed-responsive embed-responsive-4by3">
+          <% end %>
+
             <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
             </div>
           </div>
-        <% end %>
-
-        <% if !@room.post.link.present? && !@room.post.text_content.present? %>
-          <div class="well">This post has no link or description</div>
         <% end %>
       </div>
 
@@ -77,6 +78,29 @@
     </div>
   </div>
 
+  <div class="reaction-panel">
+    <h4>Reactions!</h4>
+
+    <div class="react-results-container display-none">
+      <button id="post-reaction" class="btn btn-success">Post Reaction</button>
+      <button id="toss-reaction" class="btn btn-danger">Toss Reaction</button>
+    </div>
+
+    <div class="reactions-and-react-button">
+      <div class="react-button-container">
+        <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Make a three second reaction!" >React!</button>
+      </div>
+
+      <div class="reactions-container">
+        <% @room.post.reactions.each do |reaction| %>
+          <div class="video-container">
+            <%= video_tag(reaction.video.url, controls: true, class: 'reaction-video') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
   <div class="remote-panel">
     <div class="alert-container">
       <div class="alert alert-info status" role="alert"></div>
@@ -94,7 +118,7 @@
 
         <div class="local-video-container">
           <div class="videoContainer">
-            <video id="localVideo" oncontextmenu="return false;"></video>
+            <video id="localVideo"></video>
             <div id="localVolume" class="volume_bar"></div>
           </div>
         </div>
@@ -144,7 +168,14 @@
 <script>
   $(document).ready(function(){
     var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>'});
-    var roomShow = new RoomShow({ room: '<%= @room.token %>', participationId: '<%= @participation_id %>', nick: '<%= current_user.name %>', postId: '<%= @room.post.id %>' });
+    var roomShow = new RoomShow({
+      room: '<%= @room.token %>',
+      participationId: '<%= @participation_id %>',
+      nick: '<%= current_user.name %>',
+      postId: '<%= @room.post.id %>',
+      signalServer: '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>',
+    });
+
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
 
     $('.flash.notice').delay(3500).fadeOut(1400);

@@ -2,13 +2,10 @@ class @PostChannel
   constructor: (options) ->
     App.cable.subscriptions.create "PostChannel",
       connected: ->
-        console.log('This is Chat Ben LA-Dee-LALALAaaaa. Joe get out of the console!!!')
 
       disconnected: ->
-        console.log('disconnected')
 
       rejected: ->
-        console.log('rejected')
 
       received: (data) ->
         action = data.action

@@ -86,9 +86,11 @@ video {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 50%;
+    width: 33%;
+    height: auto; //override remove the page div 79 vh thing?
 
     .post-header {
+      margin-top: 4px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -103,9 +105,9 @@ video {
 
     .well {
       margin-top: 10px;
-      padding-bottom: 40px;
       margin-bottom: 12px;
       overflow-y: scroll;
+      padding: 5px 10px 4px 10px;
     }
 
     .read-more {
@@ -165,6 +167,29 @@ video {
     }
   }
 
+  .reaction-panel {
+    width: 33%;
+
+    h4 {
+      margin-top: 4px;
+    }
+
+    .reactions-container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+      align-items: center;
+
+      .video-container {
+        width: 90%;
+
+        .reaction-video {
+          width: 100%;
+        }
+      }
+    }
+  }
+
   .remote-panel {
     display: flex;
     flex-direction: column;
@@ -172,7 +197,8 @@ video {
     border-left: 1px solid #eeeeee;
     align-items: center;
     justify-content: space-between;
-    width: 50%;
+    width: 33%;
+    height: 79vh;
 
     .no-user-local{
       position: relative;
@@ -203,7 +229,7 @@ video {
     }
 
     .no-user .glyphicon {
-      font-size: 34vw;
+      font-size: 24vw;
     }
 
     .remote-container {

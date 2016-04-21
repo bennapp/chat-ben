@@ -2,8 +2,6 @@ class @LikeChannel
   constructor: (options) ->
     App.cable.subscriptions.create "LikeChannel",
       connected: ->
-        console.log('connected to some likes! Websockets are happening?!')
-
         onClickDislike = =>
           $like = $('#like')
           $dislike = $('#dislike')
@@ -40,10 +38,8 @@ class @LikeChannel
         $('#dislike').unbind('click').click onClickDislike
 
       disconnected: ->
-        console.log('disconnected')
 
       rejected: ->
-        console.log('rejected')
 
       received: (data) ->
         if data.action == 'like_count'

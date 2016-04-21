@@ -17,4 +17,5 @@
 //= require featherlight
 //= require_tree .
 
-const SIGNAL_SERVER = '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>'
+window.RecordRTC = require('recordrtc');
+window.SimpleWebRTC = require('simplewebrtc');

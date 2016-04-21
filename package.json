@@ -1,0 +1,26 @@
+{
+  "name": "chat-ben",
+  "version": "1.0.0",
+  "description": "chat ben",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bennapp/convo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bennapp/convo/issues"
+  },
+  "homepage": "https://github.com/bennapp/convo#readme",
+  "dependencies": {
+    "browserify": "^13.0.0",
+    "browserify-incremental": "^3.1.1",
+    "coffeeify": "^2.0.1",
+    "recordrtc": "^5.3.4",
+    "simplewebrtc": "^2.1.1"
+  }
+}

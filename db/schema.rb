@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413041319) do
+ActiveRecord::Schema.define(version: 20160418030055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,20 @@ ActiveRecord::Schema.define(version: 20160413041319) do
   add_index "ratings", ["room_id", "rater_id", "ratee_id"], name: "index_ratings_on_room_id_and_rater_id_and_ratee_id", unique: true, using: :btree
   add_index "ratings", ["room_id"], name: "index_ratings_on_room_id", using: :btree
 
+  create_table "reactions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "video_file_name"
+    t.string   "video_content_type"
+    t.integer  "video_file_size"
+    t.datetime "video_updated_at"
+  end
+
+  add_index "reactions", ["post_id"], name: "index_reactions_on_post_id", using: :btree
+  add_index "reactions", ["user_id"], name: "index_reactions_on_user_id", using: :btree
+
   create_table "rooms", force: :cascade do |t|
     t.integer  "post_id"
     t.string   "token"
@@ -120,4 +134,6 @@ ActiveRecord::Schema.define(version: 20160413041319) do
   add_foreign_key "feedbacks", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "reactions", "posts"
+  add_foreign_key "reactions", "users"
 end

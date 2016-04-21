@@ -2,6 +2,7 @@ class @RoomChannel
   constructor: (options) ->
     roomToken = options.roomToken
     window.postHistory = [options.postId]
+    window.fullHistory = [options.postId]
 
     boardKeyPress = (e) ->
       if e.which == 13 && $('#board').val() != '' && e.shiftKey == false
@@ -21,18 +22,15 @@ class @RoomChannel
 
       received: (data) ->
         if data.action == 'new_comment'
-          console.log data.post_id.toString()
-          console.log window.postHistory[window.postHistory.length - 1].toString()
           if data.post_id.toString() == window.postHistory[window.postHistory.length - 1].toString()
             $('#board').val(data.comment)
             $('.edited-by').text(data.edited_by)
 
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
-        console.log('You are in a room. What are you doing looking at the console log?!')
-
         window.nextPost = (postId, options={}) =>
-          @perform("next_post", post_id: postId, first_post: options.firstPost)
+          console.log(fullHistory)
+          @perform("next_post", post_id: postId, first_post: options.firstPost, post_history: window.fullHistory)
 
         nextPostClick = ->
           window.nextPost($('.post-header')[0].id)
@@ -48,15 +46,14 @@ class @RoomChannel
         $('#previous-post').click previousePostClick
 
       disconnected: ->
-        console.log('disconnected')
 
       rejected: ->
-        console.log('rejected')
 
       received: (data) ->
         action = data.action
         if action == 'next_post'
           postHistory.push data.id unless data.first_post
+          fullHistory.push data.id unless data.first_post
 
           # If somone refreshes the page they can next someone elses content
           # return if window.RoomShow.status == 'ending'
@@ -105,21 +102,26 @@ class @RoomChannel
               $('.read-more').featherlight('<div class=\"well\"></div>', options);
 
           if data.format_link
-            $container.append("<div class=\"embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
+            $container.append("<div class=\"embed-responsive embed-responsive-4by3 embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
             $wrapper = $('.embeded-content-wrapper')
             if data.format_type == 'imgur'
               $wrapper.append("<blockquote class=\"imgur-embed-pub\" lang=\"en\" data-id=#{data.format_link}><a href=\"//imgur.com/#{data.format_link}\"></a></blockquote>")
               $wrapper.append("<script async src=\"//s.imgur.com/min/embed.js\" charset=\"utf-8\"></script>")
             else if data.format_type == 'twitter'
+              $('.embeded-content-container').removeClass('embed-responsive-4by3')
+              $('.embeded-content-container').removeClass('embed-responsive')
               $wrapper.append("<blockquote class=\"twitter-tweet\" lang=\"en\"><a href=#{data.format_link}></a></blockquote>")
               $wrapper.append("<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>")
             else if data.format_type == 'vimeo'
               $wrapper.append("<iframe src=\"//player.vimeo.com/video#{data.format_link}?portrait=0&color=333\" width=\"640\" height=\"390\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>")
             else if data.format_type == 'youtube'
-              $wrapper.append("<iframe id=\"ytplayer\" type=\"text/html\" width=\"640\" height=\"390\" src=\"//www.youtube.com/embed/#{data.format_link}?autoplay=1&origin=https://www.chatben.co\" frameborder=\"0\"/>")
-
-          if !data.link && !data.text_content
-            $container.append("<div class=\"well\">This post has no embeded link or description</div>")
+              $wrapper.append("<iframe id=\"ytplayer\" type=\"text/html\" src=\"//www.youtube.com/embed/#{data.format_link}?autoplay=1&origin=https://www.chatben.co\"/>")
 
           $('#board').val(data.comment || '')
           $('.edited-by').text(data.edited_by || '')
+
+          $('.reactions-container').empty()
+          if data.reaction_urls.length
+            for url in data.reaction_urls
+              $('.reactions-container').append("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{url}\" controls=true></video></div>")
+
