@@ -43,7 +43,7 @@
   </script>
   <body>
     <div class="page-header">
-        <div class="page-title"><%= link_to image_tag('chatbenlogo.png'), "javascript: window.location = '#{root_url}';" %>
+        <div class="page-title"><%= link_to image_tag('chatbenlogo.png'), root_url %>
           <small class="lead"><%= @subtitle || 'It\'s gonna be OWLright!!' %></small>
         </div>
       <% if current_user %>
