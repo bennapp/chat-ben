@@ -96,8 +96,7 @@ class Post < ActiveRecord::Base
         self.format_type = 'imgur'
         self.format_link = imgur_token
       when %r{youtube.com/watch?}
-        youtube_token = link.scan(/v=\w{5,}/).last
-        youtube_token = youtube_token.split('v=')[1]
+        youtube_token = link.split('v=')[1]
         return unless youtube_token
 
         self.format_type = 'youtube'
