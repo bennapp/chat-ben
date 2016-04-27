@@ -1,6 +1,46 @@
 <%= audio_tag('notification.wav', id: 'notification-sound') %>
 <div class="room-page page">
   <div class="left-panel">
+    <div class="new-post-button-and-container">
+      <div class="btn-container">
+        <%= link_to 'javascript:;', class: 'btn btn-primary new-post-button' do %>
+          <span class="new-post-key">N</span>ew Post
+        <% end %>
+      </div>
+
+      <div class="new-post-container" style="display: none;">
+        <%= form_for(@post, remote: true, html: {'data-type': 'json'}) do |f| %>
+          <div class="fields">
+            <div class="field new-post-field new-post-title">
+              <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
+            </div>
+            <div class="field new-post-field">
+              <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
+            </div>
+          </div>
+          <% if current_user && current_user.is_admin? %>
+            <div class="field new-post-field">
+              <%= f.label :sticky %>
+              <%= f.check_box :sticky %>
+            </div>
+          <% end %>
+          <div class="new-post-textarea">
+            <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
+          </div>
+          <div class="fields">
+            <div class="btn-container">
+              <%= f.submit class: 'btn btn-primary', tabindex: 4 %>
+            </div>
+            <div class="btn-container clear-button">
+              <button type="button" class="btn btn-default" aria-label="Left Align", tabindex="4">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
     <div class="post-content-container">
       <div class="content-container">
         <h3 class="post-header" id="<%= @room.post.id %>"><%= @room.post.title %></h3>
@@ -79,7 +119,9 @@
   </div>
 
   <div class="reaction-panel">
-    <h4>Reactions!</h4>
+    <div class="react-button-container">
+      <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Make a three second reaction!">React!</button>
+    </div>
 
     <div class="react-results-container display-none">
       <button id="post-reaction" class="btn btn-success">Post Reaction</button>
@@ -87,9 +129,7 @@
     </div>
 
     <div class="reactions-and-react-button">
-      <div class="react-button-container">
-        <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Make a three second reaction!" >React!</button>
-      </div>
+      <h4>Reactions!</h4>
 
       <div class="reactions-container">
         <% @room.post.reactions.each do |reaction| %>
@@ -175,6 +215,8 @@
       postId: '<%= @room.post.id %>',
       signalServer: '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>',
     });
+
+    var newPost = new NewPost();
 
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
 

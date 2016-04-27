@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @post = Post.new
     @hide_footer = true
     redirect_to root_url and return unless @room
     participation = Participation.find_or_create_by(user: current_user, room: @room)

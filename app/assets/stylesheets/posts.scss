@@ -61,22 +61,9 @@ $container-margin: 20px;
 			display: block;
 		}
 
-		.new-post-button {
-			@include gradient-horizontal(#337ab7, #5bc0de, 0%, 100%);
-			border: none;
-			&:hover {
-				background-color: #286090;
-				background-image: none;
-			}
-		}
-
 		.new-post-key {
 			text-decoration: underline;
 		}
-	}
-
-	.clear-button {
-		margin-left: 8px;
 	}
 
 	.link-panel {
@@ -197,7 +184,6 @@ $container-margin: 20px;
 
 	.fields {
 		display: flex;
-		align-items: center;
 
 		.field {
 			margin-right: 12px;
@@ -224,14 +210,6 @@ $container-margin: 20px;
 
 	.btn {
 		display: inline-block;
-	}
-
-	.new-post-textarea textarea{
-		width: 412px;
-		height: 88px;
-		border-radius: 4px;
-		border-color: #ccc;
-		margin-bottom: 8px;
 	}
 }
 

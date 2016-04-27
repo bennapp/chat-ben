@@ -31,6 +31,7 @@ class @RoomShow
 
     $('#react-button').click ->
       $('.reactions-and-react-button').addClass('display-none')
+      $('#react-button').hide()
       $('.reaction-panel').append('<h1>You Are Reacting! Look at the camera!</h1>')
 
       recordRTC.startRecording()
@@ -45,6 +46,7 @@ class @RoomShow
     $('#post-reaction').click =>
       $('.react-results-container').addClass('display-none')
       $('.reactions-and-react-button').removeClass('display-none')
+      $('#react-button').addClass('display-none')
       fd = new FormData();
       fd.append('post_id', $('.post-header')[0].id);
       fd.append('video', recordRTC.getBlob());
@@ -57,8 +59,10 @@ class @RoomShow
           window.addReaction($('.post-header')[0].id)
 
     $('#toss-reaction').click ->
+      $('#react-button').removeClass('display-none')
       $('.react-results-container').addClass('display-none')
       $('.reactions-and-react-button').removeClass('display-none')
+      # destroy record rtc?
       $('.react-results-container video').remove()
 
   setupWebRTC: ->
@@ -159,6 +163,8 @@ class @RoomShow
 
     @_controlButtons()
 
+    @_newPostButton()
+
   _setStatus: (status) ->
     @status = status
     status = switch status
@@ -177,6 +183,17 @@ class @RoomShow
   _controlButtons: ->
     $('#mute-microphone-button').on 'click', @_toggleMic
     $('#mute-volume-button').on 'click', @_toggleVolume
+
+  _newPostButton: ->
+    $ratingForm = $("#new_post")
+    $ratingForm.on "ajax:success", (e, data, status, xhr) ->
+      window.nextPost(data.id, firstPost: true)
+      newPost = new NewPost
+      newPost.hideNewPost()
+
+    $ratingForm.on "ajax:error", (e, xhr, status, error) ->
+      newPost = new NewPost
+      newPost.hideNewPost()
 
   _toggleMic: =>
     $mic = $('#mute-microphone-button')

@@ -59,8 +59,10 @@ class PostsController < ApplicationController
       if @post.save
         room = @post.rooms.create
         format.html { redirect_to room_path(room), notice: 'Post was successfully created.' }
+        format.json { render json: @post }
       else
         format.html { redirect_to root_path, alert: @post.errors.full_messages.to_sentence }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
