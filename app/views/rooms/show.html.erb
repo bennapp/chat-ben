@@ -120,12 +120,17 @@
 
   <div class="reaction-panel">
     <div class="react-button-container">
-      <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Make a three second reaction!">React!</button>
+      <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Click to make a three second reaction or hold to make a longer one!">Press and hold to react!</button>
+    </div>
+    <div class="reaction-preview-container">
+      <video id='reaction-preview' class='display-none'></video>
     </div>
 
     <div class="react-results-container display-none">
-      <button id="post-reaction" class="btn btn-success">Post Reaction</button>
-      <button id="toss-reaction" class="btn btn-danger">Toss Reaction</button>
+      <div class='reaction-buttons-container'>
+        <button id="post-reaction" class="btn btn-success">Post Reaction</button>
+        <button id="toss-reaction" class="btn btn-danger">Toss Reaction</button>
+      </div>
     </div>
 
     <div class="reactions-and-react-button">

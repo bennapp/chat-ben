@@ -29,24 +29,23 @@ class @RoomShow
 
     window.recordRTC = RecordRTC(@webrtc.webrtc.localStreams[0], options)
 
-    $('#react-button').click ->
-      $('.reactions-and-react-button').addClass('display-none')
-      $('#react-button').hide()
-      $('.reaction-panel').append('<h1>You Are Reacting! Look at the camera!</h1>')
+    $('#react-button').mousedown =>
+      @onReactMousedown()
 
-      recordRTC.startRecording()
-
-      setTimeout(->
+    $('#react-button').mouseup =>
+      @mouseup = true
+      $('#react-button').addClass('display-none')
+      if @isHold && !@isTimeOut
         recordRTC.stopRecording (videoURL) ->
-          $('.reaction-panel h1').remove()
+          $('.reaction-panel .glow-container').remove()
           $('.react-results-container').removeClass('display-none')
           $('.react-results-container').prepend("<video style=\"width:90%;\" autoplay=\"true\" src=\"#{videoURL}\"></video>")
-      , 3000)
+          $('#reaction-preview').addClass('display-none')
 
     $('#post-reaction').click =>
       $('.react-results-container').addClass('display-none')
       $('.reactions-and-react-button').removeClass('display-none')
-      $('#react-button').addClass('display-none')
+      $('#react-button').removeClass('display-none')
       fd = new FormData();
       fd.append('post_id', $('.post-header')[0].id);
       fd.append('video', recordRTC.getBlob());
@@ -62,8 +61,45 @@ class @RoomShow
       $('#react-button').removeClass('display-none')
       $('.react-results-container').addClass('display-none')
       $('.reactions-and-react-button').removeClass('display-none')
-      # destroy record rtc?
+      recordRTC.clearRecordedData()
       $('.react-results-container video').remove()
+
+  onReactMousedown: ->
+    @mouseup = false
+    @isHold = false
+    @isTimeOut = false
+
+    $('#reaction-preview').removeClass('display-none')
+    new SimpleWebRTC
+      localVideoEl: 'reaction-preview'
+      autoRequestMedia: true
+
+    $('.reactions-and-react-button').addClass('display-none')
+    $('.reaction-panel').append('<div class="glow-container"><span class="red-glow"></span><h1> You Are Reacting!</h1></div>')
+    recordRTC.startRecording()
+
+    setTimeout(=>
+      @isHold = !@mouseup
+    , 2000)
+
+    setTimeout(=>
+      @isTimeOut = !@mouseup
+      if @isTimeOut
+        recordRTC.stopRecording (videoURL) ->
+          $('.reaction-panel .glow-container').remove()
+          $('.react-results-container').removeClass('display-none')
+          $('.react-results-container').prepend("<video style=\"width:90%;\" autoplay=\"true\" src=\"#{videoURL}\"></video>")
+          $('#reaction-preview').addClass('display-none')
+    , 10000)
+
+    setTimeout(=>
+      if !@isHold
+        recordRTC.stopRecording (videoURL) ->
+          $('.reaction-panel .glow-container').remove()
+          $('.react-results-container').removeClass('display-none')
+          $('.react-results-container').prepend("<video style=\"width:90%;\" autoplay=\"true\" src=\"#{videoURL}\"></video>")
+          $('#reaction-preview').addClass('display-none')
+    , 3000)
 
   setupWebRTC: ->
     @webrtc.on 'readyToCall', =>
