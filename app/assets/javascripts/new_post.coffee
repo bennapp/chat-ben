@@ -8,11 +8,12 @@ class @NewPost
 
     $(document).keyup (e) =>
       if e.keyCode == 78 # n
-        if $('.new-post-button').is(':visible') && !$('input').is(':focus')
+        if $('.new-post-button').is(':visible') && !$('input').is(':focus') && !$('textarea').is(':focus')
           @showNewPost()
       if e.keyCode == 27 # esc
-        if $('.clear-button').is(':visible')
-          @hideNewPost()
+        if !$('textarea').is(':focus')
+          if $('.clear-button').is(':visible')
+            @hideNewPost()
 
   showNewPost: ->
     $('.new-post-container').toggle true
