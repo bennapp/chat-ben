@@ -17,6 +17,6 @@ class RatingsController < ApplicationController
   end
 
   def sign_out_banned_user
-    sign_out current_user if current_user && current_user.banned?
+    # sign_out current_user if current_user && current_user.banned?
   end
 end

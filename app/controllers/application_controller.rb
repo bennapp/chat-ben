@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   private
 
   def redirect_if_banned
-    redirect_to banned_url if current_user && current_user.banned?
+    # redirect_to banned_url if current_user && current_user.banned?
   end
 end
