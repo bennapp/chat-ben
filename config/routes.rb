@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/new_chat', to: 'posts#new_chat'
   resources :posts
 
+  resources :reactions, only: [:index]
+
   resources :participations, only: :destroy
   resources :rooms, only: [:show, :update], path: 'chat', param: :token
   resources :ratings, only: :create

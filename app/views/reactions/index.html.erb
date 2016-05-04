@@ -1,0 +1,3 @@
+<% @reactions.each do |reaction| %>
+  <%= video_tag(reaction.video.url, controls: true, class: 'reaction-video') %>
+<% end %>
