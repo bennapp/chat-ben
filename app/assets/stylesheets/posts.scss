@@ -99,6 +99,26 @@ $container-margin: 20px;
 		margin-right: 2.5%;
 		margin-bottom: 60px;
 
+    .live-posts-container {
+      max-width: 60vw;
+      margin: auto;
+
+      .live-posts {
+        display: flex;
+        justify-content: center;
+
+        .live-post {
+          padding: 0 20px 20px 20px;
+        }
+
+        .live-img {
+          max-width: 390px;
+          height: auto;
+        }
+      }
+    }
+
+
 		.list-group-item {
 			display: flex;
 			justify-content: space-between;

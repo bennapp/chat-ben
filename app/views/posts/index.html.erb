@@ -23,6 +23,10 @@
               <%= f.label :sticky %>
               <%= f.check_box :sticky %>
             </div>
+            <div class="field new-post-field">
+              <%= f.label :live %>
+              <%= f.check_box :live %>
+            </div>
           <% end %>
           <div class="new-post-textarea">
             <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
@@ -36,6 +40,17 @@
                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
               </button>
             </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <h3>Live Streams!</h3>
+    <div class="live-posts-container">
+      <div class="live-posts">
+        <% @live_posts.each do |post| %>
+          <div class="live-post">
+            <%= link_to image_tag("http://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img"), post %>
           </div>
         <% end %>
       </div>
@@ -169,9 +184,7 @@
         <p>
           <em>Chat Ben on!</em>
         </p>
-        <p>
-          Like us on <%= link_to 'Facebook', 'https://www.facebook.com/ChatBen.co' %> give us a <strike>Pope!</strike> poke!
-        </p>
+        Like us on <%= link_to 'Facebook', 'https://www.facebook.com/ChatBen.co' %>, or don't. I don't give a Shat!
       </div>
     </div>
   </div>

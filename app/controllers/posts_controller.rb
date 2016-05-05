@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.without_deleted.from_three_weeks_ago.includes(:rooms).includes(:likes)
+    @live_posts = @posts.select { |post| post.live? }
     @posts = @posts.sort_by { |post| post.sort_order }
     @posts = @posts.reject { |post| post.like_count <= -3 }
   end
@@ -54,6 +55,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     @post.sticky = false unless current_user.is_admin?
+    @post.live = false unless current_user.is_admin?
 
     respond_to do |format|
       if @post.save
@@ -99,7 +101,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :link, :text_content, :sticky)
+    params.require(:post).permit(:title, :link, :text_content, :sticky, :live)
   end
 
   def bad_rating?(user_id)
