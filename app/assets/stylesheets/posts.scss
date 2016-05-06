@@ -106,6 +106,7 @@ $container-margin: 20px;
       .live-posts {
         display: flex;
         justify-content: center;
+        flex-wrap: wrap;
 
         .live-post {
           padding: 0 20px 20px 20px;
