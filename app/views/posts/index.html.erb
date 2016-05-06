@@ -51,6 +51,7 @@
         <% @live_posts.each do |post| %>
           <div class="live-post">
             <%= link_to image_tag("http://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img"), post %>
+            <h5 class="live-stream-title"><%= post.title %></h5>
           </div>
         <% end %>
       </div>
