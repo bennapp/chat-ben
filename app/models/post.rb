@@ -76,6 +76,8 @@ class Post < ActiveRecord::Base
         'fa fa-youtube fa-lg'
       when 'vimeo'
         'fa fa-vimeo fa-lg'
+      when 'twitch'
+        'fa fa-twitch fa-lg'
       else
         ''
     end
@@ -109,6 +111,10 @@ class Post < ActiveRecord::Base
 
         self.format_type = 'vimeo'
         self.format_link = vimeo_token
+      when /twitch.tv/
+        self.format_type = 'twitch'
+        channel = link.split('/').last
+        self.format_link = channel
       end
 
     self.format_link = self.format_link.html_safe if self.format_link

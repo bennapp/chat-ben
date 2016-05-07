@@ -105,8 +105,9 @@ class PostsController < ApplicationController
   end
 
   def bad_rating?(user_id)
-    return true if current_user.ratings.where('ratee_id = ?', user_id).where('value <= 2').any?
-    return true if current_user.rateeds.where('rater_id = ?', user_id).where('value <= 2').any?
+    false
+    #return true if current_user.ratings.where('ratee_id = ?', user_id).where('value <= 2').any?
+    #return true if current_user.rateeds.where('rater_id = ?', user_id).where('value <= 2').any?
   end
 
   def just_chat?(user_id)

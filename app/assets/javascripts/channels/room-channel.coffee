@@ -121,6 +121,8 @@ class @RoomChannel
               $wrapper.append("<iframe src=\"//player.vimeo.com/video#{data.format_link}?portrait=0&color=333\" width=\"640\" height=\"390\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>")
             else if data.format_type == 'youtube'
               $wrapper.append("<iframe id=\"ytplayer\" type=\"text/html\" src=\"//www.youtube.com/embed/#{data.format_link}?autoplay=1&origin=https://www.chatben.co\"/>")
+            else if data.format_type == 'twitch'
+              $wrapper.append("<iframe src=\"http://player.twitch.tv/?channel=#{data.format_link}\" scrolling=\"no\" allowfullscreen=\"true\"></iframe>")
 
           $('#board').val(data.comment || '')
           $('.edited-by').text(data.edited_by || '')
