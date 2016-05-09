@@ -10,12 +10,16 @@ class @LikeChannel
             $dislike.addClass('btn-danger')
             $like.addClass('btn-default')
             $like.removeClass('btn-primary')
-            document.getElementById('dislike-sound').play()
+            audio = document.getElementById('dislike-sound')
+            audio.volume = 0.5
+            audio.play()
             @perform("dislike", post_id: $('.post-header')[0].id)
           else
             $dislike.addClass('btn-default')
             $dislike.removeClass('btn-danger')
-            document.getElementById('like-sound').play()
+            audio = document.getElementById('like-sound')
+            audio.volume = 0.5
+            audio.play()
             @perform("undislike", post_id: $('.post-header')[0].id)
 
         onClickLike = =>
@@ -26,12 +30,16 @@ class @LikeChannel
             $like.removeClass('btn-default')
             $dislike.addClass('btn-default')
             $dislike.removeClass('btn-danger')
-            document.getElementById('like-sound').play()
+            audio = document.getElementById('like-sound')
+            audio.volume = 0.5
+            audio.play()
             @perform("like", post_id: $('.post-header')[0].id)
           else
             $like.addClass('btn-default')
             $like.removeClass('btn-primary')
-            document.getElementById('dislike-sound').play()
+            audio = document.getElementById('dislike-sound')
+            audio.volume = 0.5
+            audio.play()
             @perform("unlike", post_id: $('.post-header')[0].id)
 
         $('#like').unbind('click').click onClickLike

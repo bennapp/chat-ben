@@ -1,1 +1,18 @@
-<iframe height="720" width="1280" src="https://player.twitch.tv/?channel=<%= value %>" scrolling="no" allowfullscreen="true"></iframe>
+<div id="twitchplayer"></div>
+<script type="text/javascript">
+  var success = function(){
+    var options = {
+        width: 1280,
+        height: 720,
+        channel: "<%= value %>"
+    };
+    var player = new Twitch.Player("twitchplayer", options);
+    player.setVolume(0.1);
+  }
+
+  $.ajax({
+    url: "https://player.twitch.tv/js/embed/v1.js",
+    dataType: "script",
+    success: success
+  })
+</script>

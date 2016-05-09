@@ -41,6 +41,12 @@
     ga('create', 'UA-75900334-1', 'auto');
     ga('send', 'pageview');
   </script>
+  <script>
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  </script>
   <body>
     <div class="page-header">
         <div class="page-title"><%= link_to image_tag('chatbenlogo.png'), root_url %>

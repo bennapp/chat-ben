@@ -120,9 +120,39 @@ class @RoomChannel
             else if data.format_type == 'vimeo'
               $wrapper.append("<iframe src=\"//player.vimeo.com/video#{data.format_link}?portrait=0&color=333\" width=\"640\" height=\"390\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>")
             else if data.format_type == 'youtube'
-              $wrapper.append("<iframe id=\"ytplayer\" type=\"text/html\" src=\"//www.youtube.com/embed/#{data.format_link}?autoplay=1&origin=https://www.chatben.co\"/>")
+              $wrapper.append("<div id=\"ytplayer\"></div>")
+              onPlayerReady = (event) ->
+                event.target.playVideo()
+                event.target.setVolume 10
+
+              if YT
+                player = new (YT.Player)('ytplayer',
+                  height: '720'
+                  width: '1280'
+                  videoId: data.format_link
+                  events: 'onReady': onPlayerReady)
+              else
+                window.onYouTubeIframeAPIReady = ->
+                  player = new (YT.Player)('ytplayer',
+                    height: '720'
+                    width: '1280'
+                    videoId: data.format_link
+                    events: 'onReady': onPlayerReady)
             else if data.format_type == 'twitch'
-              $wrapper.append("<iframe src=\"https://player.twitch.tv/?channel=#{data.format_link}\" scrolling=\"no\" allowfullscreen=\"true\"></iframe>")
+              $wrapper.append("<div id=\"twitchplayer\"></div>")
+              success = ->
+                options =
+                  width: 1280
+                  height: 720
+                  channel: data.format_link
+                player = new (Twitch.Player)('twitchplayer', options)
+                player.setVolume 0.1
+                return
+
+              $.ajax
+                url: 'https://player.twitch.tv/js/embed/v1.js'
+                dataType: 'script'
+                success: success
 
           $('#board').val(data.comment || '')
           $('.edited-by').text(data.edited_by || '')

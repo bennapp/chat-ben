@@ -1,0 +1,2 @@
+queries = [Participation.joins(:room).where('rooms.full is true').where('rooms.created_at > ?', 3.days.ago.utc).pluck(:user_id).uniq.count, Reaction.where('reactions.created_at > ?', 3.days.ago.utc).count, User.where('created_at > ?', 3.days.ago.utc).count, Like.where(dislike: true).where('created_at > ?', 3.days.ago.utc).count, Like.where(dislike: false).where('created_at > ?', 3.days.ago.utc).count, Post.where('created_at > ?', 3.days.ago.utc).count, Rating.where('created_at > ?', 3.days.ago.utc).count]
+

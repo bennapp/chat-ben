@@ -1,3 +1,19 @@
-<% autoplay = 'autoplay=1' %>
+<div id="ytplayer"></div>
+<script>
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('ytplayer', {
+      height: '720',
+      width: '1280',
+      videoId: '<%= value %>',
+      events: {
+        'onReady': onPlayerReady
+      }
+    });
+  }
 
-<iframe id="ytplayer" height="720" width="1280" type="text/html" src="//www.youtube.com/embed/<%= value %>?<%= autoplay %>&origin=https://www.chatben.co"/>
+  function onPlayerReady(event) {
+    event.target.playVideo();
+    event.target.setVolume(10);
+  }
+</script>
