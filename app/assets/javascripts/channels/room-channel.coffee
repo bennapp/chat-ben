@@ -147,6 +147,7 @@ class @RoomChannel
                   channel: data.format_link
                 player = new (Twitch.Player)('twitchplayer', options)
                 player.setVolume 0.1
+                player.play()
                 return
 
               $.ajax
