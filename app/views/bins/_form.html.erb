@@ -1,0 +1,26 @@
+<%= form_for(bin) do |f| %>
+  <% if bin.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bin.errors.count, "error") %> prohibited this bin from being saved:</h2>
+
+      <ul>
+      <% bin.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title %><br>
+    <%= f.text_field :title, tabindex: 1 %>
+  </div>
+
+  <% (0..9).each do |i| %>
+    <%= f.collection_select(:post_ids, @posts, :id, :title, { include_blank: 'None', selected: @bin.posts[i].try(:id) }, { name: "bin[post_ids][#{i}]" }) %>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

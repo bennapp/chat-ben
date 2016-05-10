@@ -10,6 +10,8 @@ class Post < ActiveRecord::Base
   # scope :from_three_weeks_ago, -> { where('posts.created_at > ?', 2.days.ago.utc) }
 
   belongs_to :user
+  has_many :bins, through: :post_bins
+  has_many :post_bins
   has_many :rooms
   has_many :likes
   has_many :reactions

@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<ol>
+  <% @bin.posts.each do |post| %>
+    <li><%= post.title %></li>
+  <% end %>
+</ol>
+
+<%= link_to 'Edit', edit_bin_path(@bin) %> |
+<%= link_to 'Back', bins_path %>

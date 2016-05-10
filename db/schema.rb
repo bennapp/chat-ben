@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505053200) do
+ActiveRecord::Schema.define(version: 20160510062426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bins", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "feedbacks", force: :cascade do |t|
     t.text     "message"
@@ -47,6 +53,16 @@ ActiveRecord::Schema.define(version: 20160505053200) do
   add_index "participations", ["deleted_at"], name: "index_participations_on_deleted_at", using: :btree
   add_index "participations", ["room_id"], name: "index_participations_on_room_id", using: :btree
   add_index "participations", ["user_id"], name: "index_participations_on_user_id", using: :btree
+
+  create_table "post_bins", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "bin_id"
+    t.integer "position"
+  end
+
+  add_index "post_bins", ["bin_id"], name: "index_post_bins_on_bin_id", using: :btree
+  add_index "post_bins", ["post_id", "bin_id"], name: "index_post_bins_on_post_id_and_bin_id", using: :btree
+  add_index "post_bins", ["post_id"], name: "index_post_bins_on_post_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
