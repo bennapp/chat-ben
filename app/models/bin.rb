@@ -5,7 +5,6 @@ class Bin < ApplicationRecord
   after_save :set_post_bin_position
 
   def post_ids=(post_ids)
-    post_bins.delete_all
     super(post_ids)
     @post_ids = post_ids.reject { |post_id| post_id.empty? }
   end
