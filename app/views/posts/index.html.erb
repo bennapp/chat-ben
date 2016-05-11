@@ -45,22 +45,24 @@
       </div>
     </div>
 
-    <h3>Live Streams!</h3>
-    <div class="live-posts-container">
-      <div class="live-posts">
-        <% @live_posts.each do |post| %>
-          <div class="live-post">
+    <h3>Channels!</h3>
+    <div class="bins-container">
+      <div class="bins">
+        <% @bins.each do |bin| %>
+          <div class="bin">
+            <% post = bin.posts.first %>
             <% if post.format_type == 'youtube' %>
               <%= link_to image_tag("http://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img"), post %>
             <% elsif post.format_type == 'twitch' %>
               <%= link_to image_tag("twitch.jpg", class: "live-img"), post %>
             <% end %>
-            <h5 class="live-stream-title"><%= post.title %></h5>
+            <h5 class="bin-title"><%= bin.title %></h5>
           </div>
         <% end %>
       </div>
     </div>
 
+    <h3>Posts!</h3>
     <ul class="list-group">
       <% @posts.each do |post| %>
         <li class="list-group-item" id="<%= post.id %>">

@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.without_deleted.from_three_weeks_ago.includes(:rooms).includes(:likes)
-    @live_posts = @posts.select { |post| post.live? }
+    @bins = Bin.all
     @posts = @posts.sort_by { |post| post.sort_order }
     @posts = @posts.reject { |post| post.like_count <= -3 }
   end

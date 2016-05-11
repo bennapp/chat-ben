@@ -71,8 +71,6 @@ $container-margin: 20px;
 
 .btn.blink {
 	border: none;
-	padding: 16px 12px;
-	font-size: 24px;
 }
 
 .page-container {
@@ -99,23 +97,23 @@ $container-margin: 20px;
 		margin-right: 2.5%;
 		margin-bottom: 60px;
 
-    .live-posts-container {
+
+    .bins-container {
       max-width: 60vw;
       margin: auto;
 
-      .live-stream-title {
+      .bin-title {
         max-width: 390px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
-      .live-posts {
+      .bins {
         display: flex;
-        justify-content: center;
         flex-wrap: wrap;
 
-        .live-post {
+        .bin {
           padding: 0 20px 20px 20px;
         }
 
