@@ -7,6 +7,18 @@ class CommentChannel < ApplicationCable::Channel
     puts 'unsubscribed'
   end
 
+  def add_reaction(data)
+    post = Post.find(data['post_id'])
+    reaction_url = post.reactions.first.video.url
+    options = {
+      action: 'add_reaction',
+      reaction_url: reaction_url,
+      post_id: post.id,
+    }
+
+    ActionCable.server.broadcast("comment_channel", options)
+  end
+
   def comment(data)
     return unless current_user
     post = Post.find(data['post_id'])

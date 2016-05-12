@@ -14,6 +14,9 @@ class @RoomChannel
       connected: ->
         $('#board').keypress boardKeyPress
 
+        window.addReaction = (postId, options={}) =>
+          @perform("add_reaction", post_id: postId)
+
       disconnected: ->
         console.log('disconnected')
 
@@ -21,7 +24,10 @@ class @RoomChannel
         console.log('rejected')
 
       received: (data) ->
-        if data.action == 'new_comment'
+        if data.action == 'add_reaction' && data.post_id.toString() == window.postHistory[window.postHistory.length - 1].toString()
+          videoURL = data.reaction_url
+          $('.reactions-container').prepend("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{videoURL}\" autoplay controls=true></video></div>")
+        else if data.action == 'new_comment'
           if data.post_id.toString() == window.postHistory[window.postHistory.length - 1].toString()
             $('#board').val(data.comment)
             $('.edited-by').text(data.edited_by)
@@ -30,9 +36,6 @@ class @RoomChannel
       connected: ->
         window.nextPost = (postId, options={}) =>
           @perform("next_post", post_id: postId, first_post: options.firstPost, post_history: window.fullHistory, bin_id: $('.bin-header').data('bin-id'))
-
-        window.addReaction = (postId, options={}) =>
-          @perform("add_reaction", post_id: postId)
 
         nextPostClick = ->
           window.nextPost($('.post-header')[0].id)
@@ -53,10 +56,7 @@ class @RoomChannel
 
       received: (data) ->
         action = data.action
-        if action == 'add_reaction'
-          videoURL = data.reaction_url
-          $('.reactions-container').prepend("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{videoURL}\" controls=true></video></div>")
-        else if action == 'next_post'
+        if action == 'next_post'
           postHistory.push data.id unless data.first_post
           fullHistory.push data.id unless data.first_post
 

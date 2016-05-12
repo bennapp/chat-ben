@@ -57,6 +57,11 @@
               <%= link_to image_tag("twitch.jpg", class: "live-img"), post_path(post, channel: bin.id) %>
             <% end %>
             <h5 class="bin-title"><%= bin.title %></h5>
+            <ol>
+              <% bin.posts.each do |post| %>
+                <li><%= post.title %></li>
+              <% end %>
+            </ol>
           </div>
         <% end %>
       </div>
