@@ -33,6 +33,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    channel = params['channel']
     rooms = @post.rooms.where('rooms.full is false').where('rooms.waiting is true')
     room = rooms.select do |room|
       waiting_user_id = room.participations.first.try(:user_id)
@@ -41,7 +42,7 @@ class PostsController < ApplicationController
 
     room = @post.rooms.create if room.blank?
 
-    redirect_to room_path(room)
+    redirect_to room_path(room, channel: channel)
   end
 
   def new

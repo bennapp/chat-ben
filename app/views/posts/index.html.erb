@@ -52,9 +52,9 @@
           <div class="bin">
             <% post = bin.posts.first %>
             <% if post.format_type == 'youtube' %>
-              <%= link_to image_tag("http://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img"), post %>
+              <%= link_to image_tag("http://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img"), post_path(post, channel: bin.id) %>
             <% elsif post.format_type == 'twitch' %>
-              <%= link_to image_tag("twitch.jpg", class: "live-img"), post %>
+              <%= link_to image_tag("twitch.jpg", class: "live-img"), post_path(post, channel: bin.id) %>
             <% end %>
             <h5 class="bin-title"><%= bin.title %></h5>
           </div>

@@ -29,7 +29,7 @@ class @RoomChannel
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
         window.nextPost = (postId, options={}) =>
-          @perform("next_post", post_id: postId, first_post: options.firstPost, post_history: window.fullHistory)
+          @perform("next_post", post_id: postId, first_post: options.firstPost, post_history: window.fullHistory, bin_id: $('.bin-header').data('bin-id'))
 
         window.addReaction = (postId, options={}) =>
           @perform("add_reaction", post_id: postId)
@@ -84,7 +84,6 @@ class @RoomChannel
           $container = $('.content-container')
           $container.empty()
           $container.append("<h3 class=\"post-header\" id=\"#{data.id}\">#{data.title}</h3>")
-          $container.append("<div class='posted-by-container'>submitted by <span class='posted-by'></span></div>")
           $('.posted-by').text(data.posted_by)
 
           if data.link && data.full_url && !data.format_link

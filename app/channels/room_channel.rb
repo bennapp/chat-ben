@@ -25,7 +25,11 @@ class RoomChannel < ApplicationCable::Channel
       post_history = []
     end
 
-    if data['first_post']
+    if data['bin_id'].present?
+      current_post_id = data['post_id'].to_i
+      posts = Bin.find(data['bin_id']).posts
+      post = posts.select { |post| !post_history.include?(post.id) && post.id != current_post_id }.first
+    elsif data['first_post']
       post = Post.find(data['post_id'].to_i)
     else
       posts = Post.without_deleted.from_three_weeks_ago
@@ -50,7 +54,6 @@ class RoomChannel < ApplicationCable::Channel
     end
 
     like_count = post.like_count
-    posted_by = post.user.name
 
     reaction_urls = post.reactions.map { |reaction| reaction.video.url }
 
@@ -64,7 +67,6 @@ class RoomChannel < ApplicationCable::Channel
       text_content: post.text_content,
       like: like_exists,
       dislike: dislike_exists,
-      posted_by: posted_by,
       like_count: like_count,
       full_url: post.full_url,
       link: post.link,

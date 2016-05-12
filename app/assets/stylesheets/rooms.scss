@@ -121,6 +121,11 @@ video {
     }
 
     .post-content-container {
+      h2 {
+        margin-top: 0px;
+        margin-bottom: 8px;
+      }
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;

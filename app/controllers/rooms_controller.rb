@@ -7,6 +7,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    @bin = Bin.find_by_id(params['channel'])
     @post = Post.new
     @hide_footer = true
     redirect_to root_url and return unless @room
