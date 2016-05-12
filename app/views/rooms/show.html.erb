@@ -7,7 +7,7 @@
         <h2 class='bin-header' data-bin-id="<%= @bin.id %>"><%= @bin.title %></h2>
       <% end %>
       <div class="content-container">
-        <h3 class="post-header" id="<%= @room.post.id %>"><%= @room.post.title %></h3>
+        <h4 class="post-header" id="<%= @room.post.id %>"><%= @room.post.title %></h4>
         <% if @room.post.link.present? && @room.post.format_link.blank? %>
           <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
         <% end %>
@@ -215,6 +215,7 @@
 <script>
   $(document).ready(function(){
     var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>'});
+    var binChannel = new BinChannel({ binId: '<%= @bin.try(:id) %>'});
     var roomShow = new RoomShow({
       room: '<%= @room.token %>',
       participationId: '<%= @participation_id %>',

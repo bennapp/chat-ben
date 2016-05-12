@@ -83,7 +83,7 @@ class @RoomChannel
 
           $container = $('.content-container')
           $container.empty()
-          $container.append("<h3 class=\"post-header\" id=\"#{data.id}\">#{data.title}</h3>")
+          $container.append("<h4 class=\"post-header\" id=\"#{data.id}\">#{data.title}</h4>")
           $('.posted-by').text(data.posted_by)
 
           if data.link && data.full_url && !data.format_link
