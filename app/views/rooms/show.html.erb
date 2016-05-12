@@ -101,6 +101,10 @@
               <%= f.label :sticky %>
               <%= f.check_box :sticky %>
             </div>
+            <div class="field new-post-field">
+              <%= f.label :live %>
+              <%= f.check_box :live %>
+            </div>
           <% end %>
           <div class="new-post-textarea">
             <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
