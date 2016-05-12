@@ -124,12 +124,16 @@ class @RoomChannel
                 event.target.playVideo()
                 event.target.setVolume 10
 
+              onPlayerStateChange = (event) ->
+                if event.target.getPlayerState() == 0
+                  window.nextPost($('.post-header')[0].id)
+
               if YT
                 player = new (YT.Player)('ytplayer',
                   height: '720'
                   width: '1280'
                   videoId: data.format_link
-                  events: 'onReady': onPlayerReady)
+                  events: 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange)
               else
                 window.onYouTubeIframeAPIReady = ->
                   player = new (YT.Player)('ytplayer',
@@ -147,6 +151,8 @@ class @RoomChannel
                 player = new (Twitch.Player)('twitchplayer', options)
                 player.setVolume 0.1
                 player.play()
+                player.addEventListener 'ended', ->
+                  window.nextPost $('.post-header')[0].id
                 return
 
               $.ajax

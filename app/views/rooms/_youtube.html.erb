@@ -7,7 +7,8 @@
       width: '1280',
       videoId: '<%= value %>',
       events: {
-        'onReady': onPlayerReady
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
       }
     });
   }
@@ -15,5 +16,12 @@
   function onPlayerReady(event) {
     event.target.playVideo();
     event.target.setVolume(10);
+  }
+
+  function onPlayerStateChange(event) {
+    debugger
+    if (event.target.getPlayerState() === 0){
+      window.nextPost($('.post-header')[0].id);
+    }
   }
 </script>

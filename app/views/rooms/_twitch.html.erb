@@ -9,6 +9,7 @@
     var player = new Twitch.Player("twitchplayer", options);
     player.setVolume(0.1);
     player.play();
+    player.addEventListener('ended', function(){ window.nextPost($('.post-header')[0].id) });
   }
 
   $.ajax({
