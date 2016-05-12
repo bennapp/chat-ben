@@ -52,7 +52,7 @@
   <body>
     <div class="page-header">
         <div class="page-title"><%= link_to image_tag('chatbenlogo.png'), root_url %>
-          <small class="lead"><%= @subtitle || 'HOLY SHAT! LET\'S CHAT!' %></small>
+          <small class="lead"><%= @subtitle || 'G\'day mate! Welcome to Chat Ben!'  %></small>
         </div>
       <% if current_user %>
         <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
