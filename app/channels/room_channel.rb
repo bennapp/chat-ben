@@ -25,12 +25,12 @@ class RoomChannel < ApplicationCable::Channel
       post_history = []
     end
 
-    if data['bin_id'].present?
-      current_post_id = data['post_id'].to_i
-      posts = Bin.find(data['bin_id']).posts
-      post = posts.select { |post| !post_history.include?(post.id) && post.id != current_post_id }.first
-    elsif data['first_post']
+    if data['first_post']
       post = Post.find(data['post_id'].to_i)
+    elsif data['bin_id'].present?
+      current_post_id = data['post_id'].to_i
+      posts = Bin.find(data['bin_id']).posts.sort_by { |post| post.sort_order }
+      post = posts.select { |post| !post_history.include?(post.id) && post.id != current_post_id }.first
     else
       posts = Post.without_deleted.from_three_weeks_ago
       posts = posts.sort_by { |post| post.sort_order }

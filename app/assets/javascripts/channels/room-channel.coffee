@@ -24,13 +24,12 @@ class @RoomChannel
         console.log('rejected')
 
       received: (data) ->
-        if data.action == 'add_reaction' && data.post_id.toString() == window.postHistory[window.postHistory.length - 1].toString()
+        if data.action == 'add_reaction' && data.post_id.toString() == $('.post-header')[0].id
           videoURL = data.reaction_url
           $('.reactions-container').prepend("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{videoURL}\" autoplay controls=true></video></div>")
-        else if data.action == 'new_comment'
-          if data.post_id.toString() == window.postHistory[window.postHistory.length - 1].toString()
-            $('#board').val(data.comment)
-            $('.edited-by').text(data.edited_by)
+        else if data.action == 'new_comment' && data.post_id.toString() == $('.post-header')[0].id
+          $('#board').val(data.comment)
+          $('.edited-by').text(data.edited_by)
 
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
