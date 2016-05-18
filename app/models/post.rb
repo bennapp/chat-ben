@@ -106,7 +106,6 @@ class Post < ActiveRecord::Base
 
         self.format_type = 'youtube'
         self.format_link = youtube_token
-      when youtu.be
       when /vimeo.com/
         vimeo_token = URI(link).path
         vimeo_token.slice!('/channels')
