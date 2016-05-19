@@ -50,7 +50,7 @@
       <div class="bins">
         <% @bins.each do |bin| %>
           <div class="bin">
-            <% post = bin.posts.first %>
+            <% post = bin.posts.second %>
             <% if post.format_type == 'youtube' %>
               <%= link_to image_tag("http://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img"), post_path(post, channel: bin.id) %>
             <% elsif post.format_type == 'twitch' %>
@@ -58,7 +58,7 @@
             <% end %>
             <h5 class="bin-title"><%= bin.title %></h5>
             <ol>
-              <% bin.posts.each do |post| %>
+              <% bin.posts[1..-1].each do |post| %>
                 <li><%= post.title %></li>
               <% end %>
             </ol>
