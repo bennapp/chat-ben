@@ -85,7 +85,7 @@ video {
     flex-direction: column;
     padding: 0px 12px 0 12px;
     width: 33%;
-    height: 86vh; //override remove the page div 79 vh thing?
+    height: auto; //override remove the page div 79 vh thing?
 
     .bin-header {
       margin-top: 0px;
