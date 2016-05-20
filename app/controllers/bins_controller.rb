@@ -58,7 +58,7 @@ class BinsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def bin_params
-    params.require(:bin).permit(:title, :post_ids => (0..9).to_a.map(&:to_s) )
+    params.require(:bin).permit(:title, :post_ids => (0..19).to_a.map(&:to_s) )
   end
 
   def redirect_if_non_admin
