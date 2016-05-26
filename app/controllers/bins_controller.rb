@@ -14,12 +14,12 @@ class BinsController < ApplicationController
   # GET /bins/new
   def new
     @bin = Bin.new
-    @posts = Post.without_deleted.from_three_weeks_ago.sort_by { |post| post.sort_order }
+    @posts = Post.without_deleted.from_three_weeks_ago.sort_by { |post| post.title }
   end
 
   # GET /bins/1/edit
   def edit
-    @posts = Post.without_deleted.from_three_weeks_ago.sort_by { |post| post.sort_order }
+    @posts = Post.without_deleted.from_three_weeks_ago.sort_by { |post| post.title }
   end
 
   # POST /bins
