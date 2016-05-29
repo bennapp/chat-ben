@@ -7,10 +7,13 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @bin = Bin.find_by_id(params['channel'])
+    @bins = Bin.all
+    @bin = Bin.find(params['channel'])
     @post = Post.new
     @hide_footer = true
+
     redirect_to root_url and return unless @room
+
     participation = Participation.find_or_create_by(user: current_user, room: @room)
     @participation_id = participation.id
     @rating = Rating.new

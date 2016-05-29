@@ -1,5 +1,6 @@
 class BinsController < ApplicationController
   before_action :set_bin, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show]
   before_action :redirect_if_non_admin
 
   # GET /bins
@@ -7,8 +8,38 @@ class BinsController < ApplicationController
     @bins = Bin.all
   end
 
+  # def new_chat
+  #   post = Post.find_by_id(params[:id])
+
+  #   if post.present?
+  #     rooms = post.rooms.where('rooms.full is false').where('rooms.waiting is true')
+  #   else
+  #     rooms = Room.where('rooms.full is false').where('rooms.waiting is true')
+  #     post = Post.without_deleted.from_three_weeks_ago.sample if post.blank?
+  #   end
+
+  #   room = rooms.select { |room|
+  #     waiting_user_id = room.participations.first.try(:user_id)
+  #     waiting_user_id.present? && !bad_rating?(waiting_user_id) && !just_chat?(waiting_user_id)
+  #   }.first
+
+  #   room = post.rooms.create if room.blank?
+  #   room.update_attribute(:fresh, true)
+
+  #   redirect_to room_path(room)
+  # end
+
   # GET /bins/1
   def show
+    rooms = @post.rooms.where('rooms.full is false').where('rooms.waiting is true')
+    room = rooms.select do |room|
+      waiting_user_id = room.participations.first.try(:user_id)
+      waiting_user_id.present? && !bad_rating?(waiting_user_id) && !(room.fresh? && just_chat?(waiting_user_id))
+    end
+
+    room = @post.rooms.create if room.blank?
+
+    redirect_to room_path(room, channel: @bin.id)
   end
 
   # GET /bins/new
@@ -55,6 +86,10 @@ class BinsController < ApplicationController
     @bin = Bin.find(params[:id])
   end
 
+  def set_post
+    @post = @bin.posts.first
+  end
+
   # Only allow a trusted parameter "white list" through.
   def bin_params
     @params ||= begin
@@ -66,5 +101,15 @@ class BinsController < ApplicationController
 
   def redirect_if_non_admin
     redirect_to rooth_path unless current_user.is_admin?
+  end
+
+  def bad_rating?(user_id)
+    false
+    #return true if current_user.ratings.where('ratee_id = ?', user_id).where('value <= 2').any?
+    #return true if current_user.rateeds.where('rater_id = ?', user_id).where('value <= 2').any?
+  end
+
+  def just_chat?(user_id)
+    (current_user.participations.pluck(:room_id).last(3) & User.find(user_id).participations.pluck(:room_id).last(3)).present?
   end
 end

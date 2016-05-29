@@ -5,38 +5,7 @@ class PostsController < ApplicationController
   def index
   end
 
-  def new_chat
-    post = Post.find_by_id(params[:id])
-
-    if post.present?
-      rooms = post.rooms.where('rooms.full is false').where('rooms.waiting is true')
-    else
-      rooms = Room.where('rooms.full is false').where('rooms.waiting is true')
-      post = Post.without_deleted.from_three_weeks_ago.sample if post.blank?
-    end
-
-    room = rooms.select { |room|
-      waiting_user_id = room.participations.first.try(:user_id)
-      waiting_user_id.present? && !bad_rating?(waiting_user_id) && !just_chat?(waiting_user_id)
-    }.first
-
-    room = post.rooms.create if room.blank?
-    room.update_attribute(:fresh, true)
-
-    redirect_to room_path(room)
-  end
-
   def show
-    channel = params['channel']
-    rooms = @post.rooms.where('rooms.full is false').where('rooms.waiting is true')
-    room = rooms.select do |room|
-      waiting_user_id = room.participations.first.try(:user_id)
-      waiting_user_id.present? && !bad_rating?(waiting_user_id) && !(room.fresh? && just_chat?(waiting_user_id))
-    end
-
-    room = @post.rooms.create if room.blank?
-
-    redirect_to room_path(room, channel: channel)
   end
 
   def new
@@ -47,13 +16,14 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    bin_id = post_params[:bin_id]
+    @post = Post.new(post_params.except(:bin_id))
     @post.user = current_user
     @post.sticky = false unless current_user.is_admin?
     @post.live = false unless current_user.is_admin?
 
     respond_to do |format|
-      if @post.save
+      if @post.save && PostBin.create(post_id: @post.id, bin_id: bin_id)
         room = @post.rooms.create
         format.html { redirect_to room_path(room), notice: 'Post was successfully created.' }
         format.json { render json: @post }
@@ -96,7 +66,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :link, :text_content, :sticky, :live)
+    params.require(:post).permit(:title, :link, :text_content, :sticky, :live, :bin_id)
   end
 
   def bad_rating?(user_id)
