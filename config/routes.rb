@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'static_pages/home'
+
   mount ActionCable.server => "/cable"
 
   get "/404" => "errors#not_found"
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
   resources :rooms, only: [:show, :update], path: 'chat', param: :token
   resources :ratings, only: :create
   devise_for :users#, controllers: { sessions: "users/sessions" }
-  root 'posts#index'
+  root 'static_pages#home'
   get 'banned' => 'ratings#banned'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

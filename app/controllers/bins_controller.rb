@@ -24,8 +24,7 @@ class BinsController < ApplicationController
 
   # POST /bins
   def create
-    @bin = Bin.new(title: bin_params["title"])
-    @bin.post_ids = bin_params["post_ids"].values
+    @bin = Bin.new(bin_params)
 
     if @bin.save
       redirect_to @bin, notice: 'Bin was successfully created.'
@@ -36,7 +35,7 @@ class BinsController < ApplicationController
 
   # PATCH/PUT /bins/1
   def update
-    if @bin.update(title: bin_params["title"], post_ids: bin_params["post_ids"].values)
+    if @bin.update(bin_params)
       redirect_to @bin, notice: 'Bin was successfully updated.'
     else
       render :edit
@@ -58,7 +57,11 @@ class BinsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def bin_params
-    params.require(:bin).permit(:title, :post_ids => (0..19).to_a.map(&:to_s) )
+    @params ||= begin
+      request_params = params.require(:bin).permit(:title, :description, :post_ids => (0..19).to_a.map(&:to_s) )
+      request_params['post_ids'] = request_params['post_ids'].values
+      request_params
+    end
   end
 
   def redirect_if_non_admin

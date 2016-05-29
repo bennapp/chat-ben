@@ -16,6 +16,11 @@
     <%= f.text_field :title, tabindex: 1 %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, tabindex: 2 %>
+  </div>
+
   <p>The first one is the introduction and the second one is the one that will show on the front page</p>
 
   <% (0..19).each do |i| %>

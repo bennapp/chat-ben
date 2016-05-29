@@ -32,8 +32,6 @@ body {
 .page-header {
 	margin: 0;
 	max-height: 88px;
-	background-image: asset_url('tv.png');
-  background-position: 0px 0px;
 }
 
 .flash {
@@ -105,11 +103,19 @@ body {
 		}
 	}
 
-	.logout-link {
+	.total-users-container {
 		float: right;
 		margin-right: 44px;
-		margin-top: -66px;
-		font-size: 16px;
+		margin-top: -74px;
+		font-size: 24px;
+		font-weight: bold;
+		font-family: 'Raleway', sans-serif;
+		color: darken(#5bc0de, 9.5%); //info
+
+		.logout-link {
+			margin-left: 20px;
+			font-size: 16px;
+		}
 	}
 }
 

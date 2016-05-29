@@ -1,14 +1,8 @@
 class PostsController < ApplicationController
-  skip_before_filter :authenticate_user!, only: [:index]
   before_action :set_post, only: [:show]
   before_action :set_current_users_post, only: [:edit, :update, :destroy]
 
   def index
-    @post = Post.new
-    @posts = Post.without_deleted.from_three_weeks_ago.includes(:rooms).includes(:likes)
-    @bins = Bin.all
-    @posts = @posts.sort_by { |post| post.sort_order }
-    @posts = @posts.reject { |post| post.like_count <= -3 }
   end
 
   def new_chat

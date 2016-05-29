@@ -90,21 +90,35 @@ $container-margin: 20px;
 		}
 	}
 
-	.link-panel {
+	.channel-panel {
 		flex-grow: 10;
 		height: auto;
 		margin-left: 2.5%;
 		margin-right: 2.5%;
 		margin-bottom: 60px;
 
-
     .bins-container {
-      max-width: 60vw;
       margin: auto;
+      display: flex;
+      justify-content: center;
 
       .bin-title {
+        margin-top: 12px;
+        margin-bottom: 0px;
         max-width: 390px;
-        white-space: nowrap;
+        white-space: wrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .post-title {
+        margin-top: 8px;
+        margin-bottom: 6px;
+      }
+
+      .bin-description {
+        max-width: 390px;
+        white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
@@ -123,109 +137,12 @@ $container-margin: 20px;
         }
       }
     }
-
-
-		.list-group-item {
-			display: flex;
-			justify-content: space-between;
-		}
-
-		.badge-and-title {
-			display: flex;
-		}
-
-		.preview-container {
-			.preview {
-				margin-left: 8px;
-				color: black !important;
-			}
-
-			.post-title-container {
-				max-width: 600px;
-				overflow: auto;
-				text-overflow: ellipsis;
-			}
-
-			.fa-lg {
-				line-height: 1.12em;
-				font-size: 22px;
-				&.fa-file-text-o {
-					font-size: 19px;
-				}
-				&.fa-vimeo {
-					font-size: 20px;
-				}
-			}
-
-			&:hover {
-				cursor: pointer;
-			}
-
-			span {
-				padding: 3px 2px 0px 2px;
-				font-size: 18px;
-			}
-		}
-
-		.count-container {
-			display: inline-block;
-			line-height: 1.9em;
-
-			.fa-thumb-tack {
-				margin-left: 4px;
-				margin-right: 6px;
-			}
-		}
-
-		.post-title-container {
-			margin-left: 8px;
-			display: inline-block;
-			max-width: 550px;
-			line-height: 1.9em;
-
-			-webkit-box-orient: vertical;
-			display: -webkit-box;
-			-webkit-line-clamp: 3;
-		}
-
-		.edit-delete {
-			margin-left: 20px;
-			line-height: 1.9em;
-
-			.posted-by {
-				color: #555;
-		    font-size: 14px;
-			}
-
-			.fa-thumbs-up {
-				margin-left: 6px;
-				color: #428bca;
-				font-size: 24px;
-				line-height: 0.2em;
-			}
-		}
 	}
 
 	.right-panel {
-		flex-grow: 1;
-		flex-basis: 22%;
-		min-width: 344px;
 		height: auto;
 		margin-left: 2.5%;
 		margin-right: 2.5%;
-	}
-
-	.total-users-container {
-		font-size: 24px;
-		font-weight: bold;
-		font-family: 'Raleway', sans-serif;
-		color: darken(#5bc0de, 9.5%); //info
-	}
-
-	.about-container {
-		p {
-			text-indent: 8px;
-		}
 	}
 }
 

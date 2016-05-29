@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th colspan="4"></th>
+      <th colspan="5"></th>
     </tr>
   </thead>
 
@@ -20,6 +20,7 @@
             <% end %>
           </ol>
         </td>
+        <td><%= bin.description %></td>
         <td><%= link_to 'Edit', edit_bin_path(bin) %></td>
         <td><%= link_to 'Destroy', bin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
