@@ -27,29 +27,24 @@ class RoomChannel < ApplicationCable::Channel
 
     if data['first_post']
       post = Post.find(data['post_id'].to_i)
-    elsif data['bin_id'].present?
+    else data['bin_id'].present?
       current_post_id = data['post_id'].to_i
-      posts = Bin.find(data['bin_id']).posts
+
+      bin = Bin.find(data['bin_id'])
+      posts = bin.posts
 
       current_post = Post.find(current_post_id)
       current_post_index = posts.to_a.index(current_post)
 
-      post = posts[current_post_index + 1]
-      post = posts.first if post.nil?
-    else
-      posts = Post.without_deleted.from_three_weeks_ago
-      posts = posts.sort_by { |post| post.sort_order }
-      posts = posts.reject { |post| post.like_count <= -3 }
-
-      current_post_id = data['post_id'].to_i
-
-      if rand(1) == 1
+      if current_post_index == 1 # We are moving to the first non introduction post
+        post = posts[current_post_index + 1]
+      elsif rand(1) == 1
         post = posts.select { |post| !post_history.include?(post.id) && post.id != current_post_id }.first
       else
         post = posts.select { |post| !post_history.include?(post.id) && post.id != current_post_id }.sample()
       end
 
-      post = posts[0] if post.nil?
+      post = posts.first if post.nil?
     end
 
     like = Like.where(user_id: current_user.id, post_id: post.id).first
