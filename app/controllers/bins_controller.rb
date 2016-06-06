@@ -1,7 +1,7 @@
 class BinsController < ApplicationController
   before_action :set_bin, only: [:show, :edit, :update, :destroy]
   before_action :set_post, only: [:show]
-  before_action :redirect_if_non_admin
+  before_action :redirect_if_non_admin, only: [:index, :emails, :new, :edit, :create, :update, :destroy]
 
   # GET /bins
   def index
@@ -77,6 +77,11 @@ class BinsController < ApplicationController
   def destroy
     @bin.destroy
     redirect_to bins_url, notice: 'Bin was successfully destroyed.'
+  end
+
+  def emails
+    @users = User.all
+    render :emails
   end
 
   private
