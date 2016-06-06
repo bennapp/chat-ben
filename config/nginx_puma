@@ -1,26 +1,26 @@
 server {
   listen 443 ssl;
-  server_name          chatben.co;
-  ssl_certificate      /ssl/www.chatben.co.crt;
-  ssl_certificate_key  /ssl/www.chatben.co.key;
+  server_name          www.chatben.tv;
+  ssl_certificate      /ssl/www.chatben.tv.crt;
+  ssl_certificate_key  /ssl/www.chatben.tv.key;
 
-  return 301 https://www.chatben.co$request_uri;
+  return 301 https://chatben.tv$request_uri;
 }
 
 server {
-  server_name          chatben.co;
+  server_name          chatben.tv;
   listen               *:80;
   listen               [::]:80;
 
-  return 301 https://www.chatben.co$request_uri;
+  return 301 https://chatben.tv$request_uri;
 }
 
 server {
-  server_name          www.chatben.co;
+  server_name          www.chatben.tv;
   listen               *:80;
   listen               [::]:80;
 
-  return 301 https://www.chatben.co$request_uri;
+  return 301 https://chatben.tv$request_uri;
 }
 
 upstream app {
@@ -29,7 +29,7 @@ upstream app {
 
 server {
   listen 443 ssl;
-  server_name www.chatben.co;
+  server_name chatben.tv;
 
   root /home/dev/workspace/convo/public;
   try_files $uri/index.html $uri @app;
@@ -63,8 +63,8 @@ server {
   keepalive_timeout 10;
 
   ssl on;
-  ssl_certificate /ssl/www.chatben.co.crt;
-  ssl_certificate_key /ssl/www.chatben.co.key;
+  ssl_certificate /ssl/chatben.tv.crt;
+  ssl_certificate_key /ssl/chatben.tv.key;
 
   ssl_session_timeout 5m;
 
