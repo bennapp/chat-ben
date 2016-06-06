@@ -66,8 +66,8 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :sendmail
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = { from: 'donotreply@chatben.co' }
-  config.action_mailer.default_url_options = { :host => 'chatben.co' }
+  config.action_mailer.default_options = { from: 'donotreply@chatben.tv' }
+  config.action_mailer.default_url_options = { :host => 'chatben.tv' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -86,5 +86,5 @@ Rails.application.configure do
   config.to_prepare { Devise::RegistrationsController.force_ssl }
   config.to_prepare { Devise::PasswordsController.force_ssl }
 
-  config.action_cable.allowed_request_origins = ['https://www.chatben.co', 'https://45.55.192.195']
+  config.action_cable.allowed_request_origins = ['https://chatben.tv', 'https://45.55.192.195']
 end
