@@ -23,6 +23,40 @@ server {
   return 301 https://chatben.tv$request_uri;
 }
 
+server {
+  listen 443 ssl;
+  server_name          chatben.co;
+  ssl_certificate      /ssl/www.chatben.co.crt;
+  ssl_certificate_key  /ssl/www.chatben.co.key;
+
+  return 301 https://chatben.tv$request_uri;
+}
+
+server {
+  listen 443 ssl;
+  server_name          www.chatben.co;
+  ssl_certificate      /ssl/www.chatben.co.crt;
+  ssl_certificate_key  /ssl/www.chatben.co.key;
+
+  return 301 https://chatben.tv$request_uri;
+}
+
+server {
+  server_name          chatben.co;
+  listen               *:80;
+  listen               [::]:80;
+
+  return 301 https://chatben.tv$request_uri;
+}
+
+server {
+  server_name          www.chatben.co;
+  listen               *:80;
+  listen               [::]:80;
+
+  return 301 https://chatben.tv$request_uri;
+}
+
 upstream app {
   server unix:/home/dev/workspace/convo/shared/sockets/puma.sock fail_timeout=0;
 }
