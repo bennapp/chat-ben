@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521214728) do
+ActiveRecord::Schema.define(version: 20160606212517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,8 +122,10 @@ ActiveRecord::Schema.define(version: 20160521214728) do
     t.boolean  "full",       default: false, null: false
     t.boolean  "waiting",    default: false, null: false
     t.boolean  "fresh",      default: false, null: false
+    t.integer  "bin_id"
   end
 
+  add_index "rooms", ["bin_id"], name: "index_rooms_on_bin_id", using: :btree
   add_index "rooms", ["deleted_at"], name: "index_rooms_on_deleted_at", using: :btree
   add_index "rooms", ["post_id"], name: "index_rooms_on_post_id", using: :btree
 
@@ -154,4 +156,5 @@ ActiveRecord::Schema.define(version: 20160521214728) do
   add_foreign_key "likes", "users"
   add_foreign_key "reactions", "posts"
   add_foreign_key "reactions", "users"
+  add_foreign_key "rooms", "bins"
 end

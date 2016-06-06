@@ -5,6 +5,7 @@ class Room < ActiveRecord::Base
   # end acts_as_paranoid
 
   belongs_to :post
+  belongs_to :bin
   has_many :participations
 
   validates_presence_of :token
