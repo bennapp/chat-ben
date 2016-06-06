@@ -150,15 +150,6 @@ video {
       }
     }
 
-    .buttons-info-container {
-      margin-top: 12px;
-
-      .control-buttons {
-        display: flex;
-        justify-content: space-between;
-      }
-    }
-
     .bin-controls-container {
       display: flex;
       justify-content: space-between;
@@ -176,6 +167,23 @@ video {
           padding: 6px 6px;
         }
       }
+    }
+
+    .post-info-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 2px 0px;
+
+      h3 {
+        margin: 0px;
+      }
+    }
+
+    .post-controls-container {
+      display: flex;
+      justify-content: space-between;
+      padding: 2px 0px;
     }
   }
 
