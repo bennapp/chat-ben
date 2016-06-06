@@ -1,8 +1,8 @@
 server {
   listen 443 ssl;
   server_name          www.chatben.tv;
-  ssl_certificate      /ssl/www.chatben.tv.crt;
-  ssl_certificate_key  /ssl/www.chatben.tv.key;
+  ssl_certificate      /ssl/chatben.tv.chained.crt;
+  ssl_certificate_key  /ssl/chatben.tv.key;
 
   return 301 https://chatben.tv$request_uri;
 }
@@ -63,7 +63,7 @@ server {
   keepalive_timeout 10;
 
   ssl on;
-  ssl_certificate /ssl/chatben.tv.crt;
+  ssl_certificate /ssl/chatben.tv.chained.crt;
   ssl_certificate_key /ssl/chatben.tv.key;
 
   ssl_session_timeout 5m;
