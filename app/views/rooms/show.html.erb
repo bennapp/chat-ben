@@ -2,10 +2,8 @@
 
 <div class="room-page page">
   <div class="left-panel">
-    <h2 class="bin-header" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h2>
     <div class="post-content-container">
       <div class="content-container">
-        <h4 class="post-header" id="<%= @room.post.id %>"><%= @room.post.title %></h4>
         <% if @room.post.link.present? && @room.post.format_link.blank? %>
           <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
         <% end %>
@@ -42,6 +40,18 @@
             </div>
           </div>
         <% end %>
+
+        <div class="bin-controls-container">
+          <h2 class="bin-header" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h2>
+          <div class="bin-control-buttons">
+            <button id="channel-up" class="btn"><span class="fa fa-arrow-up"></span></buttons>
+            <button id="channel-down" class="btn"><span class="fa fa-arrow-down"></span></buttons>
+          </div>
+        </div>
+
+        <div class="post-controls-container">
+          <h4 class="post-header" id="<%= @room.post.id %>"><%= @room.post.title %></h4>
+        </div>
       </div>
 
       <div class='buttons-info-container'>

@@ -126,11 +126,6 @@ video {
     }
 
     .post-content-container {
-      h2 {
-        margin-top: 0px;
-        margin-bottom: 8px;
-      }
-
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -161,6 +156,25 @@ video {
       .control-buttons {
         display: flex;
         justify-content: space-between;
+      }
+    }
+
+    .bin-controls-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2px 0px;
+
+      h2 {
+        margin: 0px;
+      }
+
+      .bin-control-buttons {
+        .btn {
+          margin: 4px 0px;
+          display: block;
+          padding: 6px 6px;
+        }
       }
     }
   }
