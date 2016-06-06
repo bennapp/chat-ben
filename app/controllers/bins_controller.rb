@@ -37,9 +37,9 @@ class BinsController < ApplicationController
       waiting_user_id.present? && !bad_rating?(waiting_user_id) && !(room.fresh? && just_chat?(waiting_user_id))
     end
 
-    room = @post.rooms.create if room.blank?
+    room = @post.rooms.create(bin: @bin) if room.blank?
 
-    redirect_to room_path(room, channel: @bin.id)
+    redirect_to room_path(room)
   end
 
   # GET /bins/new

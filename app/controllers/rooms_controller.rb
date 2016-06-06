@@ -8,7 +8,6 @@ class RoomsController < ApplicationController
 
   def show
     @bins = Bin.all
-    @bin = Bin.find(params['channel'])
     @post = Post.new
     @hide_footer = true
 
