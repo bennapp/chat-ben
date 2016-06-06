@@ -45,12 +45,6 @@
       </div>
 
       <div class='buttons-info-container'>
-        <h5>Dry Erase Board - Leave a message! Press Enter to save.</h5>
-        <div class="wall-container">
-          <textarea id="board" placeholder="Leave a message for everyone to see!"><%= @room.post.comment %></textarea>
-          <div class="edit-by-conatiner">last edited by: <span class="edited-by"><%= @room.post.last_editor.try(:name) %></span></div>
-        </div>
-
         <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
 
         <div class="buttons">
@@ -183,6 +177,14 @@
 
         <%= f.submit "Submit Rating", class: 'submit-rating btn btn-primary' %>
       <% end %>
+    </div>
+
+    <div class="dry-erase-board-container">
+      <h5>Dry Erase Board - Leave a message! Press Enter to save.</h5>
+      <div class="wall-container">
+        <textarea id="board" placeholder="Leave a message for everyone to see!"><%= @room.post.comment %></textarea>
+        <div class="edit-by-conatiner">last edited by: <span class="edited-by"><%= @room.post.last_editor.try(:name) %></span></div>
+      </div>
     </div>
   </div>
 

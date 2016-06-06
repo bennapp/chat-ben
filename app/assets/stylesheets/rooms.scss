@@ -163,16 +163,6 @@ video {
         justify-content: space-between;
       }
     }
-
-    .wall-container {
-      margin-bottom: 20px;
-
-      #board {
-        min-width: 100%;
-        border-radius: 4px;
-        min-height: 60px;
-      }
-    }
   }
 
   .reaction-panel {
@@ -311,6 +301,18 @@ video {
         video {
           margin-bottom: -4px;
           max-width: 100% !important;
+        }
+      }
+    }
+
+    .dry-erase-board-container {
+      .wall-container {
+        margin-bottom: 20px;
+
+        #board {
+          min-width: 100%;
+          border-radius: 4px;
+          min-height: 60px;
         }
       }
     }
