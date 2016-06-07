@@ -1,18 +1,5 @@
 $container-margin: 20px;
 
-.glow {
-  display: block;
-  float: left;
-  width: 10px;
-  height: 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  border-radius: 100%;
-  background: rgba(255,255,255,0.9);
-  box-shadow: inset 0px 0px 10px 2px rgba(0,255,182,0.9), 0px 0px 10px 2px rgba(0,255,135,0.9);
-  animation: pulse 1s alternate infinite;
-}
-
 .red-glow {
   display: block;
   float: left;
@@ -37,40 +24,6 @@ $container-margin: 20px;
     box-shadow: inset 0px 0px 10px 2px rgba(244,5,5,0.9),
                       0px 0px 15px 2px rgba(255,0,0,1);
   }
-}
-
-@keyframes pulse {
-  0% {
-    background: rgba(255,255,255,0.9);
-    box-shadow: inset 0px 0px 10px 2px rgba(0,255,182,0.9),
-                      0px 0px 5px 2px rgba(0,255,135,0.9);
-  }
-  100% {
-    background: rgba(255,255,255,1);
-    box-shadow: inset 0px 0px 10px 2px rgba(0,255,182,0.9),
-                      0px 0px 15px 2px rgba(0,255,135,1);
-  }
-}
-
-@keyframes blink {
-	0% {
-		background-color: rgba(92, 184, 92, 1);
-	}
-	50% {
-		background-color: rgba(57, 255, 20, 0.8);
-	}
-	100% {
-		background-color: rgba(92, 184, 92, 1);
-	}
-}
-
-.blink {
-	transition: all 2s ease-in-out;
-  animation: blink normal 2.5s infinite ease-in-out;
-}
-
-.btn.blink {
-	border: none;
 }
 
 .page-container {

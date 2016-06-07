@@ -1,52 +1,5 @@
 <div class="page-container page">
   <div class="channel-panel">
-    <div class="new-post-button-and-container">
-      <div class="btn-container">
-        <%= link_to 'javascript:;', class: 'btn btn-primary new-post-button' do %>
-          <span class="new-post-key">N</span>ew Post
-        <% end %>
-      </div>
-
-      <div class="new-post-container" style="display: none;">
-        <%= form_for(@post) do |f| %>
-          <div class="fields">
-            <div class="field new-post-field new-post-title">
-              <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
-            </div>
-            <div class="field new-post-field">
-              <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
-            </div>
-            <div class="field new-post-field">
-              <%= f.collection_select(:bin_id, @bins, :id, :title, { selected: @bin.try(:id) }, { name: "post[bin_id]" }) %>
-            </div>
-          </div>
-          <% if current_user && current_user.is_admin? %>
-            <div class="field new-post-field">
-              <%= f.label :sticky %>
-              <%= f.check_box :sticky %>
-            </div>
-            <div class="field new-post-field">
-              <%= f.label :live %>
-              <%= f.check_box :live %>
-            </div>
-          <% end %>
-          <div class="new-post-textarea">
-            <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
-          </div>
-          <div class="fields">
-            <div class="btn-container">
-              <%= f.submit class: 'btn btn-primary', tabindex: 4 %>
-            </div>
-            <div class="btn-container clear-button">
-              <button type="button" class="btn btn-default" aria-label="Left Align", tabindex="4">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-              </button>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
     <div class="bins-container">
       <div class="bins">
         <% @bins.each do |bin| %>
@@ -102,6 +55,5 @@ $(function () {
 });
 $(document).ready(function() {
   var posts = new Posts();
-  var newPost = new NewPost();
 });
 </script>
