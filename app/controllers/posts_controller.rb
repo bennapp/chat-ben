@@ -17,10 +17,8 @@ class PostsController < ApplicationController
 
   def create
     bin_id = post_params[:bin_id]
-    @post = Post.new(post_params.except(:bin_id))
+    @post = Post.new(post_params)
     @post.user = current_user
-    @post.sticky = false unless current_user.is_admin?
-    @post.live = false unless current_user.is_admin?
 
     respond_to do |format|
       if @post.save && PostBin.create(post_id: @post.id, bin_id: bin_id)
@@ -66,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :link, :text_content, :sticky, :live, :bin_id)
+    params.require(:post).permit(:title, :link, :text_content, :bin_id)
   end
 
   def bad_rating?(user_id)

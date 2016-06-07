@@ -12,6 +12,7 @@ class Post < ActiveRecord::Base
   has_many :likes
   has_many :reactions
   belongs_to :last_editor, class_name: 'User', foreign_key: 'editor_id'
+  has_one :origin_bin, class_name: 'Bin', foreign_key: 'bin_id'
 
   before_save :format_link_into_lightbox_html
 

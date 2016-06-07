@@ -51,15 +51,15 @@
   </script>
   <body>
     <div class="page-header">
-        <div class="page-title"><%= link_to image_tag('chatbenlogo.png'), root_url %>
-          <small class="lead">its TV on the internet with your friends.</small>
-        </div>
-        <div class="total-users-container">
-          <span id="total-users"><%= User.where(active: true).count %></span><span> users on now!</span>
-          <% if current_user %>
-            <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
-          <% end %>
-        </div>
+      <div class="page-title"><%= link_to image_tag('chatbenlogotv.png'), root_url %>
+        <small class="lead">its TV on the internet with your friends.</small>
+      </div>
+      <div class="total-users-container">
+        <span id="total-users"><%= User.where(active: true).count %></span><span> users on now!</span>
+        <% if current_user %>
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete, class: 'logout-link') %>
+        <% end %>
+      </div>
     </div>
 
     <% if flash[:notice] %>

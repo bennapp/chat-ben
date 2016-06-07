@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607004201) do
+ActiveRecord::Schema.define(version: 20160607230049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,8 +90,10 @@ ActiveRecord::Schema.define(version: 20160607004201) do
     t.string   "comment"
     t.integer  "editor_id"
     t.boolean  "live",         default: false, null: false
+    t.integer  "bin_id"
   end
 
+  add_index "posts", ["bin_id"], name: "index_posts_on_bin_id", using: :btree
   add_index "posts", ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
@@ -167,6 +169,7 @@ ActiveRecord::Schema.define(version: 20160607004201) do
   add_foreign_key "guide_positions", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "posts", "bins"
   add_foreign_key "reactions", "posts"
   add_foreign_key "reactions", "users"
   add_foreign_key "rooms", "bins"

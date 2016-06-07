@@ -12,7 +12,7 @@ class Bin < ApplicationRecord
     @post_ids = posts_attributes.map { |post_attribute|
       if post_attribute['title'].present?
         post_attribute.delete('id')
-        post = Post.create(post_attribute)
+        post = Post.create(post_attribute.merge({bin_id: id}))
         post.id
       elsif post_attribute["id"].present?
         post_attribute["id"]
