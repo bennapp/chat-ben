@@ -4,7 +4,7 @@ class @RoomChannel
 
     boardKeyPress = (e) ->
       if e.which == 13 && $('#board').val() != '' && e.shiftKey == false
-        window.commentChannel.perform("comment", comment: $('#board').val(), post_id: $('.post-header')[0].id)
+        window.commentChannel.perform("comment", comment: $('#board').val(), post_id: $('.post-header').data('post-id'))
         $('#board').blur()
         return false;
 
@@ -22,26 +22,34 @@ class @RoomChannel
         console.log('rejected')
 
       received: (data) ->
-        if data.action == 'add_reaction' && data.post_id.toString() == $('.post-header')[0].id
+        if data.action == 'add_reaction' && data.post_id.toString() == $('.post-header').data('post-id')
           videoURL = data.reaction_url
           $('.reactions-container').prepend("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{videoURL}\" autoplay controls=true></video></div>")
-        else if data.action == 'new_comment' && data.post_id.toString() == $('.post-header')[0].id
+        else if data.action == 'new_comment' && data.post_id.toString() == $('.post-header').data('post-id')
           $('#board').val(data.comment)
           $('.edited-by').text(data.edited_by)
 
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
-        window.nextPost = (postId, options={}) =>
-          @perform("next_post", post_id: postId, first_post: options.firstPost, bin_id: $('.bin-header').data('bin-id'))
+        window.nextPost = =>
+          @perform("next_post", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
 
         nextPostClick = ->
-          window.nextPost($('.post-header')[0].id)
+          window.nextPost()
 
-        previousePostClick = ->
-          #
+        prevPostClick = =>
+          @perform("prev_post", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
+
+        channelUpClick = ->
+          @perform("channel_up", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
+
+        channelDownClick = ->
+          @perform("channel_down", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
 
         $('#next-post').click nextPostClick
-        $('#previous-post').click previousePostClick
+        $('#prev-post').click prevPostClick
+        $('#channel-up').click channelUpClick
+        $('#channel-down').click channelDownClick
 
       disconnected: ->
 
@@ -49,12 +57,7 @@ class @RoomChannel
 
       received: (data) ->
         action = data.action
-        if action == 'next_post'
-          postHistory.push data.id unless data.first_post
-          fullHistory.push data.id unless data.first_post
-
-          # If somone refreshes the page they can next someone elses content
-          # return if window.RoomShow.status == 'ending'
+        if action == 'advance_post'
           $like = $('#like')
           $dislike = $('#dislike')
           if data.like
@@ -74,16 +77,20 @@ class @RoomChannel
           $('.like-count').text(data.like_count)
           $('.like-count').attr("data-post-id", data.id)
 
-          $container = $('.content-container')
-          $container.empty()
-          $container.append("<h4 class=\"post-header\" id=\"#{data.id}\">#{data.title}</h4>")
+          $('.post-header').text(data.title)
+          $('.post-header').data('post-id', data.id)
+
           $('.posted-by').text(data.posted_by)
 
+          $container = $('.content-container')
+
+          $('.preview').remove()
           if data.link && data.full_url && !data.format_link
             $container.append("<a target=\"_blank\" class=\"preview\" href=\"\"></a>")
             $('.preview').text(data.full_url)
             $('.preview').attr('href', data.full_url)
 
+          $('.well').remove()
           if data.text_content
             $container.append("<div class=\"well\"></div>")
             $('.content-container .well').text(data.text_content)
@@ -98,8 +105,9 @@ class @RoomChannel
               }
               $('.read-more').featherlight('<div class=\"well\"></div>', options);
 
+          $('.embeded-content-container').remove()
           if data.format_link
-            $container.append("<div class=\"embed-responsive embed-responsive-4by3 embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
+            $container.prepend("<div class=\"embed-responsive embed-responsive-4by3 embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
             $wrapper = $('.embeded-content-wrapper')
             if data.format_type == 'imgur'
               $wrapper.append("<blockquote class=\"imgur-embed-pub\" lang=\"en\" data-id=#{data.format_link}><a href=\"//imgur.com/#{data.format_link}\"></a></blockquote>")
@@ -119,7 +127,7 @@ class @RoomChannel
 
               onPlayerStateChange = (event) ->
                 if event.target.getPlayerState() == 0
-                  window.nextPost($('.post-header')[0].id)
+                  window.nextPost()
 
               if YT
                 player = new (YT.Player)('ytplayer',
@@ -145,7 +153,7 @@ class @RoomChannel
                 player.setVolume 0.1
                 player.play()
                 player.addEventListener 'ended', ->
-                  window.nextPost $('.post-header')[0].id
+                  window.nextPost()
                 return
 
               $.ajax

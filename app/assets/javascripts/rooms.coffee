@@ -47,7 +47,7 @@ class @RoomShow
       $('.reactions-and-react-button').removeClass('display-none')
       $('#react-button').removeClass('display-none')
       fd = new FormData();
-      fd.append('post_id', $('.post-header')[0].id);
+      fd.append('post_id', $('.post-header').data('post-id'));
       fd.append('video', recordRTC.getBlob());
       $.post
         url: "/reactions",
@@ -55,7 +55,7 @@ class @RoomShow
         processData: false,
         contentType: false,
         success: (data) =>
-          window.addReaction($('.post-header')[0].id)
+          window.addReaction($('.post-header').data('post-id'))
 
     $('#toss-reaction').click ->
       $('#react-button').removeClass('display-none')
@@ -127,8 +127,6 @@ class @RoomShow
         remote.insertBefore d, remote.firstChild
 
       document.getElementById('notification-sound').play()
-
-      window.nextPost(@postId, firstPost: true)
 
       $('.control-buttons').removeClass('display-none')
       $('.no-user-container').addClass('display-none')
@@ -223,7 +221,6 @@ class @RoomShow
   _newPostButton: ->
     $ratingForm = $("#new_post")
     $ratingForm.on "ajax:success", (e, data, status, xhr) ->
-      window.nextPost(data.id, firstPost: true)
       newPost = new NewPost
       newPost.hideNewPost()
 

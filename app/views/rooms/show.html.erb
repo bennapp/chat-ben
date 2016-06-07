@@ -53,8 +53,7 @@
         </div>
 
         <div class="post-info-container">
-          <h3 class="post-header" id="<%= @room.post.id %>"><%= @room.post.title %></h3>
-
+          <h3 class="post-header" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h3>
           <div class="likes">
             <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
             <% if Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
@@ -66,7 +65,7 @@
         </div>
 
         <div class="post-controls-container">
-          <button id="previous-post" class="btn btn-primary">Prev Show</button>
+          <button id="prev-post" class="btn btn-primary">Prev Show</button>
           <button id="next-post" data-toggle="tooltip" data-placement="top" title="Press this button to view the next show on this channel!" class="btn btn-primary">Next Show</button>
         </div>
       </div>
@@ -221,7 +220,6 @@
 <script>
   $(document).ready(function(){
     var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>'});
-    var binChannel = new BinChannel({ binId: '<%= @room.bin.id %>'});
     var likeChannel = new LikeChannel();
     var roomShow = new RoomShow({
       room: '<%= @room.token %>',

@@ -22,7 +22,6 @@ class Post < ActiveRecord::Base
   validates_presence_of :user
   validates_presence_of :title
 
-  after_create :broadcast_create
   after_create :create_like
 
   def create_like
@@ -38,13 +37,7 @@ class Post < ActiveRecord::Base
   end
 
   def destroy
-    updated = update_attribute(:deleted_at, current_time_from_proper_timezone)
-    ActionCable.server.broadcast("post_channel", { id: id, action: 'destroy' }) if updated
-    updated
-  end
-
-  def broadcast_create
-    ActionCable.server.broadcast("post_channel", { id: id, title: title, action: 'create', user: user.name })
+    update_attribute(:deleted_at, current_time_from_proper_timezone)
   end
 
   def num_chatted
