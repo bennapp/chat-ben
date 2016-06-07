@@ -5,7 +5,7 @@ class BinsController < ApplicationController
 
   # GET /bins
   def index
-    @bins = Bin.all
+    @bins = Bin.all.sort_by { |bin| bin.id }
   end
 
   # GET /bins/1

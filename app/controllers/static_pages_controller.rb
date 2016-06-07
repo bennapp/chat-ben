@@ -3,6 +3,6 @@ class StaticPagesController < ApplicationController
 
   def home
     @post = Post.new
-    @bins = Bin.all
+    @bins = Bin.all.sort_by { |bin| bin.id }
   end
 end
