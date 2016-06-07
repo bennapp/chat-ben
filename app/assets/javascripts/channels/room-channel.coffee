@@ -1,8 +1,6 @@
 class @RoomChannel
   constructor: (options) ->
     roomToken = options.roomToken
-    window.postHistory = [options.postId]
-    window.fullHistory = [options.postId]
 
     boardKeyPress = (e) ->
       if e.which == 13 && $('#board').val() != '' && e.shiftKey == false
@@ -34,17 +32,13 @@ class @RoomChannel
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
       connected: ->
         window.nextPost = (postId, options={}) =>
-          @perform("next_post", post_id: postId, first_post: options.firstPost, post_history: window.fullHistory, bin_id: $('.bin-header').data('bin-id'))
+          @perform("next_post", post_id: postId, first_post: options.firstPost, bin_id: $('.bin-header').data('bin-id'))
 
         nextPostClick = ->
           window.nextPost($('.post-header')[0].id)
 
         previousePostClick = ->
-          if postHistory.length == 1
-            window.nextPost(window.postHistory[0], firstPost: true)
-          else
-            window.postHistory.pop()
-            window.nextPost(window.postHistory[window.postHistory.length - 1], firstPost: true)
+          #
 
         $('#next-post').click nextPostClick
         $('#previous-post').click previousePostClick
