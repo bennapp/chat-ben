@@ -40,10 +40,10 @@ class @RoomChannel
         prevPostClick = =>
           @perform("prev_post", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
 
-        channelUpClick = ->
+        channelUpClick = =>
           @perform("channel_up", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
 
-        channelDownClick = ->
+        channelDownClick = =>
           @perform("channel_down", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
 
         $('#next-post').click nextPostClick
@@ -79,6 +79,9 @@ class @RoomChannel
 
           $('.post-header').text(data.title)
           $('.post-header').data('post-id', data.id)
+
+          $('.bin-header').text(data.bin_title)
+          $('.bin-header').data('bin-id', data.bin_id)
 
           $('.posted-by').text(data.posted_by)
 
