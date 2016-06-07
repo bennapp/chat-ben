@@ -89,16 +89,6 @@
               <%= f.collection_select(:bin_id, @bins, :id, :title, { selected: @room.bin.try(:id) }, { name: "post[bin_id]" }) %>
             </div>
           </div>
-          <% if current_user && current_user.is_admin? %>
-            <div class="field new-post-field">
-              <%= f.label :sticky %>
-              <%= f.check_box :sticky %>
-            </div>
-            <div class="field new-post-field">
-              <%= f.label :live %>
-              <%= f.check_box :live %>
-            </div>
-          <% end %>
           <div class="new-post-textarea">
             <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
           </div>

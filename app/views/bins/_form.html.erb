@@ -21,11 +21,28 @@
     <%= f.text_area :description, tabindex: 2 %>
   </div>
 
-  <p>The first one is the introduction and the second one is the one that will show on the front page</p>
-
-  <% (0..19).each do |i| %>
-    <%= f.collection_select(:post_ids, @posts, :id, :id_with_title, { include_blank: 'None', selected: @bin.posts[i].try(:id) }, { name: "bin[post_ids][#{i}]" }) %>
-  <% end %>
+  <div class="bin-forms">
+    <% (0..100).each do |i| %>
+      <div class="bin-form">
+        <p><%= i + 1 %></p>
+        <%= f.collection_select(:post_ids, @posts, :id, :id_with_title, { include_blank: 'None', selected: @bin.posts[i].try(:id) }, { name: "bin[post_ids][#{i}]" }) %>
+        <p>Or create a new post</p>
+        <%= f.fields_for "posts[#{i}]" do |post| %>
+          <div class="fields">
+            <div class="field new-post-field new-post-title">
+              <%= post.text_field :title, placeholder: 'Title' %>
+            </div>
+            <div class="field new-post-field">
+              <%= post.text_field :link, placeholder: 'Link (optional)' %>
+            </div>
+          </div>
+          <div class="new-post-textarea">
+            <%= post.text_area :text_content, placeholder: 'Text (optional)' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>

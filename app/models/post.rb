@@ -5,10 +5,6 @@ class Post < ActiveRecord::Base
   scope :with_deleted, -> { where.not(deleted_at: nil) }
   # end acts_as_paranoid
 
-  scope :from_three_weeks_ago, -> { where('posts.created_at > ?', 2.weeks.ago.utc) }
-  # Change back after chat ben night
-  # scope :from_three_weeks_ago, -> { where('posts.created_at > ?', 2.days.ago.utc) }
-
   belongs_to :user
   has_many :bins, through: :post_bins
   has_many :post_bins
@@ -19,7 +15,6 @@ class Post < ActiveRecord::Base
 
   before_save :format_link_into_lightbox_html
 
-  validates_presence_of :user
   validates_presence_of :title
 
   after_create :create_like

@@ -8,27 +8,6 @@ class BinsController < ApplicationController
     @bins = Bin.all
   end
 
-  # def new_chat
-  #   post = Post.find_by_id(params[:id])
-
-  #   if post.present?
-  #     rooms = post.rooms.where('rooms.full is false').where('rooms.waiting is true')
-  #   else
-  #     rooms = Room.where('rooms.full is false').where('rooms.waiting is true')
-  #     post = Post.without_deleted.from_three_weeks_ago.sample if post.blank?
-  #   end
-
-  #   room = rooms.select { |room|
-  #     waiting_user_id = room.participations.first.try(:user_id)
-  #     waiting_user_id.present? && !bad_rating?(waiting_user_id) && !just_chat?(waiting_user_id)
-  #   }.first
-
-  #   room = post.rooms.create if room.blank?
-  #   room.update_attribute(:fresh, true)
-
-  #   redirect_to room_path(room)
-  # end
-
   # GET /bins/1
   def show
     rooms = @post.rooms.where('rooms.full is false').where('rooms.waiting is true')
@@ -44,13 +23,15 @@ class BinsController < ApplicationController
 
   # GET /bins/new
   def new
+    @hide_footer = true
     @bin = Bin.new
-    @posts = Post.without_deleted.from_three_weeks_ago.sort_by { |post| post.title }
+    @posts = Post.without_deleted.sort_by { |post| post.title }
   end
 
   # GET /bins/1/edit
   def edit
-    @posts = Post.without_deleted.from_three_weeks_ago.sort_by { |post| post.title }
+    @hide_footer = true
+    @posts = Post.without_deleted.sort_by { |post| post.title }
   end
 
   # POST /bins
@@ -58,7 +39,7 @@ class BinsController < ApplicationController
     @bin = Bin.new(bin_params)
 
     if @bin.save
-      redirect_to @bin, notice: 'Bin was successfully created.'
+      redirect_to action: :index, notice: 'Bin was successfully created.'
     else
       render :new
     end
@@ -67,7 +48,7 @@ class BinsController < ApplicationController
   # PATCH/PUT /bins/1
   def update
     if @bin.update(bin_params)
-      redirect_to @bin, notice: 'Bin was successfully updated.'
+      redirect_to action: :index, notice: 'Bin was successfully updated.'
     else
       render :edit
     end
@@ -98,8 +79,14 @@ class BinsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def bin_params
     @params ||= begin
-      request_params = params.require(:bin).permit(:title, :description, :post_ids => (0..19).to_a.map(&:to_s) )
-      request_params['post_ids'] = request_params['post_ids'].values
+      request_params = params.require(:bin).permit(:title, :description, :post_ids => (0..100).to_a.map(&:to_s), :posts => [:title, :link, :text_content] )
+      post_ids = request_params['post_ids'].values
+      request_params.delete('post_ids')
+      posts = request_params['posts'].values
+      request_params.delete('posts')
+
+      posts.each_with_index { |post, index| post['id'] = post_ids[index] }
+      request_params['posts_attributes'] = posts
       request_params
     end
   end

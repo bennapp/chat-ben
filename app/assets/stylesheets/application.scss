@@ -199,3 +199,18 @@ body {
 		float: right;
 	}
 }
+
+.bin-forms {
+	display: flex;
+	flex-wrap: wrap;
+
+	.bin-form {
+		padding: 0px 10px;
+		border: 1px solid black;
+	}
+
+	select {
+		width: 160px;
+	}
+
+}
