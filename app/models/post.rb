@@ -32,20 +32,12 @@ class Post < ActiveRecord::Base
     likes.pluck(:dislike).sum { |dislike| dislike ? -1 : 1 }
   end
 
-  def sort_order
-    [-num_waiting, (sticky? ? -1 : 1), -like_count]
-  end
-
   def destroy
     update_attribute(:deleted_at, current_time_from_proper_timezone)
   end
 
-  def num_chatted
-    @num_chatted ||= Participation.joins(:room).joins('inner join posts on rooms.post_id = posts.id').where('posts.id = ?', id).count
-  end
-
-  def num_waiting
-    @num_waiting = rooms.where(waiting: true).where(full: false).count
+  def id_with_title
+    "#{id} - #{title}"
   end
 
   def full_url

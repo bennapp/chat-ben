@@ -9,7 +9,7 @@
         <% end %>
 
         <% if @room.post.text_content.present? %>
-          <div class="well">
+          <div class="well post-content">
             <%= html_escape(simple_format @room.post.text_content) %>
           </div>
 
@@ -19,7 +19,7 @@
             </div>
 
             <script>
-              $('.read-more').featherlight('<div class=\"well\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
+              $('.read-more').featherlight('<div class=\"well post-content\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
                   closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
                   otherClose: '.escape-icon',
                   afterOpen: function() {

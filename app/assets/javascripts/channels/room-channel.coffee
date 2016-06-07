@@ -93,9 +93,9 @@ class @RoomChannel
             $('.preview').text(data.full_url)
             $('.preview').attr('href', data.full_url)
 
-          $('.well').remove()
+          $('.well.post-content').remove()
           if data.text_content
-            $container.append("<div class=\"well\"></div>")
+            $container.append("<div class=\"well post-content\"></div>")
             $('.content-container .well').text(data.text_content)
             if data.text_content.length > 500
               $container.append("<div class=\"btn btn-info read-more\" aria-label=\"Left Align\"><span class=\"fa fa-file-text-o fa-lg\" aria-hidden=\"true\"></span> Read more</div>")
