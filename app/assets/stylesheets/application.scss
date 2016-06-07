@@ -76,32 +76,35 @@ body {
 }
 
 .page-header{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	padding: 0;
+
 	img {
 		max-height: 106px;
 	}
 
+	small {
+		vertical-align: bottom;
+		font-weight: 600;
+		color: black;
+		text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+		margin-left: 10px;
+	}
+
 	.page-title {
-		margin-left: 2.5%;
+		margin-left: 10px;
 		font-family: 'Raleway', sans-serif;
 		font-weight: 700;
-
-		small {
-			font-weight: 600;
-			// color: $sub-text-grey;
-			color: black;
-			text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-			margin-left: 10px;
-		}
 	}
 
 	.total-users-container {
-		float: right;
-		margin-right: 44px;
-		margin-top: -74px;
 		font-size: 24px;
 		font-weight: bold;
 		font-family: 'Raleway', sans-serif;
-		color: darken(#5bc0de, 9.5%); //info
+		color: #00AAE4; //Logo blue
+		margin-right: 20px;
 
 		.logout-link {
 			margin-left: 20px;

@@ -185,6 +185,13 @@ video {
       justify-content: space-between;
       padding: 2px 0px;
     }
+
+    .content-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
   }
 
   .reaction-panel {

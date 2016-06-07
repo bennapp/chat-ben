@@ -42,67 +42,71 @@
               </div>
             </div>
           <% end %>
+        <% else %>
+          <div> </div>
         <% end %>
 
-        <div class="bin-controls-container">
-          <h2 class="bin-header" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h2>
-          <div class="bin-control-buttons">
-            <button id="channel-up" class="btn"><span class="fa fa-arrow-up"></span></button>
-            <button id="channel-down" class="btn"><span class="fa fa-arrow-down"></span></button>
-          </div>
-        </div>
-
-        <div class="post-info-container">
-          <h3 class="post-header" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h3>
-          <div class="likes">
-            <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
-            <% if Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
-              <button id="like" class="btn btn-primary"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
-            <% else %>
-              <button id="like" class="btn btn-default"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="post-controls-container">
-          <button id="prev-post" class="btn btn-primary">Prev Show</button>
-          <button id="next-post" data-toggle="tooltip" data-placement="top" title="Press this button to view the next show on this channel!" class="btn btn-primary">Next Show</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="new-post-button-and-container">
-      <div class="btn-container">
-        <%= link_to 'Add Show to Channel', 'javascript:;', class: 'btn btn-primary new-post-button' %>
-      </div>
-
-      <div class="new-post-container" style="display: none;">
-        <%= form_for(@post, remote: true, html: {'data-type': 'json'}) do |f| %>
-          <div class="fields">
-            <div class="field new-post-field new-post-title">
-              <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
-            </div>
-            <div class="field new-post-field">
-              <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
-            </div>
-            <div class="field new-post-field">
-              <%= f.collection_select(:bin_id, @bins, :id, :title, { selected: @room.bin.try(:id) }, { name: "post[bin_id]" }) %>
+        <div class="controls-container">
+          <div class="bin-controls-container">
+            <h2 class="bin-header" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h2>
+            <div class="bin-control-buttons">
+              <button id="channel-up" class="btn"><span class="fa fa-arrow-up"></span></button>
+              <button id="channel-down" class="btn"><span class="fa fa-arrow-down"></span></button>
             </div>
           </div>
-          <div class="new-post-textarea">
-            <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
+
+          <div class="post-info-container">
+            <h3 class="post-header" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h3>
+            <div class="likes">
+              <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
+              <% if Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
+                <button id="like" class="btn btn-primary"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
+              <% else %>
+                <button id="like" class="btn btn-default"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
+              <% end %>
+            </div>
           </div>
-          <div class="fields">
+
+          <div class="post-controls-container">
+            <button id="prev-post" class="btn btn-primary">Prev Show</button>
+            <button id="next-post" data-toggle="tooltip" data-placement="top" title="Press this button to view the next show on this channel!" class="btn btn-primary">Next Show</button>
+          </div>
+
+          <div class="new-post-button-and-container">
             <div class="btn-container">
-              <%= f.submit class: 'btn btn-primary', tabindex: 4 %>
+              <%= link_to 'Add Show to Channel', 'javascript:;', class: 'btn btn-primary new-post-button' %>
             </div>
-            <div class="btn-container clear-button">
-              <button type="button" class="btn btn-default" aria-label="Left Align", tabindex="4">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-              </button>
+
+            <div class="new-post-container" style="display: none;">
+              <%= form_for(@post, remote: true, html: {'data-type': 'json'}) do |f| %>
+                <div class="fields">
+                  <div class="field new-post-field new-post-title">
+                    <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
+                  </div>
+                  <div class="field new-post-field">
+                    <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
+                  </div>
+                  <div class="field new-post-field">
+                    <%= f.collection_select(:bin_id, @bins, :id, :title, { selected: @room.bin.try(:id) }, { name: "post[bin_id]" }) %>
+                  </div>
+                </div>
+                <div class="new-post-textarea">
+                  <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
+                </div>
+                <div class="fields">
+                  <div class="btn-container">
+                    <%= f.submit class: 'btn btn-primary', tabindex: 4 %>
+                  </div>
+                  <div class="btn-container clear-button">
+                    <button type="button" class="btn btn-default" aria-label="Left Align", tabindex="4">
+                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
