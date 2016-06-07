@@ -13,8 +13,8 @@ class RoomsController < ApplicationController
 
     redirect_to root_url and return unless @room
 
-    participation = Participation.find_or_create_by(user: current_user, room: @room)
-    @participation_id = participation.id
+    GuidePosition.find_or_create_by(user: current_user, bin: @room.bin)
+    @participation_id = Participation.find_or_create_by(user: current_user, room: @room).id
     @rating = Rating.new
   end
 
