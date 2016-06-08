@@ -51,8 +51,8 @@ class RoomChannel < ApplicationCable::Channel
 
     if current_post_index
       next_post_index = current_post_index + 1
-      guide_position = GuidePosition.find_or_create_by(user: current_user, bin: bin)
-      guide_position.update_attribute(:position, next_post_index)
+      guide_position = GuidePosition.find_or_create_by(user: current_user, bin: bin) if current_user
+      guide_position.update_attribute(:position, next_post_index) if current_user
 
       post = posts[next_post_index % posts.size]
     else
@@ -82,17 +82,24 @@ class RoomChannel < ApplicationCable::Channel
     end
 
     room.update_attribute(:bin, bin)
-    guide_position = GuidePosition.find_or_create_by(user: current_user, bin: bin)
-
     posts = bin.posts.to_a
-    post = posts[guide_position.position]
+
+    if current_user
+      guide_position = GuidePosition.find_or_create_by(user: current_user, bin: bin)
+      post = posts[guide_position.position]
+    else
+      post = posts.first
+    end
 
     options = generate_post_options(post, room, bin)
     ActionCable.server.broadcast("room_#{params[:room]}", options)
   end
 
   def generate_post_options(post, room, bin)
-    like = Like.where(user_id: current_user.id, post_id: post.id).first
+    if current_user
+      like = Like.where(user_id: current_user.id, post_id: post.id).first
+    end
+
     if like.present?
       dislike_exists = like.dislike?
       like_exists = !dislike_exists

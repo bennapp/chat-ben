@@ -2,7 +2,7 @@
 
 class @RoomShow
   constructor: (options) ->
-    @nick = options.nick
+    @nick = currentUser.name
     @room = options.room
     @postId = options.postId
     @signalServer = options.signalServer

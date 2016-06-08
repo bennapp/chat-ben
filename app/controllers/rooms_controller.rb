@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :update]
 
+  skip_before_filter :authenticate_user!, only: [:show]
+
   def update
     @room.update_attribute(:waiting, false) # all you can update is that you are no long waiting when you leave
     render nothing: true

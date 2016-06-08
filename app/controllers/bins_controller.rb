@@ -3,6 +3,8 @@ class BinsController < ApplicationController
   before_action :set_post, only: [:show]
   before_action :redirect_if_non_admin, only: [:index, :emails, :new, :edit, :create, :update, :destroy]
 
+  skip_before_filter :authenticate_user!, only: [:show]
+
   # GET /bins
   def index
     @bins = Bin.all.sort_by { |bin| bin.id }

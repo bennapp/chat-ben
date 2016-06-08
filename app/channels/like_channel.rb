@@ -19,8 +19,8 @@ class LikeChannel < ApplicationCable::Channel
     like.update_attribute(:dislike, false)
 
     post = Post.find(current_post_id)
-    ActionCable.server.broadcast "like_channel", action: 'like_count', post_id: current_post_id, like_count: post.like_count
-    (ActionCable.server.broadcast "like_channel_#{post.user.id}", action: 'like', like: true) if post.user.id != current_user.id
+    ActionCable.server.broadcast("like_channel", action: 'like_count', post_id: current_post_id, like_count: post.like_count)
+    ActionCable.server.broadcast("like_channel_#{post.user.id}", action: 'like', like: true) if current_user && post.user.id != current_user.id
   end
 
   def unlike(data)
@@ -30,8 +30,8 @@ class LikeChannel < ApplicationCable::Channel
     like.destroy if like.present?
 
     post = Post.find(current_post_id)
-    ActionCable.server.broadcast "like_channel", action: 'like_count', post_id: current_post_id, like_count: post.like_count
-    (ActionCable.server.broadcast "like_channel_#{post.user.id}", action: 'like', like: false) if post.user.id != current_user.id
+    ActionCable.server.broadcast("like_channel", action: 'like_count', post_id: current_post_id, like_count: post.like_count)
+    ActionCable.server.broadcast("like_channel_#{post.user.id}", action: 'like', like: false) if current_user && post.user.id != current_user.id
   end
 
   def dislike(data)
@@ -41,8 +41,8 @@ class LikeChannel < ApplicationCable::Channel
     like.update_attribute(:dislike, true)
 
     post = Post.find(current_post_id)
-    ActionCable.server.broadcast "like_channel", action: 'like_count', post_id: current_post_id, like_count: post.like_count
-    (ActionCable.server.broadcast "like_channel_#{post.user.id}", action: 'like', like: false) if post.user.id != current_user.id
+    ActionCable.server.broadcast("like_channel", action: 'like_count', post_id: current_post_id, like_count: post.like_count)
+    ActionCable.server.broadcast("like_channel_#{post.user.id}", action: 'like', like: false) if current_user && post.user.id != current_user.id
   end
 
   def undislike(data)
@@ -52,7 +52,7 @@ class LikeChannel < ApplicationCable::Channel
     like.destroy if like.present?
 
     post = Post.find(current_post_id)
-    ActionCable.server.broadcast "like_channel", action: 'like_count', post_id: current_post_id, like_count: post.like_count
-    (ActionCable.server.broadcast "like_channel_#{post.user.id}", action: 'like', like: true) if post.user.id != current_user.id
+    ActionCable.server.broadcast("like_channel", action: 'like_count', post_id: current_post_id, like_count: post.like_count)
+    ActionCable.server.broadcast("like_channel_#{post.user.id}", action: 'like', like: true) if current_user && post.user.id != current_user.id
   end
 end

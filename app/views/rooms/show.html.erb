@@ -59,7 +59,7 @@
             <h3 class="post-header" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h3>
             <div class="likes">
               <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
-              <% if Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
+              <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
                 <button id="like" class="btn btn-primary"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
               <% else %>
                 <button id="like" class="btn btn-default"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
@@ -120,7 +120,7 @@
       <div class="switch-container">
         <span class="switch-text">Video Chat (Off / On)</span>
         <div class="onoffswitch">
-          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" <%= current_user.matching? ? 'checked' : '' %> >
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" <%= current_user && current_user.matching? ? 'checked' : '' %> >
           <label class="onoffswitch-label" for="myonoffswitch"></label>
         </div>
       </div>
@@ -225,9 +225,9 @@
   $(document).ready(function(){
     var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>'});
     var likeChannel = new LikeChannel();
+    currentUser.name = '<%= current_user ? current_user.name : "" %>';
     var roomShow = new RoomShow({
       room: '<%= @room.token %>',
-      nick: '<%= current_user.name %>',
       postId: '<%= @room.post.id %>',
       signalServer: '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>',
     });

@@ -19,7 +19,9 @@ Rails.application.routes.draw do
   resources :rooms, only: [:show, :update], path: 'chat', param: :token
   resources :ratings, only: :create
   devise_for :users#, controllers: { sessions: "users/sessions" }
+
   root 'static_pages#home'
+
   get 'banned' => 'ratings#banned'
 
   get 'emails' => 'bins#emails'
