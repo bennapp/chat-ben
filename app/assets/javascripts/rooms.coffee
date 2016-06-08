@@ -4,7 +4,6 @@ class @RoomShow
   constructor: (options) ->
     @_setStatus('waiting')
     @room = options.room
-    @participation = options.participationId
     @postId = options.postId
     @signalServer = options.signalServer
 

@@ -270,6 +270,14 @@ video {
     width: 33%;
     height: 79vh;
 
+    .alert-container {
+      display: flex;
+
+      .switch-container {
+        padding: 10px;
+      }
+    }
+
     .no-user-local{
       position: relative;
       height: 100%;

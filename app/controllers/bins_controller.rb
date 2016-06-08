@@ -12,7 +12,7 @@ class BinsController < ApplicationController
   def show
     rooms = @post.rooms.where('rooms.full is false').where('rooms.waiting is true')
     room = rooms.first
-    room = @post.rooms.create(bin: @bin) if room.blank?
+    room = @post.rooms.create(bin: @bin) if room.blank? #here is where you set the room waiting according to the user
 
     redirect_to room_path(room)
   end

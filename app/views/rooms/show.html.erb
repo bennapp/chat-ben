@@ -117,6 +117,13 @@
   <div class="remote-panel">
     <div class="alert-container">
       <div class="alert alert-info status" role="alert"></div>
+
+      <div class="switch-container">
+        <div class="onoffswitch">
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" >
+          <label class="onoffswitch-label" for="myonoffswitch"></label>
+        </div>
+      </div>
     </div>
 
     <div class="remote-container">
@@ -220,7 +227,6 @@
     var likeChannel = new LikeChannel();
     var roomShow = new RoomShow({
       room: '<%= @room.token %>',
-      participationId: '<%= @participation_id %>',
       nick: '<%= current_user.name %>',
       postId: '<%= @room.post.id %>',
       signalServer: '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>',

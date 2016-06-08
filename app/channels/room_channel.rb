@@ -4,14 +4,14 @@ class RoomChannel < ApplicationCable::Channel
     room = Room.find_by_token(params[:room])
     room.update_attribute(:waiting, true)
 
-    Participation.find_or_create_by(user: current_user, room: room).update_attribute(:deleted_at, nil)
+    Participation.find_or_create_by(user: current_user, room: room).update_attribute(:deleted_at, nil) if current_user
   end
 
   def unsubscribed
     room = Room.find_by_token(params[:room])
     room.update_attribute(:waiting, false)
 
-    Participation.find_by(user: current_user, room: room).destroy
+    Participation.find_by(user: current_user, room: room).destroy if current_user
   end
 
   def next_post(data)
