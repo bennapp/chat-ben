@@ -73,41 +73,45 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="new-post-button-and-container">
-      <div class="btn-container">
-        <%= link_to 'Add Show to Channel', 'javascript:;', class: 'btn btn-primary new-post-button' %>
+      <div class="new-post-button-and-container">
+        <div class="btn-container">
+          <%= link_to 'Add Show to Channel', 'javascript:;', class: 'btn btn-primary new-post-button' %>
+        </div>
+
+        <div class="new-post-container" style="display: none;">
+          <%= form_for(@post, remote: true, html: {'data-type': 'json'}) do |f| %>
+            <div class="fields">
+              <div class="field new-post-field new-post-title">
+                <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
+              </div>
+              <div class="field new-post-field">
+                <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
+              </div>
+            </div>
+            <div class="new-post-textarea">
+              <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
+            </div>
+            <div class="fields">
+              <div class="field">
+                <%= f.collection_select(:bin_id, @bins, :id, :title, { selected: @room.bin.try(:id) }, { name: "post[bin_id]" }) %>
+              </div>
+            </div>
+
+            <div class="fields">
+              <div class="btn-container">
+                <%= f.submit class: 'btn btn-primary', tabindex: 4 %>
+              </div>
+              <div class="btn-container clear-button">
+                <button type="button" class="btn btn-default" aria-label="Left Align", tabindex="4">
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
 
-      <div class="new-post-container" style="display: none;">
-        <%= form_for(@post, remote: true, html: {'data-type': 'json'}) do |f| %>
-          <div class="fields">
-            <div class="field new-post-field new-post-title">
-              <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
-            </div>
-            <div class="field new-post-field">
-              <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
-            </div>
-            <div class="field new-post-field">
-              <%= f.collection_select(:bin_id, @bins, :id, :title, { selected: @room.bin.try(:id) }, { name: "post[bin_id]" }) %>
-            </div>
-          </div>
-          <div class="new-post-textarea">
-            <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
-          </div>
-          <div class="fields">
-            <div class="btn-container">
-              <%= f.submit class: 'btn btn-primary', tabindex: 4 %>
-            </div>
-            <div class="btn-container clear-button">
-              <button type="button" class="btn btn-default" aria-label="Left Align", tabindex="4">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-              </button>
-            </div>
-          </div>
-        <% end %>
-      </div>
     </div>
   </div>
 

@@ -163,6 +163,9 @@ class @RoomChannel
                 url: 'https://player.twitch.tv/js/embed/v1.js'
                 dataType: 'script'
                 success: success
+          else
+            $container.prepend("<div> </div>")
+
 
           $('#board').val(data.comment || '')
           $('.edited-by').text(data.edited_by || '')

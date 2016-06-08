@@ -19,11 +19,11 @@ class @NewPost
     $('.new-post-container').toggle true
     $('.new-post-button').toggle false
     $('.btn.blink').hide()
-    $('.post-content-container').hide()
+    $('.content-container').hide()
     $('.new-post-title input').focus()
 
   hideNewPost: ->
     $('.new-post-container').toggle false
     $('.new-post-button').toggle true
-    $('.post-content-container').show()
+    $('.content-container').show()
     $('.btn.blink').show()
