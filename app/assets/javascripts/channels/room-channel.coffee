@@ -166,7 +166,6 @@ class @RoomChannel
           else
             $container.prepend("<div> </div>")
 
-
           $('#board').val(data.comment || '')
           $('.edited-by').text(data.edited_by || '')
 
