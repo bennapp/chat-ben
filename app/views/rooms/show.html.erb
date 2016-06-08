@@ -117,10 +117,10 @@
   <div class="remote-panel">
     <div class="alert-container">
       <div class="alert alert-info status" role="alert"></div>
-
       <div class="switch-container">
+        <span class="switch-text">Video Chat (Off / On)</span>
         <div class="onoffswitch">
-          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" >
+          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" <%= current_user.matching? ? 'checked' : '' %> >
           <label class="onoffswitch-label" for="myonoffswitch"></label>
         </div>
       </div>

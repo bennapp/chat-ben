@@ -11,14 +11,14 @@ class @LikeChannel
             $like.addClass('btn-default')
             $like.removeClass('btn-primary')
             audio = document.getElementById('dislike-sound')
-            audio.volume = 0.5
+            audio.volume = 0.1
             audio.play()
             @perform("dislike", post_id: $('.post-header').data('post-id'))
           else
             $dislike.addClass('btn-default')
             $dislike.removeClass('btn-danger')
             audio = document.getElementById('like-sound')
-            audio.volume = 0.5
+            audio.volume = 0.1
             audio.play()
             @perform("undislike", post_id: $('.post-header').data('post-id'))
 
@@ -31,14 +31,14 @@ class @LikeChannel
             $dislike.addClass('btn-default')
             $dislike.removeClass('btn-danger')
             audio = document.getElementById('like-sound')
-            audio.volume = 0.5
+            audio.volume = 0.1
             audio.play()
             @perform("like", post_id: $('.post-header').data('post-id'))
           else
             $like.addClass('btn-default')
             $like.removeClass('btn-primary')
             audio = document.getElementById('dislike-sound')
-            audio.volume = 0.5
+            audio.volume = 0.1
             audio.play()
             @perform("unlike", post_id: $('.post-header').data('post-id'))
 

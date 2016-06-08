@@ -2,7 +2,7 @@ class RoomChannel < ApplicationCable::Channel
   def subscribed
     stream_from "room_#{params[:room]}"
     room = Room.find_by_token(params[:room])
-    room.update_attribute(:waiting, true)
+    room.update_attribute(:waiting, true) if current_user && current_user.matching?
 
     Participation.find_or_create_by(user: current_user, room: room).update_attribute(:deleted_at, nil) if current_user
   end
@@ -28,6 +28,13 @@ class RoomChannel < ApplicationCable::Channel
 
   def channel_down(data)
     advance_channel(data, down: true)
+  end
+
+  def set_matching(data)
+    matching = data['matching']
+    room.update_attribute(:waiting, true) if matching
+
+    current_user.update_attribute(:matching, matching) if current_user
   end
 
   private

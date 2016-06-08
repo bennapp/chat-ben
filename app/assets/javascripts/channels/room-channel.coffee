@@ -46,10 +46,15 @@ class @RoomChannel
         channelDownClick = =>
           @perform("channel_down", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
 
+        matchingSwtich = (event) =>
+          @perform("set_matching", matching: event.target.checked)
+
         $('#next-post').click nextPostClick
         $('#prev-post').click prevPostClick
         $('#channel-up').click channelUpClick
         $('#channel-down').click channelDownClick
+
+        $('#myonoffswitch').change matchingSwtich
 
       disconnected: ->
 
