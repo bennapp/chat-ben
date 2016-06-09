@@ -1,4 +1,10 @@
 class FeedbacksController < ApplicationController
+  before_action :redirect_if_non_admin, only: [:index]
+
+  def index
+    @feedbacks = Feedback.all
+  end
+
   def new
     @feedback = Feedback.new
     @is_feeback_new = true
@@ -19,8 +25,8 @@ class FeedbacksController < ApplicationController
     end
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def feedback_params
-      params.require(:feedback).permit(:message)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def feedback_params
+    params.require(:feedback).permit(:message)
+  end
 end

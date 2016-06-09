@@ -89,10 +89,6 @@ class BinsController < ApplicationController
     end
   end
 
-  def redirect_if_non_admin
-    redirect_to rooth_path unless current_user.is_admin?
-  end
-
   def bad_rating?(user_id)
     false
     #return true if current_user.ratings.where('ratee_id = ?', user_id).where('value <= 2').any?

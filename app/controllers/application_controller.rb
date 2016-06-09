@@ -16,13 +16,16 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :password_confirmation, :current_password) }
   end
 
+  def redirect_if_non_admin
+    redirect_to root_path unless current_user.is_admin?
+  end
+
   private
 
   def redirect_if_banned
     # redirect_to banned_url if current_user && current_user.banned?
   end
 
-  private
   # override the devise helper to store the current location so we can
   # redirect to it after loggin in or out. This override makes signing in
   # and signing up work automatically.

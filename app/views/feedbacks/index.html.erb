@@ -1,0 +1,19 @@
+<h1>Feedback</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @feedbacks.each do |feedback| %>
+      <tr>
+        <td><%= feedback.message %></td>
+        <td><%= feedback.user.name %></td>
+        <td><%= feedback.created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
