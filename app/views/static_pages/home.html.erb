@@ -20,33 +20,6 @@
       </div>
     </div>
   </div>
-
-  <% if current_user %>
-  <% else %>
-    <div class="right-panel">
-      <div class="login-container">
-        <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
-
-          <div class="fields">
-            <div class="field login-field">
-              <%= f.text_field :login, class: 'login-input', tabindex: 5, placeholder: 'Username/Email' %>
-            </div>
-
-            <div class="field login-field">
-              <%= f.password_field :password, autocomplete: "off", class: 'login-input', tabindex: 6, placeholder: 'Password' %>
-            </div>
-
-            <div class="btn-container">
-              <%= f.submit "Log in", class: 'btn btn-info', tabindex: 7 %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-      <div class="btn-container">
-        <%= link_to "Sign up", new_registration_path(:user), class: 'btn btn-success', tabindex: 8 %>
-      </div>
-    </div>
-  <% end %>
 </div>
 
 <script>

@@ -16,6 +16,10 @@ video {
   display: none !important;
 }
 
+.hidden {
+  visibility: hidden !important;
+}
+
 .buttons {
   .new-buttons {
     display: flex;

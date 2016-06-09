@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :redirect_if_banned
 
+  before_filter :store_current_location, unless: :devise_controller?
+
   protected
 
   def configure_permitted_parameters
@@ -18,5 +20,13 @@ class ApplicationController < ActionController::Base
 
   def redirect_if_banned
     # redirect_to banned_url if current_user && current_user.banned?
+  end
+
+  private
+  # override the devise helper to store the current location so we can
+  # redirect to it after loggin in or out. This override makes signing in
+  # and signing up work automatically.
+  def store_current_location
+    store_location_for(:user, request.url)
   end
 end

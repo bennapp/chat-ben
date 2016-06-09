@@ -91,6 +91,7 @@ body {
     color: black;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     margin-left: 10px;
+    white-space: nowrap;
   }
 
   .page-title {
@@ -256,4 +257,14 @@ body {
 .onoffswitch-checkbox:checked + .onoffswitch-label:before {
   right: 0px;
   background-color: #2196F3;
+}
+
+.field_with_errors {
+  display: inline-block;
+}
+
+.new_user {
+  .field {
+    margin-bottom: 8px;
+  }
 }

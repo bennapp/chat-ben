@@ -88,15 +88,21 @@ $container-margin: 20px;
       }
     }
 	}
-
-	.right-panel {
-		height: auto;
-		margin-left: 2.5%;
-		margin-right: 2.5%;
-	}
 }
 
-.login-container, .new-post-container {
+.authentication-container {
+  height: auto;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+}
+
+.auth-form-container {
+  .btn {
+    margin-left: 8px;
+  }
+}
+
+.auth-form-container, .new-post-container {
 	.input {
 		font-size: 15px;
 	}
@@ -105,7 +111,7 @@ $container-margin: 20px;
 		display: flex;
 
 		.field {
-			margin-right: 12px;
+			margin-right: 8px;
 			margin-bottom: 8px;
 
 			input {
@@ -114,7 +120,7 @@ $container-margin: 20px;
 			}
 		}
 
-		.login-field {
+		.field {
 			input {
 				width: 128px;
 			}
