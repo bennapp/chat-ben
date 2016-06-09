@@ -1,6 +1,7 @@
 class @NewPost
   constructor: (options) ->
-    $('.new-post-button').on 'click', =>
+    $('.new-post-button').on 'click', (event) =>
+      return unless forceSignIn(event)
       @showNewPost()
 
     $('.clear-button').on 'click', =>

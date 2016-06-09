@@ -11,6 +11,7 @@ class @RoomShow
     @_bindDom()
 
   onReactMousedown: ->
+    return unless forceSignIn(event)
     successCallback = (stream) =>
       options = { type: 'video', frameInterval: 20 }
       @reactStream = stream
@@ -137,13 +138,16 @@ class @RoomShow
 
   _matchingSwitch: ->
     $('#myonoffswitch').change (event) =>
-      window.matchingSwtich(event.target.checked)
-      if @status == 'waiting' && !event.target.checked
-        @_setStatus('not-waiting')
-        @stopWebRTC()
-      else if @status == 'not-waiting' && event.target.checked
-        @_setStatus('waiting')
-        @_startWebRTC()
+      if forceSignIn(event)
+        window.matchingSwtich(event.target.checked)
+        if @status == 'waiting' && !event.target.checked
+          @_setStatus('not-waiting')
+          @stopWebRTC()
+        else if @status == 'not-waiting' && event.target.checked
+          @_setStatus('waiting')
+          @_startWebRTC()
+      else
+        $(event.target).prop('checked', !event.target.checked)
 
   _setStatusWithSwitch: ->
     if $('#myonoffswitch').is(':checked')
@@ -215,6 +219,7 @@ class @RoomShow
       @onReactMousedown()
 
     $('#react-button').mouseup =>
+      return unless forceSignIn(event)
       if @reactStream
         @mouseup = true
         $('#react-button').addClass('display-none')

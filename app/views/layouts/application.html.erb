@@ -33,7 +33,8 @@
 
     $(document).ready(function() {
       var cable = new Cable();
-      window.currentUser = {}
+      window.currentUser = {};
+      currentUser.name = '<%= current_user ? current_user.name : "" %>';
       new Login;
     });
   </script>
@@ -65,12 +66,14 @@
         </div>
 
         <% unless current_user %>
+          <div class="login-notice notice alert alert-info hidden">Login to do that! Chat Ben is much more awesome that way!</div>
+
           <div class="login-and-signup-button">
             <div class="auth-form-container">
               <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
                 <div class="fields">
                   <div class="field">
-                    <%= f.text_field :login, placeholder: 'Username/Email' %>
+                    <%= f.text_field :login, class: 'login-field', placeholder: 'Username/Email' %>
                   </div>
 
                   <div class="field">

@@ -268,3 +268,7 @@ body {
     margin-bottom: 8px;
   }
 }
+
+.login-notice {
+  @include gradient-horizontal(#d9edf7, #FFFFFF, 0%, 100%);
+}

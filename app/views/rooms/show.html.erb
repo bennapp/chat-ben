@@ -225,7 +225,6 @@
   $(document).ready(function(){
     var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>'});
     var likeChannel = new LikeChannel();
-    currentUser.name = '<%= current_user ? current_user.name : "" %>';
     var roomShow = new RoomShow({
       room: '<%= @room.token %>',
       postId: '<%= @room.post.id %>',
