@@ -6,7 +6,7 @@
           <div class="bin">
             <% post = bin.posts.first %>
             <% if post.format_type == 'youtube' %>
-              <%= link_to image_tag("http://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img"), bin %>
+              <%= link_to image_tag("https://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img"), bin %>
             <% elsif post.format_type == 'twitch' %>
               <%= link_to image_tag("twitch.jpg", class: "live-img"), bin %>
             <% end %>
