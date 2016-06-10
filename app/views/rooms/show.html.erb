@@ -47,14 +47,19 @@
         <% end %>
 
         <div class="controls-container">
+          TV Guide
           <div class="guide-container">
-            TV Guide
-            <div id="guide-contents">
+            <div class="channel-contents guide-table">
+              <table>
+                <% @bins.each_with_index do |bin, i| %>
+                  <tr><td class="headcol"><button><%= "#{bin.abbreviation} #{i + 1}" %></button></td></tr>
+                <% end %>
+              </table>
+            </div>
+            <div id="guide-contents" class="guide-table">
               <table>
                 <% @bins.each_with_index do |bin, i| %>
                   <tr data-guide-bin-id="<%= bin.id %>">
-                    <td class="headcol"><button><%= "#{bin.abbreviation}: #{i + 1}" %></button></td>
-
                     <% bin.posts.each do |post| %>
                       <% if post.id == @room.post.id && bin.id == @room.bin.id %>
                         <td data-guide-post-id="<%= post.id %>"><button class="selected-show"><%= post.title %></button></td>

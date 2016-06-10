@@ -369,10 +369,6 @@ video {
 }
 
 .guide-container {
-  table {
-    border-collapse: separate;
-  }
-
   td {
     margin: 0;
     white-space: nowrap;
@@ -392,18 +388,23 @@ video {
 
   #guide-contents {
     background-color: #c0c0c0;
-    margin-left: 5em;
     overflow-x: scroll;
     overflow-y: scroll;
+    max-height: 87px;
+  }
+
+  .channel-contents {
+    overflow-x: visible;
+    overflow-y: scroll;
+    float: left;
+    max-height: 87px;
   }
 
   .headcol {
-    position: absolute;
     width: 5em;
-    left: 12px;
-    top: auto;
 
     button {
+      padding-left: 3px;
       background-color: #92b8dd;
       color: #11284a;
     }

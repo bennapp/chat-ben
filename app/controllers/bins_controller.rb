@@ -7,6 +7,7 @@ class BinsController < ApplicationController
 
   # GET /bins
   def index
+    @hide_footer = true
     @bins = Bin.all.sort_by { |bin| bin.id }
   end
 
