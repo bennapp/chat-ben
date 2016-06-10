@@ -168,7 +168,6 @@ class @RoomShow
     if @webrtc
       @webrtc.startLocalVideo()
     else
-      console.log('bye')
       @webrtc = new SimpleWebRTC
         localVideoEl: 'localVideo'
         remoteVideosEl: ''
