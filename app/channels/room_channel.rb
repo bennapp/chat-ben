@@ -50,7 +50,12 @@ class RoomChannel < ApplicationCable::Channel
     current_post_index = posts.index(current_post)
 
     if current_post_index
-      next_post_index = current_post_index + 1
+      if data['guide']
+        next_post_index = current_post_index
+      else
+        next_post_index = current_post_index + 1
+      end
+
       guide_position = GuidePosition.find_or_create_by(user: current_user, bin: bin) if current_user
       guide_position.update_attribute(:position, next_post_index) if current_user
 

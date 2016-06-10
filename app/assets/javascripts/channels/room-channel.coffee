@@ -33,6 +33,9 @@ class @RoomChannel
       connected: ->
         window.nextPost = =>
           @perform("next_post", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
+          
+        window.postFromGuide = (options) =>
+          @perform("next_post", guide: true, post_id: options.postId, bin_id: options.binId)
 
         nextPostClick = ->
           window.nextPost()
