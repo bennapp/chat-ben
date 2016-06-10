@@ -49,16 +49,17 @@
         <div class="controls-container">
           <div class="guide-container">
             TV Guide
-            <div class="guide-contents">
+            <div id="guide-contents">
               <table>
                 <% @bins.each_with_index do |bin, i| %>
-                  <tr>
+                  <tr data-guide-bin-id="<%= bin.id %>">
                     <td class="headcol"><button><%= "#{bin.abbreviation}: #{i + 1}" %></button></td>
+
                     <% bin.posts.each do |post| %>
                       <% if post.id == @room.post.id && bin.id == @room.bin.id %>
-                        <td><button class="selected"><%= post.title %></button></td>
+                        <td data-guide-post-id="<%= post.id %>"><button class="selected-show"><%= post.title %></button></td>
                       <% else %>
-                        <td><button><%= post.title %></button></td>
+                        <td data-guide-post-id="<%= post.id %>"><button><%= post.title %></button></td>
                       <% end %>
                     <% end %>
                   </tr>
@@ -240,6 +241,8 @@
 
 <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script src="//cdn.jsdelivr.net/jquery.scrollto/2.1.2/jquery.scrollTo.min.js"></script>
+
 <script>
   $(document).ready(function(){
     var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>'});
@@ -251,6 +254,7 @@
     });
 
     var newPost = new NewPost();
+    new Guide;
 
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
 

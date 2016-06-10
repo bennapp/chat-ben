@@ -61,6 +61,8 @@ class @RoomChannel
       received: (data) ->
         action = data.action
         if action == 'advance_post'
+          guideSelect(postId: data.id, binId: data.bin_id)
+          
           $like = $('#like')
           $dislike = $('#dislike')
           if data.like

@@ -381,14 +381,15 @@ video {
       background-color: #11284a;
       border-color: #5e7088;
       color: #d1dded;
-      &.selected {
+
+      &.selected-show {
         background-color: #f8f69f;
         color: #11284a;
       }
     }
   }
 
-  .guide-contents {
+  #guide-contents {
     background-color: #c0c0c0;
     margin-left: 5em;
     overflow-x: scroll;
