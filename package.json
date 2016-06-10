@@ -20,7 +20,7 @@
     "browserify": "^13.0.0",
     "browserify-incremental": "^3.1.1",
     "coffeeify": "^2.0.1",
-    "recordrtc": "^5.3.4",
+    "recordrtc": "^5.3.7",
     "simplewebrtc": "^2.1.1"
   }
 }
