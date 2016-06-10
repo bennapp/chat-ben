@@ -47,6 +47,26 @@
         <% end %>
 
         <div class="controls-container">
+          <div class="guide-container">
+            TV Guide
+            <div class="guide-contents">
+              <table>
+                <% @bins.each_with_index do |bin, i| %>
+                  <tr>
+                    <td class="headcol"><button><%= "#{bin.abbreviation}: #{i + 1}" %></button></td>
+                    <% bin.posts.each do |post| %>
+                      <% if post.id == @room.post.id && bin.id == @room.bin.id %>
+                        <td><button class="selected"><%= post.title %></button></td>
+                      <% else %>
+                        <td><button><%= post.title %></button></td>
+                      <% end %>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </table>
+            </div>
+          </div>
+
           <div class="bin-controls-container">
             <h2 class="bin-header" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h2>
             <div class="bin-control-buttons">
@@ -69,16 +89,15 @@
 
           <div class="post-controls-container">
             <button id="prev-post" class="btn btn-primary">Prev Show</button>
+            <div class="btn-container">
+              <%= link_to 'Add Show to Channel', 'javascript:;', class: 'btn btn-primary new-post-button' %>
+            </div>
             <button id="next-post" data-toggle="tooltip" data-placement="top" title="Press this button to view the next show on this channel!" class="btn btn-primary">Next Show</button>
           </div>
         </div>
       </div>
 
       <div class="new-post-button-and-container">
-        <div class="btn-container">
-          <%= link_to 'Add Show to Channel', 'javascript:;', class: 'btn btn-primary new-post-button' %>
-        </div>
-
         <div class="new-post-container" style="display: none;">
           <%= form_for(@post, remote: true, html: {'data-type': 'json'}) do |f| %>
             <div class="fields">

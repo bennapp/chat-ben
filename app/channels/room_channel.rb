@@ -87,9 +87,9 @@ class RoomChannel < ApplicationCable::Channel
     if current_user
       guide_position = GuidePosition.find_or_create_by(user: current_user, bin: bin)
       post = posts[guide_position.position]
-    else
-      post = posts.first
     end
+
+    post = posts.first if post.nil?
 
     options = generate_post_options(post, room, bin)
     ActionCable.server.broadcast("room_#{params[:room]}", options)

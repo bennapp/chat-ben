@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th colspan="5"></th>
+      <th colspan="6"></th>
     </tr>
   </thead>
 
@@ -13,6 +13,7 @@
     <% @bins.each do |bin| %>
       <tr>
         <td><%= bin.title %></td>
+        <td><%= bin.abbreviation %></td>
         <td>
           <ol>
             <% bin.posts.each do |post| %>

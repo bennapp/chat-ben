@@ -366,3 +366,44 @@ video {
     }
   }
 }
+
+.guide-container {
+  table {
+    border-collapse: separate;
+  }
+
+  td {
+    margin: 0;
+    white-space: nowrap;
+
+    button {
+      width: 100%;
+      background-color: #11284a;
+      border-color: #5e7088;
+      color: #d1dded;
+      &.selected {
+        background-color: #f8f69f;
+        color: #11284a;
+      }
+    }
+  }
+
+  .guide-contents {
+    background-color: #c0c0c0;
+    margin-left: 5em;
+    overflow-x: scroll;
+    overflow-y: scroll;
+  }
+
+  .headcol {
+    position: absolute;
+    width: 5em;
+    left: 12px;
+    top: auto;
+
+    button {
+      background-color: #92b8dd;
+      color: #11284a;
+    }
+  }
+}
