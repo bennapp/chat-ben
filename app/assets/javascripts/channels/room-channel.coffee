@@ -22,10 +22,10 @@ class @RoomChannel
         console.log('rejected')
 
       received: (data) ->
-        if data.action == 'add_reaction' && data.post_id.toString() == $('.post-header').data('post-id')
+        if data.action == 'add_reaction' && data.post_id == $('.post-header').data('post-id')
           videoURL = data.reaction_url
           $('.reactions-container').prepend("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{videoURL}\" autoplay controls=true></video></div>")
-        else if data.action == 'new_comment' && data.post_id.toString() == $('.post-header').data('post-id')
+        else if data.action == 'new_comment' && data.post_id == $('.post-header').data('post-id')
           $('#board').val(data.comment)
           $('.edited-by').text(data.edited_by)
 
@@ -62,7 +62,7 @@ class @RoomChannel
         action = data.action
         if action == 'advance_post'
           guideSelect(postId: data.id, binId: data.bin_id)
-          
+
           $like = $('#like')
           $dislike = $('#dislike')
           if data.like
@@ -100,7 +100,7 @@ class @RoomChannel
 
           $('.well.post-content').remove()
           if data.text_content
-            $container.append("<div class=\"well post-content\"></div>")
+            $container.prepend("<div class=\"well post-content\"></div>")
             $('.content-container .well').text(data.text_content)
             if data.text_content.length > 500
               $container.append("<div class=\"btn btn-info read-more\" aria-label=\"Left Align\"><span class=\"fa fa-file-text-o fa-lg\" aria-hidden=\"true\"></span> Read more</div>")

@@ -16,7 +16,13 @@ class @RoomShow
       options = { type: 'video', frameInterval: 20 }
       @reactStream = stream
       window.recordRTC = RecordRTC(stream, options)
-      document.querySelector('#reaction-preview').src = stream
+
+      video = document.querySelector('#reaction-preview')
+      if window.URL
+        video.src = window.URL.createObjectURL(stream)
+      else
+        video.src = stream
+      video.play()
 
       @mouseup = false
       @isHold = false

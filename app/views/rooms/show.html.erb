@@ -4,32 +4,6 @@
   <div class="left-panel">
     <div class="post-content-container">
       <div class="content-container">
-        <% if @room.post.link.present? && @room.post.format_link.blank? %>
-          <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
-        <% end %>
-
-        <% if @room.post.text_content.present? %>
-          <div class="well post-content">
-            <%= html_escape(simple_format @room.post.text_content) %>
-          </div>
-
-          <% if @room.post.text_content.length > 500 %>
-            <div class="btn btn-info read-more" aria-label="Left Align">
-              <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
-            </div>
-
-            <script>
-              $('.read-more').featherlight('<div class=\"well post-content\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
-                  closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
-                  otherClose: '.escape-icon',
-                  afterOpen: function() {
-                    $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
-                }
-              });
-            </script>
-          <% end %>
-        <% end %>
-
         <% if @room.post.format_link.present? %>
           <% if @room.post.format_type == 'twitter' %>
             <div class="embeded-content-container">
@@ -44,6 +18,32 @@
           <% end %>
         <% else %>
           <div> </div>
+        <% end %>
+
+        <% if @room.post.link.present? && @room.post.format_link.blank? %>
+            <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
+        <% end %>
+
+        <% if @room.post.text_content.present? %>
+            <div class="well post-content">
+              <%= html_escape(simple_format @room.post.text_content) %>
+            </div>
+
+            <% if @room.post.text_content.length > 500 %>
+                <div class="btn btn-info read-more" aria-label="Left Align">
+                  <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
+                </div>
+
+                <script>
+                  $('.read-more').featherlight('<div class=\"well post-content\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
+                    closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
+                    otherClose: '.escape-icon',
+                    afterOpen: function() {
+                      $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
+                    }
+                  });
+                </script>
+            <% end %>
         <% end %>
 
         <div class="controls-container">
@@ -100,7 +100,7 @@
 
       <div class="new-post-button-and-container">
         <div class="new-post-container" style="display: none;">
-          <h3>Add A Show!</h3>
+          <h3>Add a Show!</h3>
           <%= form_for(@post, remote: true, html: {'data-type': 'json'}) do |f| %>
             <div class="fields">
               <div class="field new-post-field new-post-title">
