@@ -25,25 +25,25 @@
         <% end %>
 
         <% if @room.post.text_content.present? %>
-            <div class="well post-content">
-              <%= html_escape(simple_format @room.post.text_content) %>
+          <div class="well post-content">
+            <%= html_escape(simple_format @room.post.text_content) %>
+          </div>
+
+          <% if @room.post.text_content.length > 500 %>
+            <div class="btn btn-info read-more" aria-label="Left Align">
+              <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
             </div>
 
-            <% if @room.post.text_content.length > 500 %>
-                <div class="btn btn-info read-more" aria-label="Left Align">
-                  <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
-                </div>
-
-                <script>
-                  $('.read-more').featherlight('<div class=\"well post-content\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
-                    closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
-                    otherClose: '.escape-icon',
-                    afterOpen: function() {
-                      $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
-                    }
-                  });
-                </script>
-            <% end %>
+            <script>
+              $('.read-more').featherlight('<div class=\"well post-content\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
+                closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
+                otherClose: '.escape-icon',
+                afterOpen: function() {
+                  $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
+                }
+              });
+            </script>
+          <% end %>
         <% end %>
 
         <div class="controls-container">
@@ -78,6 +78,7 @@
 
           <div class="post-info-container">
             <h3 class="post-header" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h3>
+
             <div class="likes">
               <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
               <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>

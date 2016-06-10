@@ -88,7 +88,7 @@ video {
     display: flex;
     flex-direction: column;
     padding: 0px 12px 0 12px;
-    width: 33%;
+    width: 40%;
     height: auto; //override remove the page div 79 vh thing?
     border-right: 1px solid #eeeeee;
 
@@ -98,11 +98,10 @@ video {
     }
 
     .post-header {
-      margin-top: 4px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 800px;
+      max-width: 80%;
     }
 
     a.preview {
@@ -200,7 +199,7 @@ video {
   }
 
   .reaction-panel {
-    width: 33%;
+    width: 20%;
     padding: 0px 12px 0 12px;
     border-left: 1px solid #eeeeee;
     height: auto;
@@ -271,7 +270,7 @@ video {
     padding: 0px 12px 0 12px;
     align-items: center;
     justify-content: space-between;
-    width: 33%;
+    width: 40%;
     height: 79vh;
 
     .alert-container {
