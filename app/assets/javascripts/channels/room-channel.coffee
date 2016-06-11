@@ -181,4 +181,3 @@ class @RoomChannel
           if data.reaction_urls.length
             for url in data.reaction_urls
               $('.reactions-container').append("<div class=\"video-container\"><video class=\"reaction-video\" src=\"#{url}\" controls=true></video></div>")
-
