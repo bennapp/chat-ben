@@ -71,7 +71,7 @@ class RoomChannel < ApplicationCable::Channel
   def advance_channel(data, options = {})
     room = Room.find_by_token(params[:room])
     current_bin = Bin.find(data['bin_id'])
-    bins = Bin.all.to_a
+    bins = Bin.all.sort_by { |bin| bin.id }.to_a
 
     current_bin_index = bins.index(current_bin)
 
