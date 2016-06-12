@@ -10,54 +10,99 @@ class @RoomShow
 
     @_bindDom()
 
+  # reactWithoutWebcam: ->
+  #   successCallback = (stream) =>
+  #     options = { type: 'video', frameInterval: 20 }
+  #     @reactStream = stream
+  #     window.recordRTC = RecordRTC(stream, options)
+
+  #     video = document.querySelector('#reaction-preview')
+  #     if window.URL
+  #       video.src = window.URL.createObjectURL(stream)
+  #     else
+  #       video.src = stream
+  #     video.play()
+
+  #     debugger
+
+  #     @mouseup = false
+  #     @isHold = false
+  #     @isTimeOut = false
+
+  #     $('#reaction-preview').removeClass('display-none')
+  #     $('.reactions-and-react-button').addClass('display-none')
+  #     $('.reaction-panel').append('<div class="glow-container"><span class="red-glow"></span><h1> You Are Reacting!</h1></div>')
+  #     recordRTC.startRecording()
+
+  #     setTimeout(=>
+  #       @isHold = !@mouseup
+  #     , 2000)
+
+  #     setTimeout(=>
+  #       @isTimeOut = !@mouseup
+  #       if @isTimeOut
+  #         recordRTC.stopRecording @stopRecordingRTC
+  #     , 10000)
+
+  #     setTimeout(=>
+  #       if !@isHold
+  #         recordRTC.stopRecording @stopRecordingRTC
+  #     , 3000)
+
+  #   errorCallback = (error) =>
+  #     @stopRecordingRTC()
+  #     console.log 'navigator.getUserMedia error: ', error
+
+  #   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
+  #   navigator.getUserMedia({ audio: true, video: true }, successCallback, errorCallback)
+
+  reactWithWebcam: ->
+    options =
+      type: 'video'
+      frameInterval: 20
+
+    window.recordRTC = RecordRTC(@webrtc.webrtc.localStreams[0], options)
+
+    @mouseup = false
+    @isHold = false
+    @isTimeOut = false
+
+    $('#reaction-preview').removeClass('display-none')
+    new SimpleWebRTC
+      localVideoEl: 'reaction-preview'
+      autoRequestMedia: true
+
+    $('.reactions-and-react-button').addClass('display-none')
+    $('.reaction-panel').append('<div class="glow-container"><span class="red-glow"></span><h1> You Are Reacting!</h1></div>')
+    recordRTC.startRecording()
+
+    setTimeout(=>
+      @isHold = !@mouseup
+    , 2000)
+
+    setTimeout(=>
+      @isTimeOut = !@mouseup
+      if @isTimeOut
+        recordRTC.stopRecording @stopRecordingRTC
+    , 10000)
+
+    setTimeout(=>
+      if !@isHold
+        recordRTC.stopRecording @stopRecordingRTC
+    , 3000)
+
   onReactMousedown: ->
     return unless forceSignIn(event)
-    successCallback = (stream) =>
-      options = { type: 'video', frameInterval: 20 }
-      @reactStream = stream
-      window.recordRTC = RecordRTC(stream, options)
 
-      video = document.querySelector('#reaction-preview')
-      if window.URL
-        video.src = window.URL.createObjectURL(stream)
-      else
-        video.src = stream
-      video.play()
-
-      @mouseup = false
-      @isHold = false
-      @isTimeOut = false
-
-      $('#reaction-preview').removeClass('display-none')
-      $('.reactions-and-react-button').addClass('display-none')
-      $('.reaction-panel').append('<div class="glow-container"><span class="red-glow"></span><h1> You Are Reacting!</h1></div>')
-      recordRTC.startRecording()
-
-      setTimeout(=>
-        @isHold = !@mouseup
-      , 2000)
-
-      setTimeout(=>
-        @isTimeOut = !@mouseup
-        if @isTimeOut
-          recordRTC.stopRecording @stopRecordingRTC
-      , 10000)
-
-      setTimeout(=>
-        if !@isHold
-          recordRTC.stopRecording @stopRecordingRTC
-      , 3000)
-
-    errorCallback = (error) =>
-      @stopRecordingRTC()
-      console.log 'navigator.getUserMedia error: ', error
-
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
-    navigator.getUserMedia({ audio: true, video: true }, successCallback, errorCallback)
+    if @webrtc
+      @reactWithWebcam()
+    else
+      @reactWithoutWebcam()
 
   stopRecordingRTC: (videoURL) =>
     @reactStream.getTracks()[0].stop() if @reactStream
     @reactStream.getTracks()[1].stop() if @reactStream
+
     $('.reaction-panel .glow-container').remove()
     $('.react-results-container').removeClass('display-none')
     $('.react-results-container').prepend("<video style=\"width:90%;\" autoplay=\"true\" src=\"#{videoURL}\"></video>") if videoURL
@@ -226,7 +271,7 @@ class @RoomShow
 
     $('#react-button').mouseup =>
       return unless forceSignIn(event)
-      if @reactStream
+      if @reactStream || @webrtc
         @mouseup = true
         $('#react-button').addClass('display-none')
         if @isHold && !@isTimeOut
