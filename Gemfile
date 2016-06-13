@@ -25,6 +25,8 @@ gem 'browserify-rails'
 gem 'paperclip', '~> 4.3'
 gem 'paperclip-av-transcoder', '~> 0.6'
 
+gem 'browser'
+
 group :production do
   gem 'autoprefixer-rails', '~> 6.3'
 end

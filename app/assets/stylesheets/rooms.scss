@@ -92,6 +92,10 @@ video {
     height: auto; //override remove the page div 79 vh thing?
     border-right: 1px solid #eeeeee;
 
+    &.mobile {
+      width: 100%;
+    }
+
     .bin-header {
       margin-top: 0px;
       margin-bottom: 0px;
@@ -204,6 +208,10 @@ video {
     border-left: 1px solid #eeeeee;
     height: auto;
 
+    &.mobile {
+      visibility: hidden !important;
+    }
+
     #reaction-preview {
       width: 90%;
     }
@@ -274,6 +282,10 @@ video {
     justify-content: space-between;
     width: 40%;
     height: 79vh;
+
+    &.mobile {
+      visibility: hidden !important;
+    }
 
     .alert-container {
       display: flex;
