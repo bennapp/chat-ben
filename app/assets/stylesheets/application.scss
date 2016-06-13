@@ -11,12 +11,6 @@ $sub-text-grey: #8899a6;
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
-@media screen and (max-device-width: 480px) {
-  .page-header {
-    width: 200%;
-  }
-}
-
 html, body {
   height: 100%;
 }
