@@ -10,49 +10,51 @@ class @RoomShow
 
     @_bindDom()
 
-  reactWithoutWebcam: ->
-    successCallback = (stream) =>
-      options = { type: 'video', frameInterval: 20 }
-      @reactStream = stream
-      window.recordRTC = RecordRTC(stream, options)
+  # reactWithoutWebcam: ->
+  #   successCallback = (stream) =>
+  #     options = { type: 'video', frameInterval: 20 }
+  #     @reactStream = stream
+  #     window.recordRTC = RecordRTC(stream, options)
 
-      video = document.querySelector('#reaction-preview')
-      if window.URL
-        video.src = window.URL.createObjectURL(stream)
-      else
-        video.src = stream
-      video.play()
+  #     video = document.querySelector('#reaction-preview')
+  #     if window.URL
+  #       video.src = window.URL.createObjectURL(stream)
+  #     else
+  #       video.src = stream
+  #     video.play()
 
-      @mouseup = false
-      @isHold = false
-      @isTimeOut = false
+  #     debugger
 
-      $('#reaction-preview').removeClass('display-none')
-      $('.reactions-and-react-button').addClass('display-none')
-      $('.reaction-panel').append('<div class="glow-container"><span class="red-glow"></span><h1> You Are Reacting!</h1></div>')
-      recordRTC.startRecording()
+  #     @mouseup = false
+  #     @isHold = false
+  #     @isTimeOut = false
 
-      setTimeout(=>
-        @isHold = !@mouseup
-      , 2000)
+  #     $('#reaction-preview').removeClass('display-none')
+  #     $('.reactions-and-react-button').addClass('display-none')
+  #     $('.reaction-panel').append('<div class="glow-container"><span class="red-glow"></span><h1> You Are Reacting!</h1></div>')
+  #     recordRTC.startRecording()
 
-      setTimeout(=>
-        @isTimeOut = !@mouseup
-        if @isTimeOut
-          recordRTC.stopRecording @stopRecordingRTC
-      , 10000)
+  #     setTimeout(=>
+  #       @isHold = !@mouseup
+  #     , 2000)
 
-      setTimeout(=>
-        if !@isHold
-          recordRTC.stopRecording @stopRecordingRTC
-      , 3000)
+  #     setTimeout(=>
+  #       @isTimeOut = !@mouseup
+  #       if @isTimeOut
+  #         recordRTC.stopRecording @stopRecordingRTC
+  #     , 10000)
 
-    errorCallback = (error) =>
-      @stopRecordingRTC()
-      console.log 'navigator.getUserMedia error: ', error
+  #     setTimeout(=>
+  #       if !@isHold
+  #         recordRTC.stopRecording @stopRecordingRTC
+  #     , 3000)
 
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
-    navigator.getUserMedia({ audio: true, video: true }, successCallback, errorCallback)
+  #   errorCallback = (error) =>
+  #     @stopRecordingRTC()
+  #     console.log 'navigator.getUserMedia error: ', error
+
+  #   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
+  #   navigator.getUserMedia({ audio: true, video: true }, successCallback, errorCallback)
 
   reactWithWebcam: ->
     options =
