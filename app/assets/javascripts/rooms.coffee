@@ -5,6 +5,7 @@ class @RoomShow
     @nick = currentUser.name
     @room = options.room
     @postId = options.postId
+    @mobile = options.mobile
     @signalServer = options.signalServer
     @_setStatusWithSwitch()
 
@@ -156,7 +157,7 @@ class @RoomShow
         $(event.target).prop('checked', !event.target.checked)
 
   _setStatusWithSwitch: ->
-    if $('#myonoffswitch').is(':checked')
+    if $('#myonoffswitch').is(':checked') && !@mobile
       @_setStatus('waiting')
       @_startWebRTC()
     else

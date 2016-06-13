@@ -13,15 +13,13 @@ class BinsController < ApplicationController
 
   # GET /bins/1
   def show
-    rooms = Room.where('rooms.full is false').where('rooms.waiting is true')
-    room = rooms.first
-
-    if current_user && !current_user.matching?
+    if not_matching? || browser.device.mobile?
       room = @post.rooms.create(bin: @bin)
-    end
+    else
+      rooms = Room.where('rooms.full is false').where('rooms.waiting is true')
+      room = rooms.first
 
-    if room.blank? || !current_user
-      room = @post.rooms.create(bin: @bin)
+      room = @post.rooms.create(bin: @bin) if room.blank?
     end
 
     redirect_to room_path(room)
@@ -72,6 +70,10 @@ class BinsController < ApplicationController
   end
 
   private
+
+  def not_matching?
+    current_user && !current_user.matching?
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_bin

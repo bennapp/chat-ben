@@ -1,7 +1,7 @@
 <%= audio_tag('notification.wav', id: 'notification-sound') %>
 
 <div class="room-page page">
-  <div class="left-panel <%= mobile? %>">
+  <div class="left-panel <%= mobile_css? %>">
     <div class="post-content-container">
       <div class="content-container">
         <% if @room.post.format_link.present? %>
@@ -141,7 +141,7 @@
     </div>
   </div>
 
-  <div class="remote-panel <%= mobile? %>">
+  <div class="remote-panel <%= mobile_css? %>">
     <div class="alert-container">
       <div class="alert alert-info status" role="alert"></div>
       <div class="switch-container">
@@ -216,7 +216,7 @@
     </div>
   </div>
 
-  <div class="reaction-panel <%= mobile? %>">
+  <div class="reaction-panel <%= mobile_css? %>">
     <div class="react-button-container">
       <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Click to make a three second reaction or hold to make a longer one!">Press and hold to react!</button>
     </div>
@@ -256,6 +256,7 @@
     var roomShow = new RoomShow({
       room: '<%= @room.token %>',
       postId: '<%= @room.post.id %>',
+      mobile: '<%= mobile? %>',
       signalServer: '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>',
     });
 
