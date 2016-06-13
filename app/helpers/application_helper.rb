@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def mobile_css?
+  def mobile_css
     @mobile ||= mobile? ? 'mobile' : ''
   end
 

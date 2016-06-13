@@ -27,11 +27,6 @@ $container-margin: 20px;
 }
 
 .page-container {
-	display: flex;
-	flex-wrap: wrap-reverse;
-
-	min-width: 800px;
-
 	.btn-container {
 		.btn {
 			margin-bottom: 8px;
@@ -42,8 +37,6 @@ $container-margin: 20px;
 	.channel-panel {
 		flex-grow: 10;
 		height: auto;
-		margin-left: 2.5%;
-		margin-right: 2.5%;
 		margin-bottom: 60px;
 
     .bins-container {
@@ -55,10 +48,14 @@ $container-margin: 20px;
       .bin-title {
         margin-top: 12px;
         margin-bottom: 0px;
-        max-width: 390px;
         white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        max-width: 390px;
+        &.mobile {
+          max-width: 100%;
+        }
       }
 
       .post-title {
@@ -67,10 +64,14 @@ $container-margin: 20px;
       }
 
       .bin-description {
-        max-width: 390px;
         white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        max-width: 390px;
+        &.mobile {
+          max-width: 100%;
+        }
       }
 
       .bins {
@@ -82,8 +83,11 @@ $container-margin: 20px;
         }
 
         .live-img {
-          max-width: 390px;
           height: auto;
+          max-width: 390px;
+          &.mobile {
+            max-width: 100%;
+          }
         }
       }
     }
@@ -92,13 +96,13 @@ $container-margin: 20px;
 
 .authentication-container {
   height: auto;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
+  margin-left: 10px;
+  margin-bottom: 8px;
 }
 
 .auth-form-container {
   .btn {
-    margin-left: 8px;
+    margin-right: 8px;
   }
 }
 
@@ -109,6 +113,7 @@ $container-margin: 20px;
 
 	.fields {
 		display: flex;
+    flex-wrap: wrap;
 
 		.field {
 			margin-right: 8px;

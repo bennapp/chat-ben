@@ -57,70 +57,11 @@
       <div class="page-title"><%= link_to image_tag('chatbenlogotv.png'), root_url %>
         <small class="lead">its TV on the internet with your friends.</small>
       </div>
-      <div class="authentication-container">
-        <div class="total-users-container">
-          <span id="total-users"><%= User.where(active: true).count %></span><span> users on now!</span>
-          <% if current_user %>
-            <%= link_to("Logout: #{current_user.name}", destroy_user_session_path, :method => :delete, class: 'logout-link') %>
-          <% end %>
-        </div>
 
-        <% unless current_user %>
-          <div class="login-notice notice alert alert-info hidden">Login to do that! Chat Ben is much more awesome that way!</div>
-
-          <div class="login-and-signup-button">
-            <div class="auth-form-container">
-              <%= form_for(User.new, as: :user, url: session_path(:user)) do |f| %>
-                <div class="fields">
-                  <div class="field">
-                    <%= f.text_field :login, class: 'login-field', placeholder: 'Username/Email' %>
-                  </div>
-
-                  <div class="field">
-                    <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %>
-                  </div>
-
-                  <div class="btn-container">
-                    <%= f.submit "Log in", class: 'btn btn-info' %>
-                  </div>
-
-                  <div class="btn-container">
-                    <%= link_to "Sign up", 'javascript:;', class: 'btn btn-success signup' %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
-
-          <div class='signup-form-container auth-form-container hidden'>
-            <%= form_for(User.new, as: :user, url: registration_path(:user)) do |f| %>
-              <div class="fields">
-                <div class="field">
-                  <%= f.text_field :name, autofocus: true, placeholder: 'Username' %>
-                </div>
-
-                <div class="field">
-                  <%= f.email_field :email, placeholder: "Email" %>
-                </div>
-
-                <div class="field">
-                  <%= f.password_field :password, placeholder: 'Password', autocomplete: "off" %>
-                </div>
-
-                <div class="actions">
-                  <%= f.submit "Sign up!", class: 'btn btn-success auth-btn' %>
-                </div>
-                <div class="btn-container signup-clear-button">
-                  <button type="button" class="btn btn-default" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  </button>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
+      <%= render partial: 'shared/authentication' unless mobile? %>
     </div>
+
+    <%= render partial: 'shared/authentication' if mobile? %>
 
     <% if flash[:notice] %>
       <div class="flash notice alert alert-info"><%= flash[:notice] %></div>
