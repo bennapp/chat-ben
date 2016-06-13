@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th colspan="6"></th>
+      <th colspan="7"></th>
     </tr>
   </thead>
 
@@ -17,7 +17,7 @@
         <td>
           <ol>
             <% bin.posts.each do |post| %>
-              <li><%= post.title %></li>
+              <li><%= post.title %> - <%= link_to 'Link', bin_path(bin, post: post.id) %></li>
             <% end %>
           </ol>
         </td>

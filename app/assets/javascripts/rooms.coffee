@@ -267,7 +267,8 @@ class @RoomShow
       newPost.hideNewPost()
       postId = data.id
       binId = data.bin_id
-      $("#guide-contents tr[data-guide-bin-id='#{binId}']").append("<td data-guide-post-id=\"#{postId}\"><button class=\"selected-show\">#{data.title}</button></td>")
+      $("#guide-contents tr[data-guide-bin-id='#{binId}']").append("<td data-guide-post-id=\"#{postId}\"><button class=\"selected-show\"></button></td>")
+      $('.selected-show').text(data.title)
       window.postFromGuide(binId: binId, postId: postId)
 
     $ratingForm.on "ajax:error", (e, xhr, status, error) ->

@@ -16,7 +16,7 @@ class BinsController < ApplicationController
     rooms = Room.where('rooms.full is false').where('rooms.waiting is true')
     room = rooms.first
 
-    if !current_user.matching?
+    if current_user && !current_user.matching?
       room = @post.rooms.create(bin: @bin)
     end
 
@@ -79,7 +79,11 @@ class BinsController < ApplicationController
   end
 
   def set_post
-    @post = @bin.posts.first
+    if params['post'].present?
+      @post = @bin.posts.where(id: params['post']).first
+    end
+
+    @post = @bin.posts.first if @post.nil?
   end
 
   # Only allow a trusted parameter "white list" through.
