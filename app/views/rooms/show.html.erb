@@ -87,19 +87,19 @@
             <div class="likes">
               <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
               <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
-                <button id="like" class="btn btn-primary"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
+                <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
               <% else %>
-                <button id="like" class="btn btn-default"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
+                <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
               <% end %>
             </div>
           </div>
 
           <div class="post-controls-container">
-            <button id="prev-post" class="btn btn-primary">Prev Show</button>
+            <button id="prev-post" class="btn btn-primary <%= mobile_small_btn %>">Prev Show</button>
             <div class="btn-container">
-              <%= link_to 'Add Show to Channel', 'javascript:;', class: 'btn btn-primary new-post-button' %>
+              <%= link_to 'Add to Channel', 'javascript:;', class: "btn btn-success new-post-button #{mobile_small_btn}" %>
             </div>
-            <button id="next-post" data-toggle="tooltip" data-placement="top" title="Press this button to view the next show on this channel!" class="btn btn-primary">Next Show</button>
+            <button id="next-post" data-toggle="tooltip" data-placement="top" title="Press this button to view the next show on this channel!" class="btn btn-primary <%= mobile_small_btn %>">Next Show</button>
           </div>
         </div>
       </div>

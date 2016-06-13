@@ -1,6 +1,10 @@
 module ApplicationHelper
   def mobile_css
-    @mobile ||= mobile? ? 'mobile' : ''
+    mobile? ? 'mobile' : ''
+  end
+
+  def mobile_small_btn
+    mobile? ? 'btn-xs' : ''
   end
 
   def mobile?
