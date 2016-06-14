@@ -8,36 +8,35 @@ $container-margin: 20px;
   margin-top: 8px;
   margin-right: 16px;
   border-radius: 100%;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: inset 0px 0px 10px 2px rgba(244, 5, 5, 0.9), 0px 0px 10px 2px rgba(255, 0, 0, 0.98);
   animation: redpulse 1s alternate infinite;
 }
 
 @keyframes redpulse {
   0% {
-    background: rgba(255,255,255,0.9);
-    box-shadow: inset 0px 0px 10px 2px rgba(255,5,5,0.9),
-                      0px 0px 5px 2px rgba(255,0,0,0.9);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0px 0px 10px 2px rgba(255, 5, 5, 0.9), 0px 0px 5px 2px rgba(255, 0, 0, 0.9);
   }
   100% {
-    background: rgba(255,255,255,1);
-    box-shadow: inset 0px 0px 10px 2px rgba(244,5,5,0.9),
-                      0px 0px 15px 2px rgba(255,0,0,1);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: inset 0px 0px 10px 2px rgba(244, 5, 5, 0.9), 0px 0px 15px 2px rgba(255, 0, 0, 1);
   }
 }
 
 .page-container {
-	.btn-container {
-		.btn {
-			margin-bottom: 8px;
-			display: block;
-		}
-	}
+  .btn-container {
 
-	.channel-panel {
-		flex-grow: 10;
-		height: auto;
-		margin-bottom: 60px;
+    .btn {
+      margin-bottom: 8px;
+      display: block;
+    }
+  }
+
+  .channel-panel {
+    flex-grow: 10;
+    height: auto;
+    margin-bottom: 60px;
 
     .bins-container {
       margin: auto;
@@ -51,8 +50,8 @@ $container-margin: 20px;
         white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
-
         max-width: 390px;
+
         &.mobile {
           max-width: 100%;
         }
@@ -67,8 +66,8 @@ $container-margin: 20px;
         white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
-
         max-width: 390px;
+
         &.mobile {
           max-width: 100%;
         }
@@ -91,7 +90,7 @@ $container-margin: 20px;
         }
       }
     }
-	}
+  }
 }
 
 .authentication-container {
@@ -106,45 +105,46 @@ $container-margin: 20px;
   }
 }
 
-.auth-form-container, .new-post-container {
-	.input {
-		font-size: 15px;
-	}
+.auth-form-container,
+.new-post-container {
+  .input {
+    font-size: 15px;
+  }
 
-	.fields {
-		display: flex;
+  .fields {
+    display: flex;
     flex-wrap: wrap;
 
-		.field {
-			margin-right: 8px;
-			margin-bottom: 8px;
+    .field {
+      margin-right: 8px;
+      margin-bottom: 8px;
 
-			input {
-				border-radius: 4px;
+      input {
+        border-radius: 4px;
         height: 34px;
         width: 128px;
 
         &.mobile {
-          height: auto;
+          height: 22px;
           width: 80px;
         }
-			}
-		}
+      }
+    }
 
-		.new-post-field {
-			input {
-				width: 200px;
-			}
-		}
-	}
+    .new-post-field {
+      input {
+        width: 200px;
+      }
+    }
+  }
 
-	.btn {
-		display: inline-block;
-	}
+  .btn {
+    display: inline-block;
+  }
 }
 
 .new-edit-post {
-	margin-left: 20px;
+  margin-left: 20px;
 }
 
 .panel-heading {
