@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="field">
-                  <%= f.password_field :password, class: "#{mobile_css}", autocomplete: "off", placeholder: 'Password' %>
+                  <%= f.password_field :password, class: "password-field #{mobile_css}", autocomplete: "off", placeholder: 'Password' %>
                 </div>
 
                 <div class="btn-container">
@@ -37,15 +37,15 @@
         <%= form_for(User.new, as: :user, url: registration_path(:user)) do |f| %>
             <div class="fields">
               <div class="field">
-                <%= f.text_field :name, class: "#{mobile_css}", autofocus: true, placeholder: 'Username' %>
+                <%= f.text_field :name, class: "username-field #{mobile_css}", autofocus: true, placeholder: 'Username' %>
               </div>
 
               <div class="field">
-                <%= f.email_field :email, class: "#{mobile_css}", placeholder: "Email" %>
+                <%= f.password_field :password, class: "register-password-field #{mobile_css}", placeholder: 'Password', autocomplete: "off" %>
               </div>
 
               <div class="field">
-                <%= f.password_field :password, class: "#{mobile_css}", placeholder: 'Password', autocomplete: "off" %>
+                <%= f.email_field :email, class: "email-field #{mobile_css}", placeholder: "Email" %>
               </div>
 
               <div class="actions">

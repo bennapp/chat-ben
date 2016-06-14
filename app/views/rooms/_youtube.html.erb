@@ -17,9 +17,8 @@
   function onPlayerReady(event) {
     if (mobile !== 'mobile') {
       event.target.playVideo();
+      event.target.setVolume(10);
     }
-
-    event.target.setVolume(10);
   }
 
   function onPlayerStateChange(event) {

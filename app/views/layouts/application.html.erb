@@ -58,10 +58,10 @@
         <small class="lead">its TV on the internet with your friends.</small>
       </div>
 
-      <%= render partial: 'shared/authentication' unless mobile? %>
+      <%= render partial: 'shared/login' if !mobile? %>
     </div>
 
-    <%= render partial: 'shared/authentication' if mobile? %>
+    <%= render partial: 'shared/login' if mobile? %>
 
     <% if flash[:notice] %>
       <div class="flash notice alert alert-info"><%= flash[:notice] %></div>

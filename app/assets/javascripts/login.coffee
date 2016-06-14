@@ -2,6 +2,7 @@ class @Login
   constructor: (options) ->
     $('.btn.signup').on 'click', =>
       @showSignup()
+      @transferInputs()
 
     $('.signup-clear-button').on 'click', =>
       @hideSignup()
@@ -20,6 +21,21 @@ class @Login
   showSignup: ->
     $('.login-and-signup-button').addClass('hidden')
     $('.signup-form-container').removeClass('hidden')
+
+  transferInputs: ->
+    $loginField = $('.login-field')
+    $passwordField = $('.password-field')
+    $usernameField = $('.username-field')
+    $registerPasswordField = $('.register-password-field')
+
+    if $usernameField.val() == ''
+      $usernameField.val($loginField.val())
+
+    if $registerPasswordField.val() == ''
+      $registerPasswordField.val($passwordField.val())
+
+    if $registerPasswordField.val().length && $usernameField.val().length
+      $('.email-field').focus()
 
   hideSignup: ->
     $('.signup-form-container').addClass('hidden')
