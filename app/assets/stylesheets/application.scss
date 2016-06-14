@@ -23,6 +23,10 @@ body {
 
 .alert {
   padding: 8px 15px 8px 15px;
+
+  .glyphicon-remove {
+    cursor: pointer;
+  }
 }
 
 .page-header {
@@ -41,7 +45,7 @@ body {
     border: none;
   }
 
-  margin: 26px 2.5% 0;
+  margin: 8px 2.5% 0;
 }
 
 .form-container {
@@ -121,6 +125,7 @@ body {
 .escape-container {
   background: rgba(230, 230, 230, 0.6);
   border-radius: 4px;
+
   span {
     font-size: 11px;
   }
@@ -257,8 +262,4 @@ body {
   .field {
     margin-bottom: 8px;
   }
-}
-
-.login-notice {
-  @include gradient-horizontal(#d9edf7, #FFFFFF, 0%, 100%);
 }

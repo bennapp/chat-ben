@@ -70,6 +70,14 @@
       <div class="flash alert alert-danger"><%= flash[:alert] %></div>
     <% end %>
 
+    <% if !browser.device.mobile? && browser.safari? %>
+      <div class="flash alert alert-danger safari-notice">Safari is working on web cam support. Until then, use chatben in Chrome or Firefox! <a href='https://www.google.com/search?q=safari+webrtc+support'>(Read More)</a></div>
+    <% end %>
+
+    <% if browser.device.mobile? %>
+      <div class="flash notice alert alert-info mobile-notice">Use your laptop for the full chatben experience. <em>Hint: it is way cooler that way </em><span class='mobile-notice-clear glyphicon glyphicon-remove'></span></div>
+    <% end %>
+
     <%= yield %>
 
     <% unless @hide_footer %>

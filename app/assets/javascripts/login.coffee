@@ -4,8 +4,8 @@ class @Login
       @showSignup()
       @transferInputs()
 
-    $('.signup-clear-button').on 'click', =>
-      @hideSignup()
+    $('.signup-clear-button').on 'click', @hideSignup
+    $('.alert .glyphicon-remove').on 'click', @hideNotice
 
     window.forceSignIn = (event) ->
       if window.currentUser.name
@@ -40,3 +40,6 @@ class @Login
   hideSignup: ->
     $('.signup-form-container').addClass('hidden')
     $('.login-and-signup-button').removeClass('hidden')
+
+  hideNotice: (event) ->
+    $(event.target.parentElement).addClass('hidden')

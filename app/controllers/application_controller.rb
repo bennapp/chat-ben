@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :redirect_if_banned
   before_action :store_current_location, unless: :devise_controller?
-  before_action :safari_warning
-
 
   protected
 
@@ -19,10 +17,6 @@ class ApplicationController < ActionController::Base
 
   def redirect_if_non_admin
     redirect_to root_path unless current_user.is_admin?
-  end
-
-  def safari_warning
-    flash[:alert] = "Safari is working on web cam support. Until then, use chatben in Chrome or Firefox! <a href='https://www.google.com/search?q=safari+webrtc+support'>(Read More)</a>".html_safe if !browser.device.mobile? && browser.safari?
   end
 
   private

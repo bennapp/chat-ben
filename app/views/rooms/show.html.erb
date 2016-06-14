@@ -265,7 +265,7 @@
 
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
 
-    $('.flash.notice').delay(3500).fadeOut(1400);
+    $('.flash.notice').delay(4000).fadeOut(1400);
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
     });
