@@ -120,14 +120,14 @@ $container-margin: 20px;
 			margin-bottom: 8px;
 
 			input {
-				height: 34px;
 				border-radius: 4px;
-			}
-		}
+        height: 34px;
+        width: 128px;
 
-		.field {
-			input {
-				width: 128px;
+        &.mobile {
+          height: auto;
+          width: 80px;
+        }
 			}
 		}
 

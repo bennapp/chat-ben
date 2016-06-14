@@ -85,6 +85,10 @@ video {
   align-items: stretch;
   margin-top: 12px;
 
+  &.mobile{
+    margin-top: 0px;
+  }
+
   .left-panel {
     display: flex;
     flex-direction: column;

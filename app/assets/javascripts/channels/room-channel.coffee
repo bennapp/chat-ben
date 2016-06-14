@@ -134,6 +134,7 @@ class @RoomChannel
               $wrapper.append("<div id=\"ytplayer\"></div>")
               onPlayerReady = (event) ->
                 event.target.playVideo()
+                debugger
                 event.target.setVolume 10
 
               onPlayerStateChange = (event) ->
