@@ -1,6 +1,7 @@
 <div id="ytplayer"></div>
 <script>
   var player;
+  var mobile = '<%= mobile_css %>';
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('ytplayer', {
       height: '720',
@@ -14,7 +15,10 @@
   }
 
   function onPlayerReady(event) {
-//    event.target.playVideo();
+    if (mobile !== 'mobile') {
+      event.target.playVideo();
+    }
+
     event.target.setVolume(10);
   }
 

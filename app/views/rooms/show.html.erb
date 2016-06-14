@@ -251,7 +251,7 @@
 
 <script>
   $(document).ready(function(){
-    var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>'});
+    var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>', mobile: '<%= mobile_css %>'});
     var likeChannel = new LikeChannel();
     var roomShow = new RoomShow({
       room: '<%= @room.token %>',

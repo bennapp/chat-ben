@@ -1,5 +1,6 @@
 class @RoomChannel
   constructor: (options) ->
+    @mobile = options.mobile
     roomToken = options.roomToken
 
     boardKeyPress = (e) ->
@@ -133,8 +134,7 @@ class @RoomChannel
             else if data.format_type == 'youtube'
               $wrapper.append("<div id=\"ytplayer\"></div>")
               onPlayerReady = (event) ->
-                event.target.playVideo()
-                debugger
+                event.target.playVideo() unless @mobile == 'mobile'
                 event.target.setVolume 10
 
               onPlayerStateChange = (event) ->
