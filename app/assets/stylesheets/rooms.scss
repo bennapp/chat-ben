@@ -214,7 +214,7 @@ video {
     height: auto;
 
     &.mobile {
-      visibility: hidden !important;
+      display: none !important;
     }
 
     #reaction-preview {
@@ -289,7 +289,7 @@ video {
     height: 79vh;
 
     &.mobile {
-      visibility: hidden !important;
+      display: none !important;
     }
 
     .alert-container {
