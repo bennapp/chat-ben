@@ -85,6 +85,10 @@ body {
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     margin-left: 10px;
     white-space: nowrap;
+
+    &.beta-red {
+      color: #ff0016;
+    }
   }
 
   .page-title {
