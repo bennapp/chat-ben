@@ -13,10 +13,12 @@ $sub-text-grey: #8899a6;
 
 html, body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   padding-bottom: 70px;
+  position: relative;
 }
 
 .alert {
