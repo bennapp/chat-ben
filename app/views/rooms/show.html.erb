@@ -79,11 +79,19 @@
 
           <div class="bin-controls-container">
             <div class="bin-logo-header">
-              <h3 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h3>
+              <% if mobile? %>
+                <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
+              <% else %>
+                <h3 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h3>
+              <% end %>
             </div>
 
             <div class="bin-control-buttons">
-              <h2 class="bin-channel-number"><%= @room.bin.position + 1 %></h2>
+              <% if mobile? %>
+                <h4 class="bin-channel-number"><%= @room.bin.position + 1 %></h4>
+              <% else %>
+                <h2 class="bin-channel-number"><%= @room.bin.position + 1 %></h2>
+              <% end %>
               <button id="channel-up" class="btn btn-xs"><span class="fa fa-arrow-up"></span></button>
               <button id="channel-down" class="btn btn-xs"><span class="fa fa-arrow-down"></span></button>
             </div>
@@ -100,7 +108,11 @@
                 <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
                 <i class="fa fa-thumbs-o-up"></i>
               </span>
-              <h5 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h5>
+              <% if mobile? %>
+                <h6 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h6>
+              <% else %>
+                <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
+              <% end %>
             </div>
 
             <div class="post-controls-container">

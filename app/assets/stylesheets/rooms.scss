@@ -129,6 +129,7 @@ video {
     .read-more {
       margin-top: 12px;
       max-height: 30px;
+
       span {
         padding-bottom: 12px;
       }
@@ -174,7 +175,7 @@ video {
         text-overflow: ellipsis;
       }
 
-      h3 {
+      .bin-header {
         margin: 0px;
         overflow: hidden;
         white-space: nowrap;
@@ -188,6 +189,7 @@ video {
 
       .bin-control-buttons {
         display: flex;
+        align-items: center;
 
         .btn {
           -webkit-appearance: none;
@@ -204,7 +206,7 @@ video {
       align-items: flex-end;
       padding: 2px 0px;
 
-      h5 {
+      .post-header {
         margin: 0px 2px;
         padding-bottom: 2px;
       }
