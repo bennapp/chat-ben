@@ -13,6 +13,7 @@ class @Login
       else
         $('.login-notice').removeClass('hidden')
         $('.login-field').focus()
+        $('body').scrollTo('.login-field')
 
         return false
 
