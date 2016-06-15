@@ -51,14 +51,14 @@
           <div class="guide-container">
             <div class="channel-contents guide-table">
               <table>
-                <% @bins.each_with_index do |bin, i| %>
-                  <tr><td class="headcol"><button><%= "#{bin.abbreviation} #{i + 1}" %></button></td></tr>
+                <% @bins.each do |bin| %>
+                  <tr><td class="headcol"><button><%= "#{bin.abbreviation} #{bin.position + 1}" %></button></td></tr>
                 <% end %>
               </table>
             </div>
             <div id="guide-contents" class="guide-table">
               <table>
-                <% @bins.each_with_index do |bin, i| %>
+                <% @bins.each do |bin| %>
                   <tr data-guide-bin-id="<%= bin.id %>">
                     <% bin.posts.each do |post| %>
                       <% if post.id == @room.post.id && bin.id == @room.bin.id %>
@@ -74,11 +74,12 @@
           </div>
 
           <div class="bin-controls-container">
-            <h2 class="bin-header" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h2>
             <div class="bin-control-buttons">
-              <button id="channel-up" class="btn"><span class="fa fa-arrow-up"></span></button>
-              <button id="channel-down" class="btn"><span class="fa fa-arrow-down"></span></button>
+              <button id="channel-up" class="btn btn-xs"><span class="fa fa-arrow-up"></span></button>
+              <button id="channel-down" class="btn btn-xs"><span class="fa fa-arrow-down"></span></button>
             </div>
+            <h2 class="bin-channel-number"><%= @room.bin.position + 1 %></h2>
+            <h2 class="bin-header" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h2>
           </div>
 
           <div class="post-info-container">

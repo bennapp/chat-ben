@@ -8,7 +8,7 @@ class BinsController < ApplicationController
   # GET /bins
   def index
     @hide_footer = true
-    @bins = Bin.all.sort_by { |bin| bin.id }
+    @bins = Bin.all.sort_by { |bin| bin.position }
   end
 
   # GET /bins/1
@@ -91,7 +91,7 @@ class BinsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def bin_params
     @params ||= begin
-      request_params = params.require(:bin).permit(:title, :abbreviation, :description, :post_ids => (0..100).to_a.map(&:to_s), :posts => [:title, :link, :text_content] )
+      request_params = params.require(:bin).permit(:title, :abbreviation, :description, :position, :post_ids => (0..100).to_a.map(&:to_s), :posts => [:title, :link, :text_content] )
       post_ids = request_params['post_ids'].values
       request_params.delete('post_ids')
       posts = request_params['posts'].values

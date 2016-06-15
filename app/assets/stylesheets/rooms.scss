@@ -165,17 +165,27 @@ video {
 
     .bin-controls-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      align-items: flex-end;
       padding: 2px 0px;
 
       h2 {
         margin: 0px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .bin-channel-number {
+        margin: 0px 4px;
+        font-weight: bold;
       }
 
       .bin-control-buttons {
+        display: flex;
+
         .btn {
-          margin: 4px 0px;
+          margin-left: 4px;
           display: block;
           padding: 6px 6px;
         }

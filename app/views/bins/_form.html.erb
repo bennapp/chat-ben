@@ -26,6 +26,11 @@
     <%= f.text_area :description %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :position %><br>
+    <%= f.number_field :position %>
+  </div>
+
   <div class="bin-forms">
     <% (0..100).each do |i| %>
       <div class="bin-form">
