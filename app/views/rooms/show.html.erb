@@ -116,8 +116,13 @@
             </div>
 
             <div class="post-controls-container">
-              <button id="prev-post" class="btn btn-primary btn-xs">Prev Show</button>
-              <button id="next-post" class="btn btn-primary btn-xs">Next Show</button>
+              <% if mobile? %>
+                <button id="prev-post" class="btn btn-primary btn-xs">Prev</button>
+                <button id="next-post" class="btn btn-primary btn-xs">Next</button>
+              <% else %>
+                <button id="prev-post" class="btn btn-primary btn-xs">Prev Show</button>
+                <button id="next-post" class="btn btn-primary btn-xs">Next Show</button>
+              <% end %>
             </div>
           </div>
 
