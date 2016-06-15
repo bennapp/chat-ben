@@ -76,6 +76,7 @@ $container-margin: 20px;
       .bins {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
 
         .bin {
           padding: 0 20px 20px 20px;
