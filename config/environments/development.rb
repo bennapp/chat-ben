@@ -54,4 +54,6 @@ Rails.application.configure do
   config.logger = Logger.new(STDOUT)
   config.logger.level = Logger.const_get('INFO')
   config.log_level = :debug
+
+  Paperclip.options[:command_path] = "/usr/local/bin/"
 end

@@ -2,6 +2,10 @@ class Bin < ApplicationRecord
   has_many :posts, through: :post_bins
   has_many :post_bins, -> { order(position: :asc) }
 
+  has_attached_file :logo, styles: { medium: "400x400>", thumb: "64x64>" }, default_url: ':placeholder'
+  validates_attachment_content_type :logo, content_type: /\Aimage\/.*\Z/
+  validates_attachment_size :logo, :less_than => 1.megabytes
+
   attr_accessor :posts_attributes
 
   after_save :set_post_bin_position

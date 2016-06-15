@@ -89,6 +89,8 @@ $container-margin: 20px;
         .live-img {
           height: auto;
           max-width: 390px;
+          border-radius: 2px;
+
           &.mobile {
             max-width: 100%;
           }
