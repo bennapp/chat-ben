@@ -4,7 +4,7 @@ class AddPositionToBins < ActiveRecord::Migration[5.0]
 
     next_position = 0
     Bin.where(position: nil).sort_by { |bin| bin.id }.each_with_index do |bin, index|
-      bin.update_attribute(:position, next_position + index)
+      bin.update_column(:position, next_position + index)
     end
   end
 
