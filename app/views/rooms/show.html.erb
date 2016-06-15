@@ -52,7 +52,11 @@
             <div class="channel-contents guide-table">
               <table>
                 <% @bins.each do |bin| %>
-                  <tr><td class="headcol"><button><%= "#{bin.abbreviation} #{bin.position + 1}" %></button></td></tr>
+                  <tr data-guide-bin-id="<%= bin.id %>">
+                    <td class="headcol" data-guide-post-id="<%= bin.posts.first.id %>">
+                      <button><%= "#{bin.abbreviation} #{bin.position + 1}" %></button>
+                    </td>
+                  </tr>
                 <% end %>
               </table>
             </div>

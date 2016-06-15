@@ -12,7 +12,7 @@ class @Guide
       $('#guide-contents').scrollTo('.selected-show', axis: 'x', offset: -20)
       $('#guide-contents').scrollTo('.selected-show', axis: 'y')
 
-    $('#guide-contents td').on 'click', (event) ->
+    $('.guide-container td').on 'click', (event) ->
       cell = event.target.parentNode
       row = event.target.parentNode.parentNode
       postId = $(cell).data('guide-post-id')

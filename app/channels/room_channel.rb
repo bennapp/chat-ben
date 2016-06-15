@@ -134,6 +134,7 @@ class RoomChannel < ApplicationCable::Channel
       reaction_urls: reaction_urls,
       bin_title: bin.title,
       bin_id: bin.id,
+      bin_number: bin.position + 1,
     }
   end
 end
