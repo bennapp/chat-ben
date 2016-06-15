@@ -190,7 +190,7 @@ video {
         display: flex;
 
         .btn {
-          appearance: none;
+          -webkit-appearance: none;
           margin-left: 4px;
           display: block;
           padding: 6px 6px;
@@ -216,7 +216,7 @@ video {
       margin-left: 4px;
 
       .btn {
-        appearance: none;
+        -webkit-appearance: none;
         margin-left: 4px;
       }
     }
