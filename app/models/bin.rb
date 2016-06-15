@@ -6,12 +6,12 @@ class Bin < ApplicationRecord
 
   after_save :set_post_bin_position
   after_save :set_other_bin_positions
+  before_save :set_postition_if_nil
 
   accepts_nested_attributes_for :post_bins
 
-  def position=(value)
-    value = Bin.maximum('position') + 1 if value.nil?
-    super(value)
+  def set_postition_if_nil
+    self.position = Bin.maximum('position') + 1 if position.nil?
   end
 
   def set_other_bin_positions
