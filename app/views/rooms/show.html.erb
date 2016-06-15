@@ -74,33 +74,39 @@
           </div>
 
           <div class="bin-controls-container">
+            <div class="bin-logo-header">
+              <h2 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h2>
+            </div>
+
             <div class="bin-control-buttons">
+              <h2 class="bin-channel-number"><%= @room.bin.position + 1 %></h2>
               <button id="channel-up" class="btn btn-xs"><span class="fa fa-arrow-up"></span></button>
               <button id="channel-down" class="btn btn-xs"><span class="fa fa-arrow-down"></span></button>
             </div>
-            <h2 class="bin-channel-number"><%= @room.bin.position + 1 %></h2>
-            <h2 class="bin-header" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h2>
           </div>
 
           <div class="post-info-container">
-            <h3 class="post-header" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h3>
-
-            <div class="likes">
-              <i class="fa fa-thumbs-o-up"></i> <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
+            <div class="likes-header">
               <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
                 <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
               <% else %>
                 <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
               <% end %>
+              <span class="like-count-container">
+                <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
+                <i class="fa fa-thumbs-o-up"></i>
+              </span>
+              <h3 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h3>
+            </div>
+
+            <div class="post-controls-container">
+              <button id="prev-post" class="btn btn-primary btn-xs">Prev Show</button>
+              <button id="next-post" class="btn btn-primary btn-xs">Next Show</button>
             </div>
           </div>
 
-          <div class="post-controls-container">
-            <button id="prev-post" class="btn btn-primary <%= mobile_small_btn %>">Prev Show</button>
-            <div class="btn-container">
-              <%= link_to 'Add to Channel', 'javascript:;', class: "btn btn-success new-post-button #{mobile_small_btn}" %>
-            </div>
-            <button id="next-post" data-toggle="tooltip" data-placement="top" title="Press this button to view the next show on this channel!" class="btn btn-primary <%= mobile_small_btn %>">Next Show</button>
+          <div class="btn-container">
+            <%= link_to 'Add a Show to Any Channel', 'javascript:;', class: "btn btn-success new-post-button #{mobile_small_btn}" %>
           </div>
         </div>
       </div>

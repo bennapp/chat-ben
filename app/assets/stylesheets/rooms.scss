@@ -110,7 +110,6 @@ video {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 80%;
     }
 
     a.preview {
@@ -165,14 +164,20 @@ video {
 
     .bin-controls-container {
       display: flex;
+      justify-content: space-between;
       align-items: flex-end;
       padding: 2px 0px;
 
+      .bin-logo-header {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
       h2 {
         margin: 0px;
-
-        white-space: nowrap;
         overflow: hidden;
+        white-space: nowrap;
         text-overflow: ellipsis;
       }
 
@@ -206,7 +211,10 @@ video {
     .post-controls-container {
       display: flex;
       justify-content: space-between;
-      padding: 2px 0px;
+
+      .btn {
+        margin-left: 4px;
+      }
     }
 
     .content-container {
@@ -214,6 +222,22 @@ video {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+    }
+
+    .likes-header {
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      .like-count-container {
+        margin: 0px 4px;
+      }
+    }
+
+    .btn-container {
+      padding: 2px 0px;
     }
   }
 
