@@ -190,10 +190,10 @@ video {
         display: flex;
 
         .btn {
+          appearance: none;
           margin-left: 4px;
           display: block;
           padding: 6px 6px;
-          min-width: 25px;
         }
       }
     }
@@ -216,7 +216,7 @@ video {
       margin-left: 4px;
 
       .btn {
-        min-width: 69px;
+        appearance: none;
         margin-left: 4px;
       }
     }
