@@ -79,7 +79,7 @@
 
           <div class="bin-controls-container">
             <div class="bin-logo-header">
-              <h4 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h4>
+              <h3 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h3>
             </div>
 
             <div class="bin-control-buttons">
@@ -92,15 +92,15 @@
           <div class="post-info-container">
             <div class="likes-header">
               <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
-                <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
+                <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up"></span></button>
               <% else %>
-                <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up fa-lg"></span></button>
+                <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up"></span></button>
               <% end %>
               <span class="like-count-container">
                 <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
                 <i class="fa fa-thumbs-o-up"></i>
               </span>
-              <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
+              <h5 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h5>
             </div>
 
             <div class="post-controls-container">

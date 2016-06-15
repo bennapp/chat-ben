@@ -174,7 +174,7 @@ video {
         text-overflow: ellipsis;
       }
 
-      h4 {
+      h3 {
         margin: 0px;
         overflow: hidden;
         white-space: nowrap;
@@ -203,8 +203,8 @@ video {
       align-items: flex-end;
       padding: 2px 0px;
 
-      h4 {
-        margin: 0px;
+      h5 {
+        margin: 0px 2px;
         padding-bottom: 2px;
       }
     }
@@ -212,8 +212,10 @@ video {
     .post-controls-container {
       display: flex;
       justify-content: space-between;
+      margin-left: 4px;
 
       .btn {
+        min-width: 69px;
         margin-left: 4px;
       }
     }
