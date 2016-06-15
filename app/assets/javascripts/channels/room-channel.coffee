@@ -93,6 +93,7 @@ class @RoomChannel
           $('.bin-header').data('bin-id', data.bin_id)
           
           $('.bin-channel-number').text(data.bin_number)
+          $('.bin-logo').attr('src', data.bin_logo_src)
 
           $('.posted-by').text(data.posted_by)
 

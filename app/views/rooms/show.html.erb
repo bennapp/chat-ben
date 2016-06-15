@@ -79,6 +79,7 @@
 
           <div class="bin-controls-container">
             <div class="bin-logo-header">
+              <%= image_tag @room.bin.logo.url(:thumb), class: 'bin-logo' %>
               <% if mobile? %>
                 <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
               <% else %>

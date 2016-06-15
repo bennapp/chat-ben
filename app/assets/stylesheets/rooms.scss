@@ -170,16 +170,23 @@ video {
       padding: 2px 0px;
 
       .bin-logo-header {
+        display: flex;
+        align-items: flex-end;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
       }
 
       .bin-header {
-        margin: 0px;
+        margin: 0px 4px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+      }
+
+      .bin-logo {
+        max-width: 64px;
+        max-height: 64px;
       }
 
       .bin-channel-number {
