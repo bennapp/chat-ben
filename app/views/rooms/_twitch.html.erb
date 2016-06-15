@@ -1,5 +1,6 @@
 <div id="twitchplayer"></div>
 <script type="text/javascript">
+  var mobile = '<%= mobile_css %>';
   var success = function(){
     var options = {
         width: 1280,
@@ -7,8 +8,12 @@
         channel: "<%= value %>"
     };
     var player = new Twitch.Player("twitchplayer", options);
-    player.setVolume(0.1);
-    player.play();
+
+    if (mobile !== 'mobile') {
+      player.setVolume(0.1);
+      player.play();
+    }
+
     player.addEventListener('ended', function(){ window.nextPost() });
   }
 

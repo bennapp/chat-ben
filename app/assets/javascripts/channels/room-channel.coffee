@@ -163,8 +163,9 @@ class @RoomChannel
                   height: 720
                   channel: data.format_link
                 player = new (Twitch.Player)('twitchplayer', options)
-                player.setVolume 0.1
-                player.play()
+                if @mobile != 'mobile'
+                  player.setVolume 0.1
+                  player.play()
                 player.addEventListener 'ended', ->
                   window.nextPost()
                 return
