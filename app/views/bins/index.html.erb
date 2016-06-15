@@ -12,7 +12,7 @@
   <tbody>
     <% @bins.each do |bin| %>
       <tr>
-        <td><%= image_tag bin.logo.url(:thumb) %></td>
+        <td><%= image_tag bin.logo.url(:thumb), style: 'max-height:64px;max-width:64px;' %></td>
         <td><%= bin.title %></td>
         <td><%= bin.abbreviation %></td>
         <td><%= bin.position %></td>
