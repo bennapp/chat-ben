@@ -65,7 +65,7 @@ class BinsController < ApplicationController
   end
 
   def emails
-    @users = User.all
+    @users = User.all.sort_by { |user| user.created_at }
     render :emails
   end
 
