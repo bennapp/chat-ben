@@ -53,7 +53,7 @@
               <table>
                 <% @bins.each do |bin| %>
                   <tr data-guide-bin-id="<%= bin.id %>">
-                    <td class="headcol" data-guide-post-id="<%= bin.posts.first.try(:id) %>">
+                    <td class="headcol" data-guide-post-id="<%= bin.posts.first.try(:id) %>" title="<%= bin.title %>">
                       <button><%= "#{bin.abbreviation} #{bin.position + 1}" %></button>
                     </td>
                   </tr>

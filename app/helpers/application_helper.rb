@@ -7,6 +7,10 @@ module ApplicationHelper
     mobile? ? 'btn-xs' : ''
   end
 
+  def mobile_vimeo_autoplay
+    mobile? ? '0' : '1'
+  end
+
   def mobile?
     browser.device.mobile?
   end
