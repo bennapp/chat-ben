@@ -97,6 +97,19 @@ class @RoomChannel
 
           $('.posted-by').text(data.posted_by)
 
+          if data.duration
+            clearTimeout(window.durationTimeout)
+            window.durationTimeout = setTimeout (->
+              window.nextPost()
+              return
+            ), data.duration * 1000
+          else if data.format_type != 'youtube' && data.format_type != 'vimeo' && data.format_type != 'twitch'
+            clearTimeout(window.durationTimeout)
+            window.durationTimeout = setTimeout (->
+              window.nextPost()
+              return
+            ), 7000
+
           $container = $('.content-container')
 
           $('.preview').remove()
@@ -125,6 +138,8 @@ class @RoomChannel
             $container.prepend("<div class=\"embed-responsive embed-responsive-4by3 embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
             $wrapper = $('.embeded-content-wrapper')
             if data.format_type == 'imgur'
+              $('.embeded-content-container').removeClass('embed-responsive-4by3')
+              $('.embeded-content-container').removeClass('embed-responsive')
               $wrapper.append("<blockquote class=\"imgur-embed-pub\" lang=\"en\" data-id=#{data.format_link}><a href=\"//imgur.com/#{data.format_link}\"></a></blockquote>")
               $wrapper.append("<script async src=\"//s.imgur.com/min/embed.js\" charset=\"utf-8\"></script>")
             else if data.format_type == 'twitter'

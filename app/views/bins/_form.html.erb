@@ -50,6 +50,9 @@
             <div class="field new-post-field">
               <%= post.text_field :link, placeholder: 'Link (optional)' %>
             </div>
+            <div class="field new-post-field">
+              <%= post.number_field :duration, placeholder: 'Time until skip to next post' %>
+            </div>
           </div>
           <div class="new-post-textarea">
             <%= post.text_area :text_content, placeholder: 'Text (optional)' %>

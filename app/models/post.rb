@@ -85,15 +85,17 @@ class Post < ActiveRecord::Base
         youtube_token = youtube_token.split('&').first
         return unless youtube_token
 
-        start_time = link.split('t=')[1].split('&').first
+        start_time = link.split('t=')[1]
+        start_time = start_time.split('&').first if start_time.present?
 
         self.format_type = 'youtube'
         self.format_link = youtube_token
         self.start_time = start_time if start_time.present?
       when /youtu.be/
-        start_time = link.split('t=')[1].split('&').first
-        self.start_time = start_time if start_time.present?
+        start_time = link.split('t=')[1]
+        start_time = start_time.split('&').first if start_time.present?
 
+        self.start_time = start_time if start_time.present?
         self.format_type = 'youtube'
         self.format_link = link.split('/').last
       when /vimeo.com/

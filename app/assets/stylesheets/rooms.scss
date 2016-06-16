@@ -150,11 +150,9 @@ video {
     .embeded-content-container {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      overflow-y: scroll;
       border-radius: 4px;
       align-items: center;
-      max-height: 59vh;
+      overflow-y: scroll;
     }
 
     .embeded-content-wrapper.imgur {

@@ -5,7 +5,7 @@
     <div class="post-content-container">
       <div class="content-container">
         <% if @room.post.format_link.present? %>
-          <% if @room.post.format_type == 'twitter' %>
+          <% if @room.post.format_type == 'twitter' || @room.post.format_type == 'imgur' %>
             <div class="embeded-content-container">
               <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
               </div>
@@ -293,6 +293,20 @@
     new Guide;
 
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link, start: @room.post.start_time }) : '' %>');
+
+    var duration = '<%= @room.post.duration %>';
+    var type = '<%= @room.post.format_type %>';
+    if (duration){
+      clearTimeout(window.durationTimeout)
+      window.durationTimeout = setTimeout(function(){
+        window.nextPost();
+      }, duration * 1000);
+    } else if (type !== 'vimeo' && type !== 'youtube' && type !== 'twitch') {
+      clearTimeout(window.durationTimeout)
+      window.durationTimeout = setTimeout(function(){
+        window.nextPost();
+      }, 7000);
+    }
 
     $('.flash.notice').delay(4000).fadeOut(1400);
     $(function () {
