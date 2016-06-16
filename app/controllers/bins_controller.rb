@@ -16,8 +16,13 @@ class BinsController < ApplicationController
     if not_matching? || browser.device.mobile?
       room = @post.rooms.create(bin: @bin)
     else
-      rooms = Room.where('rooms.full is false').where('rooms.waiting is true')
-      room = rooms.first
+      if params['post'].present?
+        rooms = @post.rooms.where('rooms.full is false').where('rooms.waiting is true')
+        room = rooms.first
+      else
+        rooms = Room.where('rooms.full is false').where('rooms.waiting is true')
+        room = rooms.first
+      end
 
       room = @post.rooms.create(bin: @bin) if room.blank?
     end
