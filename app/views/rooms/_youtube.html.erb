@@ -7,6 +7,9 @@
       height: '720',
       width: '1280',
       videoId: '<%= value %>',
+      playerVars: {
+        start: '<%= start %>'
+      },
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange

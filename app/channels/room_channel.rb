@@ -123,6 +123,7 @@ class RoomChannel < ApplicationCable::Channel
       link: post.link,
       format_link: post.format_link,
       format_type: post.format_type,
+      start_time: post.start_time,
       text_content: post.text_content,
       like: like_exists,
       dislike: dislike_exists,

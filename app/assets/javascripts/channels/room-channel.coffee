@@ -150,6 +150,8 @@ class @RoomChannel
                 player = new (YT.Player)('ytplayer',
                   height: '720'
                   width: '1280'
+                  playerVars:
+                    start: data.start_time
                   videoId: data.format_link
                   events: 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange)
               else

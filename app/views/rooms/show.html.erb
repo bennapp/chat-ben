@@ -292,7 +292,7 @@
     var newPost = new NewPost();
     new Guide;
 
-    $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link }) : '' %>');
+    $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link, start: @room.post.start_time }) : '' %>');
 
     $('.flash.notice').delay(4000).fadeOut(1400);
     $(function () {
