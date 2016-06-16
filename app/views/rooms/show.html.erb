@@ -171,15 +171,24 @@
   </div>
 
   <div class="remote-panel <%= mobile_css %>">
-    <div class="alert-container">
-      <div class="alert alert-info status" role="alert"></div>
+    <div class="share-switch-container">
       <div class="switch-container">
-        <span class="switch-text">Watch With Others (Off / On)</span>
+        <h5 class="switch-text">Watch With Others (Off / On)</h5>
         <div class="onoffswitch">
           <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" <%= current_user && current_user.matching? ? 'checked' : '' %> >
           <label class="onoffswitch-label" for="myonoffswitch"></label>
         </div>
       </div>
+
+      <div>
+        <h5>Share to Invite Friends to Watch with You</h5>
+        <input type="text" id="lookup-input" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
+        <button class="btn btn-primary btn-sm" data-clipboard-target='lookup-input' id='copy-button'>Click to Copy</button>
+      </div>
+    </div>
+
+    <div class="alert-container">
+      <div class="alert alert-info status" role="alert"></div>
     </div>
 
     <div class="remote-container">
@@ -309,8 +318,10 @@
     }
 
     $('.flash.notice').delay(4000).fadeOut(1400);
-    $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
+
+    var clip = new ZeroClipboard($("#copy-button"));
+    $('#lookup-input').focus().select()
+
+    $('[data-toggle="tooltip"]').tooltip();
   });
 </script>
