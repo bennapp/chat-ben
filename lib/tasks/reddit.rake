@@ -7,9 +7,11 @@ namespace :reddit do
     RedditKit.sign_in 'chatbenbot', password
 
     subreddits = [
-        { name: 'videos', full_name: '/r/Videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be'] },
-        { name: 'fullmoviesonyoutube', full_name: '/r/FullMoviesOnYouTube', domains: ['youtube.com', 'youtu.be'] },
-        { name: '360video', full_name: '/r/360video', domains: ['youtube.com', 'youtu.be'] },
+        { name: '/r/Videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be'], abbreviation: 'RVIDS' },
+        { name: '/r/FullMoviesOnYouTube', domains: ['youtube.com', 'youtu.be'], abbreviation: 'FMOYT' },
+        { name: '/r/360video', domains: ['youtube.com', 'youtu.be'], abbreviation: 'V360' },
+        { name: '/r/ObscureMedia', domains: ['youtube.com', 'youtu.be'], abbreviation: 'OM' },
+        { name: '/r/Unexpected', domains: ['youtube.com', 'youtu.be', 'i.imgur.com', 'imgur.com'], abbreviation: 'U!' },
     ]
 
     if args[:subreddits].present?
@@ -18,11 +20,11 @@ namespace :reddit do
     end
 
     subreddits.each do |subreddit|
-      links = RedditKit.links subreddit[:name], category: 'hot'
+      subreddit_name = subreddit[:name].gsub('/r/', '')
+      links = RedditKit.links subreddit_name, category: 'hot'
       domain_links = links.select { |link| subreddit[:domains].include?(link.domain) }
 
-      bin = Bin.find_or_create_by(title: subreddit[:full_name])
-      raise "Could not find bin with matching name: #{subreddit[:name]}" if bin.nil?
+      bin = Bin.find_or_create_by(title: subreddit[:name], abbreviation: subreddit[:abbreviation])
 
       new_posts_attributes = domain_links.map do |youtube_link|
         post = Post.find_or_create_by(title: youtube_link.title, link: youtube_link.url)
