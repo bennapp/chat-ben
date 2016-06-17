@@ -119,6 +119,7 @@ class @RoomShow
 
   _setStatus: (status) ->
     @status = status
+    window.status = status
     status = switch status
       when 'not-waiting'
         'Flip the switch to watch with someone else'

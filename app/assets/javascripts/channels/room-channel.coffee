@@ -65,6 +65,7 @@ class @RoomChannel
       received: (data) ->
         action = data.action
         if action == 'advance_post'
+          return if window.status == 'ending' && data.user_name != currentUser.name
           guideSelect(postId: data.id, binId: data.bin_id)
 
           $like = $('#like')
