@@ -66,9 +66,9 @@
                   <tr data-guide-bin-id="<%= bin.id %>">
                     <% bin.posts.each do |post| %>
                       <% if post.id == @room.post.id && bin.id == @room.bin.id %>
-                        <td data-guide-post-id="<%= post.id %>"><button class="selected-show"><%= post.title %></button></td>
+                        <td data-guide-post-id="<%= post.id %>"><button class="selected-show" title="<%= post.title %>"><%= truncate(post.title) %></button></td>
                       <% else %>
-                        <td data-guide-post-id="<%= post.id %>"><button><%= post.title %></button></td>
+                        <td data-guide-post-id="<%= post.id %>"><button title="<%= post.title %>"><%= truncate(post.title) %></button></td>
                       <% end %>
                     <% end %>
                   </tr>

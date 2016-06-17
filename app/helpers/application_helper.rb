@@ -11,6 +11,14 @@ module ApplicationHelper
     mobile? ? '0' : '1'
   end
 
+  def truncate(string, max_length = 40)
+    if string.length > max_length
+      "#{string[0..max_length]} ..."
+    else
+      string
+    end
+  end
+
   def mobile?
     browser.device.mobile?
   end

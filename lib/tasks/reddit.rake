@@ -7,8 +7,9 @@ namespace :reddit do
     RedditKit.sign_in 'chatbenbot', password
 
     subreddits = [
-        { name: 'videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be'] },
-        { name: 'fullmoviesonyoutube', domains: ['youtube.com', 'youtu.be'] },
+        { name: 'videos', full_name: '/r/Videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be'] },
+        { name: 'fullmoviesonyoutube', full_name: '/r/FullMoviesOnYouTube', domains: ['youtube.com', 'youtu.be'] },
+        { name: '360video', full_name: '/r/360video', domains: ['youtube.com', 'youtu.be'] },
     ]
 
     if args[:subreddits].present?
@@ -20,7 +21,7 @@ namespace :reddit do
       links = RedditKit.links subreddit[:name], category: 'hot'
       domain_links = links.select { |link| subreddit[:domains].include?(link.domain) }
 
-      bin = Bin.where("lower(title) = ?", "/r/#{subreddit[:name]}").first
+      bin = Bin.find_or_create_by(title: subreddit[:full_name])
       raise "Could not find bin with matching name: #{subreddit[:name]}" if bin.nil?
 
       new_posts_attributes = domain_links.map do |youtube_link|
