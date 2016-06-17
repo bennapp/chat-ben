@@ -1,12 +1,21 @@
 namespace :reddit do
   desc "TODO"
 
-  task build_channels: :environment do
+  task :build_channels, [:subreddits] => :environment do |t, args|
     password = begin IO.read("./redditbot").gsub("\n", "") rescue "" end
     raise 'put password in redditbot file' if password == ''
     RedditKit.sign_in 'chatbenbot', password
 
-    subreddits = [{ name: 'videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be'] }]
+    subreddits = [
+        { name: 'videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be'] },
+        { name: 'fullmoviesonyoutube', domains: ['youtube.com', 'youtu.be'] },
+    ]
+
+    if args[:subreddits].present?
+      subreddit_list = args[:subreddits].split(',')
+      subreddits = subreddits.select { |subreddit| subreddit_list.include?(subreddit[:name]) }
+    end
+
     subreddits.each do |subreddit|
       links = RedditKit.links subreddit[:name], category: 'top'
       domain_links = links.select { |link| subreddit[:domains].include?(link.domain) }
