@@ -12,6 +12,7 @@ namespace :reddit do
         { name: '/r/360video', domains: ['youtube.com', 'youtu.be'], abbreviation: 'V360' },
         { name: '/r/ObscureMedia', domains: ['youtube.com', 'youtu.be'], abbreviation: 'OM' },
         { name: '/r/Unexpected', domains: ['youtube.com', 'youtu.be', 'i.imgur.com', 'imgur.com'], abbreviation: 'U!' },
+        { name: '/r/YoutubeHaiku', domains: ['youtube.com', 'youtu.be'], abbreviation: 'YH' },
     ]
 
     if args[:subreddits].present?
