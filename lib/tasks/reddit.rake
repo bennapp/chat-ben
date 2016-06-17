@@ -16,6 +16,7 @@ namespace :reddit do
         { name: '/r/ArtisanVideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'AV' },
         { name: '/r/curiousvideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'CV' },
         { name: '/r/cookingvideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'COOK' },
+        { name: '/r/Lectures', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'LCTR' },
     ]
 
     if args[:subreddits].present?
