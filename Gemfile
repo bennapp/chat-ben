@@ -28,6 +28,8 @@ gem 'paperclip-av-transcoder', '~> 0.6'
 gem 'browser'
 gem 'zeroclipboard-rails'
 
+gem 'redditkit', '~> 1.0.1'
+
 group :production do
   gem 'autoprefixer-rails', '~> 6.3'
 end
