@@ -14,6 +14,7 @@ namespace :reddit do
         { name: '/r/Unexpected', domains: ['youtube.com', 'youtu.be', 'i.imgur.com', 'imgur.com'], abbreviation: 'U!' },
         { name: '/r/YoutubeHaiku', domains: ['youtube.com', 'youtu.be'], abbreviation: 'YH' },
         { name: '/r/ArtisanVideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'AV' },
+        { name: '/r/curiousvideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'CV' },
     ]
 
     if args[:subreddits].present?
@@ -26,7 +27,8 @@ namespace :reddit do
       links = RedditKit.links subreddit_name, category: 'hot'
       domain_links = links.select { |link| subreddit[:domains].include?(link.domain) }
 
-      bin = Bin.find_or_create_by(title: subreddit[:name], abbreviation: subreddit[:abbreviation])
+      bin = Bin.find_or_create_by(title: subreddit[:name])
+      bin.update_attribute(:abbreviation, subreddit[:abbreviation]) unless bin.abbreviation == subreddit[:abbreviation]
 
       new_posts_attributes = domain_links.map do |youtube_link|
         post = Post.find_or_create_by(title: youtube_link.title, link: youtube_link.url)
