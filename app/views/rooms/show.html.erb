@@ -222,29 +222,6 @@
       </div>
     </div>
 
-    <div class="rating display-none">
-      <h4 id="rate-other-user">How would you rate your conversation?</h4>
-      <div class="rating-description">
-        <p>Rating your conversations will increase your chances of being matched with someone you will enjoy talking with!</p>
-      </div>
-
-      <%= form_for(@rating, remote: true) do |f| %>
-        <%= f.hidden_field :room_id, value: @room.id %>
-
-        <div>
-          <%= f.check_box :nsfw %>
-          <%= f.label :nsfw, "Report for nudity" %>
-        </div>
-
-        <div class="rating-select-container">
-          <% select_options = options_for_select([["Select Rating", nil], ["★", 1], ["★★", 2], ["★★★", 3], ["★★★★", 4], ["★★★★★", 5]], ["Select Rating", nil]) %>
-          <%= f.select :value, select_options %>
-        </div>
-
-        <%= f.submit "Submit Rating", class: 'submit-rating btn btn-primary' %>
-      <% end %>
-    </div>
-
     <div class="dry-erase-board-container">
       <h5>Dry Erase Board - Leave a message! Press Enter to save.</h5>
       <div class="wall-container">

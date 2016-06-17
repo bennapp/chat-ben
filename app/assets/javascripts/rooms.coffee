@@ -69,14 +69,13 @@ class @RoomShow
     el = document.getElementById('container_' + @webrtc.getDomId(peer))
     if remote and el
       remote.removeChild el
-    $('.rating').removeClass('display-none')
+
     $('.control-buttons').addClass('display-none')
     @_setStatus('ending')
     $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
     $('.videoContainer').remove()
     $('.remote-container').addClass('display-none')
     $('#send-message').addClass('display-none')
-    $('.remote-panel').css('justify-content', 'flex-start')
 
     @stopWebRTC()
 
@@ -99,14 +98,6 @@ class @RoomShow
         return 'Make sure to end your conversation before leaving!'
       else
         return undefined
-
-    $ratingForm = $("#new_rating")
-    $ratingForm.on "ajax:success", (e, data, status, xhr) ->
-      $('.rating').addClass('display-none')
-      $('.new-buttons').removeClass('display-none')
-    $ratingForm.on "ajax:error", (e, xhr, status, error) ->
-      $('.rating').addClass('display-none')
-      $('.new-buttons').removeClass('display-none')
 
     $('#end-conversation').on 'click', =>
       $('#end-conversation').addClass('display-none')
@@ -262,8 +253,8 @@ class @RoomShow
     $('#mute-volume-button').on 'click', @_toggleVolume
 
   _newPostButton: ->
-    $ratingForm = $("#new_post")
-    $ratingForm.on "ajax:success", (e, data, status, xhr) ->
+    $newForm = $("#new_post")
+    $newForm.on "ajax:success", (e, data, status, xhr) ->
       newPost = new NewPost
       newPost.hideNewPost()
       postId = data.id
@@ -272,7 +263,7 @@ class @RoomShow
       $('.selected-show').text(data.title)
       window.postFromGuide(binId: binId, postId: postId)
 
-    $ratingForm.on "ajax:error", (e, xhr, status, error) ->
+    $newForm.on "ajax:error", (e, xhr, status, error) ->
       newPost = new NewPost
       newPost.hideNewPost()
 
