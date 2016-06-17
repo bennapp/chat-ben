@@ -17,13 +17,17 @@ namespace :reddit do
     end
 
     subreddits.each do |subreddit|
-      links = RedditKit.links subreddit[:name], category: 'top'
+      links = RedditKit.links subreddit[:name], category: 'hot'
       domain_links = links.select { |link| subreddit[:domains].include?(link.domain) }
 
       bin = Bin.where("lower(title) = ?", "/r/#{subreddit[:name]}").first
       raise "Could not find bin with matching name: #{subreddit[:name]}" if bin.nil?
 
-      new_posts_attributes = domain_links.map { |youtube_link| {'id' => Post.create(title: youtube_link.title, link: youtube_link.url).id} }
+      new_posts_attributes = domain_links.map do |youtube_link|
+        post = Post.find_or_create_by(title: youtube_link.title, link: youtube_link.url)
+        {'id' => post.id}
+      end
+
       bin.posts_attributes = new_posts_attributes
       bin.save!
     end
