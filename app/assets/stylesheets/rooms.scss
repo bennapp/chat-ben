@@ -30,7 +30,7 @@ video {
   }
 
   .content-panel {
-    //height: 64vh;
+    height: 59vh;
     width: 105vh;
     max-width: 100%;
 
@@ -63,6 +63,8 @@ video {
     }
 
     .embeded-content-container {
+      height: 59vh;
+      max-height: 59vh;
       display: flex;
       flex-direction: column;
       border-radius: 4px;
