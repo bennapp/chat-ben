@@ -138,7 +138,7 @@ class RoomChannel < ApplicationCable::Channel
       bin_id: bin.id,
       bin_number: bin.position + 1,
       bin_logo_src: bin.logo(:thumb),
-      bin_description: truncate(bin.description, 150),
+      bin_description: bin.description,
       user_name: current_user.try(:name),
     }
   end
