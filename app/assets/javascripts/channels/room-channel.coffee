@@ -88,6 +88,7 @@ class @RoomChannel
           $('.like-count').attr("data-post-id", data.id)
 
           $('.post-header').text(data.title)
+          $('.post-header').attr('title', data.title)
           $('.post-header').data('post-id', data.id)
 
           $('.bin-header').text(data.bin_title)
@@ -95,6 +96,9 @@ class @RoomChannel
           
           $('.bin-channel-number').text(data.bin_number)
           $('.bin-logo').attr('src', data.bin_logo_src)
+
+          $('.bin-description').text(data.bin_description || '')
+          $('.bin-description').attr('title', data.bin_description || '')
 
           $('.posted-by').text(data.posted_by)
 
@@ -111,7 +115,7 @@ class @RoomChannel
               return
             ), 30000
 
-          $container = $('.content-container')
+          $container = $('.content-panel')
 
           $('.preview').remove()
           if data.link && data.full_url && !data.format_link
@@ -122,7 +126,7 @@ class @RoomChannel
           $('.well.post-content').remove()
           if data.text_content
             $container.prepend("<div class=\"well post-content\"></div>")
-            $('.content-container .well').text(data.text_content)
+            $('.content-panel .well').text(data.text_content)
             if data.text_content.length > 500
               $container.append("<div class=\"btn btn-info read-more\" aria-label=\"Left Align\"><span class=\"fa fa-file-text-o fa-lg\" aria-hidden=\"true\"></span> Read more</div>")
               options = {
@@ -136,15 +140,15 @@ class @RoomChannel
 
           $('.embeded-content-container').remove()
           if data.format_link
-            $container.prepend("<div class=\"embed-responsive embed-responsive-4by3 embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
+            $container.prepend("<div class=\"embed-responsive embed-responsive-16by9 embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
             $wrapper = $('.embeded-content-wrapper')
             if data.format_type == 'imgur'
-              $('.embeded-content-container').removeClass('embed-responsive-4by3')
+              $('.embeded-content-container').removeClass('embed-responsive-16by9')
               $('.embeded-content-container').removeClass('embed-responsive')
               $wrapper.append("<blockquote class=\"imgur-embed-pub\" lang=\"en\" data-id=#{data.format_link}><a href=\"//imgur.com/#{data.format_link}\"></a></blockquote>")
               $wrapper.append("<script async src=\"//s.imgur.com/min/embed.js\" charset=\"utf-8\"></script>")
             else if data.format_type == 'twitter'
-              $('.embeded-content-container').removeClass('embed-responsive-4by3')
+              $('.embeded-content-container').removeClass('embed-responsive-16by9')
               $('.embeded-content-container').removeClass('embed-responsive')
               $wrapper.append("<blockquote class=\"twitter-tweet\" lang=\"en\"><a href=#{data.format_link}></a></blockquote>")
               $wrapper.append("<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>")

@@ -1,7 +1,6 @@
 class @Guide
   constructor: (options) ->
-    $('#guide-contents').scrollTo('.selected-show', axis: 'x', offset: -20)
-    $('#guide-contents').scrollTo('.selected-show', axis: 'y')
+    $('.selected-show').scrollintoview()
 
     $('.guide-table').on 'scroll', ->
       $('.guide-table:not(this)').scrollTop $(this).scrollTop()
@@ -9,8 +8,7 @@ class @Guide
     window.guideSelect = (options) ->
       $('.selected-show').removeAttr('class')
       $("#guide-contents tr[data-guide-bin-id='#{options.binId}'] td[data-guide-post-id='#{options.postId}'] button").attr('class', 'selected-show')
-      $('#guide-contents').scrollTo('.selected-show', axis: 'x', offset: -20)
-      $('#guide-contents').scrollTo('.selected-show', axis: 'y')
+      $('.selected-show').scrollintoview()
 
     $('.guide-container td').on 'click', (event) ->
       cell = event.target.parentNode
@@ -19,3 +17,14 @@ class @Guide
       binId = $(row).data('guide-bin-id')
 
       window.postFromGuide(binId: binId, postId: postId)
+
+    resizeGuide = ->
+      headerHeight = $('.page-header').height()
+      pageHeight = $('.room-page').height()
+      windowHeight = $(window).height()
+
+      $('.guide-table').css('max-height', parseInt(windowHeight - pageHeight - headerHeight))
+
+    resizeGuide()
+
+    $(window).resize resizeGuide

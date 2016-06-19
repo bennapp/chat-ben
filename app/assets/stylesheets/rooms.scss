@@ -20,96 +20,23 @@ video {
   visibility: hidden !important;
 }
 
-.buttons {
-  .new-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 20px;
-
-    .btn {
-      margin-bottom: 8px;
-    }
-
-    #new-conversation {
-      max-width: 250px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-}
-
-.rating-description {
-  width: 390px;
-
-  p {
-    margin-bottom: 4px;
-  }
-}
-
-.rating {
-  h4 {
-    margin-bottom: 2px;
-  }
-
-  .submit-rating {
-    margin-top: -4px;
-    width: 124px;
-  }
-
-  label {
-    font-weight: normal;
-  }
-
-  .rating-select-container {
-    margin-top: -4px;
-    margin-bottom: 12px;
-    position: relative;
-
-    select {
-      background: white;
-      color: black;
-      padding: 5px;
-      font-size: 16px;
-      line-height: 1.2em;
-      height: 34px;
-      width: 124px;
-      appearance: none;
-    }
-  }
-}
-
 .room-page {
   display: flex;
-  align-items: stretch;
-  margin-top: 12px;
+  flex-direction: column;
+  align-items: center;
 
-  &.mobile{
+  &.mobile {
     margin-top: 0px;
   }
 
-  .left-panel {
-    display: flex;
-    flex-direction: column;
-    padding: 0px 12px 0 12px;
-    height: auto; //override remove the page div 79 vh thing?
-    border-right: 1px solid #eeeeee;
-    width: 40%;
+  .content-panel {
+    height: 64vh;
+    width: 113.79vh;
+    max-width: 100%;
 
     &.mobile {
-      width: 100% !important;
-    }
-
-    .bin-header {
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-
-    .post-header {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      height: auto;
+      width: 100%;
     }
 
     a.preview {
@@ -135,18 +62,6 @@ video {
       }
     }
 
-    .posted-by-container {
-      color: #555;
-    }
-
-    .post-content-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 78vh;
-      width: 100%;
-    }
-
     .embeded-content-container {
       display: flex;
       flex-direction: column;
@@ -160,312 +75,275 @@ video {
         border: 0;
       }
     }
+  }
 
-    .bin-controls-container {
+  .guide-info-remote-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    .guide-info {
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: flex-end;
-      padding: 2px 0px;
+      padding: 8px;
+      height: 100%;
+      width: 50%;
 
-      .bin-logo-header {
+      &.mobile {
+        width: 100%;
+      }
+
+      .bin-header {
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+
+      .post-header {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .bin-controls-container {
+        display: flex;
+        padding: 2px 0px;
+
+        .bin-logo {
+          width: 64px;
+          height: 64px;
+        }
+
+        .bin-header-description {
+          display: flex;
+          flex-direction: column;
+          margin-left: 12px;
+
+          .bin-description {
+            &.mobile {
+              font-size: 11px;
+            }
+          }
+        }
+
+        .bin-number-header {
+          display: flex;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .bin-header {
+          margin: 0px 8px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .bin-channel-number {
+          margin: 0px;
+          font-weight: bold;
+        }
+
+        .bin-control-buttons {
+          display: flex;
+          align-items: center;
+
+          .btn {
+            -webkit-appearance: none;
+            margin-left: 4px;
+            display: block;
+            padding: 6px 6px;
+          }
+        }
+      }
+
+      .post-info-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 6px 0px;
+
+        .post-header {
+          margin: 0px 2px;
+          padding-bottom: 2px;
+        }
+      }
+
+      .post-controls-container {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 4px;
+
+        .btn {
+          -webkit-appearance: none;
+          margin-left: 4px;
+        }
+      }
+
+      .likes-header {
         display: flex;
         align-items: flex-end;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        .like-count-container {
+          margin: 0px 4px;
+        }
       }
 
-      .bin-header {
-        margin: 0px 4px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+      .btn-container {
+        padding: 2px 0px;
+      }
+    }
+
+    .chat-panel-container {
+      display: flex;
+      width: 50%;
+      justify-content: center;
+    }
+
+    .chat-panel {
+      display: flex;
+      justify-content: space-between;
+
+      &.mobile {
+        display: none !important;
       }
 
-      .bin-logo {
-        max-width: 64px;
-        max-height: 64px;
-      }
-
-      .bin-channel-number {
-        margin: 0px 4px;
-        font-weight: bold;
-      }
-
-      .bin-control-buttons {
+      .chat-container {
         display: flex;
-        align-items: center;
+        justify-content: space-between;
 
-        .btn {
-          -webkit-appearance: none;
-          margin-left: 4px;
-          display: block;
-          padding: 6px 6px;
+        .remote-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 4px;
+        }
+
+        #remote {
+          .no-user.well {
+            margin-bottom: 0px;
+            padding: 10px;
+          }
+
+          .no-user .glyphicon {
+            font-size: 12vh;
+          }
+        }
+
+        button {
+          border-color: white;
+        }
+
+        .videoContainer.remote {
+          position: relative;
+
+          .volume_bar {
+            bottom: 5px;
+          }
+
+          video {
+            max-width: 100% !important;
+            width: 20vh;
+          }
+        }
+
+        .local-video-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 8px;
+
+          .videoContainer {
+            width: 100%;
+
+            video {
+              width: 20vh;
+              max-width: 100% !important;
+            }
+          }
         }
       }
-    }
 
-    .post-info-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding: 2px 0px;
-
-      .post-header {
-        margin: 0px 2px;
-        padding-bottom: 2px;
-      }
-    }
-
-    .post-controls-container {
-      display: flex;
-      justify-content: space-between;
-      margin-left: 4px;
-
-      .btn {
-        -webkit-appearance: none;
-        margin-left: 4px;
-      }
-    }
-
-    .content-container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .likes-header {
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-
-      .like-count-container {
-        margin: 0px 4px;
-      }
-    }
-
-    .btn-container {
-      padding: 2px 0px;
-    }
-  }
-
-  .remote-panel {
-    display: flex;
-    flex-direction: column;
-    padding: 0px 12px 0 12px;
-    align-items: center;
-    justify-content: space-between;
-    width: 40%;
-    height: auto;
-
-    &.mobile {
-      display: none !important;
-    }
-
-    .share-switch-container {
-      display: flex;
-      justify-content: space-around;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    .alert-container {
-      display: flex;
-      justify-content: space-around;
-    }
-
-    .no-user-local{
-      position: relative;
-      height: 100%;
-    }
-
-    .local-video-container {
-      position: absolute;
-      bottom: -4px;
-      right: 0px;
-      width: 24%;
-
-      .videoContainer {
-        width: 100%;
-
-        video {
-          max-width: 100% !important;
-        }
-      }
-    }
-
-    .no-user.well {
-      margin-bottom: 0px;
-    }
-
-    .alert {
-      margin-bottom: 14px;
-    }
-
-    .no-user .glyphicon {
-      font-size: 24vw;
-    }
-
-    .remote-container {
-      display: flex;
-      align-items: stretch;
-      margin-bottom: 20px;
-      margin-right: 12px;
-      margin-left: 12px;
-
-      #remote {
+      .chat-info-container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-      }
+        justify-content: space-between;
+        padding: 8px;
 
-      button {
-        border-color: white;
-      }
-
-      .videoContainer.remote {
-        position: relative;
-
-        .volume_bar {
-          bottom: 5px;
+        .alert {
+          margin-bottom: 4px;
+          padding: 4px 8px 4px 8px;
+          font-size: 12px;
         }
 
-        video {
-          margin-bottom: -4px;
-          max-width: 100% !important;
-        }
-      }
-    }
+        .video-chat-option, .invite-friends {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
 
-    .dry-erase-board-container {
-      .wall-container {
-        margin-bottom: 20px;
+          h6 {
+            margin: 0px;
+          }
 
-        #board {
-          min-width: 100%;
-          border-radius: 4px;
-          min-height: 60px;
-        }
-      }
-    }
-  }
-
-  .reaction-panel {
-    width: 20%;
-    padding: 0px 12px 0 12px;
-    border-left: 1px solid #eeeeee;
-    height: auto;
-
-    &.mobile {
-      display: none !important;
-    }
-
-    #reaction-preview {
-      width: 90%;
-    }
-
-    .reaction-preview-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 12px;
-    }
-
-    .glow-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .react-results-container {
-      .reaction-buttons-container{
-        display: flex;
-        justify-content: center;
-
-        .btn {
-          margin-left: 8px;
-        }
-      }
-    }
-
-    h4, h1 {
-      margin-top: 14px;
-      text-align: center;
-    }
-
-    #react-button{
-      width: 100%;
-      @include gradient-horizontal(#E83D16, #FFD816, 0%, 100%);
-      border: none;
-
-      &:hover {
-        background-color: #EF3E09;
-        background-image: none;
-      }
-    }
-
-    .reactions-container {
-      display: flex;
-      flex-direction: column;
-      margin-top: 20px;
-      align-items: center;
-      max-height: 70vh;
-      overflow-y: scroll;
-
-      .video-container {
-        width: 90%;
-
-        .reaction-video {
-          width: 100%;
+          .btn, .switch-container {
+            margin-left: 10px;
+          }
         }
       }
     }
   }
 }
 
-.guide-container {
-  td {
-    margin: 0;
-    white-space: nowrap;
+.guide-wrapper {
+  bottom: 0;
 
-    button {
-      min-width: 100%;
-      background-color: #11284a;
-      border-color: #5e7088;
-      color: #d1dded;
+  .guide-container {
+    td {
+      margin: 0;
+      white-space: nowrap;
 
-      &.selected-show {
-        background-color: #f8f69f;
-        color: #11284a;
+      button {
+        min-width: 100%;
+        background-color: #11284a;
+        border-color: #5e7088;
+        color: #d1dded;
+
+        &.selected-show {
+          background-color: #f8f69f;
+          color: #11284a;
+        }
       }
     }
-  }
 
-  #guide-contents {
-    background-color: #c0c0c0;
-    overflow-x: scroll;
-    overflow-y: scroll;
-    max-height: 92px;
-  }
+    .guide-table {
+      overflow-x: visible;
+      overflow-y: scroll;
+      max-height: 15vh;
+    }
 
-  .channel-contents {
-    overflow-x: visible;
-    overflow-y: scroll;
-    float: left;
-    max-height: 92px;
-  }
+    #guide-contents {
+      background-color: #c0c0c0;
+    }
 
-  .headcol {
-    width: 5em;
+    .channel-contents {
+      float: left;
+    }
 
-    button {
-      padding-left: 3px;
-      background-color: #92b8dd;
-      color: #11284a;
+    .headcol {
+      width: 5em;
+
+      button {
+        padding-left: 3px;
+        background-color: #92b8dd;
+        color: #11284a;
+      }
     }
   }
 }

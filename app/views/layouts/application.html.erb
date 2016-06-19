@@ -52,16 +52,13 @@
     ga('create', 'UA-75900334-1', 'auto');
     ga('send', 'pageview');
   </script>
-  <body>
-    <div class="page-header">
+  <body style="<%= @hide_footer ? '' : 'padding-bottom:70px;' %>">
+    <div class="page-header <%= mobile_css %>">
       <div class="page-title"><%= link_to image_tag('chatbenlogotv.png'), root_url %>
         <small class="lead">its TV on the internet with your friends.</small><small class="beta-red">(beta)</small>
       </div>
-
-      <%= render partial: 'shared/login' if !mobile? %>
+      <%= render partial: 'shared/login' %>
     </div>
-
-    <%= render partial: 'shared/login' if mobile? %>
 
     <% if flash[:notice] %>
       <div class="flash notice alert alert-info"><%= flash[:notice] %></div>
@@ -72,10 +69,6 @@
 
     <% if !browser.device.mobile? && browser.safari? %>
       <div class="flash alert alert-danger safari-notice">Safari is working on web cam support. Until then, use chatben in Chrome or Firefox! <a href='https://www.google.com/search?q=safari+webrtc+support'>(Read More)</a></div>
-    <% end %>
-
-    <% if browser.device.mobile? %>
-      <div class="flash notice alert alert-info mobile-notice">Use your laptop for the full chatben experience. <em>Hint: It is way cooler that way! </em><span class='mobile-notice-clear glyphicon glyphicon-remove'></span></div>
     <% end %>
 
     <%= yield %>

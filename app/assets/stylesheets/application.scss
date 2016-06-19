@@ -17,7 +17,6 @@ html, body {
 }
 
 body {
-  padding-bottom: 70px;
   position: relative;
 }
 
@@ -61,21 +60,20 @@ body {
   }
 }
 
-.page {
-  > div {
-    height: 79vh;
-  }
-}
-
 .page-header{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   padding: 0;
+  max-height: 6vh;
+
+  &.mobile {
+    max-height: 10vh;
+  }
 
   img {
     max-width: 100%;
-    max-height: 70px;
+    max-height: 5.9vh;
   }
 
   small {
@@ -205,57 +203,36 @@ body {
 }
 
 .onoffswitch {
-  position: relative;
-  width: 55px;
-  user-select:none;
-  margin: auto;
+  position: relative; width: 45px;
+  -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 }
-
 .onoffswitch-checkbox {
   display: none;
 }
-
 .onoffswitch-label {
-  display: block;
-  overflow: hidden;
-  cursor: pointer;
-  height: 20px;
-  padding: 0;
-  line-height: 20px;
-  border: 0px solid #FFFFFF;
-  border-radius: 30px;
-  background-color: #9E9E9E;
+  display: block; overflow: hidden; cursor: pointer;
+  height: 18px; padding: 0; line-height: 18px;
+  border: 2px solid #999999; border-radius: 18px;
+  background-color: #EEEEEE;
+  transition: background-color 0.3s ease-in;
 }
-
 .onoffswitch-label:before {
   content: "";
-  display: block;
-  width: 30px;
-  margin: -5px;
+  display: block; width: 18px; margin: 0px;
   background: #FFFFFF;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 31px;
-  border-radius: 30px;
-  box-shadow: 0 6px 12px 0px #757575;
+  position: absolute; top: 0; bottom: 0;
+  right: 25px;
+  border: 2px solid #999999; border-radius: 18px;
+  transition: all 0.3s ease-in 0s;
 }
-
 .onoffswitch-checkbox:checked + .onoffswitch-label {
-  background-color: #42A5F5;
+  background-color: #337AB7;
 }
-
 .onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
-  border-color: #42A5F5;
+  border-color: #337AB7;
 }
-
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-  margin-left: 0;
-}
-
 .onoffswitch-checkbox:checked + .onoffswitch-label:before {
   right: 0px;
-  background-color: #2196F3;
 }
 
 .field_with_errors {

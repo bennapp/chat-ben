@@ -1,261 +1,172 @@
 <%= audio_tag('notification.wav', id: 'notification-sound') %>
 
-<div class="room-page page <%= mobile_css %>">
-  <div class="left-panel <%= mobile_css %>">
-    <div class="post-content-container">
-      <div class="content-container">
-        <% if @room.post.format_link.present? %>
-          <% if @room.post.format_type == 'twitter' || @room.post.format_type == 'imgur' %>
-            <div class="embeded-content-container">
-              <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
-              </div>
-            </div>
-          <% else %>
-            <div class="embeded-content-container embed-responsive embed-responsive-4by3">
-              <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <div> </div>
-        <% end %>
-
-        <% if @room.post.link.present? && @room.post.format_link.blank? %>
-            <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
-        <% end %>
-
-        <% if @room.post.text_content.present? %>
-          <div class="well post-content">
-            <%= html_escape(simple_format @room.post.text_content) %>
+<div class="room-page <%= mobile_css %>">
+  <div class="content-panel <%= mobile_css %>">
+    <% if @room.post.format_link.present? %>
+      <% if @room.post.format_type == 'twitter' || @room.post.format_type == 'imgur' %>
+        <div class="embeded-content-container">
+          <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
           </div>
-
-          <% if @room.post.text_content.length > 500 %>
-            <div class="btn btn-info read-more" aria-label="Left Align">
-              <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
-            </div>
-
-            <script>
-              $('.read-more').featherlight('<div class=\"well post-content\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
-                closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
-                otherClose: '.escape-icon',
-                afterOpen: function() {
-                  $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
-                }
-              });
-            </script>
-          <% end %>
-        <% end %>
-
-        <div class="controls-container">
-          TV Guide
-          <div class="guide-container">
-            <div class="channel-contents guide-table">
-              <table>
-                <% @bins.each do |bin| %>
-                  <tr data-guide-bin-id="<%= bin.id %>">
-                    <td class="headcol" data-guide-post-id="<%= bin.posts.first.try(:id) %>" title="<%= bin.title %>">
-                      <button><%= "#{bin.abbreviation} #{bin.position + 1}" %></button>
-                    </td>
-                  </tr>
-                <% end %>
-              </table>
-            </div>
-            <div id="guide-contents" class="guide-table">
-              <table>
-                <% @bins.each do |bin| %>
-                  <tr data-guide-bin-id="<%= bin.id %>">
-                    <% bin.posts.each do |post| %>
-                      <% if post.id == @room.post.id && bin.id == @room.bin.id %>
-                        <td data-guide-post-id="<%= post.id %>"><button class="selected-show" title="<%= post.title %>"><%= truncate(post.title) %></button></td>
-                      <% else %>
-                        <td data-guide-post-id="<%= post.id %>"><button title="<%= post.title %>"><%= truncate(post.title) %></button></td>
-                      <% end %>
-                    <% end %>
-                  </tr>
-                <% end %>
-              </table>
-            </div>
+        </div>
+      <% else %>
+        <div class="embeded-content-container embed-responsive embed-responsive-16by9">
+          <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
           </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div> </div>
+    <% end %>
 
-          <div class="bin-controls-container">
-            <div class="bin-logo-header">
-              <%= image_tag @room.bin.logo.url(:thumb), class: 'bin-logo' %>
-              <% if mobile? %>
-                <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
-              <% else %>
-                <h3 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h3>
-              <% end %>
-            </div>
+    <% if @room.post.link.present? && @room.post.format_link.blank? %>
+        <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
+    <% end %>
 
-            <div class="bin-control-buttons">
-              <% if mobile? %>
+    <% if @room.post.text_content.present? %>
+      <div class="well post-content">
+        <%= html_escape(simple_format @room.post.text_content) %>
+      </div>
+
+      <% if @room.post.text_content.length > 500 %>
+        <div class="btn btn-info read-more" aria-label="Left Align">
+          <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
+        </div>
+
+        <script>
+          $('.read-more').featherlight('<div class=\"well post-content\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
+            closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
+            otherClose: '.escape-icon',
+            afterOpen: function() {
+              $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
+            }
+          });
+        </script>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="guide-info-remote-container">
+    <div class="guide-info <%= mobile_css %>">
+      <div class="bin-controls-container">
+        <%= image_tag @room.bin.logo.url(:thumb), class: 'bin-logo' %>
+        <div class="bin-header-description">
+          <div class="bin-number-header">
+            <% if mobile? %>
                 <h4 class="bin-channel-number"><%= @room.bin.position + 1 %></h4>
-              <% else %>
-                <h2 class="bin-channel-number"><%= @room.bin.position + 1 %></h2>
-              <% end %>
-              <button id="channel-up" class="btn btn-xs"><span class="fa fa-arrow-up"></span></button>
-              <button id="channel-down" class="btn btn-xs"><span class="fa fa-arrow-down"></span></button>
-            </div>
+            <% else %>
+                <h3 class="bin-channel-number"><%= @room.bin.position + 1 %></h3>
+            <% end %>
+            <% if mobile? %>
+                <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
+            <% else %>
+                <h3 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h3>
+            <% end %>
           </div>
-
-          <div class="post-info-container">
-            <div class="likes-header">
-              <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
-                <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up"></span></button>
-              <% else %>
-                <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-thumbs-o-up"></span></button>
-              <% end %>
-              <span class="like-count-container">
-                <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
-                <i class="fa fa-thumbs-o-up"></i>
-              </span>
-              <% if mobile? %>
-                <h6 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h6>
-              <% else %>
-                <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
-              <% end %>
-            </div>
-
-            <div class="post-controls-container">
-              <% if mobile? %>
-                <button id="prev-post" class="btn btn-primary btn-xs">Prev</button>
-                <button id="next-post" class="btn btn-primary btn-xs">Next</button>
-              <% else %>
-                <button id="prev-post" class="btn btn-primary btn-xs">Prev Show</button>
-                <button id="next-post" class="btn btn-primary btn-xs">Next Show</button>
-              <% end %>
-            </div>
-          </div>
-
-          <div class="btn-container">
-            <%= link_to 'Add a Show to Any Channel', 'javascript:;', class: "btn btn-success new-post-button #{mobile_small_btn}" %>
+          <div class="bin-description <%= mobile_css %>" title="<%= @room.bin.description %>">
+            <%= truncate(@room.bin.description, 150) %>
           </div>
         </div>
       </div>
 
-      <div class="new-post-button-and-container">
-        <div class="new-post-container" style="display: none;">
-          <h3>Add a Show!</h3>
-          <%= form_for(@post, remote: true, html: {'data-type': 'json'}) do |f| %>
-            <div class="fields">
-              <div class="field new-post-field new-post-title">
-                <%= f.text_field :title, placeholder: 'Title', tabindex: 1 %>
-              </div>
-              <div class="field new-post-field">
-                <%= f.text_field :link, placeholder: 'Link (optional)', tabindex: 2 %>
-              </div>
-            </div>
-            <div class="new-post-textarea">
-              <%= f.text_area :text_content, placeholder: 'Text (optional)', tabindex: 3 %>
-            </div>
-            <div class="fields">
-              <div class="field">
-                <%= f.collection_select(:bin_id, @bins, :id, :title, { selected: @room.bin.try(:id) }, { name: "post[bin_id]" }) %>
-              </div>
-            </div>
-
-            <div class="fields">
-              <div class="btn-container">
-                <%= f.submit class: 'btn btn-primary', tabindex: 4 %>
-              </div>
-              <div class="btn-container clear-button">
-                <button type="button" class="btn btn-default" aria-label="Left Align">
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                </button>
-              </div>
-            </div>
+      <div class="post-info-container">
+        <div class="likes-header">
+          <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
+              <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
+          <% else %>
+              <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
+          <% end %>
+          <span class="like-count-container">
+            <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
+            <i class="fa fa-thumbs-o-up"></i>
+          </span>
+          <% if mobile? %>
+              <h6 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h6>
+          <% else %>
+              <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
           <% end %>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="remote-panel <%= mobile_css %>">
-    <div class="share-switch-container">
-      <div class="switch-container">
-        <h5 class="switch-text">Watch With Others (Off / On)</h5>
-        <div class="onoffswitch">
-          <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" <%= current_user && current_user.matching? ? 'checked' : '' %> >
-          <label class="onoffswitch-label" for="myonoffswitch"></label>
-        </div>
-      </div>
+    <div class="chat-panel-container">
+      <div class="chat-panel <%= mobile_css %>">
+        <div class="chat-container">
+          <div class="remote-container">
+            <div id="remote">
+              <div class="no-user-container">
+                <div class="well no-user" aria-label="Left Align">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <div>
-        <h5>Share to Invite Friends to Watch with You</h5>
-        <input type="text" id="lookup-input" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
-        <button class="btn btn-primary btn-sm" data-clipboard-target='lookup-input' id='copy-button'>Click to Copy</button>
-      </div>
-    </div>
-
-    <div class="alert-container">
-      <div class="alert alert-info status" role="alert"></div>
-    </div>
-
-    <div class="remote-container">
-      <div class="no-user-local">
-        <div id="remote">
-          <div class="no-user-container">
-            <div class="well no-user" aria-label="Left Align">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          <div class="local-video-container">
+            <div class="videoContainer">
+              <video id="localVideo"></video>
+              <div id="localVolume" class="volume_bar"></div>
             </div>
           </div>
         </div>
 
-        <div class="local-video-container">
-          <div class="videoContainer">
-            <video id="localVideo"></video>
-            <div id="localVolume" class="volume_bar"></div>
+        <div class="chat-info-container">
+          <div class="alert chat-alert alert-info status" role="alert"></div>
+
+          <div class="buttons">
+            <div class="control-buttons hidden">
+              <button id="mute-microphone-button" class="btn dtn-defualt btn-xs"><span class="fa fa-microphone-slash"></span></button>
+              <button id="mute-volume-button" class="btn dtn-defualt btn-xs"><span class="fa fa-volume-off"></span></button>
+              <button id="end-conversation" class="btn btn-danger btn-xs">End</button>
+            </div>
+          </div>
+
+          <div class="video-chat-option">
+            <h6>Video Chat!</h6>
+            <div class="switch-container">
+              <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                <label class="onoffswitch-label" for="myonoffswitch"></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="invite-friends">
+            <h6>Invite Friends!</h6>
+            <button class="btn btn-primary btn-xs" data-clipboard-target='lookup-input' id='copy-button'>Copy Link</button>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="buttons">
-      <div class="control-buttons display-none">
-        <button id="mute-microphone-button" class="btn dtn-defualt"><span class="fa fa-microphone-slash"></span></button>
-        <button id="mute-volume-button" class="btn dtn-defualt"><span class="fa fa-volume-off"></span></button>
-        <button id="end-conversation" class="btn btn-danger">End Conversation</button>
-      </div>
-
-      <div class="new-buttons display-none">
-        <%= link_to "Back to the Front Page", root_url, id: 'new-topic', class: 'btn btn-info' %>
-      </div>
-    </div>
-
-    <div class="dry-erase-board-container">
-      <h5>Dry Erase Board - Leave a message! Press Enter to save.</h5>
-      <div class="wall-container">
-        <textarea id="board" placeholder="Leave a message for everyone to see!"><%= @room.post.comment %></textarea>
-        <div class="edit-by-conatiner">last edited by: <span class="edited-by"><%= @room.post.last_editor.try(:name) %></span></div>
-      </div>
-    </div>
   </div>
+</div>
 
-  <div class="reaction-panel <%= mobile_css %>">
-    <div class="react-button-container">
-      <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Click to make a three second reaction or hold to make a longer one!">Press and hold to react!</button>
-    </div>
-    <div class="reaction-preview-container">
-      <video id='reaction-preview' class='display-none' muted="muted"></video>
-    </div>
-
-    <div class="react-results-container display-none">
-      <div class='reaction-buttons-container'>
-        <button id="post-reaction" class="btn btn-success">Post Reaction</button>
-        <button id="toss-reaction" class="btn btn-danger">Toss Reaction</button>
-      </div>
-    </div>
-
-    <div class="reactions-and-react-button">
-      <h4>Reactions!</h4>
-
-      <div class="reactions-container">
-        <% @room.post.reactions.each do |reaction| %>
-          <div class="video-container">
-            <%= video_tag(reaction.video.url, controls: true, class: 'reaction-video') %>
-          </div>
+<div class="guide-wrapper <%= mobile_css %>">
+  <div class="guide-container">
+    <div class="channel-contents guide-table <%= mobile_css %>">
+      <table>
+        <% @bins.each do |bin| %>
+            <tr data-guide-bin-id="<%= bin.id %>">
+              <td class="headcol" data-guide-post-id="<%= bin.posts.first.try(:id) %>" title="<%= bin.title %>">
+                <button><%= "#{bin.abbreviation} #{bin.position + 1}" %></button>
+              </td>
+            </tr>
         <% end %>
-      </div>
+      </table>
+    </div>
+    <div id="guide-contents" class="guide-table <%= mobile_css %>">
+      <table>
+        <% @bins.each do |bin| %>
+            <tr data-guide-bin-id="<%= bin.id %>">
+              <% bin.posts.each do |post| %>
+                  <% if post.id == @room.post.id && bin.id == @room.bin.id %>
+                      <td data-guide-post-id="<%= post.id %>"><button class="selected-show" title="<%= post.title %>"><%= truncate(post.title) %></button></td>
+                  <% else %>
+                      <td data-guide-post-id="<%= post.id %>"><button title="<%= post.title %>"><%= truncate(post.title) %></button></td>
+                  <% end %>
+              <% end %>
+            </tr>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>

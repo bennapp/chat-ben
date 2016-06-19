@@ -70,7 +70,7 @@ class @RoomShow
     if remote and el
       remote.removeChild el
 
-    $('.control-buttons').addClass('display-none')
+    $('.control-buttons').addClass('hidden')
     @_setStatus('ending')
     $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
     $('.videoContainer').remove()
@@ -126,9 +126,9 @@ class @RoomShow
       when 'waiting'
         'Waiting for someone to chat with'
       when 'chatting'
-        "You are chatting with #{@otherPeer.nick}"
+        "You are chatting with #{@otherPeer.nick || 'someone'}"
       when 'ending'
-        "Your conversation with #{@otherPeer.nick} has ended"
+        "Your conversation with #{@otherPeer.nick || 'somone'} has ended"
       else
         ""
 
@@ -201,7 +201,7 @@ class @RoomShow
 
         document.getElementById('notification-sound').play()
 
-        $('.control-buttons').removeClass('display-none')
+        $('.control-buttons').removeClass('hidden')
         $('.no-user-container').addClass('display-none')
         $('#next-post').removeClass('display-none')
 

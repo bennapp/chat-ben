@@ -1,4 +1,4 @@
-<div class="authentication-container">
+<div class="authentication-container <%= mobile_css %>">
   <div class="total-users-container">
     <span id="total-users"><%= User.where(active: true).count %></span><span> users on now!</span>
     <% if current_user %>
