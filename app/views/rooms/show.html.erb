@@ -47,19 +47,38 @@
 
   <div class="guide-info-remote-container">
     <div class="guide-info <%= mobile_css %>">
+      <div class="post-info-container">
+        <div class="likes-header">
+          <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
+            <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
+          <% else %>
+            <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
+          <% end %>
+          <span class="like-count-container">
+            <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
+            <i class="fa fa-thumbs-o-up"></i>
+          </span>
+          <% if mobile? %>
+            <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
+          <% else %>
+            <h2 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h2>
+          <% end %>
+        </div>
+      </div>
+
       <div class="bin-controls-container">
         <%= image_tag @room.bin.logo.url(:thumb), class: 'bin-logo' %>
         <div class="bin-header-description">
           <div class="bin-number-header">
             <% if mobile? %>
-                <h4 class="bin-channel-number"><%= @room.bin.position + 1 %></h4>
+              <h4 class="bin-channel-number"><%= @room.bin.position + 1 %></h4>
             <% else %>
-                <h3 class="bin-channel-number"><%= @room.bin.position + 1 %></h3>
+              <h3 class="bin-channel-number"><%= @room.bin.position + 1 %></h3>
             <% end %>
             <% if mobile? %>
-                <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
+              <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
             <% else %>
-                <h3 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h3>
+              <h3 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h3>
             <% end %>
           </div>
           <div class="bin-description <%= mobile_css %>" title="<%= @room.bin.description %>">
@@ -67,29 +86,10 @@
           </div>
         </div>
       </div>
-
-      <div class="post-info-container">
-        <div class="likes-header">
-          <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
-              <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
-          <% else %>
-              <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
-          <% end %>
-          <span class="like-count-container">
-            <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
-            <i class="fa fa-thumbs-o-up"></i>
-          </span>
-          <% if mobile? %>
-              <h6 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h6>
-          <% else %>
-              <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
-          <% end %>
-        </div>
-      </div>
     </div>
 
-    <div class="chat-panel-container">
-      <div class="chat-panel <%= mobile_css %>">
+    <div class="chat-panel-container <%= mobile_css %>">
+      <div class="chat-panel">
         <div class="chat-container">
           <div class="remote-container">
             <div id="remote">
