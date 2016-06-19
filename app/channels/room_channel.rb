@@ -130,7 +130,6 @@ class RoomChannel < ApplicationCable::Channel
       dislike: dislike_exists,
       like_count: like_count,
       full_url: post.full_url,
-      link: post.link,
       comment: post.comment,
       edited_by: post.last_editor.try(:name),
       reaction_urls: reaction_urls,

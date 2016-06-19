@@ -97,8 +97,12 @@ class @RoomChannel
           $('.bin-channel-number').text(data.bin_number)
           $('.bin-logo').attr('src', data.bin_logo_src)
 
-          $('.bin-description').text(data.bin_description || '')
-          $('.bin-description').attr('title', data.bin_description || '')
+          description = data.bin_description || ''
+          $('.bin-description').attr('title', description)
+
+          if description.length > 140
+            description = description.slice(0, 140)
+          $('.bin-description').text(description)
 
           $('.posted-by').text(data.posted_by)
 
