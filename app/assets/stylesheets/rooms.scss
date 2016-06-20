@@ -89,7 +89,8 @@ video {
       flex-direction: column;
       justify-content: flex-end;
       padding-left: 5px;
-      width: 50%;
+      padding-bottom: 0.2em;
+      width: 53%;
 
       &.mobile {
         width: 100%;
@@ -111,14 +112,20 @@ video {
         padding: 2px 0px;
 
         .bin-logo {
-          width: 64px;
-          height: 64px;
+          width: 7.3em;
+          height: 7.3em;
+        }
+
+        .bin-post-container {
+          display: flex;
+          flex-direction: column;
+          margin-left: 8px;
+          overflow: hidden;
         }
 
         .bin-header-description {
           display: flex;
           flex-direction: column;
-          margin-left: 8px;
 
           .bin-description {
             &.mobile {
@@ -143,7 +150,7 @@ video {
 
         .bin-channel-number {
           margin: 0px;
-          font-weight: bold;
+          font-weight: bolder;
         }
 
         .bin-control-buttons {
@@ -201,7 +208,7 @@ video {
 
     .chat-panel-container {
       display: flex;
-      width: 50%;
+      width: 47%;
       justify-content: center;
 
       &.mobile {
@@ -230,11 +237,17 @@ video {
 
           .no-user.well {
             margin-bottom: 0px;
-            padding: 10px;
+            padding: 0px;
+            width: 20vh;
+            height: 15.06vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
           }
 
           .no-user .glyphicon {
-            font-size: 12vh;
+            font-size: 11vh;
           }
         }
 
@@ -247,13 +260,13 @@ video {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          padding: 8px;
+
         }
 
         .videoContainer {
           video {
-            max-width: 100% !important;
             width: 20vh;
+            max-width: 100%;
           }
         }
 

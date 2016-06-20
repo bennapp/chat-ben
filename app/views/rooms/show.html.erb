@@ -47,42 +47,44 @@
 
   <div class="guide-info-remote-container">
     <div class="guide-info <%= mobile_css %>">
-      <div class="post-info-container">
-        <div class="likes-header">
-          <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
-            <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
-          <% else %>
-            <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
-          <% end %>
-          <span class="like-count-container">
-            <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
-            <i class="fa fa-thumbs-o-up"></i>
-          </span>
-          <% if mobile? %>
-            <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
-          <% else %>
-            <h2 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h2>
-          <% end %>
-        </div>
-      </div>
-
       <div class="bin-controls-container">
-        <%= image_tag @room.bin.logo.url(:thumb), class: 'bin-logo' %>
-        <div class="bin-header-description">
-          <div class="bin-number-header">
-            <% if mobile? %>
-              <h4 class="bin-channel-number"><%= @room.bin.position + 1 %></h4>
-            <% else %>
-              <h3 class="bin-channel-number"><%= @room.bin.position + 1 %></h3>
-            <% end %>
-            <% if mobile? %>
-              <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
-            <% else %>
-              <h3 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h3>
-            <% end %>
+        <%= image_tag @room.bin.logo.url(:medium), class: 'bin-logo' %>
+        <div class="bin-post-container">
+          <div class="post-info-container">
+            <div class="likes-header">
+              <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
+                <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
+              <% else %>
+                <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
+              <% end %>
+              <span class="like-count-container">
+                <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
+                <i class="fa fa-thumbs-o-up"></i>
+              </span>
+              <% if mobile? %>
+                <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
+              <% else %>
+                <h2 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h2>
+              <% end %>
+            </div>
           </div>
-          <div class="bin-description <%= mobile_css %>" title="<%= @room.bin.description %>">
-            <%= truncate(@room.bin.description, 150) %>
+
+          <div class="bin-header-description">
+            <div class="bin-number-header">
+              <% if mobile? %>
+                <h4 class="bin-channel-number"><%= @room.bin.position + 1 %> <%= @room.bin.abbreviation %></h4>
+              <% else %>
+                <h4 class="bin-channel-number"><%= @room.bin.position + 1 %> <%= @room.bin.abbreviation %></h4>
+              <% end %>
+              <% if mobile? %>
+                <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
+              <% else %>
+                <h4 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h4>
+              <% end %>
+            </div>
+            <div class="bin-description <%= mobile_css %>" title="<%= @room.bin.description %>">
+              <%= truncate(@room.bin.description, 150) %>
+            </div>
           </div>
         </div>
       </div>
