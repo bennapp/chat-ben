@@ -279,9 +279,13 @@ video {
         padding: 8px;
 
         .alert {
-          margin-bottom: 4px;
+          margin-bottom: 2px;
           padding: 4px 8px 4px 8px;
-          font-size: 12px;
+          font-size: 1em;
+        }
+
+        .buttons {
+          margin-bototm: 2px;
         }
 
         .video-chat-option, .invite-friends {
@@ -289,7 +293,7 @@ video {
           align-items: center;
           justify-content: space-around;
 
-          h6 {
+          .option-title {
             margin: 0px;
           }
 

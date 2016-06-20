@@ -121,7 +121,7 @@
           </div>
 
           <div class="video-chat-option">
-            <h6>Video Chat!</h6>
+            <h4 class="option-title">Video Chat!</h4>
             <div class="switch-container">
               <div class="onoffswitch">
                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
@@ -131,7 +131,7 @@
           </div>
 
           <div class="invite-friends">
-            <h6>Invite Friends!</h6>
+            <h4 class="option-title">Invite Friends!</h4>
             <button class="btn btn-primary btn-xs" data-clipboard-target='lookup-input' id='copy-button'>Copy Link</button>
           </div>
         </div>
@@ -156,15 +156,15 @@
     <div id="guide-contents" class="guide-table <%= mobile_css %>">
       <table>
         <% @bins.each do |bin| %>
-            <tr data-guide-bin-id="<%= bin.id %>">
-              <% bin.posts.each do |post| %>
-                  <% if post.id == @room.post.id && bin.id == @room.bin.id %>
-                      <td data-guide-post-id="<%= post.id %>"><button class="selected-show" title="<%= post.title %>"><%= truncate(post.title) %></button></td>
-                  <% else %>
-                      <td data-guide-post-id="<%= post.id %>"><button title="<%= post.title %>"><%= truncate(post.title) %></button></td>
-                  <% end %>
+          <tr data-guide-bin-id="<%= bin.id %>">
+            <% bin.posts.each do |post| %>
+              <% if post.id == @room.post.id && bin.id == @room.bin.id %>
+                <td data-guide-post-id="<%= post.id %>"><button class="selected-show" title="<%= post.title %>"><%= truncate(post.title) %></button></td>
+              <% else %>
+                <td data-guide-post-id="<%= post.id %>"><button title="<%= post.title %>"><%= truncate(post.title) %></button></td>
               <% end %>
-            </tr>
+            <% end %>
+          </tr>
         <% end %>
       </table>
     </div>

@@ -50,7 +50,7 @@ $container-margin: 20px;
         white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 390px;
+        max-width: 26em;
 
         &.mobile {
           max-width: 100%;
@@ -63,14 +63,14 @@ $container-margin: 20px;
         white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 390px;
+        max-width: 26em;
       }
 
       .bin-description {
         white-space: wrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 390px;
+        max-width: 26em;
 
         &.mobile {
           max-width: 100%;
@@ -88,7 +88,7 @@ $container-margin: 20px;
 
         .live-img {
           height: auto;
-          max-width: 390px;
+          max-width: 26em;
           border-radius: 2px;
 
           &.mobile {
