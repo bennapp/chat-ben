@@ -47,7 +47,9 @@ namespace :reddit do
 
     link_data.each_with_index do |link_info, index|
       begin
-        client.submit_comment(link_info[:link], comment_text(link_info[:bin], link_info[:post], link_data.pluck(:post), link_info[:subreddit_name]))
+        comment = comment_text(link_info[:bin], link_info[:post], link_data.pluck(:post), link_info[:subreddit_name])
+        pp comment
+        client.submit_comment(link_info[:link], comment)
         puts "made comment #{index + 1}/#{link_data.length}"
         puts "sleeping"
         sleep 460
