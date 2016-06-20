@@ -40,6 +40,12 @@ h6 { font-size: 0.9em; }
   width: 100%;
 }
 
+.login-notice {
+  position: absolute;
+  right: 0.8em;
+  z-index: 9999;
+}
+
 .flash {
   &.alert-danger {
     @include gradient-horizontal(#f2dede, #FFFFFF, 0%, 100%);

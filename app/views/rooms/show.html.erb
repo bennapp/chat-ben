@@ -126,7 +126,7 @@
             <h4 class="option-title">Video Chat!</h4>
             <div class="switch-container">
               <div class="onoffswitch">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" <%= current_user && current_user.matching? ? 'checked' : '' %>>
                 <label class="onoffswitch-label" for="myonoffswitch"></label>
               </div>
             </div>

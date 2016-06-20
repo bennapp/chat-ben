@@ -60,6 +60,11 @@
       <%= render partial: 'shared/login' %>
     </div>
 
+    <div class="login-notice notice alert alert-info hidden">
+      Login to do that!<small> hint: chatben is way cooler that way!</small>
+      <span class="login-notice-clear glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </div>
+
     <% if flash[:notice] %>
       <div class="flash notice alert alert-info"><%= flash[:notice] %></div>
     <% end %>
