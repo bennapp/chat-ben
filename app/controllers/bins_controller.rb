@@ -88,6 +88,11 @@ class BinsController < ApplicationController
   def set_post
     if params['post'].present?
       @post = @bin.posts.where(id: params['post']).first
+
+      if @post.nil?
+        @post = Post.where(id: params['post']).first
+        @bin.posts << @post unless @post.nil?
+      end
     end
 
     @post = @bin.posts.first if @post.nil?

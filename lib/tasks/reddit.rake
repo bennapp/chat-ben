@@ -4,7 +4,8 @@ namespace :reddit do
   task :build_channels, [:subreddits] => :environment do |t, args|
     password = begin IO.read("./redditbot").gsub("\n", "") rescue "" end
     raise 'put password in redditbot file' if password == ''
-    RedditKit.sign_in 'chatbenbot', password
+    client = RedditKit::Client.new 'chatbenbot', password
+    client.user_agent = 'chatbenbot'
 
     subreddits = [
         { name: '/r/Videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be'], abbreviation: 'RVIDS' },
@@ -28,7 +29,7 @@ namespace :reddit do
 
     subreddits.each do |subreddit|
       subreddit_name = subreddit[:name].gsub('/r/', '')
-      links = RedditKit.links subreddit_name, category: 'hot'
+      links = client.links subreddit_name, category: 'hot'
       domain_links = links.select { |link| subreddit[:domains].include?(link.domain) }
 
       bin = Bin.find_or_create_by(title: subreddit[:name])
