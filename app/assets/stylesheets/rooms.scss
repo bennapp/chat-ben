@@ -242,34 +242,27 @@ video {
           border-color: white;
         }
 
-        .videoContainer.remote {
-          position: relative;
-          margin: 0px 4px;
-
-          .volume_bar {
-            bottom: 5px;
-          }
-
-          video {
-            max-width: 100% !important;
-            width: 20vh;
-          }
-        }
-
         .local-video-container {
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
           padding: 8px;
+        }
 
-          .videoContainer {
-            width: 100%;
+        .videoContainer {
+          video {
+            max-width: 100% !important;
+            width: 20vh;
+          }
+        }
 
-            video {
-              width: 20vh;
-              max-width: 100% !important;
-            }
+        .videoContainer {
+          position: relative;
+          margin: 0px 4px;
+
+          .volume_bar {
+            bottom: 5px;
           }
         }
       }
