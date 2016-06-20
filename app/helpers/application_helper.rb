@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def truncate(string, max_length = 40)
-    if string.length > max_length
+    if string && string.length > max_length
       "#{string[0..max_length]} ..."
     else
       string
