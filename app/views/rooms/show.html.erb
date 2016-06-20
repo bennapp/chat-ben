@@ -132,6 +132,7 @@
 
           <div class="invite-friends">
             <h4 class="option-title">Invite Friends!</h4>
+            <input type="text" id="lookup-input" style="display:none;" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
             <button class="btn btn-primary btn-xs" data-clipboard-target='lookup-input' id='copy-button'>Copy Link</button>
           </div>
         </div>
@@ -208,7 +209,6 @@
     $('.flash.notice').delay(4000).fadeOut(1400);
 
     var clip = new ZeroClipboard($("#copy-button"));
-    $('#lookup-input').focus().select()
 
     $('[data-toggle="tooltip"]').tooltip();
   });

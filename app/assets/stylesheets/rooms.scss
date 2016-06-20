@@ -219,13 +219,15 @@ video {
 
         .remote-container {
           display: flex;
-          flex-direction: column;
           justify-content: center;
           align-items: center;
           padding: 4px;
         }
 
         #remote {
+          display: flex;
+          justify-content: space-around;
+
           .no-user.well {
             margin-bottom: 0px;
             padding: 10px;
@@ -242,6 +244,7 @@ video {
 
         .videoContainer.remote {
           position: relative;
+          margin: 0px 4px;
 
           .volume_bar {
             bottom: 5px;
