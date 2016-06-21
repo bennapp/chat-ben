@@ -14,6 +14,8 @@ class Bin < ApplicationRecord
 
   accepts_nested_attributes_for :post_bins
 
+  has_many :rooms, dependent: :destroy
+
   def set_postition_if_nil
     self.position = Bin.maximum('position') + 1 if position.nil?
   end
