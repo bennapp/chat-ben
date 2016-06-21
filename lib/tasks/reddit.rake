@@ -5,11 +5,11 @@ namespace :reddit do
     client = authenticated_client
 
     subreddits = [
-        { name: '/r/Videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be'], abbreviation: 'RVIDS' },
+        { name: '/r/Videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be', 'vimeo.com'], abbreviation: 'RVIDS' },
         { name: '/r/FullMoviesOnYouTube', domains: ['youtube.com', 'youtu.be'], abbreviation: 'FMOYT' },
         { name: '/r/360video', domains: ['youtube.com', 'youtu.be'], abbreviation: 'V360' },
-        { name: '/r/ObscureMedia', domains: ['youtube.com', 'youtu.be'], abbreviation: 'OM' },
-        { name: '/r/Unexpected', domains: ['youtube.com', 'youtu.be', 'i.imgur.com', 'imgur.com'], abbreviation: 'U!' },
+        { name: '/r/ObscureMedia', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'OM' },
+        { name: '/r/Unexpected', domains: ['youtube.com', 'youtu.be', 'i.imgur.com', 'imgur.com', 'vimeo.com'], abbreviation: 'U!' },
         { name: '/r/YoutubeHaiku', domains: ['youtube.com', 'youtu.be'], abbreviation: 'YH' },
         { name: '/r/ArtisanVideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'AV' },
         { name: '/r/curiousvideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'CV' },
@@ -17,6 +17,11 @@ namespace :reddit do
         { name: '/r/Lectures', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'LCTR' },
         { name: '/r/Documentaries', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'DOC' },
         { name: '/r/WoahTube', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'WT' },
+        { name: '/r/Dota2', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv'], abbreviation: 'DOTA' },
+        { name: '/r/LeagueOfLegends', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv'], abbreviation: 'LOL' },
+        { name: '/r/LOLStreams', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv'], abbreviation: 'LOLS' },
+        { name: '/r/DeepIntoYouTube', domains: ['youtube.com', 'youtu.be'], abbreviation: 'DEEP' },
+        { name: '/r/See', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com'], abbreviation: 'WEED' },
     ]
 
     if args[:subreddits].present?
@@ -81,13 +86,13 @@ namespace :reddit do
     <<-COMMENT
 [Watch this post on TV with your friends!](https://chatben.tv/bins/#{bin.id}?post=#{post.id})
 
-Other posts from /r/Videos on the same channel
+Other posts from #{subreddit_name} on the same channel
 
 #{post_list.join("\n")}
 
 I am a bot putting the top posts of #{subreddit_name} onto channels on [chatben.tv](https://chatben.tv) where you can video chat with friends!
 *****
-[Full /r/Videos Channel](https://chatben.tv/bins/#{bin.id}) | [More Info](https://www.reddit.com/r/chatben/wiki/chatbenbot)
+[Full #{subreddit_name} Channel](https://chatben.tv/bins/#{bin.id}) | [More Info](https://www.reddit.com/r/chatben/wiki/chatbenbot)
     COMMENT
   end
 end
