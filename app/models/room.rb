@@ -11,8 +11,15 @@ class Room < ActiveRecord::Base
   validates_presence_of :token
   validates_uniqueness_of :token
 
-  before_validation :base_36_encode  # Needs specs
-  before_update :base_36_encode # Needs specs
+  before_validation :base_36_encode
+  before_update :base_36_encode
+
+  before_save :update_if_full
+
+  def update_if_full
+    self.full = participant_count >= 2
+    true
+  end
 
   def base_36_encode
     return if token.present?
