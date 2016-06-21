@@ -53,21 +53,23 @@ namespace :reddit do
       bin.save!
     end
 
-    link_data.each_with_index do |link_info, index|
-      begin
-        next if link_info[:post].has_reddit_comment?
-        comment = comment_text(link_info[:bin], link_info[:post], link_data.pluck(:post), link_info[:subreddit_name])
-        client.submit_comment(link_info[:link], comment)
-        link_info[:post].update_attribute(:has_reddit_comment, true)
-        puts "made comment #{index + 1}/#{link_data.length}"
-        puts "sleeping"
-        sleep 460
-      rescue => e
-        puts e.class
-        puts e.backtrace
-        puts "sleeping"
-        sleep 460
-        retry
+    if Rails.env.production?
+      link_data.each_with_index do |link_info, index|
+        begin
+          next if link_info[:post].has_reddit_comment?
+          comment = comment_text(link_info[:bin], link_info[:post], link_data.pluck(:post), link_info[:subreddit_name])
+          client.submit_comment(link_info[:link], comment)
+          link_info[:post].update_attribute(:has_reddit_comment, true)
+          puts "made comment #{index + 1}/#{link_data.length}"
+          puts "sleeping"
+          sleep 460
+        rescue => e
+          puts e.class
+          puts e.backtrace
+          puts "sleeping"
+          sleep 460
+          retry
+        end
       end
     end
   end
