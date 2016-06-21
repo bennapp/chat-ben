@@ -340,16 +340,17 @@ video {
 
     .guide-table {
       overflow-x: visible;
-      overflow-y: scroll;
       max-height: 15vh;
     }
 
     #guide-contents {
+      overflow-y: scroll;
       background-color: #c0c0c0;
       border-top-right-radius: 4px;
     }
 
     .channel-contents {
+      overflow-y: hidden;
       float: left;
       border-top-left-radius: 4px;
     }

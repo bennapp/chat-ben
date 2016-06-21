@@ -2,8 +2,8 @@ class @Guide
   constructor: (options) ->
     $('.selected-show').scrollintoview()
 
-    $('.guide-table').on 'scroll', ->
-      $('.guide-table:not(this)').scrollTop $(this).scrollTop()
+    $('#guide-contents').on 'scroll', (event) =>
+      $('#channel-contents').scrollTop $(event.target).scrollTop()
 
     window.guideSelect = (options) ->
       $('.selected-show').removeAttr('class')
