@@ -85,35 +85,23 @@ video {
     width: 100%;
 
     .guide-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding-left: 5px;
-      padding-bottom: 0.2em;
-      width: 53%;
+      float: left;
+      display: inline-block;
 
-      &.mobile {
-        width: 100%;
-      }
-
-      .bin-header {
-        margin-top: 0px;
-        margin-bottom: 0px;
-      }
-
-      .post-header {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      .bin-controls-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%;
       }
 
       .bin-controls-container {
         display: flex;
-        padding: 2px 0px;
+        padding: 0.2em 0.1em 0.2em 0.1em;
 
         .bin-logo {
-          width: 7.3em;
-          height: 7.3em;
+          width: 8.5em;
+          height: 8.5em;
         }
 
         .bin-post-container {
@@ -166,6 +154,21 @@ video {
         }
       }
 
+      &.mobile {
+        width: 100%;
+      }
+
+      .bin-header {
+        margin-top: 0px;
+        margin-bottom: 0px;
+      }
+
+      .post-header {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       .post-info-container {
         display: flex;
         justify-content: space-between;
@@ -207,9 +210,8 @@ video {
     }
 
     .chat-panel-container {
-      display: flex;
-      width: 47%;
-      justify-content: center;
+      float:right;
+      display: inline-block;
 
       &.mobile {
         display: none !important;
@@ -266,7 +268,6 @@ video {
         .videoContainer {
           video {
             width: 20vh;
-            max-width: 100%;
           }
         }
 
@@ -286,6 +287,7 @@ video {
         align-items: center;
         justify-content: space-between;
         padding: 8px;
+        min-width: 18em;
 
         .alert {
           margin-bottom: 2px;

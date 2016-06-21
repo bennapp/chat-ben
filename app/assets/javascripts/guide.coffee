@@ -27,4 +27,14 @@ class @Guide
 
     resizeGuide()
 
-    $(window).resize resizeGuide
+    resizeInfo = ->
+      chatPanelWidth = $('.chat-panel-container').width()
+      windowWidth = $(window).width()
+
+      $('.guide-info').css('width', parseInt(windowWidth - chatPanelWidth))
+
+    resizeInfo()
+
+    $(window).resize ->
+      resizeGuide()
+      resizeInfo()
