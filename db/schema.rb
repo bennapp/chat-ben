@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616190422) do
+ActiveRecord::Schema.define(version: 20160621000045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,8 +85,8 @@ ActiveRecord::Schema.define(version: 20160616190422) do
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.datetime "deleted_at"
     t.string   "link"
     t.string   "format_link"
@@ -95,10 +95,12 @@ ActiveRecord::Schema.define(version: 20160616190422) do
     t.boolean  "sticky"
     t.string   "comment"
     t.integer  "editor_id"
-    t.boolean  "live",         default: false, null: false
+    t.boolean  "live",               default: false, null: false
     t.integer  "bin_id"
     t.integer  "start_time"
     t.integer  "duration"
+    t.string   "reddit_link_id"
+    t.boolean  "has_reddit_comment"
   end
 
   add_index "posts", ["bin_id"], name: "index_posts_on_bin_id", using: :btree
