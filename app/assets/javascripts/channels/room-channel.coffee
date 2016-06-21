@@ -30,7 +30,7 @@ class @RoomChannel
           $('#board').val(data.comment)
           $('.edited-by').text(data.edited_by)
 
-    App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken },
+    App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken, mobile: @mobile == 'mobile' },
       connected: ->
         window.nextPost = =>
           @perform("next_post", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))

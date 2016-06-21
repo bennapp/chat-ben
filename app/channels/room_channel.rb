@@ -2,18 +2,22 @@ class RoomChannel < ApplicationCable::Channel
   def subscribed
     stream_from "room_#{params[:room]}"
     room = Room.find_by_token(params[:room])
-    room.update_attribute(:waiting, true)
-    room.update_attribute(:participant_count, room.participant_count + 1)
 
-    Participation.find_or_create_by(user: current_user, room: room).update_attribute(:deleted_at, nil) if current_user
+    unless params[:mobile]
+      room.update_attribute(:waiting, true)
+      room.update_attribute(:participant_count, room.participant_count + 1)
+      Participation.find_or_create_by(user: current_user, room: room).update_attribute(:deleted_at, nil) if current_user
+    end
   end
 
   def unsubscribed
     room = Room.find_by_token(params[:room])
-    room.update_attribute(:waiting, false)
 
-    room.update_attribute(:participant_count, room.participant_count - 1)
-    Participation.find_by(user: current_user, room: room).destroy if current_user
+    unless params[:mobile]
+      room.update_attribute(:waiting, false)
+      room.update_attribute(:participant_count, room.participant_count - 1)
+      Participation.find_by(user: current_user, room: room).destroy if current_user
+    end
   end
 
   def next_post(data)
