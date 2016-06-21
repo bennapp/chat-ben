@@ -10,8 +10,8 @@ namespace :reddit do
         { name: '/r/360video', domains: ['youtube.com', 'youtu.be'], abbreviation: 'V360' },
         { name: '/r/ObscureMedia', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'OM' },
         { name: '/r/Unexpected', domains: ['youtube.com', 'youtu.be', 'i.imgur.com', 'imgur.com', 'vimeo.com'], abbreviation: 'U!' },
-        { name: '/r/YoutubeHaiku', domains: ['youtube.com', 'youtu.be'], abbreviation: 'YH' },
-        { name: '/r/ArtisanVideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'AV' },
+        # { name: '/r/YoutubeHaiku', domains: ['youtube.com', 'youtu.be'], abbreviation: 'YH' },
+        # { name: '/r/ArtisanVideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'AV' },
         { name: '/r/curiousvideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'CV' },
         { name: '/r/cookingvideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'COOK' },
         { name: '/r/Lectures', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'LCTR' },
@@ -53,7 +53,7 @@ namespace :reddit do
       bin.save!
     end
 
-    if Rails.env.production?
+    if false && Rails.env.production?
       link_data.each_with_index do |link_info, index|
         begin
           next if link_info[:post].has_reddit_comment?
