@@ -5,8 +5,8 @@ class Room < ActiveRecord::Base
   # end acts_as_paranoid
 
   belongs_to :post
-  belongs_to :bin, dependent: :destroy
-  has_many :participations, dependent: :nullify
+  belongs_to :bin
+  has_many :participations, dependent: :destroy
 
   validates_presence_of :token
   validates_uniqueness_of :token

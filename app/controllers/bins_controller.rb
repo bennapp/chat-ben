@@ -8,7 +8,7 @@ class BinsController < ApplicationController
   # GET /bins
   def index
     @hide_footer = true
-    @bins = Bin.all.sort_by { |bin| bin.position }
+    @bins = Bin.without_deleted.includes(:posts).sort_by { |bin| bin.position }
   end
 
   # GET /bins/1

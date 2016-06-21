@@ -1,4 +1,7 @@
 class Bin < ApplicationRecord
+  scope :without_deleted, -> { where(deleted_at: nil) }
+  scope :with_deleted, -> { where.not(deleted_at: nil) }
+
   has_many :posts, through: :post_bins
   has_many :post_bins, -> { order(position: :asc) }
 
@@ -14,7 +17,9 @@ class Bin < ApplicationRecord
 
   accepts_nested_attributes_for :post_bins
 
-  has_many :rooms, dependent: :destroy
+  def destroy
+    update_attribute(:deleted_at, current_time_from_proper_timezone)
+  end
 
   def set_postition_if_nil
     self.position = Bin.maximum('position') + 1 if position.nil?
