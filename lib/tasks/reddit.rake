@@ -22,6 +22,8 @@ namespace :reddit do
         { name: '/r/LOLStreams', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv'], abbreviation: 'LOLS' },
         { name: '/r/DeepIntoYouTube', domains: ['youtube.com', 'youtu.be'], abbreviation: 'DEEP' },
         { name: '/r/See', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com'], abbreviation: 'WEED' },
+        { name: '/r/gifs', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com'], abbreviation: 'GIFS' },
+        { name: '/r/woahdude', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com'], abbreviation: 'WOAH' },
     ]
 
     if args[:subreddits].present?
