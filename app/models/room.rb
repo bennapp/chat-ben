@@ -6,7 +6,7 @@ class Room < ActiveRecord::Base
 
   belongs_to :post
   belongs_to :bin, dependent: :destroy
-  has_many :participations
+  has_many :participations, dependent: :destroy
 
   validates_presence_of :token
   validates_uniqueness_of :token
