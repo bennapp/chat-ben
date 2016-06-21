@@ -57,7 +57,9 @@ namespace :reddit do
       link_data.each_with_index do |link_info, index|
         begin
           next if link_info[:post].has_reddit_comment?
-          comment = comment_text(link_info[:bin], link_info[:post], link_data.pluck(:post), link_info[:subreddit_name])
+          link_data_from_subreddit = link_data.select { |other_link_info| other_link_info[:subreddit_name] == link_info[:subreddit_name] }
+          posts_from_subreddit = link_data_from_subreddit.pluck(:post)
+          comment = comment_text(link_info[:bin], link_info[:post], posts_from_subreddit, link_info[:subreddit_name])
           client.submit_comment(link_info[:link], comment)
           link_info[:post].update_attribute(:has_reddit_comment, true)
           puts "made comment #{index + 1}/#{link_data.length}"
