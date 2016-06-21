@@ -70,12 +70,9 @@ class @RoomShow
     if remote and el
       remote.removeChild el
 
-    $('.control-buttons').addClass('hidden')
+    $('.control-buttons').addClass('invisible')
     @_setStatus('ending')
-    $('#rate-other-user').append(document.createTextNode(' with ' + @otherPeer.nick))
-    $('.videoContainer').remove()
-    $('.remote-container').addClass('display-none')
-    $('#send-message').addClass('display-none')
+    $('.remote-container').addClass('invisible')
 
     @stopWebRTC()
 
@@ -100,7 +97,6 @@ class @RoomShow
         return undefined
 
     $('#end-conversation').on 'click', =>
-      $('#end-conversation').addClass('display-none')
       @webrtc.leaveRoom()
       @webrtc.connection.disconnect()
 
@@ -151,15 +147,15 @@ class @RoomShow
       @_startWebRTC()
     else
       @_setStatus('not-waiting')
-      $('#localVideo').hide()
+      $('#localVideo').addClass('invisible')
 
   stopWebRTC: ->
-    $('#localVideo').hide()
+    $('#localVideo').addClass('invisible')
     @webrtc.leaveRoom()
     @webrtc.stopLocalVideo()
 
   _startWebRTC: ->
-    $('#localVideo').show()
+    $('#localVideo').removeClass('invisible')
 
     if @webrtc
       @webrtc.startLocalVideo()
@@ -198,9 +194,8 @@ class @RoomShow
 
         document.getElementById('notification-sound').play()
 
-        $('.control-buttons').removeClass('hidden')
-        $('.no-user-container').addClass('display-none')
-        $('#next-post').removeClass('display-none')
+        $('.control-buttons').removeClass('invisible')
+        $('.no-user-container').addClass('hidden')
 
         @_setStatus('chatting')
 
