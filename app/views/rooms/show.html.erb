@@ -19,7 +19,7 @@
     <% end %>
 
     <% if @room.post.link.present? && @room.post.format_link.blank? %>
-        <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
+      <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
     <% end %>
 
     <% if @room.post.text_content.present? %>
@@ -54,18 +54,18 @@
             <div class="post-info-container">
               <div class="likes-header">
                 <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
-                    <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
+                  <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
                 <% else %>
-                    <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
+                  <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
                 <% end %>
                 <span class="like-count-container">
                 <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
                 <i class="fa fa-thumbs-o-up"></i>
               </span>
                 <% if mobile? %>
-                    <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
+                  <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
                 <% else %>
-                    <h2 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h2>
+                  <h2 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h2>
                 <% end %>
               </div>
             </div>
@@ -73,14 +73,14 @@
             <div class="bin-header-description">
               <div class="bin-number-header">
                 <% if mobile? %>
-                    <h4 class="bin-channel-number"><%= @room.bin.position + 1 %> <%= @room.bin.abbreviation %></h4>
+                  <h4 class="bin-channel-number"><%= @room.bin.position + 1 %> <%= @room.bin.abbreviation %></h4>
                 <% else %>
-                    <h4 class="bin-channel-number"><%= @room.bin.position + 1 %> <%= @room.bin.abbreviation %></h4>
+                  <h4 class="bin-channel-number"><%= @room.bin.position + 1 %> <%= @room.bin.abbreviation %></h4>
                 <% end %>
                 <% if mobile? %>
-                    <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
+                  <h5 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h5>
                 <% else %>
-                    <h4 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h4>
+                  <h4 class="bin-header" title="<%= @room.bin.title %>" data-bin-id="<%= @room.bin.id %>"><%= @room.bin.title %></h4>
                 <% end %>
               </div>
               <div class="bin-description <%= mobile_css %>" title="<%= @room.bin.description %>">
@@ -126,6 +126,7 @@
 
           <div class="video-chat-option">
             <h4 class="option-title">Video Chat!</h4>
+            <i id="video-chat-helper" class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="When video chat is enabled, you will be matched with others. Disabling video chat will not end an ongoing conversation"></i>
             <div class="switch-container">
               <div class="onoffswitch">
                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" <%= current_user.nil? || (current_user && current_user.matching?) ? 'checked' : '' %>>
@@ -136,6 +137,7 @@
 
           <div class="invite-friends">
             <h4 class="option-title">Invite Friends!</h4>
+            <i id="invite-friends-helper" class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Send your friends the URL to invite them to video chat with you!"></i>
             <input type="text" id="lookup-input" style="display:none;" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
             <button class="btn btn-primary btn-xs" data-clipboard-target='lookup-input' id='copy-button'>Copy Link</button>
           </div>

@@ -308,8 +308,12 @@ video {
             margin: 0px;
           }
 
-          .btn, .switch-container {
-            margin-left: 10px;
+          label {
+            margin-bottom: 0px;
+          }
+
+          .btn, .switch-container, .info-helper {
+            margin-left: 6px;
           }
         }
       }
