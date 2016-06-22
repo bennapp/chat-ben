@@ -121,9 +121,10 @@ video {
           flex-direction: column;
 
           .bin-description {
+            max-height: 3em;
+            
             &.mobile {
               font-size: 11px;
-              max-height: 3em;
             }
           }
         }
