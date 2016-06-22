@@ -70,7 +70,7 @@ class RoomChannel < ApplicationCable::Channel
       post = posts.first
     end
 
-    options = generate_post_options(post, room, bin)
+    options = generate_post_options(post, room, bin, data['from_token'])
     ActionCable.server.broadcast("room_#{params[:room]}", options)
   end
 
@@ -102,11 +102,11 @@ class RoomChannel < ApplicationCable::Channel
 
     post = posts.first if post.nil?
 
-    options = generate_post_options(post, room, bin)
+    options = generate_post_options(post, room, bin, data['from_token'])
     ActionCable.server.broadcast("room_#{params[:room]}", options)
   end
 
-  def generate_post_options(post, room, bin)
+  def generate_post_options(post, room, bin, from_token)
     if current_user
       like = Like.where(user_id: current_user.id, post_id: post.id).first
     end
@@ -145,7 +145,7 @@ class RoomChannel < ApplicationCable::Channel
       bin_logo_src: bin.logo(:medium),
       bin_description: bin.description,
       bin_abbreviation: bin.abbreviation,
-      user_name: current_user.try(:name),
+      from_token: from_token,
     }
   end
 end

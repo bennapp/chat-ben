@@ -33,10 +33,10 @@ class @RoomChannel
     App.cable.subscriptions.create { channel: "RoomChannel", room: roomToken, mobile: @mobile == 'mobile' },
       connected: ->
         window.nextPost = =>
-          @perform("next_post", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
+          @perform("next_post", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'), from_token: window.fromToken)
           
         window.postFromGuide = (options) =>
-          @perform("next_post", guide: true, post_id: options.postId, bin_id: options.binId)
+          @perform("next_post", guide: true, post_id: options.postId, bin_id: options.binId, from_token: window.fromToken)
 
         nextPostClick = ->
           window.nextPost()
@@ -67,7 +67,7 @@ class @RoomChannel
       received: (data) ->
         action = data.action
         if action == 'advance_post'
-          return if window.status == 'ending' && data.user_name != currentUser.name
+          return if window.status == 'ending' && data.from_token != window.fromToken
           guideSelect(postId: data.id, binId: data.bin_id)
 
           $like = $('#like')

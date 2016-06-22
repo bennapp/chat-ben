@@ -184,6 +184,7 @@
 
 <script>
   $(document).ready(function(){
+    window.fromToken = '<%= SecureRandom.uuid %>';
     var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>', mobile: '<%= mobile_css %>'});
     var likeChannel = new LikeChannel();
     var roomShow = new RoomShow({
