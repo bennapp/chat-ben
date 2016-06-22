@@ -67,6 +67,7 @@ namespace :reddit do
       bin.save!
     end
 
+    # Commented out since Reddit Does not like our comments, needs a new strat
     if false && Rails.env.production?
       link_data.each_with_index do |link_info, index|
         begin
