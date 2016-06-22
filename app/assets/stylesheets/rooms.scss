@@ -123,6 +123,7 @@ video {
           .bin-description {
             &.mobile {
               font-size: 11px;
+              max-height: 3em;
             }
           }
         }
