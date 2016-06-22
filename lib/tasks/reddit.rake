@@ -4,26 +4,40 @@ namespace :reddit do
   task :build_channels, [:subreddits] => :environment do |t, args|
     client = authenticated_client
 
+    supported_domains = ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv']
+
     subreddits = [
-        { name: '/r/Videos', domains: ['youtube.com', 'vimeo.com', 'youtu.be', 'vimeo.com'], abbreviation: 'RVIDS' },
-        { name: '/r/FullMoviesOnYouTube', domains: ['youtube.com', 'youtu.be'], abbreviation: 'FMOYT' },
-        { name: '/r/360video', domains: ['youtube.com', 'youtu.be'], abbreviation: 'V360' },
-        { name: '/r/ObscureMedia', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'OM' },
-        { name: '/r/Unexpected', domains: ['youtube.com', 'youtu.be', 'i.imgur.com', 'imgur.com', 'vimeo.com'], abbreviation: 'U!' },
-        { name: '/r/YoutubeHaiku', domains: ['youtube.com', 'youtu.be'], abbreviation: 'YH' },
-        { name: '/r/ArtisanVideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'AV' },
-        { name: '/r/curiousvideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'CV' },
-        { name: '/r/cookingvideos', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'COOK' },
-        { name: '/r/Lectures', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'LCTR' },
-        { name: '/r/Documentaries', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'DOC' },
-        { name: '/r/WoahTube', domains: ['youtube.com', 'youtu.be', 'vimeo.com'], abbreviation: 'WT' },
-        { name: '/r/Dota2', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv'], abbreviation: 'DOTA' },
-        { name: '/r/LeagueOfLegends', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv'], abbreviation: 'LOL' },
-        { name: '/r/LOLStreams', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv'], abbreviation: 'LOLS' },
-        { name: '/r/DeepIntoYouTube', domains: ['youtube.com', 'youtu.be'], abbreviation: 'DEEP' },
-        { name: '/r/See', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com'], abbreviation: 'WEED' },
-        { name: '/r/gifs', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com'], abbreviation: 'GIFS' },
-        { name: '/r/woahdude', domains: ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com'], abbreviation: 'WOAH' },
+        { name: '/r/Videos', abbreviation: 'RVIDS' },
+        { name: '/r/FullMoviesOnYouTube', abbreviation: 'FMOYT' },
+        { name: '/r/360video', abbreviation: 'V360' },
+        { name: '/r/ObscureMedia', abbreviation: 'OM' },
+        { name: '/r/Unexpected', abbreviation: 'U!' },
+        { name: '/r/YoutubeHaiku', abbreviation: 'YH' },
+        { name: '/r/ArtisanVideos', abbreviation: 'AV' },
+        { name: '/r/curiousvideos', abbreviation: 'CV' },
+        { name: '/r/cookingvideos', abbreviation: 'COOK' },
+        { name: '/r/Lectures', abbreviation: 'LCTR' },
+        { name: '/r/Documentaries', abbreviation: 'DOC' },
+        { name: '/r/WoahTube', abbreviation: 'WT' },
+        { name: '/r/Dota2', abbreviation: 'DOTA' },
+        { name: '/r/LeagueOfLegends', abbreviation: 'LOL' },
+        { name: '/r/LOLStreams', abbreviation: 'LOLS' },
+        { name: '/r/DeepIntoYouTube', abbreviation: 'DEEP' },
+        { name: '/r/See', abbreviation: 'WEED' },
+        { name: '/r/gifs', abbreviation: 'GIFS' },
+        { name: '/r/woahdude', abbreviation: 'WOAH' },
+        { name: '/r/trailers', abbreviation: 'TRAIL' },
+        { name: '/r/HighQualityGifs', abbreviation: 'HQGFS' },
+        { name: '/r/reactiongifs', abbreviation: 'RG' },
+        { name: '/r/drunk', abbreviation: 'DRUNK' },
+        { name: '/r/Memes', abbreviation: 'MEMES' },
+        { name: '/r/EarthPorn', abbreviation: 'EP' },
+        { name: '/r/PoliticalVideo', abbreviation: 'PV' },
+        { name: '/r/unknownvideos', abbreviation: 'UV' },
+        { name: '/r/NotTimAndEric', abbreviation: 'NTAE' },
+        { name: '/r/InterdimensionalCable', abbreviation: 'IC' },
+        { name: '/r/CommercialCuts', abbreviation: 'COMC' },
+        { name: '/r/trees', abbreviation: 'TREES' },
     ]
 
     if args[:subreddits].present?
@@ -36,7 +50,7 @@ namespace :reddit do
     subreddits.each do |subreddit|
       subreddit_name = subreddit[:name].gsub('/r/', '')
       links = client.links subreddit_name, category: 'hot'
-      domain_links = links.select { |link| subreddit[:domains].include?(link.domain) }
+      domain_links = links.select { |link| supported_domains.include?(link.domain) }
 
       bin = Bin.find_or_create_by(title: subreddit[:name])
       bin.update_attribute(:abbreviation, subreddit[:abbreviation]) unless bin.abbreviation == subreddit[:abbreviation]
