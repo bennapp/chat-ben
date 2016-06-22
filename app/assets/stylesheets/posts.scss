@@ -100,57 +100,6 @@ $container-margin: 20px;
   }
 }
 
-.authentication-container {
-  height: auto;
-  margin-left: 10px;
-  margin-right: 10px;
-
-  &.mobile {
-    display: none;
-  }
-
-  .auth-form-container {
-    .btn {
-      margin-right: 8px;
-    }
-  }
-
-  .input {
-    font-size: 15px;
-  }
-
-  .fields {
-    display: flex;
-    flex-wrap: wrap;
-
-    .field {
-      margin-right: 8px;
-      margin-bottom: 8px;
-
-      input {
-        border-radius: 4px;
-        height: 34px;
-        width: 128px;
-
-        &.mobile {
-          height: 22px;
-          width: 80px;
-        }
-      }
-    }
-
-    .new-post-field {
-      input {
-        width: 200px;
-      }
-    }
-  }
-
-  .btn {
-    display: inline-block;
-  }
-}
-
 .new-post-container {
   .input {
     font-size: 15px;

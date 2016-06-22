@@ -90,8 +90,7 @@ class @RoomShow
       if @status == 'waiting'
         $.ajax(url: "/chat/#{@room}", type: 'PUT') # When you leave your own room and navigate back to front page, you should see num chating change becauce of you.
         return undefined
-      else
-      if @status == 'chatting'
+      else if @status == 'chatting'
         return 'Make sure to end your conversation before leaving!'
       else
         return undefined

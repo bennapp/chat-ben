@@ -13,7 +13,7 @@ $sub-text-grey: #8899a6;
 
 html, body {
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 body {
@@ -22,7 +22,7 @@ body {
 
 h1 { font-size: 3.0em; }
 h2 { font-size: 2.1em; }
-h3 { font-size: 1.7em; }
+h3 { font-size: 1.5em; }
 h4 { font-size: 1.2em; }
 h5 { font-size: 1.0em; }
 h6 { font-size: 0.9em; }
@@ -84,43 +84,121 @@ h6 { font-size: 0.9em; }
     max-height: 10vh;
   }
 
+  .page-title {
+    display: flex;
+    align-items: flex-end;
+  }
+
   img {
-    max-width: 100%;
+    display: table-cell;
     max-height: 5.9vh;
     margin-bottom: 1px;
+
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   small {
-    vertical-align: bottom;
     font-weight: 600;
     color: black;
     text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
     margin-left: 10px;
     white-space: nowrap;
+    font-size: 2.2vh;
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+
+    @media screen and (max-width: 940px) {
+      display: none;
+    }
 
     &.beta-red {
       color: #ff0016;
     }
   }
 
-  .page-title {
-    margin-left: 10px;
-    margin-right: 10px;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-  }
-
   .total-users-container {
-    font-size: 24px;
+    font-size: 2.4vh;
     font-weight: bold;
     font-family: 'Raleway', sans-serif;
     color: #00AAE4; //Logo blue
     margin-right: 20px;
 
+    @media screen and (max-width: 1140px) {
+      display: none;
+    }
+
     .logout-link {
       margin-left: 20px;
       font-size: 16px;
     }
+  }
+}
+
+.mobile-notice {
+  display: none;
+  margin: 2px;
+  padding: 4px 3px;
+  font-size: 3.8vw;
+
+  &.mobile {
+    display: block;
+  }
+
+  .glyphicon-remove {
+    top: 3px;
+    float: right;
+  }
+}
+
+.authentication-container {
+  height: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 4px;
+
+  &.mobile {
+    display: none;
+  }
+
+  .auth-form-container {
+    .btn {
+      margin-right: 8px;
+    }
+  }
+
+  .input {
+    font-size: 15px;
+  }
+
+  .fields {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+    .field {
+      margin-right: 8px;
+      margin-bottom: 0px;
+
+      input {
+        border-radius: 4px;
+        height: 22px;
+        width: 10vw;
+      }
+    }
+
+    .new-post-field {
+      input {
+        width: 200px;
+      }
+    }
+  }
+
+  .btn {
+    display: inline-block;
   }
 }
 

@@ -97,11 +97,16 @@ video {
 
       .bin-controls-container {
         display: flex;
-        padding: 0.2em 0.1em 0.2em 0.1em;
+        padding: 0.2em 0.1em 4px 0.1em;
 
         .bin-logo {
           width: 8.5em;
           height: 8.5em;
+
+          &.mobile {
+            width: 6.5em;
+            height: 6.5em;
+          }
         }
 
         .bin-post-container {
@@ -334,6 +339,9 @@ video {
         background-color: #11284a;
         border-color: #5e7088;
         color: #d1dded;
+
+        border-style: solid;
+        border-width: 1px;
 
         &.selected-show {
           background-color: #f8f69f;

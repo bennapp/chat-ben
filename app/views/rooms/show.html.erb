@@ -49,7 +49,7 @@
     <div class="guide-info <%= mobile_css %>">
       <div class="bin-controls-wrapper">
         <div class="bin-controls-container">
-          <%= image_tag @room.bin.logo.url(:medium), class: 'bin-logo' %>
+          <%= image_tag @room.bin.logo.url(:medium), class: "bin-logo #{mobile_css}" %>
           <div class="bin-post-container">
             <div class="post-info-container">
               <div class="likes-header">
@@ -65,7 +65,7 @@
                 <% if mobile? %>
                   <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
                 <% else %>
-                  <h2 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h2>
+                  <h3 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h3>
                 <% end %>
               </div>
             </div>
@@ -126,7 +126,7 @@
 
           <div class="video-chat-option">
             <h4 class="option-title">Video Chat!</h4>
-            <i id="video-chat-helper" class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="When video chat is enabled, you will be matched with others. Disabling video chat will not end an ongoing conversation"></i>
+            <i id="video-chat-helper" class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="When video chat is enabled, you will be matched with others. Disabling video chat will not end an ongoing conversation."></i>
             <div class="switch-container">
               <div class="onoffswitch">
                 <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" <%= current_user.nil? || (current_user && current_user.matching?) ? 'checked' : '' %>>

@@ -54,10 +54,16 @@
   </script>
   <body style="<%= @hide_footer ? '' : 'padding-bottom:70px;' %>">
     <div class="page-header <%= mobile_css %>">
-      <div class="page-title"><%= link_to image_tag('chatbenlogotv.png'), root_url %>
-        <small class="lead">its TV on the internet with your friends.</small><small class="beta-red">(beta)</small>
+      <div class="page-title">
+        <%= link_to image_tag('chatbenlogotv.png'), root_url %>
+        <small class="lead">its TV on the internet with your friends. <small class="beta-red"> (beta)</small></small>
       </div>
       <%= render partial: 'shared/login' %>
+    </div>
+
+    <div class="mobile-notice alert alert-info <%= mobile_css %>">
+      Try chatben on your laptop to video chat with friends!
+      <span class="mobile-notice-clear glyphicon glyphicon-remove" aria-hidden="true"></span>
     </div>
 
     <div class="login-notice notice alert alert-info hidden">
