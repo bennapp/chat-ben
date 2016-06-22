@@ -47,33 +47,38 @@ $container-margin: 20px;
       .bin-title {
         margin-top: 12px;
         margin-bottom: 0px;
-        white-space: wrap;
+        overflow-wrap: break-word;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 26em;
+        width: 22vw;
 
         &.mobile {
-          max-width: 100%;
+          width: 100%;
         }
       }
 
       .post-title {
         margin-top: 2px;
         margin-bottom: 2px;
-        white-space: wrap;
+        overflow-wrap: break-word;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 26em;
+        width: 22vw;
+
+        &.mobile {
+          width: 100%;
+        }
       }
 
       .bin-description {
         white-space: wrap;
         overflow: hidden;
+        overflow-wrap: break-word;
         text-overflow: ellipsis;
-        max-width: 26em;
+        width: 22vw;
 
         &.mobile {
-          max-width: 100%;
+          width: 100%;
         }
       }
 
@@ -88,11 +93,11 @@ $container-margin: 20px;
 
         .live-img {
           height: auto;
-          max-width: 26em;
+          width: 22vw;
           border-radius: 2px;
 
           &.mobile {
-            max-width: 100%;
+            width: 100%;
           }
         }
       }
