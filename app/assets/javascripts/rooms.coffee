@@ -117,7 +117,7 @@ class @RoomShow
     window.status = status
     status = switch status
       when 'not-waiting'
-        'Enable Video Chat to watch with someone else'
+        'Video Chat is disabled'
       when 'waiting'
         'Waiting for someone to chat with'
       when 'chatting'
