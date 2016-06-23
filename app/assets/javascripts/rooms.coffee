@@ -4,7 +4,6 @@ class @RoomShow
   constructor: (options) ->
     @nick = currentUser.name
     @room = options.room
-    @postId = options.postId
     @mobile = options.mobile
     @signalServer = options.signalServer
     @_setStatusWithSwitch()
@@ -70,7 +69,8 @@ class @RoomShow
     if remote and el
       remote.removeChild el
 
-    $('.control-buttons').addClass('invisible')
+    $('.control-buttons').addClass('hidden')
+    $('.chat-again-container').removeClass('hidden')
     @_setStatus('ending')
     $('.remote-container').addClass('invisible')
 

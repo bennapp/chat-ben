@@ -116,6 +116,10 @@
         <div class="chat-info-container">
           <div class="alert chat-alert alert-info status" role="alert"></div>
 
+          <div class="chat-again-container hidden">
+            <button class="btn btn-primary btn-xs" id='chat-again'>Chat Again!</button>
+          </div>
+
           <div class="buttons">
             <div class="control-buttons invisible">
               <button id="mute-microphone-button" class="btn dtn-defualt btn-xs"><span class="fa fa-microphone-slash"></span></button>
@@ -189,13 +193,13 @@
     var likeChannel = new LikeChannel();
     var roomShow = new RoomShow({
       room: '<%= @room.token %>',
-      postId: '<%= @room.post.id %>',
       mobile: '<%= mobile? %>',
       signalServer: '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>',
     });
 
     var newPost = new NewPost();
     new Guide;
+    new ChatAgain({url: "<%= request.original_url.split('/chat').first %>"});
 
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link, start: @room.post.start_time }) : '' %>');
 
