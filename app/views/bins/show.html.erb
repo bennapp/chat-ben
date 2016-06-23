@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <ol>
-  <% @bin.posts.each do |post| %>
+  <% @bin.posts.order('post_bins.position asc').each do |post| %>
     <li><%= post.title %></li>
   <% end %>
 </ol>

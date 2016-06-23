@@ -18,7 +18,7 @@
         <td><%= bin.position %></td>
         <td>
           <ol>
-            <% bin.posts.each do |post| %>
+            <% bin.posts.order('post_bins.position asc').each do |post| %>
               <li><%= post.title %> - <%= link_to 'Link', bin_path(bin, post: post.id) %></li>
             <% end %>
           </ol>

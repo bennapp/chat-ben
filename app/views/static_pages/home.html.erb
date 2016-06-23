@@ -4,7 +4,7 @@
       <div class="bins">
         <% @bins.each do |bin| %>
           <div class="bin">
-            <% post = bin.posts.first %>
+            <% post = bin.posts.order('post_bins.position asc').limit(1).first %>
             <% if post %>
               <% if post.format_type == 'youtube' %>
                 <%= link_to image_tag("https://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img #{mobile_css}"), bin %>

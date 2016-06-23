@@ -40,7 +40,7 @@
     <% (0..100).each do |i| %>
       <div class="bin-form">
         <p><%= i + 1 %></p>
-        <%= f.collection_select(:post_ids, @posts, :id, :id_with_title, { include_blank: 'None', selected: @bin.posts[i].try(:id) }, { name: "bin[post_ids][#{i}]" }) %>
+        <%= f.collection_select(:post_ids, @posts, :id, :id_with_title, { include_blank: 'None', selected: @bin.posts.order('post_bins.position asc')[i].try(:id) }, { name: "bin[post_ids][#{i}]" }) %>
         <p>Or create a new post</p>
         <%= f.fields_for "posts[#{i}]" do |post| %>
           <div class="fields">

@@ -51,8 +51,9 @@ class RoomChannel < ApplicationCable::Channel
     bin = Bin.find(data['bin_id'])
     current_post = Post.find(data['post_id'].to_i)
 
-    posts = bin.posts.to_a
+    posts = bin.posts.order('post_bins.position asc').to_a
     posts = posts.reverse if options[:prev_post] == true
+
     current_post_index = posts.index(current_post)
 
     if current_post_index
@@ -61,9 +62,6 @@ class RoomChannel < ApplicationCable::Channel
       else
         next_post_index = current_post_index + 1
       end
-
-      guide_position = GuidePosition.find_or_create_by(user: current_user, bin: bin) if current_user
-      guide_position.update_attribute(:position, next_post_index) if current_user
 
       post = posts[next_post_index % posts.size]
     else
@@ -92,15 +90,8 @@ class RoomChannel < ApplicationCable::Channel
       bin = bin.first
     end
 
-    room.update_attribute(:bin, bin)
-    posts = bin.posts.to_a
-
-    if current_user
-      guide_position = GuidePosition.find_or_create_by(user: current_user, bin: bin)
-      post = posts[guide_position.position]
-    end
-
-    post = posts.first if post.nil?
+    posts = bin.posts.order('post_bins.position asc').to_a
+    post = posts.first
 
     options = generate_post_options(post, room, bin, data['from_token'])
     ActionCable.server.broadcast("room_#{params[:room]}", options)
@@ -120,6 +111,7 @@ class RoomChannel < ApplicationCable::Channel
 
     reaction_urls = post.reactions.map { |reaction| reaction.video.url }
 
+    room.update_attribute(:bin, bin)
     room.update_attribute(:post, post)
 
     {

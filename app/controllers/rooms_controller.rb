@@ -15,7 +15,6 @@ class RoomsController < ApplicationController
 
     redirect_to root_url and return unless @room
 
-    GuidePosition.find_or_create_by(user: current_user, bin: @room.bin) if current_user
     Participation.find_or_create_by(user: current_user, room: @room) if current_user
     @rating = Rating.new
   end
