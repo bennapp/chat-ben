@@ -36,10 +36,6 @@ class RoomChannel < ApplicationCable::Channel
     advance_channel(data, down: true)
   end
 
-  def chat_again(data)
-
-  end
-
   def set_matching(data)
     matching = data['matching']
     room = Room.find_by_token(params[:room])
