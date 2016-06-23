@@ -110,6 +110,11 @@ class Post < ActiveRecord::Base
         self.format_type = 'twitch'
         channel = link.split('/').last
         self.format_link = channel
+      when /gfycat.com/
+        self.format_type = 'gfycat'
+        token = link.split('gfycat.com/').last
+
+        self.format_link = token if token.present?
       end
 
     self.format_link = self.format_link.html_safe if self.format_link

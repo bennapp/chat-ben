@@ -158,6 +158,11 @@ class @RoomChannel
               $('.embeded-content-container').removeClass('embed-responsive')
               $wrapper.append("<blockquote class=\"twitter-tweet\" lang=\"en\"><a href=#{data.format_link}></a></blockquote>")
               $wrapper.append("<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>")
+            else if data.format_type == 'gfycat'
+              $('.embeded-content-container').removeClass('embed-responsive-16by9')
+              $('.embeded-content-container').removeClass('embed-responsive')
+              $wrapper.append("<div class='gfyitem' data-id='#{data.format_link}'></div>")
+              gfyCollection.init()
             else if data.format_type == 'vimeo'
               autoPlay = if @mobile == 'mobile' then '0' else '1'
               $wrapper.append("<iframe src=\"//player.vimeo.com/video#{data.format_link}?portrait=0&color=333&autoplay=#{autoPlay}\" width=\"640\" height=\"390\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>")

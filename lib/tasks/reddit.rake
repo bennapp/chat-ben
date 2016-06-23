@@ -4,7 +4,7 @@ namespace :reddit do
   task :build_channels, [:subreddits] => :environment do |t, args|
     client = authenticated_client
 
-    supported_domains = ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv']
+    supported_domains = ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv', 'gfycat.com']
 
     subreddits = [
         { name: '/r/Videos', abbreviation: 'RVIDS' },
@@ -38,6 +38,11 @@ namespace :reddit do
         { name: '/r/InterdimensionalCable', abbreviation: 'IC' },
         { name: '/r/CommercialCuts', abbreviation: 'COMC' },
         { name: '/r/trees', abbreviation: 'TREES' },
+        { name: '/r/HipHopHeads', abbreviation: 'HPHPH' },
+        { name: '/r/Music', abbreviation: 'RMTV' },
+        { name: '/r/ListenToThis', abbreviation: 'LTT' },
+        { name: '/r/ElectronicMusic', abbreviation: 'EMTV' },
+        { name: '/r/ClassicalMusic', abbreviation: 'CMTV' },
     ]
 
     if args[:subreddits].present?

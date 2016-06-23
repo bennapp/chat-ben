@@ -3,7 +3,7 @@
 <div class="room-page <%= mobile_css %>">
   <div class="content-panel <%= mobile_css %>">
     <% if @room.post.format_link.present? %>
-      <% if @room.post.format_type == 'twitter' || @room.post.format_type == 'imgur' %>
+      <% if @room.post.format_type == 'twitter' || @room.post.format_type == 'imgur' || @room.post.format_type == 'gfycat' %>
         <div class="embeded-content-container">
           <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
           </div>
@@ -183,6 +183,7 @@
 </div>
 
 <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://assets.gfycat.com/gfycat.js"></script>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script src="//cdn.jsdelivr.net/jquery.scrollto/2.1.2/jquery.scrollTo.min.js"></script>
 
