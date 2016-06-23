@@ -115,6 +115,11 @@ class Post < ActiveRecord::Base
         token = link.split('gfycat.com/').last
 
         self.format_link = token if token.present?
+      when /soundcloud.com/
+        self.format_type = 'soundcloud'
+        token = link.split('soundcloud.com/').last
+
+        self.format_link = token if token.present?
       end
 
     self.format_link = self.format_link.html_safe if self.format_link

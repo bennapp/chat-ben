@@ -163,6 +163,25 @@ class @RoomChannel
               $('.embeded-content-container').removeClass('embed-responsive')
               $wrapper.append("<div class='gfyitem' data-id='#{data.format_link}'></div>")
               gfyCollection.init()
+            else if data.format_type == 'soundcloud'
+              $wrapper.append("<iframe id=\"sc-widget\" src=\"https://w.soundcloud.com/player/?url=http://soundcloud.com/#{data.format_link}\"></iframe>")
+              widgetIframe = document.getElementById('sc-widget')
+              widget = SC.Widget(widgetIframe)
+              widget.bind SC.Widget.Events.READY, ->
+                widget.play()
+                widget.setVolume 10
+                return
+              end = false
+              widget.bind SC.Widget.Events.FINISH, ->
+                widget.getCurrentSound (sound) ->
+                  widget.getSounds (sounds) ->
+                    if end
+                      window.nextPost()
+                    if sound.id == sounds[sounds.length - 1].id
+                      end = true
+                    return
+                  return
+                return
             else if data.format_type == 'vimeo'
               autoPlay = if @mobile == 'mobile' then '0' else '1'
               $wrapper.append("<iframe src=\"//player.vimeo.com/video#{data.format_link}?portrait=0&color=333&autoplay=#{autoPlay}\" width=\"640\" height=\"390\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>")

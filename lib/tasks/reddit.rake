@@ -4,7 +4,7 @@ namespace :reddit do
   task :build_channels, [:subreddits] => :environment do |t, args|
     client = authenticated_client
 
-    supported_domains = ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv', 'gfycat.com']
+    supported_domains = ['youtube.com', 'youtu.be', 'vimeo.com', 'twitter', 'i.imgur.com', 'imgur.com', 'twitch.tv', 'gfycat.com', 'soundcloud.com']
 
     subreddits = [
         { name: '/r/Videos', abbreviation: 'RVIDS' },
