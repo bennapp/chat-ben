@@ -132,8 +132,9 @@ class @RoomShow
 
   _matchingSwitch: ->
     $('#myonoffswitch').change (event) =>
+      window.matchingSwtich(event.target.checked)
+
       doSwitch = (event) =>
-        window.matchingSwtich(event.target.checked)
         if @status == 'waiting' && !event.target.checked
           @_setStatus('not-waiting')
           @stopWebRTC()
