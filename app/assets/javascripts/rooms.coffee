@@ -132,13 +132,16 @@ class @RoomShow
 
   _matchingSwitch: ->
     $('#myonoffswitch').change (event) =>
-      window.matchingSwtich(event.target.checked)
-      if @status == 'waiting' && !event.target.checked
-        @_setStatus('not-waiting')
-        @stopWebRTC()
-      else if @status == 'not-waiting' && event.target.checked
-        @_setStatus('waiting')
-        @_startWebRTC()
+      doSwitch = (event) =>
+        window.matchingSwtich(event.target.checked)
+        if @status == 'waiting' && !event.target.checked
+          @_setStatus('not-waiting')
+          @stopWebRTC()
+        else if @status == 'not-waiting' && event.target.checked
+          window.chatAgain()
+
+      setTimeout(doSwitch(event), 250)
+
 
   _setStatusWithSwitch: ->
     if $('#myonoffswitch').is(':checked') && !@mobile
