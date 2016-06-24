@@ -163,6 +163,9 @@ class @RoomChannel
               $('.embeded-content-container').removeClass('embed-responsive')
               $wrapper.append("<div class='gfyitem' data-id='#{data.format_link}'></div>")
               gfyCollection.init()
+            else if data.format_type == 'giphy'
+              $wrapper.append("<iframe src=\"//giphy.com/embed/#{data.format_link}?html5=true\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe>")
+
             else if data.format_type == 'soundcloud'
               $wrapper.append("<iframe id=\"sc-widget\" src=\"https://w.soundcloud.com/player/?url=http://soundcloud.com/#{data.format_link}\"></iframe>")
               widgetIframe = document.getElementById('sc-widget')
