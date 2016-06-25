@@ -107,10 +107,11 @@ video {
   }
 
   .reaction-panel {
-    width: 25vw;
+    width: 30vw;
 
     #reaction-preview {
       width: 90%;
+      transform: scaleX(-1);
     }
 
     .reaction-preview-container {
@@ -360,7 +361,6 @@ video {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-
         }
 
         .videoContainer {
