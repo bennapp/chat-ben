@@ -215,8 +215,15 @@ class @RoomShow
     $('#react-button').mousedown =>
       @onReactMousedown()
 
-    $('#react-button').bind 'mouseup mouseleave', =>
+    $('#react-button').bind 'mouseup', =>
       return unless forceSignIn(event)
+      if @reactStream && @reacting
+        @mouseup = true
+        $('#react-button').addClass('display-none')
+        if @isHold && !@isTimeOut
+          recordRTC.stopRecording @stopRecordingRTC
+
+    $('#react-button').bind 'mouseleave', =>
       if @reactStream && @reacting
         @mouseup = true
         $('#react-button').addClass('display-none')
