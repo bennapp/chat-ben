@@ -3,8 +3,10 @@
   var widgetIframe = document.getElementById('sc-widget'), widget = SC.Widget(widgetIframe);
 
   widget.bind(SC.Widget.Events.READY, function() {
-    widget.play();
-    widget.setVolume(10);
+    if (window.hasStorage() && localStorage.getItem("seen-info")){
+      widget.play();
+      widget.setVolume(10);
+    }
   });
 
   var end = false;

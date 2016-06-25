@@ -19,7 +19,7 @@
   }
 
   function onPlayerReady(event) {
-    if (mobile !== 'mobile' && !dev) {
+    if (mobile !== 'mobile' && window.hasStorage() && localStorage.getItem("seen-info")) {
       event.target.playVideo();
       event.target.setVolume(10);
     }

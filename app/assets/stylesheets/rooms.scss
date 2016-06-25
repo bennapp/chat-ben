@@ -328,6 +328,76 @@ video {
   }
 }
 
+.featherlight.info {
+  background: rgba(51, 51, 51, 0.75);
+
+  .featherlight-content {
+    background: white;
+    min-width: 70%;
+  }
+
+  .info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .or-container {
+    display: flex;
+    width: 100%;
+    margin: 12px 0px;
+
+    .or {
+      margin: 0;
+    }
+
+    .header-line {
+      border-bottom: 1px solid grey;
+      width: 50%;
+      align-self: center;
+      margin: 10px;
+    }
+  }
+
+  .social-option {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    .share-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .send-link, .send-fb, .post-twitter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 8px;
+
+      .option-title {
+        margin: 0px;
+      }
+
+      .btn, input, .fb-send, .twitter-share-button {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  #info-go-button {
+    align-self: flex-end;
+  }
+}
+
+.copy-button {
+  width: 90px;
+}
+
 .guide-wrapper {
   bottom: 0;
 

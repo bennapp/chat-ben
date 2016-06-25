@@ -9,7 +9,7 @@
     };
     var player = new Twitch.Player("twitchplayer", options);
 
-    if (mobile !== 'mobile') {
+    if (mobile !== 'mobile' && window.hasStorage() && localStorage.getItem("seen-info")) {
       player.setVolume(0.1);
       player.play();
     }
