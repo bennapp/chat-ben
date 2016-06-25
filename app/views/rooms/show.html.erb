@@ -205,7 +205,6 @@
       <div class="send-link">
         <h4 class="option-title">Share the plain old link</h4>
         <input type="text" id="info-lookup-input" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
-        <button class="btn btn-primary btn-xs copy-button" data-clipboard-target='info-lookup-input' id='info-copy-button'>Click to Copy</button>
       </div>
     </div>
   </div>
@@ -252,8 +251,6 @@
     $('.flash.notice').delay(4000).fadeOut(1400);
 
     var clip = new ZeroClipboard($("#copy-button"));
-    var infoClip = new ZeroClipboard($("#info-copy-button"));
-
     $('.copy-button').on('click', function(e){
       $(e.target).text('Copied!').css('background-color', '#0088ff').css('border-color', '#0088ff');
     });

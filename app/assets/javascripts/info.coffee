@@ -8,6 +8,9 @@ class @Info
         otherClose: '#info-go-button'
         beforeOpen: ->
           $infoContainer.removeClass('invisible')
+        afterOpen: ->
+          $('#info-lookup-input').focus ->
+            $(this).select()
         afterClose: ->
           if window.hasStorage()
             localStorage.setItem('seen-info', true)
