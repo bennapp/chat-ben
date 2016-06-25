@@ -425,7 +425,7 @@ video {
 
   .featherlight-content {
     background: white;
-    min-width: 70%;
+    min-width: 60%;
   }
 
   .info-container {
@@ -433,28 +433,15 @@ video {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
 
-  .or-container {
-    display: flex;
-    width: 100%;
-    margin: 12px 0px;
-
-    .or {
-      margin: 0;
-    }
-
-    .header-line {
-      border-bottom: 1px solid grey;
-      width: 50%;
-      align-self: center;
-      margin: 10px;
+    .info-title {
+      margin-bottom: 30px;
     }
   }
 
   .social-option {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
 
     .share-container {

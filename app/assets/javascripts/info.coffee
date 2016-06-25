@@ -1,6 +1,6 @@
 class @Info
   constructor: (options) ->
-    if window.hasStorage() && !localStorage.getItem("seen-info")
+    if true || window.hasStorage() && !localStorage.getItem("seen-info") && !options.mobile
       $infoContainer = $('.info-container')
 
       configuration =
@@ -14,6 +14,9 @@ class @Info
         afterClose: ->
           if window.hasStorage()
             localStorage.setItem('seen-info', true)
+            
+          if window.playVid
+            window.playVid()
 
       $info = $.featherlight($infoContainer, configuration)
       $info.open()

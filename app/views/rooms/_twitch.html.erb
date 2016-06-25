@@ -9,6 +9,11 @@
     };
     var player = new Twitch.Player("twitchplayer", options);
 
+    window.playVid = function(){
+      player.setVolume(0.1);
+      player.play();
+    };
+
     if (mobile !== 'mobile' && window.hasStorage() && localStorage.getItem("seen-info")) {
       player.setVolume(0.1);
       player.play();

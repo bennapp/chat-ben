@@ -213,11 +213,7 @@
 </div>
 
 <div class="info-container invisible">
-  <h2>Just kick back and watch TV</h2>
-
-  <div class="or-container"><div class="header-line"></div><h1 class="or">Or</h1><div class="header-line"></div></div>
-
-  <h2>Enable your webcam and get your friends in here!</h2>
+  <h2 class="info-title">Enable your webcam and get your friends in here!</h2>
   <div class="social-option">
     <%= image_tag 'chatben_pipey_allow.png', class: 'camera-access' %>
 
@@ -259,7 +255,7 @@
 
     var newPost = new NewPost();
     new Guide;
-    new Info;
+    new Info({ mobile: '<%= mobile? %>' });
     new ChatAgain({url: "<%= Rails.env.development? ? 'http://localhost:3000' : 'https://chatben.tv' %>"});
 
     $('.embeded-content-wrapper').append('<%= @room.post.format_link ? j(render partial: "#{@room.post.format_type}", locals: { value: @room.post.format_link, start: @room.post.start_time }) : '' %>');
