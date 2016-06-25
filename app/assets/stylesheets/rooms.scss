@@ -29,6 +29,18 @@ video {
     margin-top: 0px;
   }
 
+  .content-panel-reactions-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 100%;
+
+    &.mobile {
+      height: auto;
+      width: 100%;
+    }
+  }
+
   .content-panel {
     height: 59vh;
     width: 105vh;
@@ -75,6 +87,85 @@ video {
     .embeded-content-wrapper.imgur {
       iframe {
         border: 0;
+      }
+    }
+  }
+
+  .reaction-panel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+
+    @media screen and (max-width: 1200px) {
+      display: none;
+    }
+
+    &.mobile {
+      display: none !important;
+    }
+  }
+
+  .reaction-panel {
+    width: 25vw;
+
+    #reaction-preview {
+      width: 90%;
+    }
+
+    .reaction-preview-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    .glow-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .react-results-container {
+      .reaction-buttons-container{
+        display: flex;
+        justify-content: center;
+
+        .btn {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    h4, h2 {
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    #react-button{
+      width: 100%;
+      @include gradient-horizontal(#E83D16, #FFD816, 0%, 100%);
+      border: none;
+
+      &:hover {
+        background-color: #EF3E09;
+        background-image: none;
+      }
+    }
+
+    .reactions-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-height: 50vh;
+      overflow-y: scroll;
+
+      .video-container {
+        width: 90%;
+
+        .reaction-video {
+          width: 100%;
+        }
       }
     }
   }

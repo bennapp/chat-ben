@@ -1,48 +1,78 @@
 <%= audio_tag('notification.wav', id: 'notification-sound') %>
 
 <div class="room-page <%= mobile_css %>">
-  <div class="content-panel <%= mobile_css %>">
-    <% if @room.post.format_link.present? %>
-      <% if @room.post.format_type == 'twitter' || @room.post.format_type == 'imgur' || @room.post.format_type == 'gfycat' %>
-        <div class="embeded-content-container">
-          <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
+  <div class="content-panel-reactions-container <%= mobile_css %>">
+    <div class="content-panel <%= mobile_css %>">
+      <% if @room.post.format_link.present? %>
+        <% if @room.post.format_type == 'twitter' || @room.post.format_type == 'imgur' || @room.post.format_type == 'gfycat' %>
+          <div class="embeded-content-container">
+            <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
+            </div>
           </div>
-        </div>
+        <% else %>
+          <div class="embeded-content-container embed-responsive embed-responsive-16by9">
+            <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
+            </div>
+          </div>
+        <% end %>
       <% else %>
-        <div class="embeded-content-container embed-responsive embed-responsive-16by9">
-          <div class="embeded-content-wrapper <%= @room.post.format_type || '' %>">
+        <div> </div>
+      <% end %>
+
+      <% if @room.post.link.present? && @room.post.format_link.blank? %>
+        <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
+      <% end %>
+
+      <% if @room.post.text_content.present? %>
+        <div class="well post-content">
+          <%= html_escape(simple_format @room.post.text_content) %>
+        </div>
+
+        <% if @room.post.text_content.length > 500 %>
+          <div class="btn btn-info read-more" aria-label="Left Align">
+            <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
+          </div>
+
+          <script>
+            $('.read-more').featherlight('<div class=\"well post-content\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
+              closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
+              otherClose: '.escape-icon',
+              afterOpen: function() {
+                $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
+              }
+            });
+          </script>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="reaction-panel-container <%= mobile_css %> ">
+      <div class="reaction-panel">
+        <div class="react-button-container">
+          <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="left" title="Click to make a four second reaction or hold to make a longer one!">React!</button>
+        </div>
+        <div class="reaction-preview-container">
+          <video id='reaction-preview' class='display-none' muted="muted"></video>
+        </div>
+
+        <div class="react-results-container display-none">
+          <div class='reaction-buttons-container'>
+            <button id="post-reaction" class="btn btn-success">Post Reaction</button>
+            <button id="toss-reaction" class="btn btn-danger">Toss Reaction</button>
           </div>
         </div>
-      <% end %>
-    <% else %>
-      <div> </div>
-    <% end %>
 
-    <% if @room.post.link.present? && @room.post.format_link.blank? %>
-      <%= link_to @room.post.full_url, @room.post.full_url, target: '_blank', class: 'preview' %>
-    <% end %>
-
-    <% if @room.post.text_content.present? %>
-      <div class="well post-content">
-        <%= html_escape(simple_format @room.post.text_content) %>
-      </div>
-
-      <% if @room.post.text_content.length > 500 %>
-        <div class="btn btn-info read-more" aria-label="Left Align">
-          <span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span> Read more
+        <div class="reactions-and-react-button">
+          <div class="reactions-container">
+            <% @room.post.reactions.each do |reaction| %>
+              <div class="video-container">
+                <%= video_tag(reaction.video.url, controls: true, class: 'reaction-video') %>
+              </div>
+            <% end %>
+          </div>
         </div>
-
-        <script>
-          $('.read-more').featherlight('<div class=\"well post-content\"><%= html_escape j(simple_format @room.post.text_content) %></div>', {
-            closeIcon: '<div class=\"escape-container\"><span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span></div>',
-            otherClose: '.escape-icon',
-            afterOpen: function() {
-              $('.featherlight-content').append('<div class=\"btn escape-icon\">esc</div>')
-            }
-          });
-        </script>
-      <% end %>
-    <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="guide-info-remote-container">

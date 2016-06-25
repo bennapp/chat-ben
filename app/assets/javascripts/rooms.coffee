@@ -7,11 +7,13 @@ class @RoomShow
     @mobile = options.mobile
     @signalServer = options.signalServer
     @_setStatusWithSwitch()
+    @reacting = false
 
     @_bindDom()
 
   onReactMousedown: ->
     return unless forceSignIn(event)
+    @reacting = true
     successCallback = (stream) =>
       options = { type: 'video', frameInterval: 20 }
       @reactStream = stream
@@ -30,23 +32,23 @@ class @RoomShow
 
       $('#reaction-preview').removeClass('display-none')
       $('.reactions-and-react-button').addClass('display-none')
-      $('.reaction-panel').append('<div class="glow-container"><span class="red-glow"></span><h1> You Are Reacting!</h1></div>')
+      $('.reaction-panel').append('<div class="glow-container"><span class="red-glow"></span><h2> You Are Reacting!</h2></div>')
       recordRTC.startRecording()
 
       setTimeout(=>
         @isHold = !@mouseup
-      , 2000)
+      , 1000)
+
+      setTimeout(=>
+        if !@isHold
+          recordRTC.stopRecording @stopRecordingRTC
+      , 4000)
 
       setTimeout(=>
         @isTimeOut = !@mouseup
         if @isTimeOut
           recordRTC.stopRecording @stopRecordingRTC
       , 10000)
-
-      setTimeout(=>
-        if !@isHold
-          recordRTC.stopRecording @stopRecordingRTC
-      , 3000)
 
     errorCallback = (error) =>
       @stopRecordingRTC()
@@ -56,6 +58,7 @@ class @RoomShow
     navigator.getUserMedia({ audio: true, video: true }, successCallback, errorCallback)
 
   stopRecordingRTC: (videoURL) =>
+    @reacting = false
     @reactStream.getTracks()[0].stop() if @reactStream
     @reactStream.getTracks()[1].stop() if @reactStream
     $('.reaction-panel .glow-container').remove()
@@ -212,15 +215,13 @@ class @RoomShow
     $('#react-button').mousedown =>
       @onReactMousedown()
 
-    $('#react-button').mouseup =>
+    $('#react-button').bind 'mouseup mouseleave', =>
       return unless forceSignIn(event)
-      if @reactStream
+      if @reactStream && @reacting
         @mouseup = true
         $('#react-button').addClass('display-none')
         if @isHold && !@isTimeOut
           recordRTC.stopRecording @stopRecordingRTC
-      else
-        @stopRecordingRTC()
 
     $('#post-reaction').click =>
       $('.react-results-container').addClass('display-none')
