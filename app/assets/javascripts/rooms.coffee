@@ -144,7 +144,6 @@ class @RoomShow
 
       setTimeout(doSwitch, 700)
 
-
   _setStatusWithSwitch: ->
     if $('#myonoffswitch').is(':checked') && !@mobile
       @_setStatus('waiting')
