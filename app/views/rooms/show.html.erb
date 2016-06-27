@@ -3,6 +3,19 @@
 <div class="room-page <%= mobile_css %>">
   <div class="content-panel-reactions-container <%= mobile_css %>">
     <div class="content-panel <%= mobile_css %>">
+      <div class="video-panel hidden">
+        <%= video_tag('static1.mp4', id: 'static1', class: 'static hidden') %>
+        <%= video_tag('static2.mp4', id: 'static2', class: 'static hidden') %>
+        <%= video_tag('static3.mp4', id: 'static3', class: 'static hidden') %>
+        <%= video_tag('static4.mp4', id: 'static4', class: 'static hidden') %>
+        <%= video_tag('static5.mp4', id: 'static5', class: 'static hidden') %>
+        <%= video_tag('static6.mp4', id: 'static6', class: 'static hidden') %>
+        <%= video_tag('static7.mp4', id: 'static7', class: 'static hidden') %>
+        <%= video_tag('static8.mp4', id: 'static8', class: 'static hidden') %>
+        <%= video_tag('static9.mp4', id: 'static9', class: 'static hidden') %>
+        <%= video_tag('static10.mp4', id: 'static10', class: 'static hidden') %>
+      </div>
+
       <% if @room.post.format_link.present? %>
         <% if @room.post.format_type == 'twitter' || @room.post.format_type == 'imgur' || @room.post.format_type == 'gfycat' %>
           <div class="embeded-content-container">
@@ -49,8 +62,9 @@
     <div class="reaction-panel-container <%= mobile_css %> ">
       <div class="reaction-panel">
         <div class="react-button-container">
-          <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Click to make a four second reaction or hold to make a longer one!">React!</button>
+          <button id="react-button" class="btn btn-warning" data-toggle="tooltip" data-placement="bottom" title="Click to make a four second reaction or hold to make a longer one!">Leave a video reaction!</button>
         </div>
+
         <div class="reaction-preview-container">
           <video id='reaction-preview' class='display-none' muted="muted"></video>
         </div>
@@ -213,24 +227,29 @@
 </div>
 
 <div class="info-container invisible">
-  <h2 class="info-title">Enable your webcam and get your friends in here!</h2>
-  <div class="social-option">
-    <%= image_tag 'chatben_pipey_allow.png', class: 'camera-access' %>
+  <h2 class="info-title">Invite friends to watch with you!</h2>
+  <div class="social">
 
-    <div class="share-container">
-      <div class="post-twitter">
-        <h4 class="option-title">Post to Twitter</h4>
-        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I'm%20watching%20chatben.tv%20right%20now!%20Join%20my%20video%20chat%20and%20watch%20with%20me!%0A%0A">Tweet</a>
-      </div>
+    <div class="camera-access-wrapper">
+      <%= image_tag 'pipey_trans.png', class: 'camera-access' %>
+    </div>
 
-      <div class="send-fb">
-        <h4 class="option-title">Send a Facebook message</h4>
-        <div class="fb-send" data-href="https://chatben.tv/chat/<%= @room.token %>"></div>
-      </div>
+    <div class="share-wrapper">
+      <div class="share-container">
+        <div class="post-twitter">
+          <h4 class="option-title">Post to Twitter</h4>
+          <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I'm%20watching%20chatben.tv%20right%20now!%20Join%20my%20video%20chat%20and%20watch%20with%20me!%0A%0A">Tweet</a>
+        </div>
 
-      <div class="send-link">
-        <h4 class="option-title">Share the plain old link</h4>
-        <input type="text" id="info-lookup-input" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
+        <div class="send-fb">
+          <h4 class="option-title">Send a Facebook message</h4>
+          <div class="fb-send" data-href="https://chatben.tv/chat/<%= @room.token %>"></div>
+        </div>
+
+        <div class="send-link">
+          <h4 class="option-title">Share the plain old link</h4>
+          <input type="text" id="info-lookup-input" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
+        </div>
       </div>
     </div>
   </div>

@@ -1,10 +1,11 @@
 class @Info
   constructor: (options) ->
-    if true || window.hasStorage() && !localStorage.getItem("seen-info") && !options.mobile
+    if window.hasStorage() && !localStorage.getItem("seen-info") && !options.mobile
       $infoContainer = $('.info-container')
 
       configuration =
         variant: 'info'
+        closeIcon: ''
         otherClose: '#info-go-button'
         beforeOpen: ->
           $infoContainer.removeClass('invisible')

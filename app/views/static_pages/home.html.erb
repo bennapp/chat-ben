@@ -3,23 +3,26 @@
     <div class="bins-container">
       <div class="bins">
         <% @bins.each do |bin| %>
-          <div class="bin">
-            <% post = bin.posts.order('post_bins.position asc').limit(1).first %>
-            <% if post %>
-              <% if post.format_type == 'youtube' %>
-                <%= link_to image_tag("https://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img #{mobile_css}"), bin %>
-              <% elsif post.format_type == 'twitch' %>
-                <%= link_to image_tag("twitch.jpg", class: "live-img #{mobile_css}"), bin %>
-              <% else %>
-                <%= link_to image_tag("missing_bin.png", class: "live-img #{mobile_css}"), bin %>
+          <%= link_to bin, class: 'bin' do %>
+            <div class="bin-contents">
+              <% post = bin.posts.order('post_bins.position asc').limit(1).first %>
+              <% if post %>
+                <% if post.format_type == 'youtube' %>
+                  <%= image_tag("https://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img #{mobile_css}") %>
+                <% elsif post.format_type == 'twitch' %>
+                  <%= image_tag("twitch.jpg", class: "live-img #{mobile_css}") %>
+                <% else %>
+                  <%= image_tag("missing_bin.png", class: "live-img #{mobile_css}") %>
+                <% end %>
+                <div class="bin-info-container">
+                  <h3 class="bin-info"><%= bin.position + 1 %> <%= bin.abbreviation %></h3>
+                  <h3 class="bin-title <%= mobile_css %>"><%= bin.title %></h3>
+                </div>
+                <h4 class="post-title <%= mobile_css %>"><%= post.title %></h4>
               <% end %>
-              <%= link_to bin do %>
-                <h3 class="bin-title <%= mobile_css %>"><%= bin.title %></h3>
-              <% end %>
-              <h4 class="post-title <%= mobile_css %>"><%= post.title %></h4>
-            <% end %>
-            <div class="bin-description <%= mobile_css %>"><p><%= bin.description %></p></div>
-          </div>
+              <div class="bin-description <%= mobile_css %>"><p><%= bin.description %></p></div>
+            </div>
+          <% end %>
         <% end %>
       </div>
     </div>

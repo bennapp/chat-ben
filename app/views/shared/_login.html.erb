@@ -2,7 +2,7 @@
   <div class="total-users-container">
     <span id="total-users"><%= User.where(active: true).count %></span><span> users on now!</span>
     <% if current_user %>
-        <%= link_to("Logout: #{current_user.name}", destroy_user_session_path, :method => :delete, class: 'logout-link') %>
+        <%= link_to("Logout", destroy_user_session_path, :method => :delete, class: 'logout-link') %>
     <% end %>
   </div>
 

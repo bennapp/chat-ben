@@ -65,10 +65,28 @@ class @RoomChannel
       rejected: ->
 
       received: (data) ->
-        action = data.action
-        if action == 'advance_post'
+        if data.action == 'advance_post'
           return if window.status == 'ending' && data.from_token != window.fromToken
+          return if $('.static:not(.hidden)').length
           guideSelect(postId: data.id, binId: data.bin_id)
+
+          min = 1
+          max = 11
+          randNum = Math.floor(Math.random() * (max - min)) + min
+
+          $('.video-panel').removeClass('hidden')
+          $('.embeded-content-container').remove()
+
+          $("#static#{randNum}").removeClass('hidden')
+
+          staticVideo = document.getElementById("static#{randNum}")
+          staticVideo.volume = 0.05;
+
+          staticVideo.play()
+
+          $(staticVideo).bind 'ended', ->
+            $('.static').addClass('hidden')
+            $('.video-panel').addClass('hidden')
 
           $like = $('#like')
           $dislike = $('#dislike')
@@ -144,7 +162,6 @@ class @RoomChannel
               }
               $('.read-more').featherlight('<div class=\"well\"></div>', options);
 
-          $('.embeded-content-container').remove()
           if data.format_link
             $container.prepend("<div class=\"embed-responsive embed-responsive-16by9 embeded-content-container\"><div class=\"embeded-content-wrapper #{data.format_type || ''}\"></div></div>")
             $wrapper = $('.embeded-content-wrapper')

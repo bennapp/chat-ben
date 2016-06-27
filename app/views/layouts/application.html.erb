@@ -75,8 +75,8 @@
 
     <div class="page-header <%= mobile_css %>">
       <div class="page-title">
-        <%= link_to image_tag('chatbenlogotv.png'), root_url %>
-        <small class="lead">its TV on the internet with your friends. <small class="beta-red"> (beta)</small></small>
+        <%= link_to image_tag('chatbenTVlogo2.png'), root_url %>
+        <small class="lead">Watch the internet like TV with your friends!<small class="beta-red"> beta</small></small>
       </div>
       <%= render partial: 'shared/login' %>
     </div>
@@ -103,18 +103,6 @@
     <% end %>
 
     <%= yield %>
-
-    <% unless @hide_footer %>
-      <div class="navbar navbar-default navbar-fixed-bottom">
-        <div class="footer-content">
-          <% if current_user && !@is_feeback_new %>
-            <%= link_to('Leave Ben Feedback', new_feedback_path) %>
-          <% end %>
-
-          <p class="copyright text-muted">2016 Chat Ben</p>
-        </div>
-      </div>
-    <% end %>
 
     <%= audio_tag('8-bit-coin.wav', id: 'like-sound') %>
     <%= audio_tag('8-bit-wrong.wav', id: 'dislike-sound') %>

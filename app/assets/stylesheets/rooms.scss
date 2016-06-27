@@ -1,3 +1,5 @@
+$panel-grey: rgba(30, 30, 30, 1);
+
 .volume_bar {
   position: absolute;
   width: 5px;
@@ -31,9 +33,10 @@ video {
 
   .content-panel-reactions-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: stretch;
     width: 100%;
+    position: relative;
 
     &.mobile {
       height: auto;
@@ -41,10 +44,29 @@ video {
     }
   }
 
+  .video-panel {
+    height: 59vh;
+    width: 105vh;
+    max-width: 100%;
+    background-color: $panel-grey;
+    border-radius: 2px;
+
+    position: absolute;
+    top: 0px;
+    z-index: 9999999;
+
+    .static {
+      max-width: 100%;
+    }
+  }
+
   .content-panel {
     height: 59vh;
     width: 105vh;
     max-width: 100%;
+    margin: 0 auto;
+    background-color: $panel-grey;
+    border-radius: 2px;
 
     &.mobile {
       height: auto;
@@ -95,7 +117,11 @@ video {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 8px;
+    padding: 4px;
+    margin: 4px;
+
+    background-color: $panel-grey;
+    border-radius: 2px;
 
     @media screen and (max-width: 1200px) {
       display: none;
@@ -144,7 +170,6 @@ video {
     }
 
     #react-button {
-      outline: none;
       width: 100%;
       @include gradient-horizontal(#E83D16, #FFD816, 0%, 100%);
       border: none;
@@ -180,6 +205,9 @@ video {
     .guide-info {
       float: left;
       display: inline-block;
+      background-color: $panel-grey;
+      border-radius: 2px;
+      margin: 2px 4px 2px 0;
 
       .bin-controls-wrapper {
         display: flex;
@@ -190,7 +218,7 @@ video {
 
       .bin-controls-container {
         display: flex;
-        padding: 0.2em 0.1em 4px 0.1em;
+        padding: 0.2em 0.1em 4px 4px;
 
         .bin-logo {
           width: 8.5em;
@@ -207,14 +235,17 @@ video {
           flex-direction: column;
           margin-left: 8px;
           overflow: hidden;
+          padding-right: 4px;
         }
 
         .bin-header-description {
           display: flex;
           flex-direction: column;
+          color: #e4e4e4;
 
           .bin-description {
             max-height: 3em;
+            font-size: 0.9em;
 
             &.mobile {
               font-size: 11px;
@@ -312,6 +343,9 @@ video {
     .chat-panel-container {
       float:right;
       display: inline-block;
+      background-color: $panel-grey;
+      border-radius: 2px;
+      margin: 2px 0 2px 4px;
 
       &.mobile {
         display: none !important;
@@ -350,6 +384,7 @@ video {
 
           .no-user .glyphicon {
             font-size: 11vh;
+            color: #1f1f1f;
           }
         }
 
@@ -392,6 +427,9 @@ video {
           margin-bottom: 2px;
           padding: 4px 8px 4px 8px;
           font-size: 1.0vw;
+          background-color: #343434;
+          border: none;
+          color: #e4e4e4;
         }
 
         .buttons {
@@ -421,11 +459,12 @@ video {
 }
 
 .featherlight.info {
-  background: rgba(51, 51, 51, 0.75);
+  background: rgba(95, 95, 95, 0.9);
 
   .featherlight-content {
-    background: white;
     min-width: 60%;
+    background-color: $panel-grey;
+    border-radius: 2px;
   }
 
   .info-container {
@@ -436,19 +475,30 @@ video {
 
     .info-title {
       margin-bottom: 30px;
+      font-family: 'Raleway', sans-serif;
     }
   }
 
-  .social-option {
+  .social {
     display: flex;
     justify-content: space-between;
     width: 100%;
 
-    .share-container {
+    .share-wrapper {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+    }
+
+    .share-container, .camera-access-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 4px;
+      margin: 2px;
     }
 
     .send-link, .send-fb, .post-twitter {
@@ -462,8 +512,15 @@ video {
         margin: 0px;
       }
 
+      input {
+        color: $panel-grey;
+        border-radius: 2px;
+        border: none;
+        outline: none;
+      }
+
       .btn, input, .fb-send, .twitter-share-button {
-        margin-left: 8px;
+        margin-left: 12px;
       }
     }
   }
