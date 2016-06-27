@@ -36,6 +36,32 @@
     <%= f.file_field :logo %>
   </div>
 
+  <div class="bin-forms">
+    <% bin_posts = @bin.posts.order('post_bins.position asc') %>
+    <% (0..50).each do |i| %>
+      <div class="bin-form">
+        <p><%= i + 1 %></p>
+        <p>Create a new post</p>
+        <%= f.fields_for "posts[#{i}]" do |post| %>
+          <div class="fields">
+            <div class="field new-post-field new-post-title">
+              <%= post.text_field :title, placeholder: 'Title' %>
+            </div>
+            <div class="field new-post-field">
+              <%= post.text_field :link, placeholder: 'Link (optional)' %>
+            </div>
+            <div class="field new-post-field">
+              <%= post.number_field :duration, placeholder: 'Time until skip to next post' %>
+            </div>
+          </div>
+          <div class="new-post-textarea">
+            <%= post.text_area :text_content, placeholder: 'Text (optional)' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
