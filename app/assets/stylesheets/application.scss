@@ -110,6 +110,7 @@ input { color: $panel-grey; }
   align-items: flex-end;
   padding: 0;
   max-height: 6vh;
+  border: none;
 
   &.mobile {
     max-height: 10vh;
@@ -120,21 +121,23 @@ input { color: $panel-grey; }
     align-items: flex-end;
   }
 
+  .page-title-text {
+    display: flex;
+    padding-bottom: 4px;
+    margin-left: 4px;
+  }
+
   img {
     display: table-cell;
     max-height: 5.9vh;
-    margin-bottom: 1px;
-
     margin-left: 10px;
-    margin-right: 10px;
   }
 
   small {
     font-weight: 600;
     color: white;
-    margin-left: 10px;
     white-space: nowrap;
-    font-size: 2.2vh;
+    font-size: 2.5vh;
     margin: 0;
     font-family: 'Raleway', sans-serif;
     font-weight: 700;
@@ -143,27 +146,29 @@ input { color: $panel-grey; }
       display: none;
     }
 
+    &.lead {
+      margin-right: 6px;
+    }
+
     &.beta-red {
       color: #ff0016;
+      font-weight: 100;
+      margin-right: 25px;
     }
   }
 
-  .total-users-container {
-    font-size: 2.4vh;
-    font-weight: bold;
-    font-family: 'Raleway', sans-serif;
+  .total-users {
     color: #25aae1;
-    margin-right: 20px;
 
     @media screen and (max-width: 1140px) {
       display: none;
     }
+  }
 
-    .logout-link {
-      color: #25aae1;
-      margin-left: 20px;
-      font-size: 16px;
-    }
+  .logout-link {
+    color: #25aae1;
+    margin-left: 20px;
+    font-size: 16px;
   }
 }
 

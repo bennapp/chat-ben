@@ -101,6 +101,7 @@ video {
       z-index: 8000;
 
       overflow: hidden;
+      box-shadow: 3px 3px 10px #000;
     }
 
     &.mobile {
@@ -587,7 +588,8 @@ video {
         min-width: 100%;
         background-color: #11284a;
         border-color: #5e7088;
-        color: #d1dded;
+        color: #f6fcfe;
+        text-shadow: 2px 2px 0px black;
 
         border-style: solid;
         border-width: 1px;
@@ -595,6 +597,7 @@ video {
         &.selected-show {
           background-color: #f8f69f;
           color: #11284a;
+          text-shadow: inherit;
         }
       }
     }
@@ -620,9 +623,12 @@ video {
       width: 5em;
 
       button {
-        padding-left: 3px;
+        text-align: left;
+        padding-left: 2em;
         background-color: #92b8dd;
         color: #11284a;
+        font-weight: bolder;
+        text-shadow: inherit;
       }
     }
   }

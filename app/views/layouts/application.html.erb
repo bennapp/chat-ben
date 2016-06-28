@@ -76,8 +76,14 @@
     <div class="page-header <%= mobile_css %>">
       <div class="page-title">
         <%= link_to image_tag('chatbenTVlogo2.png'), root_url %>
-        <small class="lead">Watch the internet together!<small class="beta-red"> beta</small></small>
+
+        <div class="page-title-text">
+          <small class="beta-red">beta</small>
+          <small class="lead">Watch the internet together</small>
+          <small class="total-users" id="total-users"><%= User.where(active: true).count %></small><small class="total-users"> users on now!</small>
+        </div>
       </div>
+
       <%= render partial: 'shared/login' %>
     </div>
 

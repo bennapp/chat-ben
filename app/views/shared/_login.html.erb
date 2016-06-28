@@ -1,10 +1,7 @@
 <div class="authentication-container <%= mobile_css %>">
-  <div class="total-users-container">
-    <span id="total-users"><%= User.where(active: true).count %></span><span> users on now!</span>
-    <% if current_user %>
-        <%= link_to("Logout", destroy_user_session_path, :method => :delete, class: 'logout-link') %>
-    <% end %>
-  </div>
+  <% if current_user %>
+    <%= link_to("Logout", destroy_user_session_path, :method => :delete, class: 'logout-link') %>
+  <% end %>
 
   <% unless current_user %>
       <div class="login-and-signup-button">

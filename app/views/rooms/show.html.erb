@@ -202,7 +202,7 @@
         <% @bins.each do |bin| %>
           <tr data-guide-bin-id="<%= bin.id %>">
             <td class="headcol" data-guide-post-id="<%= bin.posts.order('post_bins.position asc').limit(1).first.try(:id) %>" title="<%= bin.title %>">
-              <button><%= "#{bin.abbreviation} #{bin.position + 1}" %></button>
+              <button><%= "#{bin.position + 1} #{bin.abbreviation}" %></button>
             </td>
           </tr>
         <% end %>
