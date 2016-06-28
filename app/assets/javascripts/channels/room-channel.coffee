@@ -55,10 +55,10 @@ class @RoomChannel
         window.matchingSwtich = (checked) =>
           @perform("set_matching", matching: checked)
 
-        $('#next-post').click nextPostClick
-        $('#prev-post').click prevPostClick
         $('#channel-up').click channelUpClick
         $('#channel-down').click channelDownClick
+        $('#prev-post').click prevPostClick
+        $('#next-post').click nextPostClick
 
       disconnected: ->
 
@@ -70,23 +70,21 @@ class @RoomChannel
           return if $('.static:not(.hidden)').length
           guideSelect(postId: data.id, binId: data.bin_id)
 
-          min = 1
-          max = 11
-          randNum = Math.floor(Math.random() * (max - min)) + min
-
-          $('.video-panel').removeClass('hidden')
           $('.embeded-content-container').remove()
 
-          $("#static#{randNum}").removeClass('hidden')
+          if @mobile != 'mobile'
+            min = 1
+            max = 11
+            randNum = Math.floor(Math.random() * (max - min)) + min
+            $('.video-panel').removeClass('hidden')
+            $("#static#{randNum}").removeClass('hidden')
+            staticVideo = document.getElementById("static#{randNum}")
+            staticVideo.volume = 0.05;
+            staticVideo.play()
 
-          staticVideo = document.getElementById("static#{randNum}")
-          staticVideo.volume = 0.05;
-
-          staticVideo.play()
-
-          $(staticVideo).bind 'ended', ->
-            $('.static').addClass('hidden')
-            $('.video-panel').addClass('hidden')
+            $(staticVideo).bind 'ended', ->
+              $('.static').addClass('hidden')
+              $('.video-panel').addClass('hidden')
 
           $like = $('#like')
           $dislike = $('#dislike')
