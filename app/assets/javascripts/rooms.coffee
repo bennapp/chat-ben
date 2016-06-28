@@ -62,6 +62,7 @@ class @RoomShow
     @reactStream.getTracks()[0].stop() if @reactStream
     @reactStream.getTracks()[1].stop() if @reactStream
     $('.reaction-panel .glow-container').remove()
+    $('.react-results-container video').remove()
     $('.react-results-container').removeClass('display-none')
     $('.react-results-container').prepend("<video style=\"width:90%;\" autoplay=\"true\" src=\"#{videoURL}\"></video>") if videoURL
     $('#reaction-preview').addClass('display-none')
@@ -244,6 +245,7 @@ class @RoomShow
         contentType: false,
         success: (data) =>
           window.addReaction($('.post-header').data('post-id'))
+          recordRTC.clearRecordedData()
 
     $('#toss-reaction').click ->
       $('#react-button').removeClass('display-none')

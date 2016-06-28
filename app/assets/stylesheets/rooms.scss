@@ -183,9 +183,14 @@ video {
     }
 
     .react-results-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
       .reaction-buttons-container{
         display: flex;
         justify-content: center;
+        margin-top: 8px;
 
         .btn {
           margin-left: 8px;
@@ -250,12 +255,12 @@ video {
         padding: 0.2em 0.1em 4px 4px;
 
         .bin-logo {
-          width: 8.5em;
-          height: 8.5em;
+          width: 15vh;
+          height: 15vh;
 
           &.mobile {
-            width: 6.5em;
-            height: 6.5em;
+            width: 12vh;
+            height: 12vh;
           }
         }
 
