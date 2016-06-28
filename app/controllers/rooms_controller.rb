@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @bins = Bin.without_deleted.includes(:posts).sort_by { |bin| bin.position }
+    @bins = Bin.without_deleted.includes(:posts).order('post_bins.position asc').order(:position)
     @post = Post.new
     @hide_footer = true
 

@@ -1,5 +1,5 @@
 class BinsController < ApplicationController
-  before_action :set_bin, only: [:show, :edit, :update, :destroy]
+  before_action :set_bin, only: [:show, :update, :destroy]
   before_action :set_post, only: [:show]
   before_action :redirect_if_non_admin, only: [:index, :emails, :new, :edit, :create, :update, :destroy]
 
@@ -8,7 +8,7 @@ class BinsController < ApplicationController
   # GET /bins
   def index
     @hide_footer = true
-    @bins = Bin.without_deleted.includes(:posts).sort_by { |bin| bin.position }
+    @bins = Bin.without_deleted.includes(:posts).order('post_bins.position asc').order(:position)
   end
 
   # GET /bins/1
@@ -39,6 +39,7 @@ class BinsController < ApplicationController
 
   # GET /bins/1/edit
   def edit
+    @bin = Bin.find(params[:id]).includes(:posts).order('post_bins.position asc')
     @hide_footer = true
     @posts = Post.without_deleted.where(bin_id: @bin.id).order(:title)
   end
@@ -70,7 +71,7 @@ class BinsController < ApplicationController
   end
 
   def emails
-    @users = User.all.sort_by { |user| user.created_at }
+    @users = User.all.order(:created_at)
     render :emails
   end
 

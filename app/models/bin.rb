@@ -29,7 +29,7 @@ class Bin < ApplicationRecord
     return unless self.position_changed?
     max_position = Bin.maximum('position')
 
-    other_bins = Bin.where.not(id: self.id).sort_by { |bin| bin.position }.to_a
+    other_bins = Bin.where.not(id: self.id).order(:position).to_a
     other_positions = (0..max_position + 1).to_a - [self.position]
 
     other_bins.each_with_index do |bin, index|

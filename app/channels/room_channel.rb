@@ -75,7 +75,7 @@ class RoomChannel < ApplicationCable::Channel
   def advance_channel(data, options = {})
     room = Room.find_by_token(params[:room])
     current_bin = Bin.find(data['bin_id'])
-    bins = Bin.without_deleted.includes(:posts).sort_by { |bin| bin.position }.to_a
+    bins = Bin.without_deleted.includes(:posts).order('post_bins.position asc').order(:position).to_a
 
     current_bin_index = bins.index(current_bin)
 
@@ -90,7 +90,7 @@ class RoomChannel < ApplicationCable::Channel
       bin = bin.first
     end
 
-    posts = bin.posts.order('post_bins.position asc').to_a
+    posts = bin.posts.to_a
     post = posts.first
 
     options = generate_post_options(post, room, bin, data['from_token'])
