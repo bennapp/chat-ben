@@ -1,5 +1,5 @@
 $container-margin: 20px;
-$panel-grey: rgba(30, 30, 30, 1);
+$panel-grey: rgba(30, 30, 30, 0.8);
 
 .red-glow {
   display: block;
@@ -106,11 +106,11 @@ $panel-grey: rgba(30, 30, 30, 1);
           margin: 0 10px 10px 10px;
           background: $panel-grey;
           border-radius: 2px;
-
           color: inherit;
 
           &:hover {
             text-decoration: none;
+            background-color: rgba(50, 50, 50, 0.8);
           }
         }
 

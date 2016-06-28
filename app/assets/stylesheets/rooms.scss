@@ -1,4 +1,4 @@
-$panel-grey: rgba(30, 30, 30, 1);
+$panel-grey: rgba(30, 30, 30, 0.8);
 
 .volume_bar {
   position: absolute;
@@ -33,7 +33,7 @@ video {
 
   .content-panel-reactions-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: stretch;
     width: 100%;
     position: relative;
@@ -45,15 +45,18 @@ video {
   }
 
   .video-panel {
-    height: 59vh;
-    width: 105vh;
+    height: 57vh;
+    width: 99vh;
+    margin-top: 5vh;
+    margin-left: -1vh;
+
     max-width: 100%;
     background-color: $panel-grey;
     border-radius: 2px;
 
     position: absolute;
     top: 0px;
-    z-index: 9999999;
+    z-index: 88888;
 
     .static {
       max-width: 100%;
@@ -61,16 +64,42 @@ video {
   }
 
   .content-panel {
-    height: 59vh;
-    width: 105vh;
+    height: 56vh;
+    width: 93vh;
+    margin-top: 5vh;
+    margin-bottom: 3vh;
+    margin-left: 10vh;
     max-width: 100%;
-    margin: 0 auto;
+
     background-color: $panel-grey;
     border-radius: 2px;
+
+    &:not(.mobile):before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+
+      border-radius: 6px;
+
+      display: block;
+      background-image: image-url("old_tv_empty_screen_wide_taller_carved.png");
+      background-size: cover;
+
+      height: 64vh;
+      width: 121vh;
+      margin-top: -5vh;
+      margin-left: -5vh;
+
+      pointer-events: none;
+      z-index: 99999;
+
+      overflow: hidden;
+    }
 
     &.mobile {
       height: auto;
       width: 100%;
+      margin: 0;
     }
 
     a.preview {
@@ -97,8 +126,8 @@ video {
     }
 
     .embeded-content-container {
-      height: 59vh;
-      max-height: 59vh;
+      height: 56vh;
+      max-height: 56vh;
       display: flex;
       flex-direction: column;
       border-radius: 4px;
@@ -133,7 +162,7 @@ video {
   }
 
   .reaction-panel {
-    width: 30vw;
+    width: 22vw;
 
     #reaction-preview {
       width: 90%;

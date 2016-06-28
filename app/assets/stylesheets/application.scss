@@ -29,19 +29,13 @@ body:before {
   z-index: -1;
 
   display: block;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), image-url("static2.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), image-url("wood.jpg");
   background-size:cover;
   width: 102%;
   height: 102%;
 
   overflow: hidden;
   margin: -10px -5px -5px -10px;
-
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px);
 }
 
 .btn {
