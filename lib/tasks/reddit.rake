@@ -71,6 +71,9 @@ namespace :reddit do
         { name: '/r/funny', abbreviation: 'FUNNY' },
         { name: '/r/rickandmorty', abbreviation: 'RICKM' },
         { name: '/r/SiliconValleyHBO', abbreviation: 'SVHBO' },
+        { name: '/r/soundcloud', abbreviation: 'SC' },
+        { name: '/r/bestofsoundcloud', abbreviation: 'BSC' },
+        { name: '/r/pics', abbreviation: 'PICS' },
     ]
 
     if args[:subreddits].present?
@@ -93,8 +96,7 @@ namespace :reddit do
         post = Post.find_or_create_by(title: domain_link.title, link: domain_link.url)
         #after a while I can move bin_id into the find or create by
         post.update_attributes({ reddit_link_id: domain_link.id, bin_id: bin.id }) if post.reddit_link_id != domain_link.id || bin.id != post.bin_id
-        
-        link_data << {link: domain_link, post: post, subreddit_name: subreddit[:name], bin: bin} if index < 4
+        link_data << { link: domain_link, post: post, subreddit_name: subreddit[:name], bin: bin } if index < 4
 
         post.id
       end
@@ -127,6 +129,96 @@ namespace :reddit do
           retry
         end
       end
+    end
+  end
+
+  task set_position: :environment do
+    desired_bin_positions = [
+      [6, "Chat Ben On", "CBTV"],
+      [24, "/r/Videos", "RVIDS"],
+      [39, "/r/gifs", "GIFS"],
+      [26, "/r/Unexpected", "U!"],
+      [77, "/r/funny", "FUNNY"],
+      [35, "/r/woahdude", "WOAH"],
+      [65, "/r/PlayItAgainSam", "PIAGS"],
+      [27, "/r/YoutubeHaiku", "YH"],
+      [14, "Full Length Films", "FLIX"],
+      [17, "/r/FullMoviesOnYouTube", "FMOYT"],
+
+      [53, "/r/Music", "RMTV"],
+      [54, "/r/ListenToThis", "LTT"],
+
+      [78, "/r/rickandmorty", "RICKM"],
+      [62, "/r/robotchicken", "RC"],
+      [61, "/r/adultswim", "AS"],
+      [33, "/r/WoahTube", "WT"],
+      [21, "/r/DeepIntoYouTube", "DEEP"],
+
+      [16, "/r/Dota2", "DOTA"],
+      [36, "/r/LeagueOfLegends", "LOL"],
+      [37, "/r/LOLStreams", "LOLS"],
+      [58, "Overwatch Livestream", "OVRW"],
+      [59, "Counter-Strike: Global Offensive", "CS"],
+      [60, "Minecraft TV", "MINE"],
+
+      [52, "/r/HipHopHeads", "HPHPH"],
+      [55, "/r/ElectronicMusic", "EMTV"],
+      [56, "/r/ClassicalMusic", "CMTV"],
+      [57, "Sound Cloud Friends", "SCF"],
+      [7, "Music TV", "CBMTV"],
+
+      [38, "/r/See", "WEED"],
+      [51, "/r/trees", "TREES"],
+      [43, "/r/drunk", "DRUNK"],
+
+      [45, "/r/EarthPorn", "EP"],
+      [75, "/r/itookapicture", "IPICT"],
+      [25, "/r/360video", "V360"],
+      [9, "Science, Nature, Tech", "SCI"],
+      [76, "/r/RoomPorn", "ROOM"],
+      [29, "/r/curiousvideos", "CV"],
+      [28, "/r/ArtisanVideos", "AV"],
+
+      [63, "/r/ShortFilms", "SF"],
+      [40, "/r/trailers", "TRAIL"],
+      [13, "Netflix and Chill", "NFLX"],
+
+      [70, "/r/baseball", "BB"],
+      [71, "/r/soccer", "FC"],
+      [72, "/r/NFL", "NFL"],
+      [11, "Sports Central", "SPORT"],
+
+      [12, "DO IT LIVE TV!", "LIVE"],
+      [73, "/r/news", "NEWS"],
+      [15, "\"News\" and Politics", "NEWS"],
+      [46, "/r/PoliticalVideo", "PV"],
+
+      [68, "/r/television", "RTELE"],
+      [18, "/r/SiliconValleyHBO", "SVHBO"],
+
+      [31, "/r/Lectures", "LCTR"],
+      [32, "/r/Documentaries", "DOC"],
+
+      [30, "/r/cookingvideos", "COOK"],
+      [74, "/r/food", "FOOD"],
+
+      [66, "/r/fifthworldvideos", "FWV"],
+      [48, "/r/NotTimAndEric", "NTAE"],
+      [49, "/r/InterdimensionalCable", "IC"],
+      [50, "/r/CommercialCuts", "COMC"],
+      [67, "/r/UNEXPECTEDTHUGLIFE", "UTL"],
+
+      [69, "/r/mealtimevideos", "NOMTV"],
+      [64, "/r/FunniestVideos", "FV"],
+
+      [8, "Comedy Center", "HAHA"],
+      [10, "Yourtube", "U-TUBE"],
+      [20, "Extreme Energy and Food", "EXT"],
+    ]
+
+    desired_bin_positions.each_with_index do |bin_info, index|
+      bin = Bin.where(abbreviation: bin_info.last).first
+      bin.update_column(:position, index) if bin
     end
   end
 
