@@ -139,28 +139,40 @@ namespace :reddit do
       [39, "/r/gifs", "GIFS"],
       [26, "/r/Unexpected", "U!"],
       [77, "/r/funny", "FUNNY"],
+
       [35, "/r/woahdude", "WOAH"],
       [65, "/r/PlayItAgainSam", "PIAGS"],
       [27, "/r/YoutubeHaiku", "YH"],
+      [63, "/r/ShortFilms", "SF"],
+      [40, "/r/trailers", "TRAIL"],
+      [13, "Netflix and Chill", "NFLX"],
       [14, "Full Length Films", "FLIX"],
       [17, "/r/FullMoviesOnYouTube", "FMOYT"],
 
-      [53, "/r/Music", "RMTV"],
+      [8, "Comedy Center", "HAHA"],
+
       [54, "/r/ListenToThis", "LTT"],
+      [53, "/r/Music", "RMTV"],
 
       [78, "/r/rickandmorty", "RICKM"],
+      [49, "/r/InterdimensionalCable", "IC"],
       [62, "/r/robotchicken", "RC"],
       [61, "/r/adultswim", "AS"],
       [33, "/r/WoahTube", "WT"],
+      [10, "Yourtube", "U-TUBE"],
       [21, "/r/DeepIntoYouTube", "DEEP"],
 
       [16, "/r/Dota2", "DOTA"],
       [36, "/r/LeagueOfLegends", "LOL"],
       [37, "/r/LOLStreams", "LOLS"],
+      [79, "Hearthstone", "HS"],
+      [80, "League of Legends - Twitch", "LOLT"],
       [58, "Overwatch Livestream", "OVRW"],
       [59, "Counter-Strike: Global Offensive", "CS"],
       [60, "Minecraft TV", "MINE"],
 
+      [81, "/r/soundcloud", "SC"],
+      [82, "/r/bestofsoundcloud", "BSC"],
       [52, "/r/HipHopHeads", "HPHPH"],
       [55, "/r/ElectronicMusic", "EMTV"],
       [56, "/r/ClassicalMusic", "CMTV"],
@@ -172,16 +184,13 @@ namespace :reddit do
       [43, "/r/drunk", "DRUNK"],
 
       [45, "/r/EarthPorn", "EP"],
+      [83, "/r/pics", "PICS"],
       [75, "/r/itookapicture", "IPICT"],
       [25, "/r/360video", "V360"],
       [9, "Science, Nature, Tech", "SCI"],
       [76, "/r/RoomPorn", "ROOM"],
       [29, "/r/curiousvideos", "CV"],
       [28, "/r/ArtisanVideos", "AV"],
-
-      [63, "/r/ShortFilms", "SF"],
-      [40, "/r/trailers", "TRAIL"],
-      [13, "Netflix and Chill", "NFLX"],
 
       [70, "/r/baseball", "BB"],
       [71, "/r/soccer", "FC"],
@@ -202,18 +211,15 @@ namespace :reddit do
       [30, "/r/cookingvideos", "COOK"],
       [74, "/r/food", "FOOD"],
 
-      [66, "/r/fifthworldvideos", "FWV"],
-      [48, "/r/NotTimAndEric", "NTAE"],
-      [49, "/r/InterdimensionalCable", "IC"],
-      [50, "/r/CommercialCuts", "COMC"],
-      [67, "/r/UNEXPECTEDTHUGLIFE", "UTL"],
+      [20, "Extreme Energy and Food", "EXT"],
 
       [69, "/r/mealtimevideos", "NOMTV"],
       [64, "/r/FunniestVideos", "FV"],
 
-      [8, "Comedy Center", "HAHA"],
-      [10, "Yourtube", "U-TUBE"],
-      [20, "Extreme Energy and Food", "EXT"],
+      [67, "/r/UNEXPECTEDTHUGLIFE", "UTL"],
+      [66, "/r/fifthworldvideos", "FWV"],
+      [48, "/r/NotTimAndEric", "NTAE"],
+      [50, "/r/CommercialCuts", "COMC"],
     ]
 
     desired_bin_positions.each_with_index do |bin_info, index|
