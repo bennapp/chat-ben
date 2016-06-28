@@ -165,6 +165,20 @@ video {
       overflow-y: scroll;
     }
 
+    .gfycat-wrapper {
+      position:relative;
+      width: 93vh;
+      height: 56vh;
+    }
+
+    .gfycat-iframe {
+      position:absolute;
+      top:0;
+      left:0;
+      width: 100%;
+      height: 100%;
+    }
+
     .embeded-content-wrapper.imgur {
       iframe {
         border: 0;

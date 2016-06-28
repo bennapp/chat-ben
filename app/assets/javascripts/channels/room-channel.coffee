@@ -176,7 +176,7 @@ class @RoomChannel
             else if data.format_type == 'gfycat'
               $('.embeded-content-container').removeClass('embed-responsive-16by9')
               $('.embeded-content-container').removeClass('embed-responsive')
-              $wrapper.append("<div class='gfyitem' data-id='#{data.format_link}'></div>")
+              $wrapper.append("<div class=\"gfycat-wrapper\"><iframe class=\"gfycat-iframe\" src='https://gfycat.com/ifr/#{data.format_link}' allowfullscreen></iframe></div>")
               gfyCollection.init()
             else if data.format_type == 'giphy'
               $wrapper.append("<iframe src=\"//giphy.com/embed/#{data.format_link}?html5=true\" frameBorder=\"0\" class=\"giphy-embed\" allowFullScreen></iframe>")
