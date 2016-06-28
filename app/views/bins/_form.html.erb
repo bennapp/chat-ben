@@ -41,7 +41,8 @@
     <% (0..50).each do |i| %>
       <div class="bin-form">
         <p><%= i + 1 %></p>
-        <p>Create a new post</p>
+        <%= f.collection_select(:post_ids, @posts, :id, :id_with_title, { include_blank: 'None', selected: bin_posts[i].try(:id) }, { name: "bin[post_ids][#{i}]" }) %>
+        <p> Or create a new post</p>
         <%= f.fields_for "posts[#{i}]" do |post| %>
           <div class="fields">
             <div class="field new-post-field new-post-title">

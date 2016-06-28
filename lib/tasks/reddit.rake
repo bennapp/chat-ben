@@ -91,7 +91,9 @@ namespace :reddit do
 
       new_post_ids = domain_links.each_with_index.map do |domain_link, index|
         post = Post.find_or_create_by(title: domain_link.title, link: domain_link.url)
-        post.update_attribute(:reddit_link_id, domain_link.id) if post.reddit_link_id != domain_link.id
+        #after a while I can move bin_id into the find or create by
+        post.update_attributes({ reddit_link_id: domain_link.id, bin_id: bin.id }) if post.reddit_link_id != domain_link.id || bin.id != post.bin_id
+        
         link_data << {link: domain_link, post: post, subreddit_name: subreddit[:name], bin: bin} if index < 4
 
         post.id
