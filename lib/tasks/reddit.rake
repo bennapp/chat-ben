@@ -52,6 +52,25 @@ namespace :reddit do
         { name: '/r/ListenToThis', abbreviation: 'LTT' },
         { name: '/r/ElectronicMusic', abbreviation: 'EMTV' },
         { name: '/r/ClassicalMusic', abbreviation: 'CMTV' },
+        { name: '/r/adultswim', abbreviation: 'AS' },
+        { name: '/r/robotchicken', abbreviation: 'RC' },
+        { name: '/r/ShortFilms', abbreviation: 'SF' },
+        { name: '/r/FunniestVideos', abbreviation: 'FV' },
+        { name: '/r/PlayItAgainSam', abbreviation: 'PIAGS' },
+        { name: '/r/fifthworldvideos', abbreviation: 'FWV' },
+        { name: '/r/UNEXPECTEDTHUGLIFE', abbreviation: 'UTL' },
+        { name: '/r/television', abbreviation: 'RTELE' },
+        { name: '/r/mealtimevideos', abbreviation: 'NOMTV' },
+        { name: '/r/baseball', abbreviation: 'BB' },
+        { name: '/r/soccer', abbreviation: 'FC' },
+        { name: '/r/NFL', abbreviation: 'NFL' },
+        { name: '/r/news', abbreviation: 'NEWS' },
+        { name: '/r/food', abbreviation: 'FOOD' },
+        { name: '/r/itookapicture', abbreviation: 'IPICT' },
+        { name: '/r/RoomPorn', abbreviation: 'ROOM' },
+        { name: '/r/funny', abbreviation: 'FUNNY' },
+        { name: '/r/rickandmorty', abbreviation: 'RICKM' },
+        { name: '/r/SiliconValleyHBO', abbreviation: 'SVHBO' },
     ]
 
     if args[:subreddits].present?
@@ -63,19 +82,23 @@ namespace :reddit do
 
     subreddits.each do |subreddit|
       subreddit_name = subreddit[:name].gsub('/r/', '')
-      links = client.links subreddit_name, category: 'hot'
+      links = client.links subreddit_name, category: 'hot', limit: 100
       domain_links = links.select { |link| supported_domains.include?(link.domain) }
+      domain_links = domain_links.take(25)
 
       bin = Bin.find_or_create_by(title: subreddit[:name])
       bin.update_attribute(:abbreviation, subreddit[:abbreviation]) unless bin.abbreviation == subreddit[:abbreviation]
 
-      new_posts_attributes = domain_links.each_with_index.map do |domain_link, index|
+      new_post_ids = domain_links.each_with_index.map do |domain_link, index|
         post = Post.find_or_create_by(title: domain_link.title, link: domain_link.url)
         post.update_attribute(:reddit_link_id, domain_link.id) if post.reddit_link_id != domain_link.id
         link_data << {link: domain_link, post: post, subreddit_name: subreddit[:name], bin: bin} if index < 4
 
-        {'id' => post.id}
+        post.id
       end
+
+      exisiting_ids = bin.posts.order('post_bins.position asc').pluck('posts.id')
+      new_posts_attributes = new_post_ids.concat(exisiting_ids).uniq.take(100).map { |post_id| {'id' => post_id } }
 
       bin.posts_attributes = new_posts_attributes
       bin.save!
