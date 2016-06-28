@@ -13,7 +13,8 @@
       },
       events: {
         'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onStateChange': onPlayerStateChange,
+        'onError': onPlayerError
       }
     });
   }
@@ -34,5 +35,9 @@
     if (event.target.getPlayerState() === 0){
       window.nextPost();
     }
+  }
+
+  function onPlayerError(event) {
+    window.nextPost();
   }
 </script>

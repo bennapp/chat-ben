@@ -213,6 +213,9 @@ class @RoomChannel
                 if event.target.getPlayerState() == 0
                   window.nextPost()
 
+              onPlayerError = (event) ->
+                window.nextPost()
+
               if YT
                 player = new (YT.Player)('ytplayer',
                   height: '720'
@@ -220,14 +223,14 @@ class @RoomChannel
                   playerVars:
                     start: data.start_time
                   videoId: data.format_link
-                  events: 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange)
+                  events: 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': onPlayerError)
               else
                 window.onYouTubeIframeAPIReady = ->
                   player = new (YT.Player)('ytplayer',
                     height: '720'
                     width: '1280'
                     videoId: data.format_link
-                    events: 'onReady': onPlayerReady)
+                    events: 'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange, 'onError': onPlayerError)
             else if data.format_type == 'twitch'
               $wrapper.append("<div id=\"twitchplayer\"></div>")
               success = ->
