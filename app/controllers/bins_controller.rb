@@ -102,12 +102,8 @@ class BinsController < ApplicationController
   def bin_params
     @params ||= begin
       request_params = params.require(:bin).permit(:title, :abbreviation, :description, :position, :logo, :post_ids => (0..50).to_a.map(&:to_s), :posts => [:title, :link, :duration, :text_content] )
-      post_ids = request_params['post_ids'].values
-      request_params.delete('post_ids')
       posts = request_params['posts'].values
       request_params.delete('posts')
-
-      posts.each_with_index { |post, index| post['id'] = post_ids[index] }
       request_params['posts_attributes'] = posts
       request_params
     end
