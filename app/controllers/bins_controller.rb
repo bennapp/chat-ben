@@ -34,7 +34,7 @@ class BinsController < ApplicationController
   def new
     @hide_footer = true
     @bin = Bin.new
-    @posts = Post.without_deleted.where(bin_id: @bin.id).order(:title)
+    @posts = []
   end
 
   # GET /bins/1/edit
