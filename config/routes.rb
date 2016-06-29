@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   get '/new_chat', to: 'posts#new_chat'
   resources :posts
+  resources :bins, path: 'channel'
   resources :bins
 
   resources :reactions, only: [:index]
