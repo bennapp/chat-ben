@@ -39,7 +39,7 @@ class BinsController < ApplicationController
 
   # GET /bins/1/edit
   def edit
-    @bin = Bin.find(params[:id]).includes(:posts).order('post_bins.position asc')
+    @bin = Bin.includes(:posts).order('post_bins.position asc').find(params[:id])
     @hide_footer = true
     @posts = Post.without_deleted.where(bin_id: @bin.id).order(:title)
   end
