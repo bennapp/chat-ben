@@ -124,14 +124,13 @@ class @RoomChannel
 
           $('.posted-by').text(data.posted_by)
 
+          clearTimeout(window.durationTimeout)
           if data.duration
-            clearTimeout(window.durationTimeout)
             window.durationTimeout = setTimeout (->
               window.nextPost()
               return
             ), data.duration * 1000
           else if data.format_type != 'youtube' && data.format_type != 'vimeo' && data.format_type != 'twitch' && data.format_type != 'soundcloud'
-            clearTimeout(window.durationTimeout)
             window.durationTimeout = setTimeout (->
               window.nextPost()
               return
