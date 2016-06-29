@@ -138,7 +138,6 @@ namespace :reddit do
 
   task set_position: :environment do
     desired_bin_positions = [
-      [
         [6, "Chat Ben On", "CBTV"],
         [24, "/r/Videos", "RVIDS"],
         [39, "/r/gifs", "GIFS"],
