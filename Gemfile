@@ -29,6 +29,7 @@ gem 'browser'
 gem 'zeroclipboard-rails'
 
 gem 'redditkit', '~> 1.0.1'
+gem 'twitch', '~> 0.1.0'
 
 group :production do
   gem 'autoprefixer-rails', '~> 6.3'

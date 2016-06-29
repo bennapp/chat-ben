@@ -127,7 +127,7 @@ class @RoomShow
       when 'chatting'
         "You are chatting with #{@otherPeer.nick || 'someone'}"
       when 'ending'
-        "Your conversation with #{@otherPeer.nick || 'somone'} has ended"
+        "Your conversation with #{@otherPeer.nick || 'someone'} has ended"
       else
         ""
 
