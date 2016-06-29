@@ -63,9 +63,19 @@ class RoomChannel < ApplicationCable::Channel
         next_post_index = current_post_index + 1
       end
 
-      post = posts[next_post_index % posts.size]
-    else
-      post = posts.first
+      post = posts[next_post_index]
+    end
+
+    if post.nil?
+      if options[:prev_post] == true
+        bin = Bin.where(position: bin.position - 1).first
+        bin = Bin.first if bin.nil?
+        post = bin.posts.order('post_bins.position asc').last
+      else
+        bin = Bin.where(position: bin.position + 1).first
+        bin = Bin.first if bin.nil?
+        post = bin.posts.order('post_bins.position asc').limit(1).first
+      end
     end
 
     options = generate_post_options(post, room, bin, data['from_token'])
@@ -75,9 +85,7 @@ class RoomChannel < ApplicationCable::Channel
   def advance_channel(data, options = {})
     room = Room.find_by_token(params[:room])
     current_bin = Bin.find(data['bin_id'])
-    bins = Bin.without_deleted.includes(:posts).order('post_bins.position asc').order(:position).to_a
-
-    current_bin_index = bins.index(current_bin)
+    current_bin_index = current_bin.position
 
     if current_bin_index
       if options[:down] == true
@@ -85,14 +93,13 @@ class RoomChannel < ApplicationCable::Channel
       else
         next_bin_index = current_bin_index - 1
       end
-      bin = bins[next_bin_index % bins.size]
-    else
-      bin = bin.first
+
+      bin = Bin.where(position: next_bin_index).first
     end
 
-    posts = bin.posts.to_a
-    post = posts.first
+    bin = bin.first if bin.nil?
 
+    post = bin.posts.order('post_bins.position asc').limit(1).first
     options = generate_post_options(post, room, bin, data['from_token'])
     ActionCable.server.broadcast("room_#{params[:room]}", options)
   end
