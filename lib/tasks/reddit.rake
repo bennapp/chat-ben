@@ -74,11 +74,11 @@ namespace :reddit do
         { name: '/r/soundcloud', abbreviation: 'SC' },
         { name: '/r/bestofsoundcloud', abbreviation: 'BSC' },
         { name: '/r/pics', abbreviation: 'PICS' },
-        
+
         { name: '/r/Minecraft', abbreviation: 'RMINE' },
         { name: '/r/HearthStone', abbreviation: 'RHS' },
         { name: '/r/Overwatch', abbreviation: 'ROVRW' },
-        { name: 'r/CounterStrike', abbreviation: 'RCS' },
+        { name: '/r/CounterStrike', abbreviation: 'RCS' },
     ]
 
     if args[:subreddits].present?
