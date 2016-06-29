@@ -94,7 +94,7 @@ namespace :reddit do
       domain_links = domain_links.take(25)
 
       bin = Bin.find_or_create_by(title: subreddit[:name])
-      bin.update_attribute(:abbreviation, subreddit[:abbreviation]) unless bin.abbreviation == subreddit[:abbreviation]
+      bin.update_attribute(:abbreviation, subreddit[:abbreviation]) if bin.abbreviation.nil?
 
       new_post_ids = domain_links.each_with_index.map do |domain_link, index|
         post = Post.find_or_create_by(title: domain_link.title, link: domain_link.url)
@@ -139,90 +139,103 @@ namespace :reddit do
   task set_position: :environment do
     desired_bin_positions = [
         [6, "Chat Ben On", "CBTV"],
-        [24, "/r/Videos", "RVIDS"],
-        [39, "/r/gifs", "GIFS"],
-        [26, "/r/Unexpected", "U!"],
-        [77, "/r/funny", "FUNNY"],
-        [35, "/r/woahdude", "WOAH"],
-        [65, "/r/PlayItAgainSam", "PIAGS"],
-        [27, "/r/YoutubeHaiku", "YH"],
-        [63, "/r/ShortFilms", "SF"],
+        [24, "/r/Videos", "VIDS"],
+        [27, "/r/YoutubeHaiku", "UHAIKU"],
+        [33, "/r/WoahTube", "WOAH"],
+        [64, "/r/FunniestVideos", "FUNNY"],
+        [65, "/r/PlayItAgainSam", "PLAY"],
+
+        [8, "Comedy Center", "HAHA"],
+        [17, "/r/FullMoviesOnYouTube", "FULLMOV"],
         [40, "/r/trailers", "TRAIL"],
         [13, "Netflix and Chill", "NFLX"],
+
+        [39, "/r/gifs", "GIFS"],
+        [26, "/r/Unexpected", "UNEXPECT"],
+        [77, "/r/funny", "RFUNNY"],
+        [35, "/r/woahdude", "WOAHDUDE"],
+
+        [63, "/r/ShortFilms", "SRTFILM"],
         [14, "Full Length Films", "FLIX"],
-        [17, "/r/FullMoviesOnYouTube", "FMOYT"],
-        [8, "Comedy Center", "HAHA"],
-        [54, "/r/ListenToThis", "LTT"],
-        [53, "/r/Music", "RMTV"],
+
         [78, "/r/rickandmorty", "RICKM"],
-        [49, "/r/InterdimensionalCable", "IC"],
-        [62, "/r/robotchicken", "RC"],
-        [61, "/r/adultswim", "AS"],
-        [33, "/r/WoahTube", "WT"],
-        [10, "Yourtube", "U-TUBE"],
+        [49, "/r/InterdimensionalCable", "ICABLE"],
+        [62, "/r/robotchicken", "ROBOTC"],
+        [61, "/r/adultswim", "ADLTSWIM"],
+
+        [10, "Yourtube", "UTUBE"],
         [21, "/r/DeepIntoYouTube", "DEEP"],
 
         [16, "/r/Dota2", "DOTA"],
         [84, "Dota 2 Streams", "DOTAS"],
         [36, "/r/LeagueOfLegends", "LOL"],
         [80, "League of Legends Streams", "LOLS"],
-        [86, "/r/HearthStone", "RHS"],
-        [79, "Hearthstone Streams", "HS"],
-        [87, "/r/Overwatch", "ROVRW"],
-        [58, "Overwatch Streams", "OVRW"],
-        [88, "/r/CounterStrike", "RCS"],
-        [59, "Counter-Strike: Global Offensive Streams", "CS"],
-        [85, "/r/Minecraft", "RMINE"],
-        [60, "Minecraft Streams", "MINE"],
+        [86, "/r/HearthStone", "HEARTH"],
+        [79, "Hearthstone Streams", "HEARTHS"],
+        [87, "/r/Overwatch", "OVRWTCH"],
+        [58, "Overwatch Streams", "OVRWTCHS"],
+        [88, "/r/CounterStrike", "CS"],
+        [59, "Counter-Strike: Global Offensive Streams", "CSS"],
+        [85, "/r/Minecraft", "MINE"],
+        [60, "Minecraft Streams", "MINES"],
 
-        [81, "/r/soundcloud", "SC"],
-        [82, "/r/bestofsoundcloud", "BSC"],
-        [52, "/r/HipHopHeads", "HPHPH"],
-        [55, "/r/ElectronicMusic", "EMTV"],
-        [41, "/r/HighQualityGifs", "HQGFS"],
-        [56, "/r/ClassicalMusic", "CMTV"],
-        [42, "/r/reactiongifs", "RG"],
-        [57, "Sound Cloud Friends", "SCF"],
+        [53, "/r/Music", "MUSIC"],
+        [54, "/r/ListenToThis", "LISTEN"],
+        [81, "/r/soundcloud", "SOUNDC"],
+        [82, "/r/bestofsoundcloud", "BSOUNDC"],
+        [52, "/r/HipHopHeads", "HIPHOP"],
+        [55, "/r/ElectronicMusic", "EDM"],
+        [56, "/r/ClassicalMusic", "CLASSM"],
+        [57, "Sound Cloud Friends", "SOUNDCF"],
         [7, "Music TV", "CBMTV"],
+
+        [41, "/r/HighQualityGifs", "HQGIFS"],
+        [42, "/r/reactiongifs", "REACTGIF"],
+
         [38, "/r/See", "WEED"],
         [51, "/r/trees", "TREES"],
         [43, "/r/drunk", "DRUNK"],
-        [45, "/r/EarthPorn", "EP"],
+
+        [45, "/r/EarthPorn", "EARTH"],
         [83, "/r/pics", "PICS"],
         [75, "/r/itookapicture", "IPICT"],
         [25, "/r/360video", "V360"],
+
         [9, "Science, Nature, Tech", "SCI"],
-        [76, "/r/RoomPorn", "ROOM"],
-        [29, "/r/curiousvideos", "CV"],
-        [28, "/r/ArtisanVideos", "AV"],
-        [70, "/r/baseball", "BB"],
-        [71, "/r/soccer", "FC"],
+        [76, "/r/RoomPorn", "ROOMS"],
+        [29, "/r/curiousvideos", "CURIOUS"],
+        [28, "/r/ArtisanVideos", "ARTISAN"],
+
+        [70, "/r/baseball", "BASEBALL"],
+        [71, "/r/soccer", "SOCCER"],
         [72, "/r/NFL", "NFL"],
-        [11, "Sports Central", "SPORT"],
+
+        [11, "Sports Central", "SPORTS"],
         [12, "DO IT LIVE TV!", "LIVE"],
-        [15, "\"News\" and Politics", "NEWS"],
-        [46, "/r/PoliticalVideo", "PV"],
-        [68, "/r/television", "RTELE"],
+        [46, "/r/PoliticalVideo", "POLI"],
+        [15, "\"News\" and Politics", "NEWSP"],
+        [73, "/r/news", "NEWS"],
+
+        [68, "/r/television", "TELE"],
         [18, "/r/SiliconValleyHBO", "SVHBO"],
-        [31, "/r/Lectures", "LCTR"],
-        [32, "/r/Documentaries", "DOC"],
+        [31, "/r/Lectures", "LECTURE"],
+        [32, "/r/Documentaries", "DOCS"],
         [30, "/r/cookingvideos", "COOK"],
         [74, "/r/food", "FOOD"],
 
         [20, "Extreme Energy and Food", "EXT"],
         [66, "/r/fifthworldvideos", "FWV"],
-        [48, "/r/NotTimAndEric", "NTAE"],
-        [50, "/r/CommercialCuts", "COMC"],
+        [48, "/r/NotTimAndEric", "TIMERIC"],
+        [50, "/r/CommercialCuts", "COMCUTS"],
 
         [69, "/r/mealtimevideos", "NOMTV"],
-        [64, "/r/FunniestVideos", "FV"],
-        [67, "/r/UNEXPECTEDTHUGLIFE", "UTL"],
-        [73, "/r/news", "NEWS"],
+        [67, "/r/UNEXPECTEDTHUGLIFE", "THUG"],
     ]
 
     desired_bin_positions.each_with_index do |bin_info, index|
       bin = Bin.where(id: bin_info.first).first
       bin.update_column(:position, index) if bin
+      bin.update_column(:abbreviation, bin_info.last) if bin
     end
   end
 

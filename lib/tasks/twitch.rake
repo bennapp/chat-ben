@@ -25,7 +25,7 @@ namespace :twitch do
 
     games.each do |game|
       bin = Bin.find_or_create_by(title: game[:bin_title])
-      bin.update_attribute(:abbreviation, game[:abbreviation]) unless bin.abbreviation == game[:abbreviation]
+      bin.update_attribute(:abbreviation, game[:abbreviation]) if bin.abbreviation.nil?
 
       streams = @twitch.streams(game: game[:twitch_name])[:body]["streams"]
 
