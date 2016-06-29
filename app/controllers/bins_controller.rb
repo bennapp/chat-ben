@@ -96,7 +96,7 @@ class BinsController < ApplicationController
       end
     end
 
-    @post = @bin.posts.first if @post.nil?
+    @post = @bin.posts.order('post_bins.position asc').first if @post.nil?
   end
 
   # Only allow a trusted parameter "white list" through.
