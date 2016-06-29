@@ -134,7 +134,7 @@ class @RoomChannel
             window.durationTimeout = setTimeout (->
               window.nextPost()
               return
-            ), 30000
+            ), 45000
 
           $container = $('.content-panel')
 
