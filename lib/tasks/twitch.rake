@@ -30,7 +30,7 @@ namespace :twitch do
       streams = @twitch.streams(game: game[:twitch_name])[:body]["streams"]
 
       new_post_attributes = streams.map do |stream|
-        post_id = Post.find_or_create_by(title: stream["channel"]["name"], link: stream["channel"]["url"], bin_id: bin.id).id
+        post_id = Post.find_or_create_by(title: "#{stream["channel"]["name"]} - #{stream["channel"]["status"]}", link: stream["channel"]["url"], bin_id: bin.id).id
 
         {'id' => post_id }
       end
