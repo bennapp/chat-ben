@@ -597,7 +597,7 @@ video {
         align-items: center;
         justify-content: space-between;
         padding: 8px;
-        min-width: 18em;
+        min-width: 20em;
 
         .alert {
           margin-bottom: 2px;
@@ -638,8 +638,16 @@ video {
             font-size: 0.9em;
           }
 
-          .btn, .switch-container, .info-helper, input {
+          .info-helper, input, .social-button {
             margin-left: 6px;
+          }
+
+          .btn-fb {
+            background-color: #3b5998;
+          }
+
+          .bt-twitter {
+            background-color: #1da1f2;
           }
         }
       }
