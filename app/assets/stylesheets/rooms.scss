@@ -610,6 +610,16 @@ video {
 
         .buttons {
           margin-bototm: 2px;
+
+          .btn-default {
+            color: #333;
+
+            &:hover {
+              color: #333;
+              background-color: #969696;
+              border-color: #969696;
+            }
+          }
         }
 
         .invite-friends {
@@ -621,11 +631,14 @@ video {
             margin: 0px;
           }
 
-          label {
-            margin-bottom: 0px;
+          input {
+            border-radius: 4px;
+            height: 22px;
+            width: 7vw;
+            font-size: 0.9em;
           }
 
-          .btn, .switch-container, .info-helper {
+          .btn, .switch-container, .info-helper, input {
             margin-left: 6px;
           }
         }

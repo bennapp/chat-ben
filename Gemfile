@@ -26,7 +26,6 @@ gem 'paperclip', '~> 4.3'
 gem 'paperclip-av-transcoder', '~> 0.6'
 
 gem 'browser'
-gem 'zeroclipboard-rails'
 
 gem 'redditkit', '~> 1.0.1'
 gem 'twitch', '~> 0.1.0'

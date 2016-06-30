@@ -199,17 +199,16 @@
 
           <div class="buttons">
             <div class="control-buttons invisible">
-              <button id="mute-microphone-button" class="btn dtn-defualt btn-xs"><span class="fa fa-microphone-slash"></span></button>
-              <button id="mute-volume-button" class="btn dtn-defualt btn-xs"><span class="fa fa-volume-off"></span></button>
-              <button id="end-conversation" class="btn btn-danger btn-xs">End</button>
+              <button id="mute-microphone-button" class="btn btn-default btn-sm"><span class="fa fa-microphone-slash"></span></button>
+              <button id="mute-volume-button" class="btn btn-default btn-sm"><span class="fa fa-volume-off"></span></button>
+              <button id="end-conversation" class="btn btn-danger btn-sm">End</button>
             </div>
           </div>
 
           <div class="invite-friends">
             <h4 class="option-title">Invite Friends!</h4>
-            <i id="invite-friends-helper" class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Send your friends the URL to invite them to video chat with you!"></i>
-            <input type="text" id="lookup-input" style="display:none;" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
-            <button class="btn btn-primary btn-xs copy-button" data-clipboard-target='lookup-input' id='copy-button'>Click to Copy</button>
+            <i id="invite-friends-helper" class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Send anyone the URL to watch together!"></i>
+            <input type="text" id="lookup-input" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
           </div>
         </div>
       </div>
@@ -277,10 +276,12 @@
   </div>
   <button class="btn btn-success btn-lg" id="info-go-button">Go!</button>
 </div>
+<div id="fb-root"></div>
 <script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 <script type="text/javascript" src="https://assets.gfycat.com/gfycat.js"></script>
 <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 <script src="//cdn.jsdelivr.net/jquery.scrollto/2.1.2/jquery.scrollTo.min.js"></script>
 
 <script>
@@ -317,14 +318,41 @@
 
     $('.flash.notice').delay(4000).fadeOut(1400);
 
-    var clip = new ZeroClipboard($("#copy-button"));
-    $('.copy-button').on('click', function(e){
-      $(e.target).text('Copied!').css('background-color', '#0088ff').css('border-color', '#0088ff');
+    $('#lookup-input').focus(function(){
+      $(this).select();
     });
+
 
     $('[data-toggle="tooltip"]').tooltip({html: true});
 
     $('body').css('overflow', 'hidden');
     $('html').css('overflow', 'hidden');
+  });
+
+  $(window).load(function() {
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    window.twttr = (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0],
+        t = window.twttr || {};
+      if (d.getElementById(id)) return t;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://platform.twitter.com/widgets.js";
+      fjs.parentNode.insertBefore(js, fjs);
+
+      t._e = [];
+      t.ready = function(f) {
+        t._e.push(f);
+      };
+
+      return t;
+    }(document, "script", "twitter-wjs"));
   });
 </script>
