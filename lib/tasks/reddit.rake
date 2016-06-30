@@ -78,6 +78,7 @@ namespace :reddit do
         { name: '/r/HearthStone', abbreviation: 'RHS' },
         { name: '/r/Overwatch', abbreviation: 'ROVRW' },
         { name: '/r/CounterStrike', abbreviation: 'RCS' },
+        { name: '/r/timanderic', abbreviation: 'TIMERIC' },
     ]
 
     if args[:subreddits].present?
@@ -218,7 +219,7 @@ namespace :reddit do
       [74, "/r/food", "FOOD"],
       [66, "/r/fifthworldvideos", "FWV"],
       [20, "Extreme Energy and Food", "EXT"],
-      [48, "/r/NotTimAndEric", "TIMERIC"],
+      [48, "/r/NotTimAndEric", "NTIMERIC"],
       [50, "/r/CommercialCuts", "COMCUTS"],
       [69, "/r/mealtimevideos", "NOMTV"],
       [67, "/r/UNEXPECTEDTHUGLIFE", "THUG"],
