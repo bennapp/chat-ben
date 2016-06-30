@@ -138,6 +138,7 @@ namespace :reddit do
   end
 
   task set_position: :environment do
+    # Bin.without_deleted.order(:position).all.each do |bin| p  [bin.id, bin.title, bin.abbreviation] end
     desired_bin_positions = [
       [6, "Chat Ben On", "CBTV"],
       [24, "/r/Videos", "VIDS"],
@@ -157,12 +158,12 @@ namespace :reddit do
       [14, "Full Length Films", "FLIX"],
       [78, "/r/rickandmorty", "RICKM"],
       [49, "/r/InterdimensionalCable", "ICABLE"],
+      [92, "/r/timanderic", "TIMERIC"],
+      [48, "/r/NotTimAndEric", "NTIMERIC"],
       [62, "/r/robotchicken", "ROBOTC"],
-      [19, "Bar Review (Lawyers Only)", "LAW"],
       [61, "/r/adultswim", "ADLTSWIM"],
       [10, "Yourtube", "UTUBE"],
       [21, "/r/DeepIntoYouTube", "DEEP"],
-      [23, "HONOR ROLL", "HONOR"],
       [16, "/r/Dota2", "DOTA"],
       [84, "Dota 2 Streams", "DOTAS"],
       [36, "/r/LeagueOfLegends", "LOL"],
@@ -170,7 +171,6 @@ namespace :reddit do
       [86, "/r/HearthStone", "HEARTH"],
       [79, "Hearthstone Streams", "HEARTHS"],
       [87, "/r/Overwatch", "OVRWTCH"],
-      [37, "/r/LOLStreams", "LOLS"],
       [58, "Overwatch Streams", "OVRWTCHS"],
       [88, "/r/CounterStrike", "CS"],
       [59, "Counter-Strike: Global Offensive Streams", "CSS"],
@@ -178,11 +178,9 @@ namespace :reddit do
       [60, "Minecraft Streams", "MINES"],
       [53, "/r/Music", "MUSIC"],
       [54, "/r/ListenToThis", "LISTEN"],
-      [34, "/r/ObscureMedia", "OM"],
       [81, "/r/soundcloud", "SOUNDC"],
       [82, "/r/bestofsoundcloud", "BSOUNDC"],
       [52, "/r/HipHopHeads", "HIPHOP"],
-      [22, "EDC 2016 on chatben.tv", "EDC"],
       [55, "/r/ElectronicMusic", "EDM"],
       [56, "/r/ClassicalMusic", "CLASSM"],
       [57, "Sound Cloud Friends", "SOUNDCF"],
@@ -194,12 +192,10 @@ namespace :reddit do
       [43, "/r/drunk", "DRUNK"],
       [45, "/r/EarthPorn", "EARTH"],
       [83, "/r/pics", "PICS"],
-      [44, "/r/Memes", "MEMES"],
       [75, "/r/itookapicture", "IPICT"],
       [25, "/r/360video", "V360"],
       [9, "Science, Nature, Tech", "SCI"],
       [76, "/r/RoomPorn", "ROOMS"],
-      [47, "/r/unknownvideos", "UV"],
       [29, "/r/curiousvideos", "CURIOUS"],
       [28, "/r/ArtisanVideos", "ARTISAN"],
       [70, "/r/baseball", "BASEBALL"],
@@ -219,10 +215,11 @@ namespace :reddit do
       [74, "/r/food", "FOOD"],
       [66, "/r/fifthworldvideos", "FWV"],
       [20, "Extreme Energy and Food", "EXT"],
-      [48, "/r/NotTimAndEric", "NTIMERIC"],
       [50, "/r/CommercialCuts", "COMCUTS"],
       [69, "/r/mealtimevideos", "NOMTV"],
       [67, "/r/UNEXPECTEDTHUGLIFE", "THUG"],
+      [90, "Californyeah!: The Channel", "CALIYA!"],
+      [91, "Crafting", "CRAFT"],
     ]
 
     desired_bin_positions.each_with_index do |bin_info, index|
