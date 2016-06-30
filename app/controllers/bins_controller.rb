@@ -1,5 +1,5 @@
 class BinsController < ApplicationController
-  before_action :set_bin, only: [:show, :update, :destroy]
+  before_action :set_bin, only: [:show, :edit, :update, :destroy]
   before_action :set_post, only: [:show]
   before_action :redirect_if_non_admin, only: [:index, :emails, :new, :edit, :create, :update, :destroy]
 
@@ -39,7 +39,6 @@ class BinsController < ApplicationController
 
   # GET /bins/1/edit
   def edit
-    @bin = Bin.includes(:posts).order('post_bins.position asc').find(params[:id])
     @hide_footer = true
     @posts = Post.without_deleted.where(bin_id: @bin.id).order(:title)
   end

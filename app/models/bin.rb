@@ -22,14 +22,14 @@ class Bin < ApplicationRecord
   end
 
   def set_postition_if_nil
-    self.position = Bin.maximum('position') + 1 if position.nil?
+    self.position = Bin.without_deleted.maximum('position') + 1 if position.nil?
   end
 
   def set_other_bin_positions
     return unless self.position_changed?
-    max_position = Bin.maximum('position')
+    max_position = Bin.without_deleted.maximum('position')
 
-    other_bins = Bin.where.not(id: self.id).sort_by { |bin| bin.position }.to_a
+    other_bins = Bin.without_deleted.where.not(id: self.id).sort_by { |bin| bin.position }.to_a
     other_positions = (0..max_position + 1).to_a - [self.position]
 
     other_bins.each_with_index do |bin, index|
