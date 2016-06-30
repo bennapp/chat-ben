@@ -50,8 +50,6 @@ class @RoomChannel
         channelDownClick = =>
           @perform("channel_down", post_id: $('.post-header').data('post-id'), bin_id: $('.bin-header').data('bin-id'))
 
-        @perform("set_matching", matching: $('#myonoffswitch').is(':checked'))
-
         window.matchingSwtich = (status) =>
           if status == 'party'
             @perform("set_matching", matching: true, solo: false)

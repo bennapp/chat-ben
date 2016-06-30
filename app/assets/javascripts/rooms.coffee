@@ -158,7 +158,7 @@ class @RoomShow
         $('.solo').addClass('on')
         window.matchingSwtich('solo')
         if @status != 'chatting' && @status != 'ending'
-          @stopWebRTC()
+          @disableWebRTC()
           @_setStatus('not-waiting')
           $('.chat-info-container').addClass('hidden')
           $('.local-video-container').addClass('hidden')
@@ -184,8 +184,9 @@ class @RoomShow
       $('.local-video-container').addClass('hidden')
       $('.remote-container').addClass('hidden')
 
-  stopWebRTC: ->
-    @webrtc.stopLocalVideo()
+  disableWebRTC: ->
+    this.webrtc.webrtc.localStream.getTracks()[0].enabled = false
+    this.webrtc.webrtc.localStream.getTracks()[1].enabled = false
 
   _startWebRTC: ->
     $('.chat-info-container').removeClass('hidden')
@@ -194,9 +195,10 @@ class @RoomShow
 
     startWebRTC = =>
       if @webrtc
-        @webrtc.startLocalVideo() unless @webrtc.webrtc.localStreams.length
+        this.webrtc.webrtc.localStream.getTracks()[0].enabled = true
+        this.webrtc.webrtc.localStream.getTracks()[1].enabled = true
       else
-        @webrtc = new window.SimpleWebRTC
+        @webrtc = new SimpleWebRTC
           localVideoEl: 'localVideo'
           remoteVideosEl: ''
           autoRequestMedia: true
