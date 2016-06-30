@@ -163,7 +163,7 @@
               </div>
             </div>
             <div class="stoplight">
-              <i id="social-stoplight-helper" class="fa fa-question-circle info-helper" data-html="true" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="<table><tr><td>Party</td><td> match with anyone</td></tr><tr><td>Friends </td><td> match with invited people only</td></tr><tr><td>Solo</td><td> video chat disabled</td></tr></table>"></i>
+              <i id="social-stoplight-helper" class="fa fa-question-circle info-helper" data-html="true" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="<table><tr><td>Party</td><td> match with anyone</td></tr><tr><td>Friends </td><td> match with invited people only</td></tr><tr><td>Solo</td><td> video chat disabled, will not end an ongoing conversation</td></tr></table>"></i>
               <div class="lights">
                 <div class="light party <%= !current_user || current_user.matching? ? 'on' : '' %>"></div>
                 <div class="light friends <%= current_user && !current_user.matching? && !current_user.solo? ? 'on' : '' %>"></div>

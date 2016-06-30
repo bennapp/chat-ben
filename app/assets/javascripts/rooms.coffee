@@ -77,6 +77,7 @@ class @RoomShow
     $('.chat-again-container').removeClass('hidden')
     @_setStatus('ending')
     $('.remote-container').addClass('invisible')
+    $('#localVideo').addClass('invisible')
 
     @stopWebRTC()
 
@@ -91,10 +92,7 @@ class @RoomShow
 
   _bindDom: ->
     window.onbeforeunload = =>
-      if @status == 'waiting'
-        $.ajax(url: "/chat/#{@room}", type: 'PUT') # When you leave your own room and navigate back to front page, you should see num chating change becauce of you.
-        return undefined
-      else if @status == 'chatting'
+      if @status == 'chatting'
         return 'Make sure to end your conversation before leaving!'
       else
         return undefined
@@ -140,27 +138,34 @@ class @RoomShow
     setLight = (event) =>
       $('.on').removeClass('on')
       $target = $(event.target)
-      if $target.hasClass('party') && @status != 'chatting' && @status != 'ending'
+      if $target.hasClass('party')
         $('.party').addClass('on')
         window.matchingSwtich('party')
-        @_setStatus('waiting')
-        @_startWebRTC()
-        window.resize()
-      else if $target.hasClass('friends') && @status != 'chatting' && @status != 'ending'
+        if @status != 'chatting' && @status != 'ending'
+          window.resize()
+          @_setStatus('waiting')
+          @_startWebRTC()
+
+      else if $target.hasClass('friends')
         $('.friends').addClass('on')
         window.matchingSwtich('friends')
-        @_setStatus('friends')
-        @_startWebRTC()
-        window.resize()
-      else
+        if @status != 'chatting' && @status != 'ending'
+          window.resize()
+          @_setStatus('friends')
+          @_startWebRTC()
+
+      else if $target.hasClass('solo')
         $('.solo').addClass('on')
         window.matchingSwtich('solo')
-        @_setStatus('not-waiting')
-        @stopWebRTC()
-        $('.chat-info-container').addClass('hidden')
-        $('.local-video-container').addClass('hidden')
-        $('.remote-container').addClass('hidden')
-        window.resize()
+        if @status != 'chatting' && @status != 'ending'
+          @stopWebRTC()
+          @_setStatus('not-waiting')
+          $('.chat-info-container').addClass('hidden')
+          $('.local-video-container').addClass('hidden')
+          $('.remote-container').addClass('hidden')
+          window.resize()
+      else
+        console.log('else')
 
     $('.light').on 'click', setLight
     $('.stoplight-option').on 'click', setLight
@@ -186,7 +191,7 @@ class @RoomShow
     $('.chat-info-container').removeClass('hidden')
     $('.local-video-container').removeClass('hidden')
     $('.remote-container').removeClass('hidden')
-    
+
     startWebRTC = =>
       if @webrtc
         @webrtc.startLocalVideo() unless @webrtc.webrtc.localStreams.length
