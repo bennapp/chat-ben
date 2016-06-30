@@ -7,13 +7,18 @@
             <div class="bin-contents">
               <% post = bin.posts.first %>
               <% if post %>
-                <% if post.format_type == 'youtube' %>
-                  <%= image_tag("https://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img #{mobile_css}") %>
-                <% elsif post.format_type == 'twitch' %>
-                  <%= image_tag("https://static-cdn.jtvnw.net/previews-ttv/live_user_#{post.title.split(' - ').first}-480x360.jpg", class: "live-img #{mobile_css}") %>
-                <% else %>
-                  <%= image_tag("missing_bin.png", class: "live-img #{mobile_css}") %>
-                <% end %>
+                <div class="img-wrapper">
+                  <% if post.format_type == 'youtube' %>
+                    <%= image_tag("https://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img #{mobile_css}") %>
+                  <% elsif post.format_type == 'twitch' %>
+                    <%= image_tag("https://static-cdn.jtvnw.net/previews-ttv/live_user_#{post.title.split(' - ').first}-480x360.jpg", class: "live-img #{mobile_css}") %>
+                  <% elsif bin.logo.present? %>
+                    <%= image_tag bin.logo.url(:medium), class: "logo-img live-img #{mobile_css}" %>
+                  <% else %>
+                    <%= image_tag("missing_bin.png", class: "live-img #{mobile_css}") %>
+                  <% end %>
+                </div>
+
                 <div class="bin-info-container">
                   <h3 class="bin-info"><%= bin.position + 1 %> <%= bin.abbreviation %></h3>
                   <h3 class="bin-title <%= mobile_css %>"><%= bin.title %></h3>

@@ -114,10 +114,22 @@ $panel-grey: rgba(30, 30, 30, 0.8);
           }
         }
 
+        .img-wrapper {
+          height: 16.5vw;
+          overflow: hidden;
+          background-color: black;
+          width: 22vw;
+        }
+
         .live-img {
           height: auto;
           width: 22vw;
           border-radius: 2px;
+
+          &.logo-img {
+            margin-left: 12.5%;
+            width: 75%;
+          }
 
           &.mobile {
             width: 100%;
