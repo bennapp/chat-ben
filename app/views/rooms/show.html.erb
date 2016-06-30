@@ -258,21 +258,12 @@
     </div>
 
     <div class="share-wrapper">
-      <div class="share-container">
-        <div class="post-twitter">
-          <h4 class="option-title">Post to Twitter</h4>
-          <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I'm%20watching%20chatben.tv%20right%20now!%20Join%20my%20video%20chat%20and%20watch%20with%20me!%0A%0A">Tweet</a>
-        </div>
-
-        <div class="send-fb">
-          <h4 class="option-title">Send a Facebook message</h4>
-          <div class="fb-send" data-href="https://chatben.tv/chat/<%= @room.token %>"></div>
-        </div>
-
-        <div class="send-link">
-          <h4 class="option-title">Share the plain old link</h4>
-          <input type="text" id="info-lookup-input" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
-        </div>
+      <div class="invite-friends">
+        <h5 class="option-title">Send Invite</h5>
+        <i id="invite-friends-helper" class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Send anyone the URL to watch together!"></i>
+        <input type="text" class="lookup-input" value="<%= request.original_url.gsub('https://', '').gsub('http://', '') %>"/>
+        <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://chatben.tv/chat/<%= @room.token %>&amp;title=I'm%20watching%20chatben.tv%20right%20now!%20Join%20my%20video%20chat%20and%20watch%20with%20me!%0A%0A" class="btn btn-primary btn-xs social-button btn-fb"><span class="fa fa-facebook"></span></a>
+        <a target="_blank" href="http://twitter.com/home?status=I'm%20watching%20chatben.tv%20right%20now!%20Join%20my%20video%20chat%20and%20watch%20with%20me!%0A%0A+https://chatben.tv/chat/<%= @room.token %>" class="btn btn-primary btn-xs social-button btn-twitter"><span class="fa fa-twitter"></span></a>
       </div>
     </div>
   </div>
@@ -318,7 +309,7 @@
 
     $('.flash.notice').delay(4000).fadeOut(1400);
 
-    $('#lookup-input').focus(function(){
+    $('.lookup-input').focus(function(){
       $(this).select();
     });
 
