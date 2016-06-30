@@ -52,8 +52,13 @@ class @RoomChannel
 
         @perform("set_matching", matching: $('#myonoffswitch').is(':checked'))
 
-        window.matchingSwtich = (checked) =>
-          @perform("set_matching", matching: checked)
+        window.matchingSwtich = (status) =>
+          if status == 'party'
+            @perform("set_matching", matching: true, solo: false)
+          else if status == 'friends'
+            @perform("set_matching", matching: false, solo: false)
+          else
+            @perform("set_matching", matching: false, solo: true)
 
         $('#channel-up').click channelUpClick
         $('#channel-down').click channelDownClick

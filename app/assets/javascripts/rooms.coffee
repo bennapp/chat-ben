@@ -6,7 +6,7 @@ class @RoomShow
     @room = options.room
     @mobile = options.mobile
     @signalServer = options.signalServer
-    @_setStatusWithSwitch()
+    @_setStatusWithLight()
     @reacting = false
 
     @_bindDom()
@@ -124,6 +124,8 @@ class @RoomShow
         'Video Chat is disabled'
       when 'waiting'
         'Waiting for someone to chat with'
+      when 'friends'
+        'Invite friends to watch together!'
       when 'chatting'
         "You are chatting with #{@otherPeer.nick || 'someone'}"
       when 'ending'
@@ -135,82 +137,108 @@ class @RoomShow
     $('.status').append(document.createTextNode(status))
 
   _matchingSwitch: ->
-    $('#myonoffswitch').change (event) =>
-      window.matchingSwtich(event.target.checked)
+    setLight = (event) =>
+      $('.on').removeClass('on')
+      $target = $(event.target)
+      if $target.hasClass('party') && @status != 'chatting' && @status != 'ending'
+        $('.party').addClass('on')
+        window.matchingSwtich('party')
+        @_setStatus('waiting')
+        @_startWebRTC()
+        window.resize()
+      else if $target.hasClass('friends') && @status != 'chatting' && @status != 'ending'
+        $('.friends').addClass('on')
+        window.matchingSwtich('friends')
+        @_setStatus('friends')
+        @_startWebRTC()
+        window.resize()
+      else
+        $('.solo').addClass('on')
+        window.matchingSwtich('solo')
+        @_setStatus('not-waiting')
+        @stopWebRTC()
+        $('.chat-info-container').addClass('hidden')
+        $('.local-video-container').addClass('hidden')
+        $('.remote-container').addClass('hidden')
+        window.resize()
 
-      doSwitch = =>
-        if @status == 'waiting' && !event.target.checked
-          @_setStatus('not-waiting')
-          @stopWebRTC()
-        else if @status == 'not-waiting' && event.target.checked
-          @_setStatus('waiting')
-          @_startWebRTC()
+    $('.light').on 'click', setLight
+    $('.stoplight-option').on 'click', setLight
 
-      setTimeout(doSwitch, 700)
-
-  _setStatusWithSwitch: ->
-    if $('#myonoffswitch').is(':checked') && !@mobile
+  _setStatusWithLight: ->
+    $light = $('.light.on')
+    if $light.hasClass('party') && !@mobile
       @_setStatus('waiting')
+      @_startWebRTC()
+    else if $light.hasClass('friends') && !@mobile
+      @_setStatus('friends')
       @_startWebRTC()
     else
       @_setStatus('not-waiting')
-      $('#localVideo').addClass('invisible')
+      $('.chat-info-container').addClass('hidden')
+      $('.local-video-container').addClass('hidden')
+      $('.remote-container').addClass('hidden')
 
   stopWebRTC: ->
-    $('#localVideo').addClass('invisible')
-    @webrtc.leaveRoom()
     @webrtc.stopLocalVideo()
 
   _startWebRTC: ->
-    $('#localVideo').removeClass('invisible')
+    $('.chat-info-container').removeClass('hidden')
+    $('.local-video-container').removeClass('hidden')
+    $('.remote-container').removeClass('hidden')
+    
+    startWebRTC = =>
+      if @webrtc
+        @webrtc.startLocalVideo() unless @webrtc.webrtc.localStreams.length
+      else
+        @webrtc = new window.SimpleWebRTC
+          localVideoEl: 'localVideo'
+          remoteVideosEl: ''
+          autoRequestMedia: true
+          debug: false
+          detectSpeakingEvents: true
+          autoAdjustMic: false
+          nick: @nick
+          url: @signalServer
 
-    if @webrtc
-      @webrtc.startLocalVideo()
-    else
-      @webrtc = new SimpleWebRTC
-        localVideoEl: 'localVideo'
-        remoteVideosEl: ''
-        autoRequestMedia: true
-        debug: false
-        detectSpeakingEvents: true
-        autoAdjustMic: false
-        nick: @nick
-        url: @signalServer
+        @webrtc.on 'readyToCall', =>
+          @webrtc.joinRoom @room
 
-      @webrtc.on 'readyToCall', =>
-        @webrtc.joinRoom @room
+        @webrtc.on 'channelMessage', (peer, label, data) =>
+          if data.type == 'volume'
+            @showVolume document.getElementById('volume_' + peer.id), data.volume
 
-      @webrtc.on 'channelMessage', (peer, label, data) =>
-        if data.type == 'volume'
-          @showVolume document.getElementById('volume_' + peer.id), data.volume
+        @webrtc.on 'videoAdded', (video, peer) =>
+          window.resize()
+          @otherPeer = peer
+          remote = document.getElementById('remote')
+          if remote
+            d = document.createElement('div')
+            d.className = 'videoContainer remote'
+            d.id = 'container_' + @webrtc.getDomId(peer)
+            d.appendChild video
+            vol = document.createElement('div')
+            vol.id = 'volume_' + peer.id
+            vol.className = 'volume_bar'
 
-      @webrtc.on 'videoAdded', (video, peer) =>
-        @otherPeer = peer
-        remote = document.getElementById('remote')
-        if remote
-          d = document.createElement('div')
-          d.className = 'videoContainer remote'
-          d.id = 'container_' + @webrtc.getDomId(peer)
-          d.appendChild video
-          vol = document.createElement('div')
-          vol.id = 'volume_' + peer.id
-          vol.className = 'volume_bar'
+            d.appendChild vol
+            remote.insertBefore d, remote.firstChild
 
-          d.appendChild vol
-          remote.insertBefore d, remote.firstChild
+          document.getElementById('notification-sound').play()
 
-        document.getElementById('notification-sound').play()
+          $('.control-buttons').removeClass('invisible')
+          $('.no-user-container').addClass('hidden')
 
-        $('.control-buttons').removeClass('invisible')
-        $('.no-user-container').addClass('hidden')
+          @_setStatus('chatting')
 
-        @_setStatus('chatting')
+        @webrtc.on 'videoRemoved', (video, peer) =>
+          window.resize()
+          @removeVideo(video, peer)
 
-      @webrtc.on 'videoRemoved', (video, peer) =>
-        @removeVideo(video, peer)
+        @webrtc.on 'volumeChange', (volume, treshold) =>
+          @showVolume document.getElementById('localVolume'), volume
 
-      @webrtc.on 'volumeChange', (volume, treshold) =>
-        @showVolume document.getElementById('localVolume'), volume
+    setTimeout(startWebRTC, 400)
 
   setupRecordRTCDom: ->
     $('#react-button').mousedown =>

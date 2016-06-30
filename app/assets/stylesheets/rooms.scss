@@ -440,6 +440,102 @@ video {
         display: flex;
         justify-content: space-between;
 
+        .social-stoplight-container {
+          display: flex;
+          padding: 2px;
+          margin: 2px;
+
+          .tooltip-inner {
+            text-align: left;
+            white-space: pre;
+            max-width: none;
+          }
+
+          .stoplight-title {
+            white-space: nowrap;
+          }
+
+          .stoplight, .stoplight-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 2px;
+            padding: 0 2px;
+
+            .stoplight-title {
+              margin: 0px;
+            }
+
+            .stoplight-option {
+              margin: 4px 2px;
+              padding: 3px 4px;
+              opacity : 0.3;
+              cursor: pointer;
+              border: 1px solid transparent;
+
+              &.on, &:hover {
+                opacity: 1;
+                border-radius: 4px;
+                border: 1px solid grey;
+              }
+            }
+          }
+
+          .stoplight-options {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3px;
+            margin: 1px;
+            justify-content: space-around;
+          }
+
+          .lights {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            padding: 3px;
+            margin: 4px 2px 2px 2px;
+
+            .light {
+              height: 9px;
+              width : 9px;
+              margin: 12px;
+              border-radius: 50%;
+              opacity : 0.3; /* makes colors less bright by default */
+              display: inline-block;
+              cursor: pointer;
+
+              &.on {
+                opacity: 1;
+              }
+            }
+
+            .solo {
+              background-color: red;
+              &.on {
+                box-shadow: inset 0px 0px 10px 2px rgba(244, 5, 5, 0.9), 0px 0px 10px 2px rgba(255, 0, 0, 0.98);
+              }
+            }
+
+            .friends {
+              background-color: yellow;
+
+              &.on {
+                box-shadow: inset 0px 0px 10px 2px rgba(244, 244, 5, 0.9), 0px 0px 10px 2px rgba(255, 255, 0, 0.98);
+              }
+            }
+
+            .party {
+              background-color: green;
+              &.on {
+                box-shadow: inset 0px 0px 10px 2px rgba(5, 244, 5, 0.9), 0px 0px 10px 2px rgba(0, 255, 0, 0.98);
+              }
+            }
+          }
+        }
+
         .remote-container {
           display: flex;
           justify-content: center;
@@ -516,7 +612,7 @@ video {
           margin-bototm: 2px;
         }
 
-        .video-chat-option, .invite-friends {
+        .invite-friends {
           display: flex;
           align-items: center;
           justify-content: space-around;
@@ -539,11 +635,11 @@ video {
 }
 
 .featherlight.info {
-  background: rgba(95, 95, 95, 0.9);
+  background: rgba(70, 70, 70, 0.9);
 
   .featherlight-content {
     min-width: 60%;
-    background-color: $panel-grey;
+    background-color: rgba(10, 10, 10, 0.95);
     border-radius: 2px;
   }
 

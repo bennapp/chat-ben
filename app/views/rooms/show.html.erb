@@ -153,6 +153,25 @@
     <div class="chat-panel-container <%= mobile_css %>">
       <div class="chat-panel">
         <div class="chat-container">
+          <div class="social-stoplight-container">
+            <div class="stoplight-info">
+              <h5 class="stoplight-title">Video Chat</h5>
+              <div class="stoplight-options">
+                <h4 class="stoplight-option party <%= !current_user || current_user.matching? ? 'on' : '' %>">Party</h4>
+                <h4 class="stoplight-option friends <%= current_user && !current_user.matching? && !current_user.solo? ? 'on' : '' %>">Friends</h4>
+                <h4 class="stoplight-option solo <%= current_user && !current_user.matching? && current_user.solo? ? 'on' : '' %>">Solo</h4>
+              </div>
+            </div>
+            <div class="stoplight">
+              <i id="social-stoplight-helper" class="fa fa-question-circle info-helper" data-html="true" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="<table><tr><td>Party</td><td> match with anyone</td></tr><tr><td>Friends </td><td> match with invited people only</td></tr><tr><td>Solo</td><td> video chat disabled</td></tr></table>"></i>
+              <div class="lights">
+                <div class="light party <%= !current_user || current_user.matching? ? 'on' : '' %>"></div>
+                <div class="light friends <%= current_user && !current_user.matching? && !current_user.solo? ? 'on' : '' %>"></div>
+                <div class="light solo <%= current_user && !current_user.matching? && current_user.solo? ? 'on' : '' %>"></div>
+              </div>
+            </div>
+          </div>
+
           <div class="remote-container">
             <div id="remote">
               <div class="no-user-container">
@@ -183,17 +202,6 @@
               <button id="mute-microphone-button" class="btn dtn-defualt btn-xs"><span class="fa fa-microphone-slash"></span></button>
               <button id="mute-volume-button" class="btn dtn-defualt btn-xs"><span class="fa fa-volume-off"></span></button>
               <button id="end-conversation" class="btn btn-danger btn-xs">End</button>
-            </div>
-          </div>
-
-          <div class="video-chat-option">
-            <h4 class="option-title">Video Chat!</h4>
-            <i id="video-chat-helper" class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="When video chat is enabled, you will be matched with others. Disabling video chat will not end an ongoing conversation."></i>
-            <div class="switch-container">
-              <div class="onoffswitch">
-                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" <%= current_user.nil? || (current_user && current_user.matching?) ? 'checked' : '' %>>
-                <label class="onoffswitch-label" for="myonoffswitch"></label>
-              </div>
             </div>
           </div>
 
@@ -314,7 +322,7 @@
       $(e.target).text('Copied!').css('background-color', '#0088ff').css('border-color', '#0088ff');
     });
 
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').tooltip({html: true});
 
     $('body').css('overflow', 'hidden');
     $('html').css('overflow', 'hidden');

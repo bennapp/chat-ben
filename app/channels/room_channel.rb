@@ -38,10 +38,11 @@ class RoomChannel < ApplicationCable::Channel
 
   def set_matching(data)
     matching = data['matching']
+    solo = data['solo']
     room = Room.find_by_token(params[:room])
     room.update_attribute(:waiting, matching)
 
-    current_user.update_attribute(:matching, matching) if current_user
+    current_user.update_attributes({ matching: matching, solo: solo }) if current_user
   end
 
   private

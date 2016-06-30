@@ -221,7 +221,7 @@ namespace :reddit do
       [48, "/r/NotTimAndEric", "TIMERIC"],
       [50, "/r/CommercialCuts", "COMCUTS"],
       [69, "/r/mealtimevideos", "NOMTV"],
-      [67, "/r/UNEXPECTEDTHUGLIFE", "THUG"]
+      [67, "/r/UNEXPECTEDTHUGLIFE", "THUG"],
     ]
 
     desired_bin_positions.each_with_index do |bin_info, index|
