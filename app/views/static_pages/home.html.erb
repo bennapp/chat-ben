@@ -10,7 +10,7 @@
                 <% if post.format_type == 'youtube' %>
                   <%= image_tag("https://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img #{mobile_css}") %>
                 <% elsif post.format_type == 'twitch' %>
-                  <%= image_tag("twitch.jpg", class: "live-img #{mobile_css}") %>
+                  <%= image_tag("https://static-cdn.jtvnw.net/previews-ttv/live_user_#{post.title.split(' - ').first}-480x360.jpg", class: "live-img #{mobile_css}") %>
                 <% else %>
                   <%= image_tag("missing_bin.png", class: "live-img #{mobile_css}") %>
                 <% end %>
