@@ -20,7 +20,8 @@ namespace :youtube do
       items = Yt::Playlist.new(id: playlist[:yt_id]).playlist_items
 
       pp items.first.title
-      pp items.first.id
+      pp items.first.video_id
+      
 
       # new_post_attributes = items.map do |item|
         # post_id = Post.find_or_create_by(title: item.title, link: "https://www.youtube.com/watch?v=#{item.id}", bin_id: bin.id).id
