@@ -29,6 +29,7 @@ gem 'browser'
 
 gem 'redditkit', '~> 1.0.1'
 gem 'twitch', '~> 0.1.0'
+gem 'yt', '~> 0.25.39'
 
 group :production do
   gem 'autoprefixer-rails', '~> 6.3'
