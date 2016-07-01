@@ -134,7 +134,7 @@ class @RoomShow
       when 'not-waiting'
         'Video Chat is disabled'
       when 'waiting'
-        'Waiting for someone to chat with'
+        'Waiting for someone to join'
       when 'friends'
         'Invite friends to watch together!'
       when 'chatting'

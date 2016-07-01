@@ -155,15 +155,15 @@
         <div class="chat-container">
           <div class="social-stoplight-container">
             <div class="stoplight-info">
-              <h5 class="stoplight-title">Video Chat</h5>
+              <h5 class="stoplight-title">Match Making</h5>
               <div class="stoplight-options">
-                <h4 class="stoplight-option party <%= !current_user || current_user.matching? ? 'on' : '' %>">Party</h4>
-                <h4 class="stoplight-option friends <%= current_user && !current_user.matching? && !current_user.solo? ? 'on' : '' %>">Friends</h4>
+                <h4 class="stoplight-option party <%= !current_user || current_user.matching? ? 'on' : '' %>">Public</h4>
+                <h4 class="stoplight-option friends <%= current_user && !current_user.matching? && !current_user.solo? ? 'on' : '' %>">Invite</h4>
                 <h4 class="stoplight-option solo <%= current_user && !current_user.matching? && current_user.solo? ? 'on' : '' %>">Solo</h4>
               </div>
             </div>
             <div class="stoplight">
-              <i id="social-stoplight-helper" class="fa fa-question-circle info-helper" data-html="true" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="<table><tr><td>Party</td><td> match with anyone</td></tr><tr><td>Friends </td><td> match with invited people only</td></tr><tr><td>Solo</td><td> video chat disabled, will not end an ongoing conversation</td></tr></table>"></i>
+              <i id="social-stoplight-helper" class="fa fa-question-circle info-helper" data-html="true" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="<table><tr>Video Chat Match Making</tr><tr><td>Public</td><td> - match with anyone, max 3 total</td></tr><tr><td>Invite </td><td> - match with invited people only</td></tr><tr><td>Solo</td><td> - video chat disabled, will not end an ongoing chat</td></tr></table>"></i>
               <div class="lights">
                 <div class="light party <%= !current_user || current_user.matching? ? 'on' : '' %>"></div>
                 <div class="light friends <%= current_user && !current_user.matching? && !current_user.solo? ? 'on' : '' %>"></div>

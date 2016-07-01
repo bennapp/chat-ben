@@ -17,7 +17,7 @@ class Room < ActiveRecord::Base
   before_save :update_if_full
 
   def update_if_full
-    self.full = participant_count >= 2
+    self.full = participant_count >= 3
     true
   end
 
