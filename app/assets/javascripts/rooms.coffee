@@ -73,13 +73,17 @@ class @RoomShow
     if remote and el
       remote.removeChild el
 
-    $('.control-buttons').addClass('hidden')
-    $('.chat-again-container').removeClass('hidden')
-    @_setStatus('ending')
-    $('.remote-container').addClass('invisible')
-    $('#localVideo').addClass('invisible')
+    peers = @otherPeer.split(' and ')
+    index = peers.indexOf(peer.nick || 'someone')
+    if index > -1
+      peers.splice(index, 1)
+    @otherPeer = peers.join(' and ')
 
-    @stopWebRTC()
+    if !$('#remote .videoContainer').length
+      @_setStatusWithLight()
+      $('.control-buttons').addClass('invisible')
+    else
+      @_setStatus('chatting')
 
   showVolume: (el, volume) ->
     return unless el
@@ -98,8 +102,17 @@ class @RoomShow
         return undefined
 
     $('#end-conversation').on 'click', =>
+      @webrtc.stopLocalVideo()
       @webrtc.leaveRoom()
       @webrtc.connection.disconnect()
+
+      $('.control-buttons').addClass('hidden')
+      $('.chat-again-container').removeClass('hidden')
+      @_setStatus('ending')
+      $('.remote-container').addClass('invisible')
+      $('#localVideo').addClass('invisible')
+
+      window.endConversation()
 
     $('#next-post').on 'click', =>
       $('#next-post').tooltip('disable')
@@ -125,9 +138,9 @@ class @RoomShow
       when 'friends'
         'Invite friends to watch together!'
       when 'chatting'
-        "You are chatting with #{@otherPeer.nick || 'someone'}"
+        "You are chatting with #{@otherPeer}"
       when 'ending'
-        "Your conversation with #{@otherPeer.nick || 'someone'} has ended"
+        "Your conversation with #{@otherPeer} has ended"
       else
         ""
 
@@ -142,17 +155,17 @@ class @RoomShow
         $('.party').addClass('on')
         window.matchingSwtich('party')
         if @status != 'chatting' && @status != 'ending'
-          window.resize()
           @_setStatus('waiting')
           @_startWebRTC()
+          window.resize()
 
       else if $target.hasClass('friends')
         $('.friends').addClass('on')
         window.matchingSwtich('friends')
         if @status != 'chatting' && @status != 'ending'
-          window.resize()
           @_setStatus('friends')
           @_startWebRTC()
+          window.resize()
 
       else if $target.hasClass('solo')
         $('.solo').addClass('on')
@@ -216,8 +229,11 @@ class @RoomShow
             @showVolume document.getElementById('volume_' + peer.id), data.volume
 
         @webrtc.on 'videoAdded', (video, peer) =>
-          window.resize()
-          @otherPeer = peer
+          if @otherPeer
+            @otherPeer = "#{@otherPeer} and #{peer.nick || 'someone'}"
+          else
+            @otherPeer = peer.nick || 'someone'
+
           remote = document.getElementById('remote')
           if remote
             d = document.createElement('div')
@@ -237,6 +253,7 @@ class @RoomShow
           $('.no-user-container').addClass('hidden')
 
           @_setStatus('chatting')
+          window.resize()
 
         @webrtc.on 'videoRemoved', (video, peer) =>
           window.resize()

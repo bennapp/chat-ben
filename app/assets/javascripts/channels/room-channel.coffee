@@ -57,7 +57,10 @@ class @RoomChannel
             @perform("set_matching", matching: false, solo: false)
           else
             @perform("set_matching", matching: false, solo: true)
-
+            
+        window.endConversation = (data) =>
+          @perform("end_conversation", data)
+        
         $('#channel-up').click channelUpClick
         $('#channel-down').click channelDownClick
         $('#prev-post').click prevPostClick

@@ -14,8 +14,16 @@ class RoomChannel < ApplicationCable::Channel
     room = Room.find_by_token(params[:room])
 
     unless params[:mobile]
-      room.update_attribute(:waiting, false)
-      room.update_attribute(:participant_count, room.participant_count - 1)
+      @offset ||= {}
+      @offset[params[:room]] ||= 0
+
+      if @offset[params[:room]] > 0
+        @offset[params[:room]] -= 1
+      else
+        room.update_attribute(:participant_count, room.participant_count - 1)
+      end
+
+      room.update_attribute(:waiting, false) if room.participant_count == 0
       Participation.find_by(user: current_user, room: room).destroy if current_user
     end
   end
@@ -44,6 +52,18 @@ class RoomChannel < ApplicationCable::Channel
 
     current_user.update_attribute(:matching, !!matching) if current_user
     current_user.update_attribute(:solo, !!solo) if current_user
+  end
+
+  def end_conversation(data)
+    room = Room.find_by_token(params[:room])
+
+    @offset ||= {}
+    @offset[params[:room]] ||= 0
+    @offset[params[:room]] += 1
+
+    room.update_attribute(:participant_count, room.participant_count - 1)
+    participation = Participation.find_by(user: current_user, room: room)
+    participation.destroy if current_user && participation
   end
 
   private
