@@ -17,7 +17,7 @@ namespace :youtube do
       bin = Bin.find_or_create_by(title: playlist[:bin_title])
       bin.update_attribute(:abbreviation, playlist[:abbreviation]) if bin.abbreviation.nil?
 
-      items = Yt::Playlist.new id: playlist[:yt_id]
+      items = Yt::Playlist.new(id: playlist[:yt_id]).items
 
       new_post_attributes = []
 
