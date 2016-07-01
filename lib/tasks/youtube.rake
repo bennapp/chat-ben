@@ -14,8 +14,6 @@ namespace :youtube do
     ]
 
     playlists.each do |playlist|
-      next if Bin.where(title: playlist[:bin_title]).exists?
-
       bin = Bin.find_or_create_by(title: playlist[:bin_title])
       bin.update_attribute(:abbreviation, playlist[:abbreviation]) if bin.abbreviation.nil?
 
