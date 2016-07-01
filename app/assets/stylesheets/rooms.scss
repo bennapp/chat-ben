@@ -472,6 +472,7 @@ video {
               opacity : 0.3;
               cursor: pointer;
               border: 1px solid transparent;
+              white-space: nowrap;
 
               &.on, &:hover {
                 opacity: 1;
