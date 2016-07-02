@@ -25,7 +25,7 @@ namespace :youtube do
       end
 
       exisiting_ids = bin.posts.order('post_bins.position asc').pluck('posts.id')
-      new_posts_attributes = new_post_ids.concat(exisiting_ids).uniq.map { |post_id| {'id' => post_id } }
+      new_post_attributes = new_post_ids.concat(exisiting_ids).uniq.map { |post_id| {'id' => post_id } }
 
       bin.posts_attributes = new_post_attributes
       bin.save!
