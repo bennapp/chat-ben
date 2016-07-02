@@ -11,6 +11,7 @@ namespace :youtube do
 
     playlists = [
       { yt_id: 'PLhHpozm-q5fdUnEP1KeN-W7v3CWrv4JZz', bin_title: 'Seinfeld Clips', abbreviation: 'SEINFELD' },
+      { yt_id: 'PLAzrgbu8gEMIIK3r4Se1dOZWSZzUSadfZ', bin_title: 'Hot Ones', abbreviation: 'HOTONES' },
     ]
 
     playlists.each do |playlist|
@@ -19,11 +20,12 @@ namespace :youtube do
 
       items = Yt::Playlist.new(id: playlist[:yt_id]).playlist_items
 
-      new_post_attributes = items.map do |item|
-        post_id = Post.find_or_create_by(title: item.title, link: "https://www.youtube.com/watch?v=#{item.video_id}", bin_id: bin.id).id
-
-        {'id' => post_id }
+      new_post_ids = items.map do |item|
+        Post.find_or_create_by(title: item.title, link: "https://www.youtube.com/watch?v=#{item.video_id}", bin_id: bin.id).id
       end
+
+      exisiting_ids = bin.posts.order('post_bins.position asc').pluck('posts.id')
+      new_posts_attributes = new_post_ids.concat(exisiting_ids).uniq.map { |post_id| {'id' => post_id } }
 
       bin.posts_attributes = new_post_attributes
       bin.save!
