@@ -43,6 +43,9 @@ namespace :youtube do
 
     channels = [
       { channel_id: 'UCsXVk37bltHxD1rDPwtNM8Q', bin_title: 'Kurzgesagt – In a Nutshell', abbreviation: 'NUTSHELL' },
+      { channel_id: 'UCFTVNLC7ysej-sD5lkLqNGA', bin_title: 'Yuka Kinoshita', abbreviation: 'YUKAFOOD' },
+      { channel_id: 'UCuPgdqQKpq4T4zeqmTelnFg', bin_title: 'kaptainkristian', abbreviation: 'KAPTKRIS' },
+      { channel_id: 'UCekQr9znsk2vWxBo3YiLq2w', bin_title: 'You Suck At Cooking', abbreviation: 'USUCK' },
     ]
 
     channels.each do |channel|
