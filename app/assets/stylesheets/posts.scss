@@ -49,6 +49,10 @@ $panel-grey: rgba(30, 30, 30, 0.8);
         overflow: hidden;
         text-overflow: ellipsis;
         width: 22vw;
+
+        &.mobile {
+          width: 100%;
+        }
       }
 
       .bin-info {
@@ -119,6 +123,11 @@ $panel-grey: rgba(30, 30, 30, 0.8);
           overflow: hidden;
           background-color: black;
           width: 22vw;
+
+          &.mobile {
+            width: 100%;
+            height: auto;
+          }
         }
 
         .live-img {

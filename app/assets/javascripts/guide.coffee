@@ -5,6 +5,21 @@ class @Guide
     $('#guide-contents').on 'scroll', (event) =>
       $('#channel-contents').scrollTop $(event.target).scrollTop()
 
+    window.guideBuildAndSelect = (data) ->
+      $('.selected-show').removeAttr('class')
+      
+      if $("#channel-contents tr[data-guide-bin-id='#{data.bin_id}']").length
+        $("#guide-contents tr[data-guide-bin-id='#{data.bin_id}']").prepend("<td data-guide-post-id=\"#{data.id}\"><button class=\"selected-show\"></button></td>")
+        $('.selected-show').text(data.title)
+        $('.selected-show').attr('title', data.title)
+      else
+        $("#channel-contents table tbody").append("<tr data-guide-bin-id=\"#{data.bin_id}\"><td class=\"headcol\" data-guide-post-id=\"#{data.id}\" title=\"#{data.bin_title}\"><button>#{data.bin_number} #{data.bin_abbreviation}</button></td></tr>")
+        $("#guide-contents table tbody").append("<tr data-guide-bin-id=\"#{data.bin_id}\"><td data-guide-post-id=\"#{data.id}\"><button class=\"selected-show\"></button></td></tr>")
+        $('.selected-show').text(data.title)
+        $('.selected-show').attr('title', data.title)
+
+      $('.selected-show').scrollintoview()
+
     window.guideSelect = (options) ->
       $('.selected-show').removeAttr('class')
       $("#guide-contents tr[data-guide-bin-id='#{options.binId}'] td[data-guide-post-id='#{options.postId}'] button").attr('class', 'selected-show')

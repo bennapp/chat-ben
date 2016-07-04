@@ -66,6 +66,29 @@ class RoomChannel < ApplicationCable::Channel
     participation.destroy if current_user && participation
   end
 
+  def add_show(data)
+    return unless current_user.present?
+    link = data['value']
+    post = Post.new(link: link, title: link)
+
+    post.format_link_into_lightbox_html
+    return unless post.format_type.present?
+    post.user = current_user
+
+    bin = Bin.find_or_create_by(user: current_user)
+    bin.update_attribute(:title, "#{current_user.name}'s Channel") if bin.title.nil?
+    name = current_user.name
+    bin.update_attribute(:abbreviation, name.size < 9 ? name.upcase : name.gsub(/[aeiou]/i, '').upcase) if bin.abbreviation.nil?
+
+    post.save!
+    bin.post_bins.each_with_index do |post_bin, index|
+      post_bin.update_attribute(:position, index + 1)
+    end
+    PostBin.create(post_id: post.id, bin_id: bin.id, position: 0)
+
+    advance_post(data.merge("guide" => true, "post_id" => post.id.to_s, "bin_id" => bin.id.to_s, "new_post" => true))
+  end
+
   private
 
   def advance_post(data, options = {})
@@ -100,7 +123,7 @@ class RoomChannel < ApplicationCable::Channel
       end
     end
 
-    options = generate_post_options(post, room, bin, data['from_token'])
+    options = generate_post_options(post, room, bin, data)
     ActionCable.server.broadcast("room_#{params[:room]}", options)
   end
 
@@ -122,11 +145,11 @@ class RoomChannel < ApplicationCable::Channel
     bin = bin.first if bin.nil?
 
     post = bin.posts.order('post_bins.position asc').limit(1).first
-    options = generate_post_options(post, room, bin, data['from_token'])
+    options = generate_post_options(post, room, bin, data)
     ActionCable.server.broadcast("room_#{params[:room]}", options)
   end
 
-  def generate_post_options(post, room, bin, from_token)
+  def generate_post_options(post, room, bin, data)
     if current_user
       like = Like.where(user_id: current_user.id, post_id: post.id).first
     end
@@ -166,7 +189,8 @@ class RoomChannel < ApplicationCable::Channel
       bin_logo_src: bin.logo(:medium),
       bin_description: bin.description,
       bin_abbreviation: bin.abbreviation,
-      from_token: from_token,
+      from_token: data['from_token'],
+      new_post: data['new_post'],
     }
   end
 end

@@ -46,6 +46,9 @@ namespace :youtube do
       { channel_id: 'UCFTVNLC7ysej-sD5lkLqNGA', bin_title: 'Yuka Kinoshita', abbreviation: 'YUKAFOOD' },
       { channel_id: 'UCuPgdqQKpq4T4zeqmTelnFg', bin_title: 'kaptainkristian', abbreviation: 'KAPTKRIS' },
       { channel_id: 'UCekQr9znsk2vWxBo3YiLq2w', bin_title: 'You Suck At Cooking', abbreviation: 'USUCK' },
+      { channel_id: 'UC6107grRI4m0o2-emgoDnAA', bin_title: 'SmarterEveryDay', abbreviation: 'SMARTER' },
+      { channel_id: 'UCUK0HBIBWgM2c4vsPhkYY4w', bin_title: 'The Slow Mo Guys', abbreviation: 'SLOWMO' },
+      { channel_id: 'UC0vSB46MmHTwwxQrAo62Dgg', bin_title: 'GoodNeighborStuff', abbreviation: 'GOODSTUFF' },
     ]
 
     channels.each do |channel|

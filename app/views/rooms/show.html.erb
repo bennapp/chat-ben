@@ -6,27 +6,32 @@
       <div class="remote-control">
         <div class="remote-control-container">
           <h4>CHANNEL</h4>
-          <button id="channel-up"><i class="fa fa-angle-up fa-2x"></i></button>
-          <button id="channel-down"><i class="fa fa-angle-down fa-2x"></i></button>
+          <button id="channel-up" class="channel-button"><i class="fa fa-angle-up fa-2x"></i></button>
+          <button id="channel-down" class="channel-button"><i class="fa fa-angle-down fa-2x"></i></button>
           <h4>SHOW</h4>
           <div class="show-container">
-            <button id="prev-post"><i class="fa fa-angle-left fa-2x"></i></button>
-            <button id="next-post"><i class="fa fa-angle-right fa-2x"></i></button>
+            <button id="prev-post" class="channel-button"><i class="fa fa-angle-left fa-2x"></i></button>
+            <button id="next-post" class="channel-button"><i class="fa fa-angle-right fa-2x"></i></button>
+          </div>
+          <div class="new-show">
+            <input id="add-show" class="link-input" placeholder="add show"/>
+            <i class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Change the show to whatever you'd like! Just paste in a link. We support: Youtube, Vimeo, Twitter, Twitch, Soundcloud, Imgur, Giphy and Gfycat!"></i>
+            <button id="add-link" class="btn btn-success btn-xs plus-button"><i class="fa fa-plus" aria-hidden="true"></i></button>
           </div>
         </div>
       </div>
       <% if !mobile? %>
         <div class="video-panel hidden">
-          <%= video_tag('static1.mp4', id: 'static1', class: 'static hidden') %>
-          <%= video_tag('static2.mp4', id: 'static2', class: 'static hidden') %>
-          <%= video_tag('static3.mp4', id: 'static3', class: 'static hidden') %>
-          <%= video_tag('static4.mp4', id: 'static4', class: 'static hidden') %>
-          <%= video_tag('static5.mp4', id: 'static5', class: 'static hidden') %>
-          <%= video_tag('static6.mp4', id: 'static6', class: 'static hidden') %>
-          <%= video_tag('static7.mp4', id: 'static7', class: 'static hidden') %>
-          <%= video_tag('static8.mp4', id: 'static8', class: 'static hidden') %>
-          <%= video_tag('static9.mp4', id: 'static9', class: 'static hidden') %>
-          <%= video_tag('static10.mp4', id: 'static10', class: 'static hidden') %>
+          <%= video_tag('static1.mp4', id: 'static1', class: 'static hidden', preload: 'none') %>
+          <%= video_tag('static2.mp4', id: 'static2', class: 'static hidden', preload: 'none') %>
+          <%= video_tag('static3.mp4', id: 'static3', class: 'static hidden', preload: 'none') %>
+          <%= video_tag('static4.mp4', id: 'static4', class: 'static hidden', preload: 'none') %>
+          <%= video_tag('static5.mp4', id: 'static5', class: 'static hidden', preload: 'none') %>
+          <%= video_tag('static6.mp4', id: 'static6', class: 'static hidden', preload: 'none') %>
+          <%= video_tag('static7.mp4', id: 'static7', class: 'static hidden', preload: 'none') %>
+          <%= video_tag('static8.mp4', id: 'static8', class: 'static hidden', preload: 'none') %>
+          <%= video_tag('static9.mp4', id: 'static9', class: 'static hidden', preload: 'none') %>
+          <%= video_tag('static10.mp4', id: 'static10', class: 'static hidden', preload: 'none') %>
         </div>
       <% end %>
 
@@ -286,7 +291,7 @@
       signalServer: '<%= Rails.env.development? ? "http://localhost:8888/" : "https://www.signalben.co:443/" %>',
     });
 
-    var newPost = new NewPost();
+    new NewPost;
     new Guide;
     new Info({ mobile: '<%= mobile? %>' });
     new ChatAgain({url: "<%= Rails.env.development? ? 'http://localhost:3000' : 'https://chatben.tv' %>"});

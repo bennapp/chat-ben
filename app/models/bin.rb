@@ -2,6 +2,8 @@ class Bin < ApplicationRecord
   scope :without_deleted, -> { where(deleted_at: nil) }
   scope :with_deleted, -> { where.not(deleted_at: nil) }
 
+  belongs_to :user
+
   has_many :posts, through: :post_bins
   has_many :post_bins, -> { order(position: :asc) }
 
@@ -14,8 +16,6 @@ class Bin < ApplicationRecord
   after_save :set_post_bin_position
   after_save :set_other_bin_positions
   before_save :set_postition_if_nil
-
-  accepts_nested_attributes_for :post_bins
 
   def destroy
     update_attribute(:deleted_at, current_time_from_proper_timezone)

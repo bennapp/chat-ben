@@ -60,6 +60,10 @@ class @RoomChannel
             
         window.endConversation = (data) =>
           @perform("end_conversation", data)
+          
+        window.addShow = (data) =>
+          data.from_token = window.fromToken
+          @perform("add_show", data)
         
         $('#channel-up').click channelUpClick
         $('#channel-down').click channelDownClick
@@ -74,7 +78,12 @@ class @RoomChannel
         if data.action == 'advance_post'
           return if window.status == 'ending' && data.from_token != window.fromToken
           return if $('.static:not(.hidden)').length
-          guideSelect(postId: data.id, binId: data.bin_id)
+          
+          if data.new_post
+            guideBuildAndSelect(data)
+            window.addShowSuccess()
+          else
+            guideSelect(postId: data.id, binId: data.bin_id)
 
           $('.embeded-content-container').remove()
 

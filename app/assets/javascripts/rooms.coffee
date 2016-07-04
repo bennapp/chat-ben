@@ -124,7 +124,6 @@ class @RoomShow
     @setupRecordRTCDom()
 
     @_controlButtons()
-    @_newPostButton()
     @_matchingSwitch()
 
   _setStatus: (status) ->
@@ -309,21 +308,6 @@ class @RoomShow
   _controlButtons: ->
     $('#mute-microphone-button').on 'click', @_toggleMic
     $('#mute-volume-button').on 'click', @_toggleVolume
-
-  _newPostButton: ->
-    $newForm = $("#new_post")
-    $newForm.on "ajax:success", (e, data, status, xhr) ->
-      newPost = new NewPost
-      newPost.hideNewPost()
-      postId = data.id
-      binId = data.bin_id
-      $("#guide-contents tr[data-guide-bin-id='#{binId}']").append("<td data-guide-post-id=\"#{postId}\"><button class=\"selected-show\"></button></td>")
-      $('.selected-show').text(data.title)
-      window.postFromGuide(binId: binId, postId: postId)
-
-    $newForm.on "ajax:error", (e, xhr, status, error) ->
-      newPost = new NewPost
-      newPost.hideNewPost()
 
   _toggleMic: =>
     $mic = $('#mute-microphone-button')
