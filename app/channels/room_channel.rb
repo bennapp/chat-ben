@@ -139,10 +139,10 @@ class RoomChannel < ApplicationCable::Channel
         next_bin_index = current_bin_index - 1
       end
 
-      bin = Bin.where(position: next_bin_index).first
+      bin = Bin.without_deleted.where(position: next_bin_index).first
     end
 
-    bin = bin.first if bin.nil?
+    bin = Bin.without_deleted.first if bin.nil?
 
     post = bin.posts.order('post_bins.position asc').limit(1).first
     options = generate_post_options(post, room, bin, data)
