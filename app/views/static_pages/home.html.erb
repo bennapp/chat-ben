@@ -8,7 +8,9 @@
               <% post = bin.posts.first %>
               <% if post %>
                 <div class="img-wrapper <%= mobile_css %>">
-                  <% if post.format_type == 'youtube' %>
+                  <% if bin.user_id.present? %>
+                    <%= image_tag bin.logo.url(:medium), class: "logo-img live-img #{mobile_css}" %>
+                  <% elsif post.format_type == 'youtube' %>
                     <%= image_tag("https://img.youtube.com/vi/" + post.format_link + "/0.jpg", class: "live-img #{mobile_css}") %>
                   <% elsif post.format_type == 'twitch' %>
                     <%= image_tag("https://static-cdn.jtvnw.net/previews-ttv/live_user_#{post.title.split(' - ').first}-480x360.jpg", class: "live-img #{mobile_css}") %>
