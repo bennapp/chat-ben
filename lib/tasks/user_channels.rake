@@ -15,7 +15,7 @@ namespace :user_channels do
       { bin_id: 111, name: "napes" },
       { bin_id: 112, name: "KARP" },
       { bin_id: 113, name: "that_guy" },
-      { bin_id: 114, name: "danmero" },
+      { bin_id: 114, name: "chatdan" },
       { bin_id: 115, name: "Drakon" },
       { bin_id: 116, name: "ashalan" },
       { bin_id: 117, name: "Rachface" },
