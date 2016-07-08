@@ -19,10 +19,15 @@ namespace :user_channels do
       { bin_id: 115, name: "Drakon" },
       { bin_id: 116, name: "ashalan" },
       { bin_id: 117, name: "Rachface" },
+      { bin_id: 133, name: "andy" },
+      { bin_id: 132, name: "andrewlngdn" },
+      { bin_id: 103, name: "ben" },
     ]
 
     channel_data.each do |data|
-      Bin.find(data[:bin_id]).update_attribute(:user_id, User.where(name: data[:name]).first.id)
+      bin = Bin.find(data[:bin_id])
+      bin.update_attribute(:user_id, User.where(name: data[:name]).first.id)
+      bin.posts.update_all(bin_id: bin.id)
     end
   end
 end

@@ -79,6 +79,7 @@ class RoomChannel < ApplicationCable::Channel
     bin.update_attribute(:title, "#{current_user.name}'s Channel") if bin.title.nil?
     name = current_user.name
     bin.update_attribute(:abbreviation, name.size < 9 ? name.upcase : name.gsub(/[aeiou]/i, '').upcase) if bin.abbreviation.nil?
+    post.bin_id = bin.id
 
     post.save!
     bin.post_bins.each_with_index do |post_bin, index|
