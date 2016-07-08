@@ -90,6 +90,28 @@ class RoomChannel < ApplicationCable::Channel
     advance_post(data.merge("guide" => true, "post_id" => post.id.to_s, "bin_id" => bin.id.to_s, "new_post" => true))
   end
 
+  def add_to_channel(data)
+    room = Room.find_by_token(params[:room])
+    return unless current_user.present?
+    post = Post.find(data['post_id'])
+
+    bin = Bin.find_or_create_by(user: current_user)
+    bin.update_attribute(:title, "#{current_user.name}'s Channel") if bin.title.nil?
+    name = current_user.name
+    bin.update_attribute(:abbreviation, name.size < 9 ? name.upcase : name.gsub(/[aeiou]/i, '').upcase) if bin.abbreviation.nil?
+    post.bin_id = bin.id
+
+    post.save!
+    bin.post_bins.each_with_index do |post_bin, index|
+      post_bin.update_attribute(:position, index + 1)
+    end
+    PostBin.create(post_id: post.id, bin_id: bin.id, position: 0)
+
+    options = generate_post_options(post, room, bin, data)
+    options[:action] = 'add_to_channel'
+    ActionCable.server.broadcast("room_#{params[:room]}", options)
+  end
+
   private
 
   def advance_post(data, options = {})

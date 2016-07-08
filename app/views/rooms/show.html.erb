@@ -116,6 +116,7 @@
           <div class="bin-post-container">
             <div class="post-info-container">
               <div class="likes-header">
+                <button id="add-to-channel" class="btn btn-success btn-sm plus-button"><i class="fa fa-lg fa-plus" aria-hidden="true"></i></button>
                 <% if mobile? %>
                   <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
                 <% else %>

@@ -419,6 +419,10 @@ video {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        .plus-button {
+          margin-right: 8px;
+        }
       }
 
       .btn-container {

@@ -54,9 +54,6 @@
     ga('create', 'UA-75900334-1', 'auto');
     ga('send', 'pageview');
   </script>
-  <script>
-    new LikeChannel;
-  </script>
   <body style="<%= @hide_footer ? '' : 'padding-bottom:70px;' %>">
     <div class="page-header <%= mobile_css %>">
       <div class="page-title">
@@ -96,5 +93,10 @@
     <%= yield %>
 
     <a class="hidden" href="http://www.freepik.com">Selected by freepik</a>
+    <script>
+      $(document).ready(function(){
+        new LikeChannel;
+      }
+    </script>
   </body>
 </html>

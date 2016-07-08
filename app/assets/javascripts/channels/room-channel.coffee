@@ -64,6 +64,9 @@ class @RoomChannel
         window.addShow = (data) =>
           data.from_token = window.fromToken
           @perform("add_show", data)
+
+        window.addToChannel = (data) =>
+          @perform("add_to_channel", post_id: $('.post-header').data('post-id'), from_token: window.fromToken)
         
         $('#channel-up').click channelUpClick
         $('#channel-down').click channelDownClick
@@ -75,7 +78,11 @@ class @RoomChannel
       rejected: ->
 
       received: (data) ->
-        if data.action == 'advance_post'
+        if data.action == 'add_to_channel'
+          return if window.status == 'ending' && data.from_token != window.fromToken
+          guideBuild(data)
+          
+        else if data.action == 'advance_post'
           return if window.status == 'ending' && data.from_token != window.fromToken
           return if $('.static:not(.hidden)').length
           

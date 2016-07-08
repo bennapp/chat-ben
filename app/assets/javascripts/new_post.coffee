@@ -9,7 +9,14 @@ class @NewPost
 
     window.addShowFail = (data) ->
       console.log('fail')
+      
+    $('#add-to-channel').on 'click', (event) =>
+      return unless forceSignIn(event)
+      @addToChannel()
 
   addNewPost: ->
     $addShow = $('#add-show')
     window.addShow(value: $addShow.val())
+
+  addToChannel: ->
+    window.addToChannel()
