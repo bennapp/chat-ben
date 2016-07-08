@@ -101,25 +101,6 @@ class @RoomChannel
               $('.static').addClass('hidden')
               $('.video-panel').addClass('hidden')
 
-          $like = $('#like')
-          $dislike = $('#dislike')
-          if data.like
-            $like.removeClass('btn-default')
-            $like.addClass('btn-primary')
-          else
-            $like.addClass('btn-default')
-            $like.removeClass('btn-primary')
-
-          if data.dislike
-            $dislike.removeClass('btn-default')
-            $dislike.addClass('btn-danger')
-          else
-            $dislike.addClass('btn-default')
-            $dislike.removeClass('btn-danger')
-
-          $('.like-count').text(data.like_count)
-          $('.like-count').attr("data-post-id", data.id)
-
           $('.post-header').text(data.title)
           $('.post-header').attr('title', data.title)
           $('.post-header').data('post-id', data.id)

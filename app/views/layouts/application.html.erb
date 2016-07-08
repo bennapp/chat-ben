@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>chatben.tv - Watch Videos Together and Video Chat with Friends</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= action_cable_meta_tag %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -54,6 +54,9 @@
     ga('create', 'UA-75900334-1', 'auto');
     ga('send', 'pageview');
   </script>
+  <script>
+    new LikeChannel;
+  </script>
   <body style="<%= @hide_footer ? '' : 'padding-bottom:70px;' %>">
     <div class="page-header <%= mobile_css %>">
       <div class="page-title">
@@ -92,8 +95,6 @@
 
     <%= yield %>
 
-    <%= audio_tag('8-bit-coin.wav', id: 'like-sound') %>
-    <%= audio_tag('8-bit-wrong.wav', id: 'dislike-sound') %>
     <a class="hidden" href="http://www.freepik.com">Selected by freepik</a>
   </body>
 </html>

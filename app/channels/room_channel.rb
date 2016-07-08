@@ -151,17 +151,6 @@ class RoomChannel < ApplicationCable::Channel
   end
 
   def generate_post_options(post, room, bin, data)
-    if current_user
-      like = Like.where(user_id: current_user.id, post_id: post.id).first
-    end
-
-    if like.present?
-      dislike_exists = like.dislike?
-      like_exists = !dislike_exists
-    end
-
-    like_count = post.like_count
-
     reaction_urls = post.reactions.map { |reaction| reaction.video.url }
 
     room.update_attribute(:bin, bin)
@@ -177,9 +166,6 @@ class RoomChannel < ApplicationCable::Channel
       start_time: post.start_time,
       duration: post.duration,
       text_content: post.text_content,
-      like: like_exists,
-      dislike: dislike_exists,
-      like_count: like_count,
       full_url: post.full_url,
       comment: post.comment,
       edited_by: post.last_editor.try(:name),

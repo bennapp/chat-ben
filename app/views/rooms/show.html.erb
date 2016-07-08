@@ -116,15 +116,6 @@
           <div class="bin-post-container">
             <div class="post-info-container">
               <div class="likes-header">
-                <% if current_user && Like.where(user_id: current_user.id, post_id: @room.post.id, dislike: false).exists? %>
-                  <button id="like" class="btn btn-primary <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
-                <% else %>
-                  <button id="like" class="btn btn-default <%= mobile_small_btn %>"><span class="fa fa-lg fa-thumbs-o-up"></span></button>
-                <% end %>
-                <span class="like-count-container">
-                <span class='like-count' data-post-id="<%= @room.post.id %>"><%= @room.post.likes.count %></span>
-                <i class="fa fa-thumbs-o-up"></i>
-              </span>
                 <% if mobile? %>
                   <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
                 <% else %>
@@ -284,7 +275,6 @@
   $(document).ready(function(){
     window.fromToken = '<%= SecureRandom.uuid %>';
     var roomChannel = new RoomChannel({ roomToken: '<%= @room.token %>', postId: '<%= @room.post_id %>', mobile: '<%= mobile_css %>'});
-    var likeChannel = new LikeChannel();
     var roomShow = new RoomShow({
       room: '<%= @room.token %>',
       mobile: '<%= mobile? %>',
