@@ -193,7 +193,7 @@ class @RoomChannel
               widget = SC.Widget(widgetIframe)
               widget.bind SC.Widget.Events.READY, ->
                 widget.play()
-                widget.setVolume 10
+                widget.setVolume 0.1
                 return
               end = false
               widget.bind SC.Widget.Events.FINISH, ->

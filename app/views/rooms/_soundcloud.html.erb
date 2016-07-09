@@ -1,16 +1,17 @@
 <iframe id="sc-widget" src="https://w.soundcloud.com/player/?url=http://soundcloud.com/<%= value %>" scrolling="no" frameborder="no"></iframe>
 <script type="text/javascript">
-  var widgetIframe = document.getElementById('sc-widget'), widget = SC.Widget(widgetIframe);
+  var widgetIframe = document.getElementById('sc-widget');
+  var widget = SC.Widget(widgetIframe);
 
   widget.bind(SC.Widget.Events.READY, function() {
     window.playVid = function(){
       widget.play();
-      widget.setVolume(10);
+      widget.setVolume(0.1);
     };
 
     if (window.hasStorage() && localStorage.getItem("seen-info")){
       widget.play();
-      widget.setVolume(10);
+      widget.setVolume(0.1);
     }
   });
 
