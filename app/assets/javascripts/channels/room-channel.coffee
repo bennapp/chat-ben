@@ -92,6 +92,12 @@ class @RoomChannel
           else
             guideSelect(postId: data.id, binId: data.bin_id)
 
+          $('#add-to-channel').addClass('btn-info')
+          $('#add-to-channel').removeClass('btn-primary')
+          $('.animate-fade-up').removeClass('fade-up')
+          $('.add-to-channel-icon').addClass('fa-star-o')
+          $('.add-to-channel-icon').removeClass('fa-star')
+
           $('.embeded-content-container').remove()
 
           if @mobile != 'mobile'

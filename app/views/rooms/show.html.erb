@@ -5,10 +5,10 @@
     <div class="content-panel <%= mobile_css %>">
       <div class="remote-control">
         <div class="remote-control-container">
-          <h4>CHANNEL</h4>
+          <h4 class="remote-header">CHANNEL</h4>
           <button id="channel-up" class="channel-button"><i class="fa fa-angle-up fa-2x"></i></button>
           <button id="channel-down" class="channel-button"><i class="fa fa-angle-down fa-2x"></i></button>
-          <h4>SHOW</h4>
+          <h4 class="remote-header">SHOW</h4>
           <div class="show-container">
             <button id="prev-post" class="channel-button"><i class="fa fa-angle-left fa-2x"></i></button>
             <button id="next-post" class="channel-button"><i class="fa fa-angle-right fa-2x"></i></button>
@@ -16,7 +16,7 @@
           <div class="new-show">
             <input id="add-show" class="link-input" placeholder="add show"/>
             <i class="fa fa-question-circle info-helper" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Change the show to whatever you'd like! Just paste in a link. We support: Youtube, Vimeo, Twitter, Twitch, Soundcloud, Imgur, Giphy and Gfycat!"></i>
-            <button id="add-link" class="btn btn-success btn-xs plus-button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+            <button id="add-link" class="btn btn-success btn-xs plus-button"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp;<i class="fa fa-tv" aria-hidden="true"></i></button>
           </div>
         </div>
       </div>
@@ -116,7 +116,8 @@
           <div class="bin-post-container">
             <div class="post-info-container">
               <div class="likes-header">
-                <button id="add-to-channel" class="btn btn-success btn-sm plus-button"><i class="fa fa-lg fa-plus" aria-hidden="true"></i></button>
+                <span class="animate-fade-up">Added!</span>
+                <button id="add-to-channel" class="btn btn-info btn-sm plus-button" data-toggle="tooltip" data-placement="bottom" title="Add this show to your channel! If your channel does not exist, we will build it for you and add it to the bottom of the guide!"><i class="fa fa-lg fa-star-o add-to-channel-icon" aria-hidden="true"></i></button>
                 <% if mobile? %>
                   <h4 class="post-header" title="<%= @room.post.title %>" data-post-id="<%= @room.post.id %>"><%= @room.post.title %></h4>
                 <% else %>
@@ -160,7 +161,7 @@
               </div>
             </div>
             <div class="stoplight">
-              <i id="social-stoplight-helper" class="fa fa-question-circle info-helper" data-html="true" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="<table><tr>Video Chat Match Making</tr><tr><td>Public</td><td> - match with anyone, max 3 total. You can still send invites.</td></tr><tr><td>Invite </td><td> - match with invited people only. Hint: send the URL.</td></tr><tr><td>Solo</td><td> - video chat disabled, will not end an ongoing chat</td></tr></table>"></i>
+              <i id="social-stoplight-helper" class="fa fa-question-circle info-helper" data-html="true" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="<table><tr>Video Chat Match Making</tr><tr><td>Public</td><td> - match with anyone, max 3 total. You can still send invites.</td></tr><tr><td>Invite </td><td> - match with invited people only. Hint: send the URL to invite.</td></tr><tr><td>Solo</td><td> - video chat disabled, will not end an ongoing chat.</td></tr></table>"></i>
               <div class="lights">
                 <div class="light party <%= !current_user || current_user.matching? ? 'on' : '' %>"></div>
                 <div class="light friends <%= current_user && !current_user.matching? && !current_user.solo? ? 'on' : '' %>"></div>

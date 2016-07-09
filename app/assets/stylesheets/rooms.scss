@@ -117,7 +117,12 @@ video {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
+        height: 100%;
+
+        .remote-header {
+          margin: 4px 0px
+        }
 
         .channel-button {
           background-color: transparent;
@@ -132,6 +137,13 @@ video {
           border-radius: 4px;
           height: 22px;
           width: 5vw;
+        }
+
+        .new-show {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: space-around;
         }
       }
     }
@@ -419,6 +431,27 @@ video {
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        .animate-fade-up {
+          position: absolute;
+          margin-top: -20px;
+          opacity: 0;
+          &.fade-up {
+            animation: fadeup 1s ease-out;
+
+            @keyframes fadeup {
+              0% {
+                margin-top: -20px;
+                opacity: 1;
+              }
+
+              100% {
+                margin-top: -40px;
+                opacity: 0;
+              }
+            }
+          }
+        }
 
         .plus-button {
           margin-right: 8px;
