@@ -21,7 +21,7 @@ namespace :user_channels do
       { bin_id: 117, name: "Rachface" },
       { bin_id: 133, name: "andy" },
       { bin_id: 132, name: "andrewlngdn" },
-      { bin_id: 103, name: "ben" },
+      { bin_id: 118, name: "ben" },
     ]
 
     channel_data.each do |data|

@@ -10,3 +10,4 @@ class @LikeChannel
       received: (data) ->
         if data.action == 'total_users'
           $('#total-users').text(data.value)
+          console.log(data.value)

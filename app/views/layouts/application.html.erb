@@ -44,6 +44,7 @@
       window.currentUser = {};
       currentUser.name = '<%= current_user ? current_user.name : "" %>';
       new Login;
+      new LikeChannel;
     });
   </script>
   <script>
@@ -93,10 +94,5 @@
     <%= yield %>
 
     <a class="hidden" href="http://www.freepik.com">Selected by freepik</a>
-    <script>
-      $(document).ready(function(){
-        new LikeChannel;
-      }
-    </script>
   </body>
 </html>
